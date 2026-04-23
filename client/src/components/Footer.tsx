@@ -121,7 +121,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="text-center text-sm text-gray-500 pt-8 border-t border-gray-700">
-          <p>&copy; 2025 Dehbi Voyages. Tous droits réservés.</p>
+          <p>&copy; 2026 Dehbi Voyages. Tous droits réservés.</p>
         </div>
       </div>
     </footer>
