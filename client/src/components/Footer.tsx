@@ -101,10 +101,10 @@ export default function Footer() {
             <div>
               <h4 className="font-bold mb-4">Suivez-nous</h4>
               <div className="flex gap-4">
-                <a href="#" className="hover:text-primary transition-colors">
+                <a href="https://www.facebook.com/dehbi.voyages/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
                   <Facebook size={20} />
                 </a>
-                <a href="#" className="hover:text-primary transition-colors">
+                <a href="https://www.instagram.com/dehbi_voyages_/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
                   <Instagram size={20} />
                 </a>
                 <a href="#" className="hover:text-primary transition-colors">
