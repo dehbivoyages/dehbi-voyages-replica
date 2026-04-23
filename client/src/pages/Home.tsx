@@ -5,6 +5,7 @@ import SpiritualTrips from '@/components/SpiritualTrips';
 import MoroccanDestinations from '@/components/MoroccanDestinations';
 import InternationalDestinations from '@/components/InternationalDestinations';
 import PremiumServices from '@/components/PremiumServices';
+import Testimonials from '@/components/Testimonials';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
         <MoroccanDestinations />
         <InternationalDestinations />
         <PremiumServices />
+        <Testimonials />
       </main>
       <Footer />
     </div>
