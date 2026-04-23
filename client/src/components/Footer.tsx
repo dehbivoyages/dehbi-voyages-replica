@@ -8,15 +8,11 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           {/* Logo Section */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">D</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-bold text-lg">Dehbi Voyages</span>
-                <span className="text-xs text-gray-400">اختر وجهتك</span>
-              </div>
-            </div>
+            <img
+              src="/manus-storage/dehbi-voyages-logo_d65e39fd.png"
+              alt="Dehbi Voyages Logo"
+              className="h-20 w-auto mb-4"
+            />
             <p className="text-sm text-gray-400">
               Votre partenaire de voyage de confiance depuis 2015.
             </p>

@@ -13,18 +13,16 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">D</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-lg text-foreground">Dehbi Voyages</span>
-              <span className="text-xs text-muted-foreground">اختر وجهتك</span>
-            </div>
-          </div>
+          <a href="#" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
+            <img
+              src="/manus-storage/dehbi-voyages-logo_d65e39fd.png"
+              alt="Dehbi Voyages Logo"
+              className="h-16 w-auto"
+            />
+          </a>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
