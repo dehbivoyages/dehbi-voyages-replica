@@ -3,22 +3,22 @@ export default function MoroccanDestinations() {
     {
       name: 'Tanger',
       description: 'La perle du détroit où l\'Atlantique rencontre la Méditerranée',
-      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop',
+      image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/tanger-hero-73xRuh7JkjY6wqeXsHAKjv.webp',
     },
     {
       name: 'Casablanca',
       description: 'La métropole avec la majestueuse Mosquée Hassan II',
-      image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=300&fit=crop',
+      image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/casablanca-city-JYR78Cm2j7t45RV6KHFTWT.webp',
     },
     {
       name: 'Rabat',
       description: 'La capitale royale avec ses palais et jardins',
-      image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&h=300&fit=crop',
+      image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/rabat-capital-Sm3UnDvHLdrWX3vNdSzjSY.webp',
     },
     {
       name: 'Meknès',
       description: 'La ville impériale avec ses portes monumentales',
-      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop',
+      image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/meknes-imperial-QkA5mBceUmtk4YMX6kXeUV.webp',
     },
   ];
 
