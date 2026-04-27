@@ -9,6 +9,7 @@ import PremiumServices from '@/components/PremiumServices';
 import OrganizedTrips from '@/components/OrganizedTrips';
 import Testimonials from '@/components/Testimonials';
 import WhatsAppReservation from '@/components/WhatsAppReservation';
+import LiveChat from '@/components/LiveChat';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -27,6 +28,7 @@ export default function Home() {
         <Testimonials />
       </main>
       <WhatsAppReservation ref={whatsappRef} />
+      <LiveChat />
       <Footer />
     </div>
   );
