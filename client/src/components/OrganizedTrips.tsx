@@ -50,6 +50,24 @@ export default function OrganizedTrips() {
         'À partir de 23.700 MAD',
       ],
     },
+    {
+      id: 4,
+      title: 'Voyage Organisé - Istanbul Mai 2026',
+      description: 'Circuit complet en Turquie avec Istanbul, visite de la Mosquée Bleue, Bosphore et Bursa. Vols Royal Air Maroc, hébergement premium et croisière sur le Bosphore incluse',
+      dates: '1 Mai - 8 Mai 2026 / 23 Mai - 30 Mai 2026 / 30 Mai - 6 Juin 2026',
+      image: '/manus-storage/DVISTANBULMAI26._a32c686f.webp',
+      pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
+      highlights: [
+        'Vols Royal Air Maroc',
+        'Hébergement 3-5 étoiles',
+        'Croisière sur le Bosphore',
+        'Visites guidées complètes',
+        'Repas inclus',
+        'Assurance voyage',
+        '7 nuits / 8 jours',
+        'À partir de 7.690 MAD',
+      ],
+    },
   ];
 
   return (
