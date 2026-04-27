@@ -79,8 +79,12 @@ export default function WhatsAppReservation() {
   const isOmrahOrHajj = selectedService === 'omrah' || selectedService === 'hajj';
 
   const handleWhatsAppReservation = () => {
-    if (!selectedService || !selectedDestination) {
-      alert('Veuillez sélectionner un service et une destination');
+    if (!selectedService) {
+      alert('Veuillez sélectionner un service');
+      return;
+    }
+    if (!isOmrahOrHajj && !selectedDestination) {
+      alert('Veuillez sélectionner une destination');
       return;
     }
 
@@ -101,8 +105,12 @@ export default function WhatsAppReservation() {
   };
 
   const handleEmailReservation = () => {
-    if (!selectedService || !selectedDestination) {
-      alert('Veuillez sélectionner un service et une destination');
+    if (!selectedService) {
+      alert('Veuillez sélectionner un service');
+      return;
+    }
+    if (!isOmrahOrHajj && !selectedDestination) {
+      alert('Veuillez sélectionner une destination');
       return;
     }
 
@@ -189,24 +197,26 @@ export default function WhatsAppReservation() {
                 </div>
               </div>
 
-              {/* Destination Selection */}
-              <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">
-                  Destination *
-                </label>
-                <select
-                  value={selectedDestination}
-                  onChange={(e) => setSelectedDestination(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                >
-                  <option value="">-- Sélectionner une destination --</option>
-                  {destinations.map((dest) => (
-                    <option key={dest} value={dest}>
-                      {dest}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              {/* Destination Selection - Hidden for Omrah/Hajj */}
+              {!isOmrahOrHajj && (
+                <div>
+                  <label className="block text-sm font-semibold text-foreground mb-2">
+                    Destination *
+                  </label>
+                  <select
+                    value={selectedDestination}
+                    onChange={(e) => setSelectedDestination(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                  >
+                    <option value="">-- Sélectionner une destination --</option>
+                    {destinations.map((dest) => (
+                      <option key={dest} value={dest}>
+                        {dest}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
 
               {/* Omrah/Hajj Specific Fields */}
               {isOmrahOrHajj && (
