@@ -33,6 +33,23 @@ export default function OrganizedTrips() {
         '13 jours / 12 nuits',
       ],
     },
+    {
+      id: 3,
+      title: 'Voyage Organisé - Thaïlande Jungle & Plages De Rêve',
+      description: 'Circuit complet en Thaïlande avec Bangkok, Krabi, Kanchanaburi, Phuket et Rivière Kwai. Jungle, plages paradisiaques et culture thaïlandaise authentique',
+      dates: '19 Août - 31 Août 2026',
+      image: '/manus-storage/DVTHAILAND26_06ae0e94.webp',
+      pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
+      highlights: [
+        'Vols Turkish Airlines',
+        'Hébergement 4-5 étoiles',
+        'Visites guidées complètes',
+        'Repas inclus',
+        'Assurance voyage',
+        '12 nuits / 13 jours',
+        'À partir de 23.700 MAD',
+      ],
+    },
   ];
 
   return (
