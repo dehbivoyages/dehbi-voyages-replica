@@ -5,7 +5,7 @@ export default function WhatsAppReservation() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedService, setSelectedService] = useState('');
   const [selectedDestination, setSelectedDestination] = useState('');
-  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+
 
   const services = [
     { id: 'hotel', label: 'Hôtel' },
@@ -63,18 +63,7 @@ export default function WhatsAppReservation() {
     'Autre',
   ];
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || []);
-    const validFiles = files.filter(file => {
-      const ext = file.name.split('.').pop()?.toLowerCase();
-      return ['jpg', 'jpeg', 'png', 'pdf'].includes(ext || '');
-    });
-    setUploadedFiles([...uploadedFiles, ...validFiles]);
-  };
 
-  const removeFile = (index: number) => {
-    setUploadedFiles(uploadedFiles.filter((_, i) => i !== index));
-  };
 
   const handleWhatsAppReservation = () => {
     if (!selectedService || !selectedDestination) {
@@ -82,7 +71,7 @@ export default function WhatsAppReservation() {
       return;
     }
 
-    const message = `Bonjour, je souhaite faire une réservation:\n- Service: ${services.find(s => s.id === selectedService)?.label}\n- Destination: ${selectedDestination}${uploadedFiles.length > 0 ? '\n- Fichiers joints: ' + uploadedFiles.map(f => f.name).join(', ') : ''}`;
+    const message = `Bonjour, je souhaite faire une réservation:\n- Service: ${services.find(s => s.id === selectedService)?.label}\n- Destination: ${selectedDestination}`;
     const whatsappUrl = `https://wa.me/212653940304?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
     resetForm();
@@ -95,7 +84,7 @@ export default function WhatsAppReservation() {
     }
 
     const subject = `Demande de Réservation - ${services.find(s => s.id === selectedService)?.label} - ${selectedDestination}`;
-    const body = `Bonjour,\n\nJe souhaite faire une réservation avec les détails suivants:\n\nService: ${services.find(s => s.id === selectedService)?.label}\nDestination: ${selectedDestination}\n${uploadedFiles.length > 0 ? '\nFichiers joints: ' + uploadedFiles.map(f => f.name).join(', ') : ''}\n\nCordialement`;
+     const body = `Bonjour,\n\nJe souhaite faire une réservation avec les détails suivants:\n\nService: ${services.find(s => s.id === selectedService)?.label}\nDestination: ${selectedDestination}\n\nCordialement`;;
     
     const mailtoUrl = `mailto:Dehbivoyages23@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.open(mailtoUrl, '_blank');
@@ -106,7 +95,6 @@ export default function WhatsAppReservation() {
     setIsOpen(false);
     setSelectedService('');
     setSelectedDestination('');
-    setUploadedFiles([]);
   };
 
   return (
@@ -182,34 +170,7 @@ export default function WhatsAppReservation() {
                 </select>
               </div>
 
-              {/* File Upload */}
-              <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">
-                  Télécharger Voyages Organisés (JPG, JPEG, PNG, PDF)
-                </label>
-                <input
-                  type="file"
-                  multiple
-                  accept=".jpg,.jpeg,.png,.pdf"
-                  onChange={handleFileUpload}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                />
-                {uploadedFiles.length > 0 && (
-                  <div className="mt-2 space-y-1">
-                    {uploadedFiles.map((file, index) => (
-                      <div key={index} className="flex items-center justify-between bg-gray-100 p-2 rounded text-sm">
-                        <span className="truncate">{file.name}</span>
-                        <button
-                          onClick={() => removeFile(index)}
-                          className="text-red-500 hover:text-red-700"
-                        >
-                          ✕
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
+
 
               {/* Info Text */}
               <p className="text-xs text-muted-foreground">
