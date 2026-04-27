@@ -5,13 +5,18 @@ export default function WhatsAppReservation() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedService, setSelectedService] = useState('');
   const [selectedDestination, setSelectedDestination] = useState('');
-
+  const [departureDate, setDepartureDate] = useState('');
+  const [returnDate, setReturnDate] = useState('');
+  const [numberOfPax, setNumberOfPax] = useState('1');
+  const [hotelCategory, setHotelCategory] = useState('');
 
   const services = [
     { id: 'hotel', label: 'Hôtel' },
     { id: 'avion', label: 'Avion' },
     { id: 'hotel-avion', label: 'Hôtel + Avion' },
     { id: 'bateaux', label: 'Bateaux' },
+    { id: 'omrah', label: 'Omrah' },
+    { id: 'hajj', label: 'Hajj' },
   ];
 
   const destinations = [
@@ -63,7 +68,15 @@ export default function WhatsAppReservation() {
     'Autre',
   ];
 
+  const hotelCategories = [
+    '3 étoiles',
+    '4 étoiles',
+    '5 étoiles',
+    'Luxe',
+    'Budget',
+  ];
 
+  const isOmrahOrHajj = selectedService === 'omrah' || selectedService === 'hajj';
 
   const handleWhatsAppReservation = () => {
     if (!selectedService || !selectedDestination) {
@@ -71,7 +84,17 @@ export default function WhatsAppReservation() {
       return;
     }
 
-    const message = `Bonjour, je souhaite faire une réservation:\n- Service: ${services.find(s => s.id === selectedService)?.label}\n- Destination: ${selectedDestination}`;
+    if (isOmrahOrHajj && (!departureDate || !returnDate || !numberOfPax || !hotelCategory)) {
+      alert('Veuillez remplir tous les champs requis');
+      return;
+    }
+
+    let message = `Bonjour, je souhaite faire une réservation:\n- Service: ${services.find(s => s.id === selectedService)?.label}\n- Destination: ${selectedDestination}`;
+    
+    if (isOmrahOrHajj) {
+      message += `\n- Date d'aller: ${departureDate}\n- Date de retour: ${returnDate}\n- Nombre de passagers: ${numberOfPax}\n- Catégorie d'hôtel: ${hotelCategory}`;
+    }
+
     const whatsappUrl = `https://wa.me/212653940304?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
     resetForm();
@@ -83,8 +106,19 @@ export default function WhatsAppReservation() {
       return;
     }
 
+    if (isOmrahOrHajj && (!departureDate || !returnDate || !numberOfPax || !hotelCategory)) {
+      alert('Veuillez remplir tous les champs requis');
+      return;
+    }
+
     const subject = `Demande de Réservation - ${services.find(s => s.id === selectedService)?.label} - ${selectedDestination}`;
-     const body = `Bonjour,\n\nJe souhaite faire une réservation avec les détails suivants:\n\nService: ${services.find(s => s.id === selectedService)?.label}\nDestination: ${selectedDestination}\n\nCordialement`;;
+    let body = `Bonjour,\n\nJe souhaite faire une réservation avec les détails suivants:\n\nService: ${services.find(s => s.id === selectedService)?.label}\nDestination: ${selectedDestination}`;
+    
+    if (isOmrahOrHajj) {
+      body += `\nDate d'aller: ${departureDate}\nDate de retour: ${returnDate}\nNombre de passagers: ${numberOfPax}\nCatégorie d'hôtel: ${hotelCategory}`;
+    }
+
+    body += '\n\nCordialement';
     
     const mailtoUrl = `mailto:Dehbivoyages23@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.open(mailtoUrl, '_blank');
@@ -95,6 +129,10 @@ export default function WhatsAppReservation() {
     setIsOpen(false);
     setSelectedService('');
     setSelectedDestination('');
+    setDepartureDate('');
+    setReturnDate('');
+    setNumberOfPax('1');
+    setHotelCategory('');
   };
 
   return (
@@ -128,7 +166,7 @@ export default function WhatsAppReservation() {
             </div>
 
             {/* Content */}
-            <div className="p-6 space-y-4 max-h-96 overflow-y-auto">
+            <div className="p-6 space-y-4 max-h-[80vh] overflow-y-auto">
               {/* Service Selection */}
               <div>
                 <label className="block text-sm font-semibold text-foreground mb-2">
@@ -170,7 +208,69 @@ export default function WhatsAppReservation() {
                 </select>
               </div>
 
+              {/* Omrah/Hajj Specific Fields */}
+              {isOmrahOrHajj && (
+                <>
+                  {/* Departure Date */}
+                  <div>
+                    <label className="block text-sm font-semibold text-foreground mb-2">
+                      Date d'aller *
+                    </label>
+                    <input
+                      type="date"
+                      value={departureDate}
+                      onChange={(e) => setDepartureDate(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                    />
+                  </div>
 
+                  {/* Return Date */}
+                  <div>
+                    <label className="block text-sm font-semibold text-foreground mb-2">
+                      Date de retour *
+                    </label>
+                    <input
+                      type="date"
+                      value={returnDate}
+                      onChange={(e) => setReturnDate(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                    />
+                  </div>
+
+                  {/* Number of Passengers */}
+                  <div>
+                    <label className="block text-sm font-semibold text-foreground mb-2">
+                      Nombre de passagers *
+                    </label>
+                    <input
+                      type="number"
+                      min="1"
+                      value={numberOfPax}
+                      onChange={(e) => setNumberOfPax(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                    />
+                  </div>
+
+                  {/* Hotel Category */}
+                  <div>
+                    <label className="block text-sm font-semibold text-foreground mb-2">
+                      Catégorie d'hôtel *
+                    </label>
+                    <select
+                      value={hotelCategory}
+                      onChange={(e) => setHotelCategory(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                    >
+                      <option value="">-- Sélectionner une catégorie --</option>
+                      {hotelCategories.map((cat) => (
+                        <option key={cat} value={cat}>
+                          {cat}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </>
+              )}
 
               {/* Info Text */}
               <p className="text-xs text-muted-foreground">
