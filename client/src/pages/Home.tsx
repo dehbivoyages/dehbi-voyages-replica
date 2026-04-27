@@ -5,6 +5,7 @@ import SpiritualTrips from '@/components/SpiritualTrips';
 import MoroccanDestinations from '@/components/MoroccanDestinations';
 import InternationalDestinations from '@/components/InternationalDestinations';
 import PremiumServices from '@/components/PremiumServices';
+import OrganizedTrips from '@/components/OrganizedTrips';
 import Testimonials from '@/components/Testimonials';
 import WhatsAppReservation from '@/components/WhatsAppReservation';
 import Footer from '@/components/Footer';
@@ -20,6 +21,7 @@ export default function Home() {
         <MoroccanDestinations />
         <InternationalDestinations />
         <PremiumServices />
+        <OrganizedTrips />
         <Testimonials />
       </main>
       <WhatsAppReservation />
