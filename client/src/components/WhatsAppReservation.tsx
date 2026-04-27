@@ -1,43 +1,112 @@
 import { useState } from 'react';
-import { MessageCircle, X } from 'lucide-react';
+import { MessageCircle, X, Mail } from 'lucide-react';
 
 export default function WhatsAppReservation() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedService, setSelectedService] = useState('');
   const [selectedDestination, setSelectedDestination] = useState('');
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
 
   const services = [
     { id: 'hotel', label: 'Hôtel' },
     { id: 'avion', label: 'Avion' },
     { id: 'hotel-avion', label: 'Hôtel + Avion' },
+    { id: 'bateaux', label: 'Bateaux' },
   ];
 
   const destinations = [
+    // Maroc
     'Tanger',
     'Casablanca',
     'Rabat',
     'Meknès',
+    'Fès',
+    'Marrakech',
+    'Agadir',
+    // Moyen-Orient
     'Turquie',
     'Égypte',
     'Jordanie',
     'Arabie Saoudite',
     'Dubaï',
+    'Oman',
+    'Liban',
+    // Asie
     'Malaisie',
+    'Thaïlande',
+    'Indonésie',
+    'Singapour',
+    'Japon',
+    'Corée du Sud',
+    'Vietnam',
+    // Europe
+    'France',
+    'Italie',
+    'Espagne',
+    'Grèce',
+    'Suisse',
+    'Allemagne',
+    'Pays-Bas',
+    // Afrique
+    'Sénégal',
+    'Kenya',
+    'Tanzanie',
+    'Afrique du Sud',
+    'Madagascar',
+    // Amériques
+    'États-Unis',
+    'Canada',
+    'Mexique',
+    'Brésil',
+    'Pérou',
+    'Colombie',
     'Autre',
   ];
 
-  const handleReservation = () => {
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    const validFiles = files.filter(file => {
+      const ext = file.name.split('.').pop()?.toLowerCase();
+      return ['jpg', 'jpeg', 'png', 'pdf'].includes(ext || '');
+    });
+    setUploadedFiles([...uploadedFiles, ...validFiles]);
+  };
+
+  const removeFile = (index: number) => {
+    setUploadedFiles(uploadedFiles.filter((_, i) => i !== index));
+  };
+
+  const handleWhatsAppReservation = () => {
     if (!selectedService || !selectedDestination) {
       alert('Veuillez sélectionner un service et une destination');
       return;
     }
 
-    const message = `Bonjour, je souhaite faire une réservation:\n- Service: ${services.find(s => s.id === selectedService)?.label}\n- Destination: ${selectedDestination}`;
+    const message = `Bonjour, je souhaite faire une réservation:\n- Service: ${services.find(s => s.id === selectedService)?.label}\n- Destination: ${selectedDestination}${uploadedFiles.length > 0 ? '\n- Fichiers joints: ' + uploadedFiles.map(f => f.name).join(', ') : ''}`;
     const whatsappUrl = `https://wa.me/212653940304?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
+    resetForm();
+  };
+
+  const handleEmailReservation = () => {
+    if (!selectedService || !selectedDestination) {
+      alert('Veuillez sélectionner un service et une destination');
+      return;
+    }
+
+    const subject = `Demande de Réservation - ${services.find(s => s.id === selectedService)?.label} - ${selectedDestination}`;
+    const body = `Bonjour,\n\nJe souhaite faire une réservation avec les détails suivants:\n\nService: ${services.find(s => s.id === selectedService)?.label}\nDestination: ${selectedDestination}\n${uploadedFiles.length > 0 ? '\nFichiers joints: ' + uploadedFiles.map(f => f.name).join(', ') : ''}\n\nCordialement`;
+    
+    const mailtoUrl = `mailto:Dehbivoyages23@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.open(mailtoUrl, '_blank');
+    resetForm();
+  };
+
+  const resetForm = () => {
     setIsOpen(false);
     setSelectedService('');
     setSelectedDestination('');
+    setUploadedFiles([]);
   };
 
   return (
@@ -54,16 +123,16 @@ export default function WhatsAppReservation() {
 
       {/* Modal */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white rounded-lg shadow-xl max-w-md w-full">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 overflow-y-auto">
+          <div className="bg-white rounded-lg shadow-xl max-w-md w-full my-8">
             {/* Header */}
             <div className="bg-green-500 text-white p-4 flex items-center justify-between rounded-t-lg">
               <div className="flex items-center gap-2">
                 <MessageCircle size={24} />
-                <h2 className="text-lg font-bold">Réserver via WhatsApp</h2>
+                <h2 className="text-lg font-bold">Réserver Maintenant</h2>
               </div>
               <button
-                onClick={() => setIsOpen(false)}
+                onClick={resetForm}
                 className="hover:bg-green-600 p-1 rounded transition-colors"
               >
                 <X size={20} />
@@ -71,7 +140,7 @@ export default function WhatsAppReservation() {
             </div>
 
             {/* Content */}
-            <div className="p-6 space-y-4">
+            <div className="p-6 space-y-4 max-h-96 overflow-y-auto">
               {/* Service Selection */}
               <div>
                 <label className="block text-sm font-semibold text-foreground mb-2">
@@ -113,25 +182,61 @@ export default function WhatsAppReservation() {
                 </select>
               </div>
 
+              {/* File Upload */}
+              <div>
+                <label className="block text-sm font-semibold text-foreground mb-2">
+                  Télécharger Voyages Organisés (JPG, JPEG, PNG, PDF)
+                </label>
+                <input
+                  type="file"
+                  multiple
+                  accept=".jpg,.jpeg,.png,.pdf"
+                  onChange={handleFileUpload}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+                {uploadedFiles.length > 0 && (
+                  <div className="mt-2 space-y-1">
+                    {uploadedFiles.map((file, index) => (
+                      <div key={index} className="flex items-center justify-between bg-gray-100 p-2 rounded text-sm">
+                        <span className="truncate">{file.name}</span>
+                        <button
+                          onClick={() => removeFile(index)}
+                          className="text-red-500 hover:text-red-700"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               {/* Info Text */}
               <p className="text-xs text-muted-foreground">
-                Vous serez redirigé vers WhatsApp pour finaliser votre réservation avec notre équipe.
+                Vous serez redirigé vers WhatsApp ou Gmail pour finaliser votre réservation avec notre équipe.
               </p>
 
               {/* Buttons */}
-              <div className="flex gap-3 pt-4">
+              <div className="flex gap-2 pt-4">
                 <button
-                  onClick={() => setIsOpen(false)}
-                  className="flex-1 px-4 py-2 border border-gray-300 text-foreground rounded-lg hover:bg-gray-50 transition-colors"
+                  onClick={resetForm}
+                  className="flex-1 px-4 py-2 border border-gray-300 text-foreground rounded-lg hover:bg-gray-50 transition-colors text-sm"
                 >
                   Annuler
                 </button>
                 <button
-                  onClick={handleReservation}
-                  className="flex-1 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-semibold flex items-center justify-center gap-2"
+                  onClick={handleWhatsAppReservation}
+                  className="flex-1 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-semibold flex items-center justify-center gap-2 text-sm"
                 >
-                  <MessageCircle size={18} />
-                  Réserver
+                  <MessageCircle size={16} />
+                  WhatsApp
+                </button>
+                <button
+                  onClick={handleEmailReservation}
+                  className="flex-1 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-semibold flex items-center justify-center gap-2 text-sm"
+                >
+                  <Mail size={16} />
+                  Gmail
                 </button>
               </div>
             </div>
