@@ -37,10 +37,7 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Desktop CTA Button */}
-          <button className="hidden md:block btn-primary">
-            Réserver
-          </button>
+
 
           {/* Mobile Menu Button */}
           <button
@@ -64,9 +61,7 @@ export default function Header() {
                 {item.label}
               </a>
             ))}
-            <button className="btn-primary w-full">
-              Réserver
-            </button>
+
           </nav>
         )}
       </div>
