@@ -6,7 +6,7 @@ export default function OrganizedTrips() {
       id: 1,
       title: 'Voyage Organisé - Arabie Saoudite',
       description: 'Circuit complet en Arabie Saoudite avec hébergement premium, vols directs et visites guidées',
-      dates: '23 Juillet - 7 Juillet 2025 / 23 Juillet - 6 Août 2025',
+      dates: '23 Juillet - 7 Juillet 2026 / 23 Juillet - 6 Août 2026',
       image: '/manus-storage/dv02_ba9ec844.jpeg',
       pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
       highlights: [
@@ -15,6 +15,22 @@ export default function OrganizedTrips() {
         'Visites guidées complètes',
         'Repas inclus',
         'Assurance voyage',
+      ],
+    },
+    {
+      id: 2,
+      title: 'Voyage Organisé - Chine Éternelle',
+      description: 'Circuit complet en Chine avec visite de Guangzhou, Shanghai, Zhangjiajie et Beijing. Vols Turkish Airlines, hébergement premium et visites guidées complètes',
+      dates: '14 Août - 26 Août 2026 / 20 Août - 2 Septembre 2026',
+      image: '/manus-storage/DVCHINE26_7b74d784.webp',
+      pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
+      highlights: [
+        'Vols Turkish Airlines',
+        'Hébergement 4-5 étoiles',
+        'Visites guidées complètes',
+        'Repas inclus',
+        'Assurance voyage',
+        '13 jours / 12 nuits',
       ],
     },
   ];
