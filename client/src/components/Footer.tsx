@@ -99,7 +99,11 @@ export default function Footer() {
               </div>
             </div>
             <div>
-              <h4 className="font-bold mb-4">Suivez-nous</h4>
+              <h4 className="font-bold mb-4 flex items-center gap-3">
+                Suivez-nous
+                <span title="Maroc">🇲🇦</span>
+                <span title="Tanger">🏙️</span>
+              </h4>
               <div className="flex gap-4">
                 <a href="https://www.facebook.com/dehbi.voyages/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
                   <Facebook size={20} />
