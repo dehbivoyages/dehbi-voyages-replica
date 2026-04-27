@@ -6,6 +6,7 @@ import MoroccanDestinations from '@/components/MoroccanDestinations';
 import InternationalDestinations from '@/components/InternationalDestinations';
 import PremiumServices from '@/components/PremiumServices';
 import Testimonials from '@/components/Testimonials';
+import WhatsAppReservation from '@/components/WhatsAppReservation';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
         <PremiumServices />
         <Testimonials />
       </main>
+      <WhatsAppReservation />
       <Footer />
     </div>
   );
