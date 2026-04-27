@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Stats from '@/components/Stats';
@@ -11,11 +12,12 @@ import WhatsAppReservation from '@/components/WhatsAppReservation';
 import Footer from '@/components/Footer';
 
 export default function Home() {
+  const whatsappRef = useRef<{ openModal: () => void }>(null);
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Header />
       <main>
-        <Hero />
+        <Hero ref={whatsappRef} />
         <Stats />
         <SpiritualTrips />
         <MoroccanDestinations />
@@ -24,7 +26,7 @@ export default function Home() {
         <OrganizedTrips />
         <Testimonials />
       </main>
-      <WhatsAppReservation />
+      <WhatsAppReservation ref={whatsappRef} />
       <Footer />
     </div>
   );

@@ -1,4 +1,10 @@
-export default function Hero() {
+import { forwardRef } from 'react';
+
+const Hero = forwardRef((props, ref: any) => {
+  const handleReserveClick = () => {
+    ref?.current?.openModal();
+  };
+
   return (
     <section className="relative h-96 md:h-[500px] overflow-hidden">
       {/* Background Image */}
@@ -22,7 +28,7 @@ export default function Hero() {
             Voyages religieux, circuits marocains et destinations internationales. Depuis 2015, nous réalisons vos rêves de voyage.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="btn-primary bg-white text-primary hover:bg-gray-100">
+            <button onClick={handleReserveClick} className="btn-primary bg-white text-primary hover:bg-gray-100">
               Réserver Maintenant
             </button>
             <button className="btn-outline border-white text-white hover:bg-white hover:text-primary">
@@ -33,4 +39,7 @@ export default function Hero() {
       </div>
     </section>
   );
-}
+});
+
+Hero.displayName = 'Hero';
+export default Hero;

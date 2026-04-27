@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { MessageCircle, X, Mail } from 'lucide-react';
+import { forwardRef, useImperativeHandle } from 'react';
 
-export default function WhatsAppReservation() {
+const WhatsAppReservation = forwardRef((props, ref) => {
+  useImperativeHandle(ref, () => ({
+    openModal: () => setIsOpen(true),
+  }));
   const [isOpen, setIsOpen] = useState(false);
   const [selectedService, setSelectedService] = useState('');
   const [selectedDestination, setSelectedDestination] = useState('');
@@ -314,6 +318,9 @@ export default function WhatsAppReservation() {
           </div>
         </div>
       )}
-    </>
-  );
-}
+      </>
+    );
+});
+
+WhatsAppReservation.displayName = 'WhatsAppReservation';
+export default WhatsAppReservation;
