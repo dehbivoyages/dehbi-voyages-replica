@@ -15,8 +15,8 @@ export default function Hero() {
       {/* Content */}
       <div className="relative h-full flex flex-col justify-center items-start container mx-auto px-4">
         <div className="max-w-2xl">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Explorez le Monde avec Dehbi Voyages
+          <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: '#FF6B35' }}>
+            اختر وجهتك .. وعلينا ايصالك
           </h1>
           <p className="text-lg text-gray-100 mb-8">
             Voyages religieux, circuits marocains et destinations internationales. Depuis 2015, nous réalisons vos rêves de voyage.

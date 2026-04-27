@@ -61,15 +61,26 @@ export default function Footer() {
           {/* Contact Form */}
           <div className="mb-8">
             <h4 className="font-bold mb-4">Nous Contacter</h4>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={(e) => {
+              e.preventDefault();
+              const nom = (e.target as any).elements[0].value;
+              const email = (e.target as any).elements[1].value;
+              const telephone = (e.target as any).elements[2].value;
+              const message = (e.target as any).elements[3].value;
+              const subject = encodeURIComponent(`Nouveau message de ${nom}`);
+              const body = encodeURIComponent(`Nom: ${nom}\nEmail: ${email}\nTéléphone: ${telephone}\n\nMessage:\n${message}`);
+              window.location.href = `mailto:dehbivoyages23@gmail.com?subject=${subject}&body=${body}`;
+            }}>
               <input
                 type="text"
                 placeholder="Votre Nom"
+                required
                 className="w-full px-4 py-2 rounded-lg bg-gray-800 text-white placeholder-gray-500 border border-gray-700 focus:outline-none focus:border-primary"
               />
               <input
                 type="email"
                 placeholder="Votre Email"
+                required
                 className="w-full px-4 py-2 rounded-lg bg-gray-800 text-white placeholder-gray-500 border border-gray-700 focus:outline-none focus:border-primary"
               />
               <input
@@ -80,6 +91,7 @@ export default function Footer() {
               <textarea
                 placeholder="Votre Message"
                 rows={4}
+                required
                 className="w-full px-4 py-2 rounded-lg bg-gray-800 text-white placeholder-gray-500 border border-gray-700 focus:outline-none focus:border-primary"
               />
               <button type="submit" className="btn-primary w-full">
