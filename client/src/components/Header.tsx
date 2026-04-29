@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
-export default function Header() {
+interface HeaderProps {
+  onReserveClick?: () => void;
+}
+
+export default function Header({ onReserveClick }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
@@ -38,7 +42,7 @@ export default function Header() {
           </nav>
 
           {/* Desktop CTA Button */}
-          <button className="hidden md:block btn-primary">
+          <button className="hidden md:block btn-primary" onClick={onReserveClick}>
             Réserver
           </button>
 
@@ -64,7 +68,7 @@ export default function Header() {
                 {item.label}
               </a>
             ))}
-            <button className="btn-primary w-full">
+            <button className="btn-primary w-full" onClick={onReserveClick}>
               Réserver
             </button>
           </nav>

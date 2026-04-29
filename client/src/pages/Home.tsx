@@ -16,7 +16,7 @@ export default function Home() {
   const whatsappRef = useRef<{ openModal: () => void }>(null);
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      <Header />
+      <Header onReserveClick={() => whatsappRef.current?.openModal()} />
       <main>
         <Hero ref={whatsappRef} />
         <Stats />
