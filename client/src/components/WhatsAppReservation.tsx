@@ -178,7 +178,7 @@ const WhatsAppReservation = forwardRef((props, ref) => {
             </div>
 
             {/* Content */}
-            <div className="p-6 space-y-4 max-h-[80vh] overflow-y-auto">
+            <div className="p-6 space-y-4 max-h-[80vh] overflow-y-auto" style={{ backgroundColor: '#f9e9b0' }}>
               {/* Service Selection */}
               <div>
                 <label className="block text-sm font-semibold text-foreground mb-2">
