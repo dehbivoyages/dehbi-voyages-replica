@@ -1,21 +1,29 @@
 import { Heart, Map, Plane } from 'lucide-react';
+import { useState } from 'react';
+import VideoModal from './VideoModal';
 
 export default function PremiumServices() {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState<number | null>(null);
+
   const services = [
     {
       icon: Heart,
       title: 'Voyages Religieux',
       description: 'Omra, pèlerinages et retraites spirituelles avec accompagnement professionnel',
+      videoUrl: '',
     },
     {
       icon: Map,
       title: 'Circuits Touristiques',
       description: 'Maroc et destinations internationales avec guides expérimentés',
+      videoUrl: '',
     },
     {
       icon: Plane,
       title: 'Billetterie Aérienne',
       description: 'Vols nationaux et internationaux aux meilleurs tarifs',
+      videoUrl: '/manus-storage/TICKETAVION_38a32468.mp4',
     },
   ];
 
@@ -44,13 +52,28 @@ export default function PremiumServices() {
                 <p className="text-muted-foreground mb-6">
                   {service.description}
                 </p>
-                <button className="btn-outline">
+                <button
+                  className="btn-outline"
+                  onClick={() => {
+                    setSelectedService(index);
+                    setIsVideoOpen(true);
+                  }}
+                >
                   En Savoir Plus
                 </button>
               </div>
             );
           })}
         </div>
+
+        {selectedService !== null && (
+          <VideoModal
+            isOpen={isVideoOpen}
+            onClose={() => setIsVideoOpen(false)}
+            videoUrl={services[selectedService].videoUrl || ''}
+            title={services[selectedService].title}
+          />
+        )}
       </div>
     </section>
   );
