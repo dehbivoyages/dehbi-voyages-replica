@@ -23,7 +23,7 @@ export default function PremiumServices() {
       icon: Plane,
       title: 'Billetterie Aérienne',
       description: 'Vols nationaux et internationaux aux meilleurs tarifs',
-      videoUrl: '/manus-storage/TICKETAVION_38a32468.mp4',
+      videoUrl: '/manus-storage/TICKETAVION_WITH_MUSIC_176c22e7.mp4',
     },
   ];
 
