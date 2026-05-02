@@ -34,7 +34,7 @@ export default function Header({ onReserveClick }: HeaderProps) {
               <a
                 key={item.label}
                 href={item.href}
-                className="text-foreground hover:text-primary transition-colors font-medium"
+                className="text-foreground hover:text-primary transition-colors font-bold"
               >
                 {item.label}
               </a>
@@ -62,7 +62,7 @@ export default function Header({ onReserveClick }: HeaderProps) {
               <a
                 key={item.label}
                 href={item.href}
-                className="text-foreground hover:text-primary transition-colors font-medium"
+                className="text-foreground hover:text-primary transition-colors font-bold"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.label}
