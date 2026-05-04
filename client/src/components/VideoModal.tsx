@@ -1,5 +1,5 @@
 import { X } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface VideoModalProps {
   isOpen: boolean;
@@ -9,6 +9,21 @@ interface VideoModalProps {
 }
 
 export default function VideoModal({ isOpen, onClose, videoUrl, title }: VideoModalProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    if (isOpen && videoRef.current) {
+      // Reset loading state when modal opens
+      setIsLoading(true);
+      setHasError(false);
+      
+      // Force reload of video
+      videoRef.current.load();
+    }
+  }, [isOpen, videoUrl]);
+
   if (!isOpen) return null;
 
   return (
@@ -26,17 +41,41 @@ export default function VideoModal({ isOpen, onClose, videoUrl, title }: VideoMo
         </div>
 
         {/* Video Container */}
-        <div className="p-6 bg-black flex items-center justify-center">
-          <video
-            width="100%"
-            height="auto"
-            controls
-            autoPlay
-            className="rounded-lg max-w-full"
-          >
-            <source src={videoUrl} type="video/mp4" />
-            Votre navigateur ne supporte pas la lecture de vidéos.
-          </video>
+        <div className="p-6 bg-black flex items-center justify-center min-h-[400px]">
+          {videoUrl ? (
+            <>
+              {isLoading && (
+                <div className="text-white text-center">
+                  <p>Chargement de la vidéo...</p>
+                </div>
+              )}
+              {hasError && (
+                <div className="text-white text-center">
+                  <p>Erreur lors du chargement de la vidéo. Veuillez réessayer.</p>
+                </div>
+              )}
+              <video
+                ref={videoRef}
+                width="100%"
+                height="auto"
+                controls
+                autoPlay
+                className="rounded-lg max-w-full"
+                onLoadedData={() => setIsLoading(false)}
+                onCanPlay={() => setIsLoading(false)}
+                onError={() => {
+                  setIsLoading(false);
+                  setHasError(true);
+                }}
+                style={{ display: isLoading || hasError ? 'none' : 'block' }}
+              >
+                <source src={videoUrl} type="video/mp4" />
+                Votre navigateur ne supporte pas la lecture de vidéos.
+              </video>
+            </>
+          ) : (
+            <p className="text-white text-center">Aucune vidéo disponible pour ce service.</p>
+          )}
         </div>
       </div>
     </div>
