@@ -9,13 +9,13 @@ export default function PremiumServices() {
       icon: Heart,
       title: 'Voyages Religieux',
       description: 'Omra, pèlerinages et retraites spirituelles avec accompagnement professionnel',
-      videoUrl: '',
+      videoUrl: '/manus-storage/DVOMRA_WITH_MUSIC_11a2556e.mp4',
     },
     {
       icon: Map,
       title: 'Circuits Touristiques',
       description: 'Maroc et destinations internationales avec guides expérimentés',
-      videoUrl: '',
+      videoUrl: '/manus-storage/song_circuits_touristiques_placeholder.mp4',
     },
     {
       icon: Plane,
