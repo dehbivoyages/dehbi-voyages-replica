@@ -28,7 +28,7 @@ export default function VideoModal({ isOpen, onClose, videoUrl, title }: VideoMo
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
-      <div className="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[60vh] overflow-y-auto">
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-200">
           <h2 className="text-xl font-bold text-foreground">{title}</h2>
@@ -41,7 +41,7 @@ export default function VideoModal({ isOpen, onClose, videoUrl, title }: VideoMo
         </div>
 
         {/* Video Container */}
-        <div className="p-6 bg-black flex items-center justify-center min-h-[400px]">
+        <div className="p-4 bg-black flex items-center justify-center min-h-[250px]">
           {videoUrl ? (
             <>
               {isLoading && (

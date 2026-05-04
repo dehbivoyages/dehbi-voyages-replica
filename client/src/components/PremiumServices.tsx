@@ -9,7 +9,7 @@ export default function PremiumServices() {
       icon: Heart,
       title: 'Voyages Religieux',
       description: 'Omra, pèlerinages et retraites spirituelles avec accompagnement professionnel',
-      videoUrl: '/manus-storage/DVOMRA_ce279147.mp4',
+      videoUrl: '/manus-storage/DVOMRA_40percent_c18c0d1a.mp4',
     },
     {
       icon: Map,
