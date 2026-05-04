@@ -47,14 +47,14 @@ const galleryImages: GalleryImage[] = [
   },
   {
     id: '6',
-    src: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&h=600&fit=crop',
+    src: 'https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?w=800&h=600&fit=crop',
     alt: 'Turquie - Cappadoce',
     destination: 'Turquie',
     description: 'Les formations rocheuses uniques de Cappadoce',
   },
   {
     id: '7',
-    src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
+    src: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&h=600&fit=crop',
     alt: 'Dubaï - Burj Khalifa',
     destination: 'Dubaï',
     description: 'Le Burj Khalifa, le plus haut bâtiment du monde',
