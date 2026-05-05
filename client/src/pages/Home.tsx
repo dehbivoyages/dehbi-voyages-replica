@@ -6,8 +6,7 @@ import SpiritualTrips from '@/components/SpiritualTrips';
 import MoroccanDestinations from '@/components/MoroccanDestinations';
 import InternationalDestinations from '@/components/InternationalDestinations';
 import PremiumServices from '@/components/PremiumServices';
-import InteractiveMap from '@/components/InteractiveMap';
-import ImageGallery from '@/components/ImageGallery';
+
 import OrganizedTrips from '@/components/OrganizedTrips';
 import Testimonials from '@/components/Testimonials';
 import WhatsAppReservation from '@/components/WhatsAppReservation';
@@ -26,8 +25,7 @@ export default function Home() {
         <MoroccanDestinations />
         <InternationalDestinations />
         <PremiumServices />
-        <InteractiveMap />
-        <ImageGallery />
+
         <OrganizedTrips />
         <Testimonials />
       </main>
