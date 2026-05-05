@@ -26,7 +26,7 @@ const galleryImages: GalleryImage[] = [
   },
   {
     id: '3',
-    src: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&h=600&fit=crop',
+    src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop',
     alt: 'Égypte - Pyramides de Gizeh',
     destination: 'Égypte',
     description: 'Les majestueuses pyramides de Gizeh',
@@ -47,14 +47,14 @@ const galleryImages: GalleryImage[] = [
   },
   {
     id: '6',
-    src: 'https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?w=800&h=600&fit=crop',
+    src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop',
     alt: 'Turquie - Cappadoce',
     destination: 'Turquie',
     description: 'Les formations rocheuses uniques de Cappadoce',
   },
   {
     id: '7',
-    src: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&h=600&fit=crop',
+    src: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=600&fit=crop',
     alt: 'Dubaï - Burj Khalifa',
     destination: 'Dubaï',
     description: 'Le Burj Khalifa, le plus haut bâtiment du monde',
