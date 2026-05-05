@@ -55,7 +55,7 @@ export default function OrganizedTrips() {
       title: 'Voyage Organisé - Thaïlande Rêvée',
       description: 'Circuit complet en Thaïlande avec Bangkok, Krabi, Phuket, îles paradisiaques et temples bouddhistes. Vols Qatar Airways, hébergement premium et expériences authentiques',
       dates: '05 Juin - 17 Juin 2025',
-      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
+      image: '/manus-storage/550993670_122239015040127360_3405256931647515060_n_4b825609.jpg',
       pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
       highlights: [
         'Vols Qatar Airways',
