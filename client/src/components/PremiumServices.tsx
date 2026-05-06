@@ -102,7 +102,7 @@ export default function PremiumServices() {
                         }
                       }}
                     >
-                      {hasVideo ? 'En Savoir Plus' : 'Bientôt disponible'}
+                      {hasVideo ? 'Clic pour voir' : 'Bientôt disponible'}
                     </button>
                   </>
                 )}

@@ -28,30 +28,30 @@ export default function VideoModal({ isOpen, onClose, videoUrl, title }: VideoMo
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
-      <div className="bg-white rounded-lg shadow-2xl overflow-y-auto" style={{maxWidth: '400px', width: '100%', maxHeight: '300px'}}>
+      <div className="bg-white rounded-lg shadow-2xl overflow-y-auto" style={{maxWidth: '280px', width: '100%', maxHeight: '200px'}}>
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200">
-          <h2 className="text-xl font-bold text-foreground">{title}</h2>
+        <div className="flex items-center justify-between p-3 border-b border-gray-200">
+          <h2 className="text-lg font-bold text-foreground truncate">{title}</h2>
           <button
             onClick={onClose}
-            className="hover:bg-gray-100 p-2 rounded transition-colors"
+            className="hover:bg-gray-100 p-1 rounded transition-colors flex-shrink-0"
           >
-            <X size={24} />
+            <X size={20} />
           </button>
         </div>
 
         {/* Video Container */}
-        <div className="p-4 bg-black flex items-center justify-center min-h-[250px]">
+        <div className="p-2 bg-black flex items-center justify-center min-h-[150px]">
           {videoUrl ? (
             <>
               {isLoading && (
-                <div className="text-white text-center">
-                  <p>Chargement de la vidéo...</p>
+                <div className="text-white text-center text-sm">
+                  <p>Chargement...</p>
                 </div>
               )}
               {hasError && (
-                <div className="text-white text-center">
-                  <p>Erreur lors du chargement de la vidéo. Veuillez réessayer.</p>
+                <div className="text-white text-center text-sm">
+                  <p>Erreur vidéo</p>
                 </div>
               )}
               <video
@@ -67,14 +67,14 @@ export default function VideoModal({ isOpen, onClose, videoUrl, title }: VideoMo
                   setIsLoading(false);
                   setHasError(true);
                 }}
-                style={{ display: isLoading || hasError ? 'none' : 'block' }}
+                style={{ display: isLoading || hasError ? 'none' : 'block', maxWidth: '260px', maxHeight: '140px' }}
               >
                 <source src={videoUrl} type="video/mp4" />
                 Votre navigateur ne supporte pas la lecture de vidéos.
               </video>
             </>
           ) : (
-            <p className="text-white text-center">Aucune vidéo disponible pour ce service.</p>
+            <p className="text-white text-center text-sm">Aucune vidéo disponible</p>
           )}
         </div>
       </div>
