@@ -102,12 +102,12 @@ export default function OrganizedTrips() {
         </div>
 
         {/* Trips Grid */}
-        <div className="grid md:grid-cols-1 gap-8">
+        <div className="grid md:grid-cols-2 gap-6">
           {trips.map((trip) => (
             <div key={trip.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 gap-4">
                 {/* Image */}
-                <div className="relative h-96 md:h-auto overflow-hidden bg-gray-200">
+                <div className="relative h-48 overflow-hidden bg-gray-200">
                   <img
                     src={trip.image}
                     alt={trip.title}
@@ -117,18 +117,18 @@ export default function OrganizedTrips() {
                 </div>
 
                 {/* Content */}
-                <div className="p-8 flex flex-col justify-between">
+                <div className="p-4 flex flex-col justify-between">
                   <div>
-                    <h3 className="text-2xl font-bold text-foreground mb-2">{trip.title}</h3>
-                    <p className="text-sm text-blue-600 font-semibold mb-4">📅 {trip.dates}</p>
-                    <p className="text-muted-foreground mb-6">{trip.description}</p>
+                    <h3 className="text-lg font-bold text-foreground mb-1">{trip.title}</h3>
+                    <p className="text-xs text-blue-600 font-semibold mb-2">📅 {trip.dates}</p>
+                    <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{trip.description}</p>
 
                     {/* Highlights */}
-                    <div className="mb-6">
-                      <h4 className="font-semibold text-foreground mb-3">Ce voyage inclut :</h4>
-                      <ul className="space-y-2">
+                    <div className="mb-3">
+                      <h4 className="font-semibold text-sm text-foreground mb-2">Ce voyage inclut :</h4>
+                      <ul className="space-y-1">
                         {trip.highlights.map((highlight, index) => (
-                          <li key={index} className="flex items-center gap-2 text-sm text-foreground">
+                          <li key={index} className="flex items-center gap-2 text-xs text-foreground">
                             <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
                             {highlight}
                           </li>
@@ -138,22 +138,22 @@ export default function OrganizedTrips() {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex gap-3">
+                  <div className="flex gap-2">
                     <a
                       href={trip.pdfUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold flex items-center justify-center gap-2"
+                      className="flex-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold flex items-center justify-center gap-1 text-sm"
                     >
-                      <Eye size={18} />
+                      <Eye size={14} />
                       Consulter
                     </a>
                     <a
                       href={trip.pdfUrl}
                       download="voyage-organise-dehbi.pdf"
-                      className="flex-1 px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-semibold flex items-center justify-center gap-2"
+                      className="flex-1 px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-semibold flex items-center justify-center gap-1 text-sm"
                     >
-                      <Download size={18} />
+                      <Download size={14} />
                       Télécharger
                     </a>
                   </div>
