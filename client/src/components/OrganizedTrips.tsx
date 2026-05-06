@@ -107,7 +107,7 @@ export default function OrganizedTrips() {
             <div key={trip.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
               <div className="grid grid-cols-1 gap-4">
                 {/* Image */}
-                <div className="relative h-48 overflow-hidden bg-gray-200">
+                <div className="relative h-25 overflow-hidden bg-gray-200">
                   <img
                     src={trip.image}
                     alt={trip.title}
@@ -117,7 +117,7 @@ export default function OrganizedTrips() {
                 </div>
 
                 {/* Content */}
-                <div className="p-4 flex flex-col justify-between">
+                <div className="p-3 flex flex-col justify-between">
                   <div>
                     <h3 className="text-lg font-bold text-foreground mb-1">{trip.title}</h3>
                     <p className="text-xs text-blue-600 font-semibold mb-2">📅 {trip.dates}</p>
