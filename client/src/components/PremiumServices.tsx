@@ -15,7 +15,7 @@ export default function PremiumServices() {
       icon: Map,
       title: 'Circuits Touristiques',
       description: 'Maroc et destinations internationales avec guides expérimentés',
-      videoUrl: '/manus-storage/song_circuits_touristiques_placeholder.mp4',
+      videoUrl: '/manus-storage/DVOMRA_40percent_c18c0d1a.mp4',
     },
     {
       icon: Plane,
