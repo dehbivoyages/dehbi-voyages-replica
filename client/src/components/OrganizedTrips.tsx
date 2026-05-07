@@ -88,35 +88,6 @@ export default function OrganizedTrips() {
         'À partir de 7.690 MAD',
       ],
     },
-    {
-      id: 6,
-      title: 'Voyage Organisé - Istanboul Vacances Scolaires',
-      description: 'Circuit en Turquie pendant les vacances scolaires avec hébergement confortable et visites culturelles',
-      dates: 'Vacances scolaires',
-      image: '/manus-storage/dv02_ba9ec844.jpeg',
-      pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
-      highlights: [
-        'Vols Air Arabia',
-        'Hébergement 3-4 étoiles',
-        'Visites guidées',
-        'Repas inclus',
-        'À partir de 5.100 MAD',
-      ],
-    },
-    {
-      id: 7,
-      title: 'Voyage Organisé - Dubai',
-      description: 'Découvrez Dubai avec ses gratte-ciels, plages et shopping de luxe',
-      dates: 'À définir',
-      image: '/manus-storage/DVCHINE26_7b74d784.webp',
-      pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
-      highlights: [
-        'Hébergement 4-5 étoiles',
-        'Visites guidées',
-        'Repas inclus',
-        'À partir de 13.900 MAD',
-      ],
-    },
   ];
 
   return (
