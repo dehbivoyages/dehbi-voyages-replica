@@ -88,51 +88,6 @@ export default function OrganizedTrips() {
         'À partir de 7.690 MAD',
       ],
     },
-    {
-      id: 6,
-      title: 'Voyage Organisé - Istanboul 2025',
-      description: 'Circuit en Turquie avec visite d\'Istanbul, Bosphore et Bursa. Hébergement confortable et croisière incluse',
-      dates: 'Mai - Juin 2025',
-      image: '/manus-storage/DVISTANBULMAI26._a32c686f.webp',
-      pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
-      highlights: [
-        'Vols Qatar Airways',
-        'Hébergement 4 étoiles',
-        'Croisiere Bosphore',
-        'Repas inclus',
-        'À partir de 23.000 MAD',
-      ],
-    },
-    {
-      id: 7,
-      title: 'Voyage Organisé - Maroc Spirituel 2025',
-      description: 'Visite des villes saintes du Maroc : Fes, Meknes, Marrakech et Essaouira avec guides spirituels',
-      dates: 'Avril - Mai 2025',
-      image: '/manus-storage/dv02_ba9ec844.jpeg',
-      pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
-      highlights: [
-        'Vols Royal Air Maroc',
-        'Hébergement 3-4 étoiles',
-        'Visites spirituelles guidées',
-        'Repas traditionnel',
-        'À partir de 8.800 MAD',
-      ],
-    },
-    {
-      id: 8,
-      title: 'Voyage Organisé - Croatie 2025',
-      description: 'Découvrez la Croatie : Dubrovnik, Split et les îles Dalmates. Vols directs et hébergement premium',
-      dates: 'Juillet - Août 2025',
-      image: '/manus-storage/DVCHINE26_7b74d784.webp',
-      pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
-      highlights: [
-        'Vols Turkish Airlines',
-        'Hébergement 4 étoiles',
-        'Croisiere côte Dalmate',
-        'Repas inclus',
-        'À partir de 9.300 MAD',
-      ],
-    },
   ];
 
   return (
