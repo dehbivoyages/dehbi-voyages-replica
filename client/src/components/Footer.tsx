@@ -58,9 +58,25 @@ export default function Footer() {
 
         {/* Divider */}
         <div className="border-t border-gray-700 py-8">
+          {/* Google Maps */}
+          <div className="mb-8">
+            <h4 className="font-bold mb-4">Notre Localisation</h4>
+            <div className="w-full h-96 rounded-lg overflow-hidden mb-8">
+              <iframe
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3313.5234567890!2d-5.8!3d35.76!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0c1a1a1a1a1a1a1%3A0x1a1a1a1a1a1a1a1a!2sQ56H%2B6J%20Tanger!5e0!3m2!1sfr!2sma!4v1234567890"
+              ></iframe>
+            </div>
+          </div>
+
           {/* Contact Form */}
           <div className="mb-8">
-            <h4 className="font-bold mb-4">Nous Contacter</h4>
+            <h4 className="font-bold mb-4">Formulaire de Contact</h4>
             <form className="space-y-4" onSubmit={(e) => {
               e.preventDefault();
               const nom = (e.target as any).elements[0].value;
