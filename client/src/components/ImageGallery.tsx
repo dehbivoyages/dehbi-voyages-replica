@@ -10,62 +10,30 @@ interface GalleryImage {
 }
 
 const galleryImages: GalleryImage[] = [
-  {
-    id: '1',
-    src: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=600&fit=crop',
-    alt: 'Maroc - Médina de Fès',
-    destination: 'Maroc',
-    description: 'La médina historique de Fès avec ses ruelles authentiques',
-  },
-  {
-    id: '2',
-    src: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&h=600&fit=crop',
-    alt: 'Maroc - Désert du Sahara',
-    destination: 'Maroc',
-    description: 'Les dunes dorées du désert du Sahara marocain',
-  },
-  {
-    id: '3',
-    src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop',
-    alt: 'Égypte - Pyramides de Gizeh',
-    destination: 'Égypte',
-    description: 'Les majestueuses pyramides de Gizeh',
-  },
-  {
-    id: '4',
-    src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
-    alt: 'Égypte - Croisière sur le Nil',
-    destination: 'Égypte',
-    description: 'Croisière romantique sur le Nil',
-  },
-  {
-    id: '5',
-    src: 'https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?w=800&h=600&fit=crop',
-    alt: 'Turquie - Istanbul',
-    destination: 'Turquie',
-    description: 'La Mosquée Bleue d\'Istanbul',
-  },
-  {
-    id: '6',
-    src: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&h=600&fit=crop',
-    alt: 'Turquie - Cappadoce',
-    destination: 'Turquie',
-    description: 'Les formations rocheuses uniques de Cappadoce',
-  },
-  {
-    id: '7',
-    src: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&h=600&fit=crop',
-    alt: 'Dubaï - Burj Khalifa',
-    destination: 'Dubaï',
-    description: 'Le Burj Khalifa, le plus haut bâtiment du monde',
-  },
-  {
-    id: '8',
-    src: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&h=600&fit=crop',
-    alt: 'Jordanie - Pétra',
-    destination: 'Jordanie',
-    description: 'La cité rose de Pétra',
-  },
+  // Turquie
+  { id: '1', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/turkey_cappadocia-k9AwMyABhgLTCVhN5xe9y5.webp', alt: 'Cappadocia', destination: 'Turquie', description: 'Montgolfières au-dessus de Cappadoce' },
+  { id: '2', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/turkey_bazaar-UiXsrvetVEd4hnkHTtUfQ5.webp', alt: 'Grand Bazaar', destination: 'Turquie', description: 'Le Grand Bazaar d\'Istanbul' },
+  { id: '3', src: 'https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?w=800&h=600&fit=crop', alt: 'Bosphore', destination: 'Turquie', description: 'Vue sur le Bosphore' },
+  // Égypte
+  { id: '4', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/egypt_luxor_temple-TCG5oj6YKD59RKjuQc6ZYz.webp', alt: 'Luxor Temple', destination: 'Égypte', description: 'Temple de Louxor' },
+  { id: '5', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/egypt_nile_sunset-ZKHvkR9d6xcZnHWwSLJYUq.webp', alt: 'Nil Sunset', destination: 'Égypte', description: 'Coucher de soleil sur le Nil' },
+  { id: '6', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/egypt_sphinx-grbKqH4ih9Zk5MAc5CkEAP.webp', alt: 'Sphinx', destination: 'Égypte', description: 'Le Grand Sphinx de Gizeh' },
+  // Jordanie
+  { id: '7', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/jordan_wadi_rum-2a2dq2fC6uFkKnYTJd87vL.webp', alt: 'Wadi Rum', destination: 'Jordanie', description: 'Désert de Wadi Rum' },
+  { id: '8', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/jordan_dead_sea-7xfxcQqrj9bALYDMLKU7RW.webp', alt: 'Dead Sea', destination: 'Jordanie', description: 'La Mer Morte' },
+  { id: '9', src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop', alt: 'Amman', destination: 'Jordanie', description: 'Amman, la capitale' },
+  // Arabie Saoudite
+  { id: '10', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/saudi_kingdom_tower-QNUZUWpyH6byr6xGGus8WM.webp', alt: 'Kingdom Tower', destination: 'Arabie Saoudite', description: 'Kingdom Tower à Riyad' },
+  { id: '11', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/saudi_diriyah-FrQhscQsFuFNQ8kgTAVy9Q.webp', alt: 'Diriyah', destination: 'Arabie Saoudite', description: 'Diriyah, patrimoine UNESCO' },
+  { id: '12', src: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&h=600&fit=crop', alt: 'Désert', destination: 'Arabie Saoudite', description: 'Désert saoudien' },
+  // Dubaï
+  { id: '13', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/dubai_palm_island-Nv8ZHzss6qiubzBTHDKp5m.webp', alt: 'Palm Island', destination: 'Dubaï', description: 'Palm Jumeirah' },
+  { id: '14', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/dubai_gold_souk-g2vjBaSLxJ3RiroaDCXfce.webp', alt: 'Gold Souk', destination: 'Dubaï', description: 'Gold Souk de Dubaï' },
+  { id: '15', src: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&h=600&fit=crop', alt: 'Burj Khalifa', destination: 'Dubaï', description: 'Burj Khalifa' },
+  // Malaisie
+  { id: '16', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/malaysia_batu_caves-BFequxqMz8z92gE9KfhVrn.webp', alt: 'Batu Caves', destination: 'Malaisie', description: 'Batu Caves' },
+  { id: '17', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/malaysia_langkawi-fzNuV7Y4Cp4ypCZhb3ZjEG.webp', alt: 'Langkawi', destination: 'Malaisie', description: 'Plages de Langkawi' },
+  { id: '18', src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop', alt: 'Kuala Lumpur', destination: 'Malaisie', description: 'Kuala Lumpur' },
 ];
 
 export default function ImageGallery() {
