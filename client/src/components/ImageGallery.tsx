@@ -7,14 +7,20 @@ interface GalleryImage {
   alt: string;
   destination: string;
   description: string;
+  video?: string;
+  isVideo?: boolean;
 }
 
 const galleryImages: GalleryImage[] = [
-  // Turquie
+  // Turquie - Vidéo
+  { id: 'v1', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/turkey_cappadocia-k9AwMyABhgLTCVhN5xe9y5.webp', alt: 'Cappadocia Video', destination: 'Turquie', description: 'Cappadoce - Effet Zoom', video: '/manus-storage/turkey_istanbul_monument_video.mp4', isVideo: true },
+  // Turquie - Images
   { id: '1', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/turkey_cappadocia-k9AwMyABhgLTCVhN5xe9y5.webp', alt: 'Cappadocia', destination: 'Turquie', description: 'Montgolfières au-dessus de Cappadoce' },
   { id: '2', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/turkey_bazaar-UiXsrvetVEd4hnkHTtUfQ5.webp', alt: 'Grand Bazaar', destination: 'Turquie', description: 'Le Grand Bazaar d\'Istanbul' },
+  // Égypte - Vidéo
+  { id: 'v2', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/egypt_luxor_temple-TCG5oj6YKD59RKjuQc6ZYz.webp', alt: 'Egypt Video', destination: 'Égypte', description: 'Égypte - Effet Zoom', video: '/manus-storage/egypt_cairo_pyramids_video.mp4', isVideo: true },
   { id: '3', src: 'https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?w=800&h=600&fit=crop', alt: 'Bosphore', destination: 'Turquie', description: 'Vue sur le Bosphore' },
-  // Égypte
+  // Égypte - Images
   { id: '4', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/egypt_luxor_temple-TCG5oj6YKD59RKjuQc6ZYz.webp', alt: 'Luxor Temple', destination: 'Égypte', description: 'Temple de Louxor' },
   { id: '5', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/egypt_nile_sunset-ZKHvkR9d6xcZnHWwSLJYUq.webp', alt: 'Nil Sunset', destination: 'Égypte', description: 'Coucher de soleil sur le Nil' },
   { id: '6', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/egypt_sphinx-grbKqH4ih9Zk5MAc5CkEAP.webp', alt: 'Sphinx', destination: 'Égypte', description: 'Le Grand Sphinx de Gizeh' },
@@ -22,7 +28,11 @@ const galleryImages: GalleryImage[] = [
   { id: '7', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/jordan_wadi_rum-2a2dq2fC6uFkKnYTJd87vL.webp', alt: 'Wadi Rum', destination: 'Jordanie', description: 'Désert de Wadi Rum' },
   { id: '8', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/jordan_dead_sea-7xfxcQqrj9bALYDMLKU7RW.webp', alt: 'Dead Sea', destination: 'Jordanie', description: 'La Mer Morte' },
   { id: '9', src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop', alt: 'Amman', destination: 'Jordanie', description: 'Amman, la capitale' },
-  // Arabie Saoudite
+  // Jordanie - Vidéo
+  { id: 'v3', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/jordan_wadi_rum-2a2dq2fC6uFkKnYTJd87vL.webp', alt: 'Jordan Video', destination: 'Jordanie', description: 'Jordanie - Effet Zoom', video: '/manus-storage/jordan_petra_monument_video.mp4', isVideo: true },
+  // Arabie Saoudite - Vidéo
+  { id: 'v4', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/saudi_kingdom_tower-QNUZUWpyH6byr6xGGus8WM.webp', alt: 'Saudi Arabia Video', destination: 'Arabie Saoudite', description: 'Arabie Saoudite - Effet Zoom', video: '/manus-storage/saudi_arabia_riyadh_video.mp4', isVideo: true },
+  // Arabie Saoudite - Images
   { id: '10', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/saudi_kingdom_tower-QNUZUWpyH6byr6xGGus8WM.webp', alt: 'Kingdom Tower', destination: 'Arabie Saoudite', description: 'Kingdom Tower à Riyad' },
   { id: '11', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/saudi_diriyah-FrQhscQsFuFNQ8kgTAVy9Q.webp', alt: 'Diriyah', destination: 'Arabie Saoudite', description: 'Diriyah, patrimoine UNESCO' },
   { id: '12', src: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&h=600&fit=crop', alt: 'Désert', destination: 'Arabie Saoudite', description: 'Désert saoudien' },
@@ -30,7 +40,11 @@ const galleryImages: GalleryImage[] = [
   { id: '13', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/dubai_palm_island-Nv8ZHzss6qiubzBTHDKp5m.webp', alt: 'Palm Island', destination: 'Dubaï', description: 'Palm Jumeirah' },
   { id: '14', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/dubai_gold_souk-g2vjBaSLxJ3RiroaDCXfce.webp', alt: 'Gold Souk', destination: 'Dubaï', description: 'Gold Souk de Dubaï' },
   { id: '15', src: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&h=600&fit=crop', alt: 'Burj Khalifa', destination: 'Dubaï', description: 'Burj Khalifa' },
-  // Malaisie
+  // Dubaï - Vidéo
+  { id: 'v5', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/dubai_palm_island-Nv8ZHzss6qiubzBTHDKp5m.webp', alt: 'Dubai Video', destination: 'Dubaï', description: 'Dubaï - Effet Zoom', video: '/manus-storage/dubai_burj_khalifa_video.mp4', isVideo: true },
+  // Malaisie - Vidéo
+  { id: 'v6', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/malaysia_batu_caves-BFequxqMz8z92gE9KfhVrn.webp', alt: 'Malaysia Video', destination: 'Malaisie', description: 'Malaisie - Effet Zoom', video: '/manus-storage/malaysia_kuala_lumpur_video.mp4', isVideo: true },
+  // Malaisie - Images
   { id: '16', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/malaysia_batu_caves-BFequxqMz8z92gE9KfhVrn.webp', alt: 'Batu Caves', destination: 'Malaisie', description: 'Batu Caves' },
   { id: '17', src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/malaysia_langkawi-fzNuV7Y4Cp4ypCZhb3ZjEG.webp', alt: 'Langkawi', destination: 'Malaisie', description: 'Plages de Langkawi' },
   { id: '18', src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop', alt: 'Kuala Lumpur', destination: 'Malaisie', description: 'Kuala Lumpur' },
@@ -103,11 +117,30 @@ export default function ImageGallery() {
               }}
               className="cursor-pointer group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow"
             >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
-              />
+              {image.isVideo ? (
+                <video
+                  src={image.video}
+                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
+                  autoPlay
+                  muted
+                  loop
+                />
+              ) : (
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+              )}
+              {image.isVideo && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
+                  <div className="w-12 h-12 bg-white/80 rounded-full flex items-center justify-center group-hover:bg-white transition-colors">
+                    <svg className="w-6 h-6 text-blue-600 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+                    </svg>
+                  </div>
+                </div>
+              )}
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-end">
                 <div className="w-full p-4 bg-gradient-to-t from-black/80 to-transparent text-white opacity-0 group-hover:opacity-100 transition-opacity">
                   <p className="font-bold">{image.destination}</p>
