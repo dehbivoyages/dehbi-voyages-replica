@@ -1,6 +1,9 @@
-import { Download, Eye } from 'lucide-react';
+import { Download, Eye, Play } from 'lucide-react';
+import { useState } from 'react';
 
 export default function OrganizedTrips() {
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+
   const trips = [
     {
       id: 1,
@@ -8,6 +11,7 @@ export default function OrganizedTrips() {
       description: 'Circuit complet en Arabie Saoudite avec hébergement premium, vols directs et visites guidées',
       dates: '23 Juillet - 7 Juillet 2026 / 23 Juillet - 6 Août 2026',
       image: '/manus-storage/dv02_ba9ec844.jpeg',
+      video: '/manus-storage/video_voyage_arabie_saoudite_24d26664.mp4',
       pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
       highlights: [
         'Vols Saudi Arabian Airlines',
@@ -23,6 +27,7 @@ export default function OrganizedTrips() {
       description: 'Circuit complet en Chine avec visite de Guangzhou, Shanghai, Zhangjiajie et Beijing. Vols Turkish Airlines, hébergement premium et visites guidées complètes',
       dates: '14 Août - 26 Août 2026 / 20 Août - 2 Septembre 2026',
       image: '/manus-storage/DVCHINE26_7b74d784.webp',
+      video: '/manus-storage/video_voyage_chine_3c3f30f4.mp4',
       pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
       highlights: [
         'Vols Turkish Airlines',
@@ -39,6 +44,7 @@ export default function OrganizedTrips() {
       description: 'Circuit complet en Thaïlande avec Bangkok, Krabi, Kanchanaburi, Phuket et Rivière Kwai. Jungle, plages paradisiaques et culture thaïlandaise authentique',
       dates: '19 Août - 31 Août 2026',
       image: '/manus-storage/DVTHAILAND26_06ae0e94.webp',
+      video: '/manus-storage/video_voyage_thailande_jungle_5fc86a5e.mp4',
       pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
       highlights: [
         'Vols Turkish Airlines',
@@ -56,6 +62,7 @@ export default function OrganizedTrips() {
       description: 'Circuit complet en Thaïlande avec Bangkok, Krabi, Phuket, îles paradisiaques et temples bouddhistes. Vols Qatar Airways, hébergement premium et expériences authentiques',
       dates: '05 Juin - 17 Juin 2025',
       image: '/manus-storage/550993670_122239015040127360_3405256931647515060_n_4b825609.jpg',
+      video: '/manus-storage/video_voyage_thailande_revee_8a932689.mp4',
       pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
       highlights: [
         'Vols Qatar Airways',
@@ -76,6 +83,7 @@ export default function OrganizedTrips() {
       description: 'Circuit complet en Turquie avec Istanbul, visite de la Mosquée Bleue, Bosphore et Bursa. Vols Royal Air Maroc, hébergement premium et croisière sur le Bosphore incluse',
       dates: '1 Mai - 8 Mai 2026 / 23 Mai - 30 Mai 2026 / 30 Mai - 6 Juin 2026',
       image: '/manus-storage/DVISTANBULMAI26._a32c686f.webp',
+      video: '/manus-storage/video_voyage_istanbul_dc42ff93.mp4',
       pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
       highlights: [
         'Vols Royal Air Maroc',
@@ -106,14 +114,34 @@ export default function OrganizedTrips() {
           {trips.map((trip) => (
             <div key={trip.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
               <div className="grid grid-cols-1 gap-4">
-                {/* Image */}
-                <div className="relative h-25 overflow-hidden bg-gray-200">
-                  <img
-                    src={trip.image}
-                    alt={trip.title}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                {/* Video/Image */}
+                <div className="relative h-25 overflow-hidden bg-gray-200 group cursor-pointer" onClick={() => trip.video && setSelectedVideo(trip.video)}>
+                  {trip.video ? (
+                    <>
+                      <video
+                        src={trip.video}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        muted
+                        loop
+                        autoPlay
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="w-12 h-12 bg-white/80 rounded-full flex items-center justify-center">
+                          <Play size={24} className="text-blue-600 ml-1" fill="currentColor" />
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <img
+                        src={trip.image}
+                        alt={trip.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                    </>
+                  )}
                 </div>
 
                 {/* Content */}
@@ -173,6 +201,26 @@ export default function OrganizedTrips() {
             Pour toute question, contactez-nous via WhatsApp ou Gmail en utilisant le bouton "Réserver" en bas à droite.
           </p>
         </div>
+
+        {/* Video Modal */}
+        {selectedVideo && (
+          <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4" onClick={() => setSelectedVideo(null)}>
+            <div className="bg-black rounded-lg overflow-hidden max-w-4xl w-full" onClick={(e) => e.stopPropagation()}>
+              <video
+                src={selectedVideo}
+                controls
+                autoPlay
+                className="w-full h-auto"
+              />
+              <button
+                onClick={() => setSelectedVideo(null)}
+                className="absolute top-4 right-4 text-white hover:text-gray-300 text-2xl"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
