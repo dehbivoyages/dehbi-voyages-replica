@@ -99,8 +99,8 @@ export default function OrganizedTrips() {
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-b from-white to-blue-50">
-      <div className="container">
+    <section className="py-16 bg-gradient-to-b from-white to-blue-50 w-full">
+      <div className="container w-full mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-foreground mb-4">Voyages Organisés</h2>
@@ -110,12 +110,12 @@ export default function OrganizedTrips() {
         </div>
 
         {/* Trips Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
           {trips.map((trip) => (
-            <div key={trip.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-              <div className="grid grid-cols-1 gap-4">
+            <div key={trip.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow h-full flex flex-col">
+              <div className="grid grid-cols-1 gap-4 flex-1 flex flex-col">
                 {/* Video/Image */}
-                <div className="relative h-25 overflow-hidden bg-gray-200 group cursor-pointer" onClick={() => trip.video && setSelectedVideo(trip.video)}>
+                <div className="relative h-40 overflow-hidden bg-gray-200 group cursor-pointer" onClick={() => trip.video && setSelectedVideo(trip.video)}>
                   {trip.video ? (
                     <>
                       <video
@@ -145,7 +145,7 @@ export default function OrganizedTrips() {
                 </div>
 
                 {/* Content */}
-                <div className="p-3 flex flex-col justify-between">
+                <div className="p-3 flex flex-col justify-between flex-1">
                   <div>
                     <h3 className="text-lg font-bold text-foreground mb-1">{trip.title}</h3>
                     <p className="text-xs text-blue-600 font-semibold mb-2">📅 {trip.dates}</p>
@@ -166,7 +166,7 @@ export default function OrganizedTrips() {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 mt-auto">
                     <a
                       href={trip.pdfUrl}
                       target="_blank"
