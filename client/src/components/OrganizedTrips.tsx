@@ -96,6 +96,24 @@ export default function OrganizedTrips() {
         'À partir de 7.690 MAD',
       ],
     },
+    {
+      id: 6,
+      title: 'Voyage Organisé - Las Palmas Août 2026',
+      description: 'Circuit complet aux Îles Canaries avec Las Palmas, le Soleil des Canaries. Vols Royal Air Maroc, hébergement 4 étoiles et visites guidées complètes',
+      dates: '13 Août - 20 Août 2026 / 21 Août - 28 Août 2026',
+      image: '/manus-storage/DVLASPALMAS2026_cf2b2528.webp',
+      video: '/manus-storage/video_voyage_las_palmas_a7d20bf8.mp4',
+      pdfUrl: '/manus-storage/DVLASPALMAS2026_42b4f72f.pdf',
+      highlights: [
+        'Vols Royal Air Maroc',
+        'Hébergement 4 étoiles',
+        'Visites guidées complètes',
+        'Repas inclus',
+        'Assurance voyage',
+        '8 jours / 7 nuits',
+        'À partir de 11.500 MAD',
+      ],
+    },
   ];
 
   return (
