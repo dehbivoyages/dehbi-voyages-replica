@@ -28,7 +28,7 @@ export default function OrganizedTrips() {
       dates: '14 Août - 26 Août 2026 / 20 Août - 2 Septembre 2026',
       image: '/manus-storage/DVCHINE26_7b74d784.webp',
       video: '/manus-storage/video_voyage_chine_3c3f30f4.mp4',
-      pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
+      pdfUrl: '/manus-storage/DVCHINE26_updated_5cc2290e.pdf',
       highlights: [
         'Vols Turkish Airlines',
         'Hébergement 4-5 étoiles',
