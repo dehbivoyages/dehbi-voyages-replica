@@ -12,7 +12,7 @@ export default function OrganizedTrips() {
       dates: '23 Juillet - 7 Juillet 2026 / 23 Juillet - 6 Août 2026',
       image: '/manus-storage/dv02_ba9ec844.jpeg',
       video: '/manus-storage/video_voyage_arabie_saoudite_24d26664.mp4',
-      pdfUrl: '/manus-storage/voyage_arabie_saoudite_d3ce4c80.pdf',
+      pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
       highlights: [
         'Vols Saudi Arabian Airlines',
         'Hébergement 4-5 étoiles',
@@ -28,7 +28,7 @@ export default function OrganizedTrips() {
       dates: '14 Août - 26 Août 2026 / 20 Août - 2 Septembre 2026',
       image: '/manus-storage/DVCHINE26_7b74d784.webp',
       video: '/manus-storage/video_voyage_chine_3c3f30f4.mp4',
-      pdfUrl: '/manus-storage/voyage_chine_eternelle_d414840f.pdf',
+      pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
       highlights: [
         'Vols Turkish Airlines',
         'Hébergement 4-5 étoiles',
@@ -45,7 +45,7 @@ export default function OrganizedTrips() {
       dates: '19 Août - 31 Août 2026',
       image: '/manus-storage/DVTHAILAND26_06ae0e94.webp',
       video: '/manus-storage/video_voyage_thailande_jungle_5fc86a5e.mp4',
-      pdfUrl: '/manus-storage/voyage_thailande_jungle_051180f0.pdf',
+      pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
       highlights: [
         'Vols Turkish Airlines',
         'Hébergement 4-5 étoiles',
@@ -63,7 +63,7 @@ export default function OrganizedTrips() {
       dates: '05 Juin - 17 Juin 2025',
       image: '/manus-storage/550993670_122239015040127360_3405256931647515060_n_4b825609.jpg',
       video: '/manus-storage/video_voyage_thailande_revee_8a932689.mp4',
-      pdfUrl: '/manus-storage/voyage_thailande_revee_f6e0c888.pdf',
+      pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
       highlights: [
         'Vols Qatar Airways',
         'Hébergement 4-5 étoiles',
@@ -84,7 +84,7 @@ export default function OrganizedTrips() {
       dates: '1 Mai - 8 Mai 2026 / 23 Mai - 30 Mai 2026 / 30 Mai - 6 Juin 2026',
       image: '/manus-storage/DVISTANBULMAI26._a32c686f.webp',
       video: '/manus-storage/video_voyage_istanbul_dc42ff93.mp4',
-      pdfUrl: '/manus-storage/voyage_istanbul_126ecd76.pdf',
+      pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
       highlights: [
         'Vols Royal Air Maroc',
         'Hébergement 3-5 étoiles',
@@ -99,8 +99,8 @@ export default function OrganizedTrips() {
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-b from-white to-blue-50 w-full">
-      <div className="container w-full mx-auto px-4">
+    <section className="py-16 bg-gradient-to-b from-white to-blue-50">
+      <div className="container">
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-foreground mb-4">Voyages Organisés</h2>
@@ -110,12 +110,12 @@ export default function OrganizedTrips() {
         </div>
 
         {/* Trips Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {trips.map((trip) => (
-            <div key={trip.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow h-full flex flex-col">
-              <div className="grid grid-cols-1 gap-4 flex-1 flex flex-col">
+            <div key={trip.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+              <div className="grid grid-cols-1 gap-4">
                 {/* Video/Image */}
-                <div className="relative h-40 overflow-hidden bg-gray-200 group cursor-pointer" onClick={() => trip.video && setSelectedVideo(trip.video)}>
+                <div className="relative h-25 overflow-hidden bg-gray-200 group cursor-pointer" onClick={() => trip.video && setSelectedVideo(trip.video)}>
                   {trip.video ? (
                     <>
                       <video
@@ -145,7 +145,7 @@ export default function OrganizedTrips() {
                 </div>
 
                 {/* Content */}
-                <div className="p-3 flex flex-col justify-between flex-1">
+                <div className="p-3 flex flex-col justify-between">
                   <div>
                     <h3 className="text-lg font-bold text-foreground mb-1">{trip.title}</h3>
                     <p className="text-xs text-blue-600 font-semibold mb-2">📅 {trip.dates}</p>
@@ -166,7 +166,7 @@ export default function OrganizedTrips() {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex gap-2 mt-auto">
+                  <div className="flex gap-2">
                     <a
                       href={trip.pdfUrl}
                       target="_blank"
