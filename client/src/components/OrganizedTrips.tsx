@@ -1,8 +1,9 @@
-import { Download, Eye, Play } from 'lucide-react';
+import { Download, Eye, Play, Filter } from 'lucide-react';
 import { useState } from 'react';
 
 export default function OrganizedTrips() {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const [selectedFilter, setSelectedFilter] = useState<string>('all');
 
   const trips = [
     {
@@ -13,6 +14,7 @@ export default function OrganizedTrips() {
       image: '/manus-storage/dv02_ba9ec844.jpeg',
       video: '/manus-storage/video_voyage_arabie_saoudite_24d26664.mp4',
       pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
+      destination: 'Moyen-Orient',
       highlights: [
         'Vols Saudi Arabian Airlines',
         'Hébergement 4-5 étoiles',
@@ -29,6 +31,7 @@ export default function OrganizedTrips() {
       image: '/manus-storage/DVCHINE26_7b74d784.webp',
       video: '/manus-storage/video_voyage_chine_3c3f30f4.mp4',
       pdfUrl: '/manus-storage/DVCHINE26_updated_5cc2290e.pdf',
+      destination: 'Asie',
       highlights: [
         'Vols Turkish Airlines',
         'Hébergement 4-5 étoiles',
@@ -46,6 +49,7 @@ export default function OrganizedTrips() {
       image: '/manus-storage/DVTHAILAND26_06ae0e94.webp',
       video: '/manus-storage/video_voyage_thailande_jungle_5fc86a5e.mp4',
       pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
+      destination: 'Asie',
       highlights: [
         'Vols Turkish Airlines',
         'Hébergement 4-5 étoiles',
@@ -64,6 +68,7 @@ export default function OrganizedTrips() {
       image: '/manus-storage/550993670_122239015040127360_3405256931647515060_n_4b825609.jpg',
       video: '/manus-storage/video_voyage_thailande_revee_8a932689.mp4',
       pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
+      destination: 'Asie',
       highlights: [
         'Vols Qatar Airways',
         'Hébergement 4-5 étoiles',
@@ -85,6 +90,7 @@ export default function OrganizedTrips() {
       image: '/manus-storage/DVISTANBULMAI26._a32c686f.webp',
       video: '/manus-storage/video_voyage_istanbul_dc42ff93.mp4',
       pdfUrl: '/manus-storage/voyage-organise-dehbi_c485bd6a.pdf',
+      destination: 'Europe',
       highlights: [
         'Vols Royal Air Maroc',
         'Hébergement 3-5 étoiles',
@@ -104,6 +110,7 @@ export default function OrganizedTrips() {
       image: '/manus-storage/DVLASPALMAS2026_cf2b2528.webp',
       video: '/manus-storage/video_voyage_las_palmas_a7d20bf8.mp4',
       pdfUrl: '/manus-storage/DVLASPALMAS2026_42b4f72f.pdf',
+      destination: 'Europe',
       highlights: [
         'Vols Royal Air Maroc',
         'Hébergement 4 étoiles',
@@ -122,6 +129,7 @@ export default function OrganizedTrips() {
       image: '/manus-storage/DVMALAISIE26_51ba3316.webp',
       video: '/manus-storage/video_voyage_malaisie_a32d64fa.mp4',
       pdfUrl: '/manus-storage/DVMALAISIE26_final_36f92057.pdf',
+      destination: 'Asie',
       highlights: [
         'Vols Emirates',
         'Hébergement 4 étoiles',
@@ -134,6 +142,15 @@ export default function OrganizedTrips() {
     },
   ];
 
+  // Get unique destinations for filter
+  const uniqueDestinations = Array.from(new Set(trips.map(trip => trip.destination)));
+  const destinations = ['all', ...uniqueDestinations];
+
+  // Filter trips based on selected destination
+  const filteredTrips = selectedFilter === 'all' 
+    ? trips 
+    : trips.filter(trip => trip.destination === selectedFilter);
+
   return (
     <section className="py-16 bg-gradient-to-b from-white to-blue-50">
       <div className="container">
@@ -145,9 +162,30 @@ export default function OrganizedTrips() {
           </p>
         </div>
 
+        {/* Filter Buttons */}
+        <div className="flex flex-wrap justify-center gap-3 mb-10">
+          <div className="flex items-center gap-2 mr-4">
+            <Filter size={20} className="text-blue-600" />
+            <span className="font-semibold text-foreground">Filtrer par :</span>
+          </div>
+          {destinations.map((destination) => (
+            <button
+              key={destination}
+              onClick={() => setSelectedFilter(destination)}
+              className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+                selectedFilter === destination
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-white text-foreground border-2 border-blue-600 hover:bg-blue-50'
+              }`}
+            >
+              {destination === 'all' ? '🌍 Tous les voyages' : `🌏 ${destination}`}
+            </button>
+          ))}
+        </div>
+
         {/* Trips Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {trips.map((trip) => (
+          {filteredTrips.map((trip) => (
             <div key={trip.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
               <div className="grid grid-cols-1 gap-4">
                 {/* Video/Image */}
@@ -183,7 +221,12 @@ export default function OrganizedTrips() {
                 {/* Content */}
                 <div className="p-3 flex flex-col justify-between">
                   <div>
-                    <h3 className="text-lg font-bold text-foreground mb-1">{trip.title}</h3>
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="text-lg font-bold text-foreground flex-1">{trip.title}</h3>
+                      <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-semibold">
+                        {trip.destination}
+                      </span>
+                    </div>
                     <p className="text-xs text-blue-600 font-semibold mb-2">📅 {trip.dates}</p>
                     <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{trip.description}</p>
 
@@ -227,11 +270,18 @@ export default function OrganizedTrips() {
           ))}
         </div>
 
+        {/* Empty State */}
+        {filteredTrips.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-lg text-muted-foreground">Aucun voyage trouvé pour cette destination.</p>
+          </div>
+        )}
+
         {/* Additional Info */}
         <div className="mt-12 bg-blue-50 border-l-4 border-blue-600 p-6 rounded">
           <h4 className="font-semibold text-foreground mb-2">📧 Besoin de plus d'informations ?</h4>
           <p className="text-muted-foreground mb-4">
-            Téléchargez le PDF pour voir tous les détails, tarifs, conditions et modalités de paiement.
+            Téléchargez le PDF pour voir tous les détails, tarifs, conditions et modalités de paiement. Tous nos voyages sont disponibles toute l'année - contactez-nous pour des dates alternatives !
           </p>
           <p className="text-sm text-muted-foreground">
             Pour toute question, contactez-nous via WhatsApp ou Gmail en utilisant le bouton "Réserver" en bas à droite.
