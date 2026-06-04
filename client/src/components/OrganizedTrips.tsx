@@ -114,6 +114,24 @@ export default function OrganizedTrips() {
         'À partir de 11.500 MAD',
       ],
     },
+    {
+      id: 7,
+      title: 'Voyage Organisé - Malaisie Kuala Lumpur Penang Langkawi',
+      description: 'Circuit complet en Malaisie avec Kuala Lumpur, Penang et Langkawi. Vols Emirates, hébergement 4 étoiles et visites guidées complètes. Le Soleil de la Malaisie vous attend !',
+      dates: '10 Août - 22 Août 2026 / 22 Août - 3 Septembre 2026',
+      image: '/manus-storage/DVMALAISIE26_51ba3316.webp',
+      video: '/manus-storage/video_voyage_malaisie_a32d64fa.mp4',
+      pdfUrl: '/manus-storage/DVMALAISIE26_final_36f92057.pdf',
+      highlights: [
+        'Vols Emirates',
+        'Hébergement 4 étoiles',
+        'Visites guidées complètes',
+        'Repas inclus',
+        'Assurance voyage',
+        '11 nuits / 12 jours',
+        'À partir de 28.500 MAD',
+      ],
+    },
   ];
 
   return (
