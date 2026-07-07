@@ -43,9 +43,9 @@
 }
 
 :root {
-  --primary: #0080c0;
+  --primary: #FF8C42;
   --primary-foreground: #FFFFFF;
-  --sidebar-primary: #0080c0;
+  --sidebar-primary: #FF8C42;
   --sidebar-primary-foreground: #FFFFFF;
   --chart-1: #0066FF;
   --chart-2: #0052CC;
@@ -63,7 +63,7 @@
   --secondary-foreground: oklch(0.985 0 0);
   --muted: #F5F5F5;
   --muted-foreground: #666666;
-  --accent: #0066FF;
+  --accent: #6BFF42;
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
