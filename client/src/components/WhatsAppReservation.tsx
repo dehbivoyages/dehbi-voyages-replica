@@ -152,12 +152,18 @@ const WhatsAppReservation = forwardRef((props, ref) => {
       {/* Floating WhatsApp Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 left-6 z-40 bg-orange-500 hover:bg-orange-600 text-white rounded-full p-4 shadow-lg transition-all duration-300 hover:scale-110 flex items-center gap-2"
+        className="fixed bottom-6 left-6 z-40 rounded-full shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center"
         title="Réserver via WhatsApp"
-        style={{backgroundColor: '#FF8C42'}}
+        style={{
+          width: '64px',
+          height: '64px',
+          backgroundImage: 'url(/manus-storage/whatsapp_logo_dehbi_3SVvvJn7TaHH7qKQLYy8VM.png)',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          backgroundColor: 'transparent'
+        }}
       >
-        <MessageCircle size={24} />
-        <span className="hidden sm:inline text-sm font-semibold">Réserver</span>
       </button>
 
       {/* Modal */}
