@@ -92,7 +92,7 @@ export default function ChatBot() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-24 right-6 z-40 rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center gap-2 font-semibold text-sm"
+          className="fixed bottom-24 left-6 z-40 rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center gap-2 font-semibold text-sm"
           title="Chat Assistant"
           style={{
             backgroundColor: '#00ff80',
@@ -109,7 +109,7 @@ export default function ChatBot() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-96 max-w-[calc(100vw-2rem)] bg-white rounded-lg shadow-2xl flex flex-col overflow-hidden">
+        <div className="fixed bottom-6 left-6 z-50 w-96 max-w-[calc(100vw-2rem)] bg-white rounded-lg shadow-2xl flex flex-col overflow-hidden">
           {/* Header */}
           <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
