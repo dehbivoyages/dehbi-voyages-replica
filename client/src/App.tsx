@@ -6,6 +6,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import WhatsAppButton from "./components/WhatsAppButton";
+import ChatBot from "./components/ChatBot";
 
 
 function Router() {
@@ -29,6 +30,7 @@ function App() {
           <Toaster />
           <Router />
           <WhatsAppButton phoneNumber="212663381004" message="Bonjour Dehbi Voyages, je souhaite en savoir plus sur vos voyages organisés." />
+          <ChatBot />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

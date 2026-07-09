@@ -1,119 +1,201 @@
 import { Star } from 'lucide-react';
+import { useState } from 'react';
 
 export default function Testimonials() {
+  const [selectedTestimonial, setSelectedTestimonial] = useState<number | null>(null);
+
   const testimonials = [
     {
-      name: 'Fatima M.',
-      location: 'Fès',
-      text: 'Expérience inoubliable avec Dehbi Voyages. L\'équipe était professionnelle et attentive à chaque détail. Je recommande vivement leurs services !',
+      id: 1,
+      name: 'Fatima Bennani',
+      destination: 'Punta Cana 2026',
       rating: 5,
-      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
+      text: 'Expérience incroyable ! L\'équipe Dehbi Voyages a organisé chaque détail à la perfection. Les hôtels étaient magnifiques et le service impeccable. Je recommande vivement !',
+      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima',
+      date: 'Juillet 2026',
     },
     {
-      name: 'Ahmed B.',
-      location: 'Marrakech',
-      text: 'Service excellent pour notre voyage en famille. Tous les arrangements étaient parfaits, du transport à l\'hébergement. Nous recommandons vivement Dehbi Voyages !',
+      id: 2,
+      name: 'Ahmed El Fassi',
+      destination: 'Omra 13 Jours',
       rating: 5,
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
+      text: 'Voyage spirituel exceptionnellement bien organisé. L\'accompagnement religieux était professionnel et respectueux. Merci Dehbi Voyages pour cette belle expérience.',
+      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ahmed',
+      date: 'Août 2026',
     },
     {
-      name: 'Layla K.',
-      location: 'Agadir',
-      text: 'Les circuits sont bien organisés et les guides sont très compétents. Nous avons appris beaucoup et nous avons passé un moment merveilleux. À bientôt pour un autre voyage !',
+      id: 3,
+      name: 'Nadia Khouribga',
+      destination: 'Antalya-Istanbul',
       rating: 5,
-      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
+      text: 'Magnifique circuit en Turquie ! Les hôtels étaient luxueux, les visites guidées très intéressantes. L\'équipe était toujours disponible et attentive. Bravo !',
+      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Nadia',
+      date: 'Juillet 2026',
     },
     {
-      name: 'Mohammed T.',
-      location: 'Casablanca',
-      text: 'Voyage spirituel transformateur. L\'équipe de Dehbi Voyages a rendu chaque moment spécial et mémorable. Merci pour cette belle expérience !',
+      id: 4,
+      name: 'Mohamed Alaoui',
+      destination: 'Umra avec Turquie',
       rating: 5,
-      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop',
+      text: 'Combinaison parfaite entre spiritualité et découverte culturelle. Istanbul était magnifique et l\'Umra bien organisée. Très satisfait du service.',
+      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mohamed',
+      date: 'Août 2026',
     },
     {
-      name: 'Nadia S.',
-      location: 'Rabat',
-      text: 'Très satisfaite du service. Les prix sont compétitifs et la qualité est au rendez-vous. Je vais certainement réserver avec eux pour mon prochain voyage.',
+      id: 5,
+      name: 'Leila Marrakchi',
+      destination: 'Punta Cana 2026',
       rating: 5,
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
+      text: 'Les plages étaient paradisiaques ! L\'hôtel all-inclusive était excellent avec un service 5 étoiles. Dehbi Voyages a vraiment dépassé mes attentes.',
+      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Leila',
+      date: 'Août 2026',
     },
     {
-      name: 'Hassan R.',
-      location: 'Tanger',
-      text: 'Excellente agence de voyages. Très professionnels et à l\'écoute des besoins. Je recommande sans hésiter Dehbi Voyages à tous mes amis !',
+      id: 6,
+      name: 'Hassan Bennani',
+      destination: 'Antalya-Istanbul',
       rating: 5,
-      image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop',
+      text: 'Voyage inoubliable ! La croisière sur le Bosphore était magique. Tous les détails étaient parfaitement organisés. Merci à toute l\'équipe !',
+      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Hassan',
+      date: 'Juillet 2026',
     },
   ];
 
-  const renderStars = (rating: number) => {
-    return (
-      <div className="flex gap-1">
-        {[...Array(rating)].map((_, i) => (
-          <Star key={i} size={16} className="fill-yellow-400 text-yellow-400" />
-        ))}
-      </div>
-    );
-  };
+  const averageRating = (testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length).toFixed(1);
 
   return (
-    <section className="section-padding bg-white">
-      <div className="container mx-auto px-4">
+    <section className="py-16 bg-white">
+      <div className="container">
+        {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
-            Avis de Nos Clients
-          </h2>
-          <p className="text-muted-foreground text-lg">
-            Découvrez ce que nos clients satisfaits pensent de nos services
+          <h2 className="text-4xl font-bold text-foreground mb-4">Avis de Nos Clients</h2>
+          <p className="text-lg text-muted-foreground mb-4">
+            Découvrez les témoignages authentiques de nos voyageurs satisfaits
           </p>
+          <div className="flex items-center justify-center gap-2">
+            <div className="flex gap-1">
+              {[...Array(5)].map((_, i) => (
+                <Star
+                  key={i}
+                  size={24}
+                  className={i < Math.round(parseFloat(averageRating)) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}
+                />
+              ))}
+            </div>
+            <span className="text-xl font-bold text-foreground">{averageRating}/5</span>
+            <span className="text-muted-foreground">({testimonials.length} avis)</span>
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, index) => (
+        {/* Testimonials Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {testimonials.map((testimonial) => (
             <div
-              key={index}
-              className="bg-gray-50 rounded-xl p-6 hover:shadow-lg transition-shadow border border-gray-200"
+              key={testimonial.id}
+              className="bg-gradient-to-br from-blue-50 to-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow cursor-pointer border border-blue-100"
+              onClick={() => setSelectedTestimonial(testimonial.id)}
             >
-              {/* Rating */}
-              <div className="mb-4">
-                {renderStars(testimonial.rating)}
+              {/* Stars */}
+              <div className="flex gap-1 mb-3">
+                {[...Array(testimonial.rating)].map((_, i) => (
+                  <Star key={i} size={16} className="fill-yellow-400 text-yellow-400" />
+                ))}
               </div>
 
-              {/* Testimonial Text */}
-              <p className="text-foreground text-sm mb-6 italic">
+              {/* Quote */}
+              <p className="text-sm text-foreground mb-4 line-clamp-3 italic">
                 "{testimonial.text}"
               </p>
 
               {/* Client Info */}
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3 border-t border-blue-100 pt-4">
                 <img
                   src={testimonial.image}
                   alt={testimonial.name}
-                  className="w-12 h-12 rounded-full object-cover"
+                  className="w-10 h-10 rounded-full"
                 />
-                <div>
-                  <p className="font-semibold text-foreground text-sm">
-                    {testimonial.name}
-                  </p>
-                  <p className="text-muted-foreground text-xs">
-                    {testimonial.location}
-                  </p>
+                <div className="flex-1">
+                  <p className="font-semibold text-sm text-foreground">{testimonial.name}</p>
+                  <p className="text-xs text-muted-foreground">{testimonial.destination}</p>
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Call to Action */}
+        {/* Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg p-8 text-white">
+          <div className="text-center">
+            <div className="text-4xl font-bold mb-2">{testimonials.length}</div>
+            <p className="text-blue-100">Clients Satisfaits</p>
+          </div>
+          <div className="text-center">
+            <div className="text-4xl font-bold mb-2">{averageRating}</div>
+            <p className="text-blue-100">Note Moyenne</p>
+          </div>
+          <div className="text-center">
+            <div className="text-4xl font-bold mb-2">100%</div>
+            <p className="text-blue-100">Recommandent Dehbi</p>
+          </div>
+        </div>
+
+        {/* CTA */}
         <div className="mt-12 text-center">
-          <p className="text-muted-foreground mb-4">
-            Partagez votre expérience avec Dehbi Voyages
+          <p className="text-lg text-muted-foreground mb-4">
+            Prêt à vivre votre propre aventure ?
           </p>
-          <button className="btn-primary">
-            Laisser un Avis
+          <button
+            className="px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-semibold transition-colors"
+            style={{ backgroundColor: '#FF8C42' }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            Réserver Maintenant
           </button>
         </div>
       </div>
+
+      {/* Modal - Full Testimonial */}
+      {selectedTestimonial && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setSelectedTestimonial(null)}>
+          <div className="bg-white rounded-lg max-w-2xl w-full p-8" onClick={(e) => e.stopPropagation()}>
+            {testimonials.map((t) => (
+              t.id === selectedTestimonial && (
+                <div key={t.id}>
+                  <div className="flex items-center gap-4 mb-6">
+                    <img
+                      src={t.image}
+                      alt={t.name}
+                      className="w-16 h-16 rounded-full"
+                    />
+                    <div>
+                      <h3 className="text-xl font-bold text-foreground">{t.name}</h3>
+                      <p className="text-muted-foreground">{t.destination}</p>
+                      <p className="text-sm text-muted-foreground">{t.date}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(t.rating)].map((_, i) => (
+                      <Star key={i} size={20} className="fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+
+                  <p className="text-lg text-foreground mb-6 leading-relaxed">
+                    "{t.text}"
+                  </p>
+
+                  <button
+                    onClick={() => setSelectedTestimonial(null)}
+                    className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold"
+                  >
+                    Fermer
+                  </button>
+                </div>
+              )
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

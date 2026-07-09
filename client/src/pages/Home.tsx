@@ -9,6 +9,7 @@ import PremiumServices from '@/components/PremiumServices';
 
 import OrganizedTrips from '@/components/OrganizedTrips';
 import Testimonials from '@/components/Testimonials';
+import Newsletter from '@/components/Newsletter';
 import WhatsAppReservation from '@/components/WhatsAppReservation';
 
 import Footer from '@/components/Footer';
@@ -28,6 +29,7 @@ export default function Home() {
 
         <OrganizedTrips />
         <Testimonials />
+        <Newsletter />
       </main>
       <WhatsAppReservation ref={whatsappRef} />
 
