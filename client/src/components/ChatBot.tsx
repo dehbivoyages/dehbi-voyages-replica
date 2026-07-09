@@ -92,7 +92,7 @@ export default function ChatBot() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-24 left-6 z-40 rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center gap-2 font-semibold text-sm"
+          className="fixed bottom-28 left-6 z-40 rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center gap-2 font-semibold text-sm"
           title="Chat Assistant"
           style={{
             backgroundColor: '#00ff80',
