@@ -92,10 +92,15 @@ export default function ChatBot() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-24 right-6 z-40 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center"
+          className="fixed bottom-24 right-6 z-40 rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center gap-2 font-semibold text-sm"
           title="Chat Assistant"
+          style={{
+            backgroundColor: '#00ff80',
+            color: '#ff8000'
+          }}
         >
-          <MessageCircle size={24} />
+          <MessageCircle size={20} />
+          <span className="hidden sm:inline">Réserver</span>
           <span className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-xs text-white font-bold">
             ?
           </span>
