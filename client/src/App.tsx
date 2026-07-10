@@ -1,4 +1,3 @@
-import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
@@ -7,6 +6,8 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import WhatsAppButton from "./components/WhatsAppButton";
 import ChatBot from "./components/ChatBot";
+import Announcements from "./components/Announcements";
+import { Toaster } from "sonner";
 
 
 function Router() {
@@ -28,6 +29,7 @@ function App() {
       >
         <TooltipProvider>
           <Toaster />
+          <Announcements />
           <Router />
           <WhatsAppButton phoneNumber="212663381004" message="Bonjour Dehbi Voyages, je souhaite en savoir plus sur vos voyages organisés." />
           <ChatBot />
