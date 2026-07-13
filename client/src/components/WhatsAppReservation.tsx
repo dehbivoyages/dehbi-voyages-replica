@@ -171,21 +171,21 @@ const WhatsAppReservation = forwardRef((props, ref) => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 overflow-y-auto">
           <div className="bg-white rounded-lg shadow-xl max-w-md w-full my-8">
             {/* Header */}
-            <div className="bg-green-500 text-white p-4 flex items-center justify-between rounded-t-lg">
+            <div className="bg-orange-500 text-white p-4 flex items-center justify-between rounded-t-lg">
               <div className="flex items-center gap-2">
                 <MessageCircle size={24} />
                 <h2 className="text-lg font-bold">Réserver Maintenant</h2>
               </div>
               <button
                 onClick={resetForm}
-                className="hover:bg-green-600 p-1 rounded transition-colors"
+                className="hover:bg-orange-600 p-1 rounded transition-colors"
               >
                 <X size={20} />
               </button>
             </div>
 
             {/* Content */}
-            <div className="p-6 space-y-4 max-h-[80vh] overflow-y-auto" style={{ backgroundColor: '#f9e9b0' }}>
+            <div className="p-6 space-y-4 max-h-[80vh] overflow-y-auto" style={{ backgroundColor: '#C8FF42' }}>
               {/* Service Selection */}
               <div>
                 <label className="block text-sm font-semibold text-foreground mb-2">
