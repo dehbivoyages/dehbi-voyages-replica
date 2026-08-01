@@ -13,24 +13,24 @@ interface Announcement {
 const announcements: Announcement[] = [
   {
     id: '1',
-    title: '🎉 Offre Spéciale',
-    description: 'Réduction de 20% sur tous les voyages',
+    title: '🌏 Jakarta - Bali - Kuala Lumpur',
+    description: 'À partir de 34.500 MAD - 11 nuits / 12 jours - Qatar Airways',
     badge: 'NOUVEAU',
     color: '#ff8000',
     bgColor: '#00ff80'
   },
   {
     id: '2',
-    title: '✈️ Dernière Minute',
-    description: 'Punta Cana à partir de 12,999 MAD',
+    title: '🇻🇳 Le Vietnam Authentement',
+    description: 'À partir de 33.500 MAD - 12 nuits / 14 jours - Circuit accompagné',
     badge: 'HOT',
     color: '#ff8000',
     bgColor: '#00ff80'
   },
   {
     id: '3',
-    title: '🕌 Omra Spécial',
-    description: 'Départ 22 juillet - Places limitées',
+    title: '🇲🇾 Kuala Lumpur - Bali',
+    description: 'À partir de 32.500 MAD - 11 nuits / 13 jours - Croisière incluse',
     badge: 'LIMITÉ',
     color: '#ff8000',
     bgColor: '#00ff80'
