@@ -34,6 +34,14 @@ const announcements: Announcement[] = [
     badge: 'LIMITÉ',
     color: '#ff8000',
     bgColor: '#00ff80'
+  },
+  {
+    id: '4',
+    title: '🕌 Omra - Voyages Spirituels',
+    description: 'À partir de 14.500 MAD - Omra avec Turquie, Omra Distinguée - Royal Air Maroc',
+    badge: 'SPÉCIAL',
+    color: '#ff8000',
+    bgColor: '#00ff80'
   }
 ];
 
