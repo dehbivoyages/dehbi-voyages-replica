@@ -137,8 +137,17 @@ export default function OrganizedTrips() {
     : trips.filter(trip => trip.destination === selectedFilter);
 
   return (
-    <section className="py-16 bg-gradient-to-b from-white to-blue-50">
-      <div className="container mx-auto px-4">
+    <section 
+      className="py-16 relative"
+      style={{
+        backgroundImage: 'url(https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/world_destinations-J3U2HM7NeytZKeXb2Q8b4R.webp)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}
+    >
+      <div className="absolute inset-0 bg-black/50"></div>
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Voyages Organisés</h2>
           <p className="text-lg text-gray-600">Découvrez nos circuits touristiques premium</p>
@@ -240,8 +249,6 @@ export default function OrganizedTrips() {
               </div>
             </div>
           </div>
-        )}
-      </div>
-    </section>
+        )}\n      </div>\n    </section>
   );
 }
