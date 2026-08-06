@@ -149,8 +149,8 @@ export default function OrganizedTrips() {
       <div className="absolute inset-0 bg-black/50"></div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Voyages Organisés</h2>
-          <p className="text-lg text-gray-600">Découvrez nos circuits touristiques premium</p>
+          <h2 className="text-5xl font-bold text-white mb-4" style={{ fontFamily: 'Playfair Display, serif', textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>Voyages Organisés</h2>
+          <p className="text-xl text-white" style={{ fontFamily: 'Poppins, sans-serif', textShadow: '1px 1px 2px rgba(0,0,0,0.2)' }}>Découvrez nos circuits touristiques premium</p>
         </div>
 
         {/* Filter Buttons */}
