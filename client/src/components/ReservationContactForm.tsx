@@ -1,4 +1,5 @@
 import { FormEvent, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
   CalendarDays,
   CheckCircle2,
@@ -6,6 +7,7 @@ import {
   MessageCircle,
   Plane,
   Send,
+  Sparkles,
   UserRound,
   Users,
 } from 'lucide-react';
@@ -229,19 +231,71 @@ export default function ReservationContactForm() {
               </p>
             )}
 
-            {status === 'success' && (
-              <p role="status" className="mt-4 flex items-start gap-2 rounded-xl border border-[#6BFF42] bg-[#6BFF42]/15 px-4 py-3 text-sm font-medium text-slate-800">
-                <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-green-700" aria-hidden="true" />
-                Votre demande est prête. WhatsApp s’est ouvert pour envoyer les informations à notre équipe.
-              </p>
-            )}
+            <AnimatePresence initial={false}>
+              {status === 'success' && (
+                <motion.div
+                  key="reservation-success"
+                  role="status"
+                  aria-live="polite"
+                  initial={{ opacity: 0, height: 0, y: -12 }}
+                  animate={{ opacity: 1, height: 'auto', y: 0 }}
+                  exit={{ opacity: 0, height: 0, y: -8 }}
+                  transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+                  className="mt-5 overflow-hidden rounded-2xl border border-[#6BFF42]/70 bg-gradient-to-br from-[#6BFF42]/25 via-[#f4ffe9] to-white px-5 py-5 text-slate-900 shadow-[0_12px_30px_rgba(107,255,66,0.16)]"
+                >
+                  <div className="flex items-start gap-4">
+                    <motion.span
+                      initial={{ scale: 0.4, rotate: -18 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      transition={{ delay: 0.12, type: 'spring', stiffness: 260, damping: 15 }}
+                      className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#6BFF42] text-[#10213f]"
+                    >
+                      <motion.span
+                        initial={{ scale: 0.7, opacity: 0 }}
+                        animate={{ scale: 1.55, opacity: 0 }}
+                        transition={{ delay: 0.18, duration: 0.7, ease: 'easeOut' }}
+                        className="absolute inset-0 rounded-full border-2 border-[#6BFF42]"
+                        aria-hidden="true"
+                      />
+                      <CheckCircle2 size={26} strokeWidth={2.4} aria-hidden="true" />
+                    </motion.span>
+                    <div className="min-w-0">
+                      <motion.p
+                        initial={{ opacity: 0, x: -8 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.18, duration: 0.28 }}
+                        className="flex items-center gap-2 font-['Playfair_Display'] text-2xl font-bold text-[#10213f]"
+                      >
+                        Merci pour votre confiance <Sparkles size={18} className="text-[#FF8C42]" aria-hidden="true" />
+                      </motion.p>
+                      <motion.p
+                        initial={{ opacity: 0, x: -8 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.26, duration: 0.28 }}
+                        className="mt-1 text-sm leading-6 text-slate-700"
+                      >
+                        Merci{formData.fullName ? ` ${formData.fullName}` : ''} ! Votre demande est prête et WhatsApp vient de s’ouvrir pour transmettre vos informations à notre équipe.
+                      </motion.p>
+                      <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.36, duration: 0.28 }}
+                        className="mt-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#527c32]"
+                      >
+                        Notre équipe vous répondra rapidement.
+                      </motion.p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             <button
               type="submit"
-              className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#FF8C42] px-5 py-3.5 font-bold text-white shadow-lg shadow-[#FF8C42]/20 transition hover:bg-[#eb7330] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#FF8C42] focus:ring-offset-2"
+              className={`mt-6 flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3.5 font-bold text-white shadow-lg transition active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#FF8C42] focus:ring-offset-2 ${status === 'success' ? 'bg-[#10213f] shadow-[#10213f]/20 hover:bg-[#1b3560]' : 'bg-[#FF8C42] shadow-[#FF8C42]/20 hover:bg-[#eb7330]'}`}
             >
-              <Send size={18} aria-hidden="true" />
-              Envoyer ma demande sur WhatsApp
+              {status === 'success' ? <CheckCircle2 size={18} aria-hidden="true" /> : <Send size={18} aria-hidden="true" />}
+              {status === 'success' ? 'Demande envoyée — ouvrir WhatsApp' : 'Envoyer ma demande sur WhatsApp'}
             </button>
             <p className="mt-3 text-center text-xs leading-5 text-slate-500">
               Vos informations servent uniquement à traiter votre demande de réservation.
