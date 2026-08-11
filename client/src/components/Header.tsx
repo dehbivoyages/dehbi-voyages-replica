@@ -12,7 +12,7 @@ export default function Header({ onReserveClick }: HeaderProps) {
     { label: 'Spirituel', href: '#spirituel' },
     { label: 'Maroc', href: '#maroc' },
     { label: 'International', href: '#international' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Contact', href: '#reservation-form' },
   ];
 
   return (

@@ -10,6 +10,7 @@ import PremiumServices from '@/components/PremiumServices';
 import OrganizedTrips from '@/components/OrganizedTrips';
 import Testimonials from '@/components/Testimonials';
 import Newsletter from '@/components/Newsletter';
+import ReservationContactForm from '@/components/ReservationContactForm';
 import WhatsAppReservation from '@/components/WhatsAppReservation';
 
 import Footer from '@/components/Footer';
@@ -28,6 +29,7 @@ export default function Home() {
         <PremiumServices />
 
         <OrganizedTrips />
+        <ReservationContactForm />
         <Testimonials />
         <Newsletter />
       </main>
