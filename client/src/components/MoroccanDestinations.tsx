@@ -8,8 +8,7 @@ export default function MoroccanDestinations() {
     {
       name: 'Tanger',
       description: 'La perle du détroit où l\'Atlantique rencontre la Méditerranée',
-      image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/tanger-hero-73xRuh7JkjY6wqeXsHAKjv.webp',
-      video: '/manus-storage/video_maroc_tanger_238424ba.mp4',
+      image: '/manus-storage/tanger_destination_67d32054.jpg',
     },
     {
       name: 'Casablanca',
