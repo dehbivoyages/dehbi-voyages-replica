@@ -7,6 +7,7 @@ import {
   MessageCircle,
   Plane,
   Send,
+  Share2,
   Sparkles,
   UserRound,
   Users,
@@ -28,9 +29,11 @@ const organizedTrips = [
 ];
 
 type FormStatus = 'idle' | 'success';
+type ShareStatus = 'idle' | 'shared' | 'copied' | 'error';
 
 export default function ReservationContactForm() {
   const [status, setStatus] = useState<FormStatus>('idle');
+  const [shareStatus, setShareStatus] = useState<ShareStatus>('idle');
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
@@ -45,7 +48,35 @@ export default function ReservationContactForm() {
   const updateField = (field: keyof typeof formData, value: string) => {
     setFormData((current) => ({ ...current, [field]: value }));
     setError('');
+    setShareStatus('idle');
     if (status === 'success') setStatus('idle');
+  };
+
+  const handleShareTrip = async () => {
+    const tripName = formData.trip || 'notre prochain voyage organisé';
+    const shareTitle = `${tripName} — Dehbi Voyages`;
+    const shareText = `Découvrez le programme ${tripName} avec Dehbi Voyages.`;
+    const shareUrl = window.location.href;
+
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: shareTitle, text: shareText, url: shareUrl });
+        setShareStatus('shared');
+        return;
+      }
+
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
+        setShareStatus('copied');
+        return;
+      }
+
+      window.open(`https://wa.me/?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}`, '_blank', 'noopener,noreferrer');
+      setShareStatus('shared');
+    } catch (shareError) {
+      if (shareError instanceof DOMException && shareError.name === 'AbortError') return;
+      setShareStatus('error');
+    }
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -284,6 +315,49 @@ export default function ReservationContactForm() {
                       >
                         Notre équipe vous répondra rapidement.
                       </motion.p>
+                      <motion.button
+                        type="button"
+                        onClick={handleShareTrip}
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.44, duration: 0.28 }}
+                        className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#10213f] px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-[#10213f]/15 transition hover:bg-[#1b3560] focus:outline-none focus:ring-2 focus:ring-[#FF8C42] focus:ring-offset-2"
+                      >
+                        {shareStatus === 'copied' ? <CheckCircle2 size={16} aria-hidden="true" /> : <Share2 size={16} aria-hidden="true" />}
+                        {shareStatus === 'copied' ? 'Lien copié' : 'Partager ce voyage'}
+                      </motion.button>
+                      <AnimatePresence initial={false}>
+                        {shareStatus === 'copied' && (
+                          <motion.span
+                            initial={{ opacity: 0, x: -5 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0 }}
+                            className="ml-2 inline-block text-xs font-semibold text-[#527c32]"
+                          >
+                            Prêt à être envoyé à vos amis.
+                          </motion.span>
+                        )}
+                        {shareStatus === 'shared' && (
+                          <motion.span
+                            initial={{ opacity: 0, x: -5 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0 }}
+                            className="ml-2 inline-block text-xs font-semibold text-[#527c32]"
+                          >
+                            Voyage partagé avec succès.
+                          </motion.span>
+                        )}
+                        {shareStatus === 'error' && (
+                          <motion.span
+                            initial={{ opacity: 0, x: -5 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0 }}
+                            className="ml-2 inline-block text-xs font-semibold text-red-700"
+                          >
+                            Le partage n’a pas pu être lancé.
+                          </motion.span>
+                        )}
+                      </AnimatePresence>
                     </div>
                   </div>
                 </motion.div>
