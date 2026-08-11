@@ -11,10 +11,9 @@ export default function MoroccanDestinations() {
       image: '/manus-storage/tanger_destination_67d32054.jpg',
     },
     {
-      name: 'Casablanca',
-      description: 'La métropole avec la majestueuse Mosquée Hassan II',
-      image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/casablanca-city-JYR78Cm2j7t45RV6KHFTWT.webp',
-      video: '/manus-storage/video_maroc_casablanca_da8494b2.mp4',
+      name: 'Tanger – Mosquée Mohammed V',
+      description: 'Un joyau architectural de Tanger avec une vue exceptionnelle sur le détroit',
+      image: '/manus-storage/mosque_mohammed_v_tanger_c7b9fd8e.jpg',
     },
     {
       name: 'Rabat',
