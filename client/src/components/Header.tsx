@@ -19,7 +19,7 @@ export default function Header({ onReserveClick }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
       <div className="container mx-auto px-4 py-3">
-        <div className="flex items-center justify-between">
+        <div className="grid grid-cols-[auto_minmax(0,1fr)_auto_auto] items-center gap-4">
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
             <img
@@ -30,7 +30,7 @@ export default function Header({ onReserveClick }: HeaderProps) {
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden min-w-0 justify-self-center md:flex items-center gap-6 lg:gap-8">
             {navItems.map((item) => (
               <a
                 key={item.label}
@@ -42,13 +42,15 @@ export default function Header({ onReserveClick }: HeaderProps) {
             ))}
           </nav>
 
-          {/* Desktop clock and CTA */}
-          <div className="hidden items-center gap-3 md:flex">
+          {/* Dedicated clock column: kept separate from navigation and CTA to prevent overlap */}
+          <div className="hidden min-w-[210px] justify-self-end border-l border-slate-200 pl-4 md:block">
             <TravelClock />
-            <button className="btn-primary" onClick={onReserveClick}>
-              Réserver
-            </button>
           </div>
+
+          {/* Dedicated desktop CTA column */}
+          <button className="btn-primary hidden shrink-0 md:block" onClick={onReserveClick}>
+            Réserver
+          </button>
 
           {/* Mobile Menu Button */}
           <button
