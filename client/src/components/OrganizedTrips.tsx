@@ -1,5 +1,5 @@
-import { CalendarDays, Download, Eye, MapPin, X } from 'lucide-react';
-import { useState } from 'react';
+import { CalendarDays, Download, Eye, Heart, MapPin, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 /**
  * Direction artistique : catalogue de voyages premium mais lisible, avec des cartes
@@ -145,6 +145,24 @@ const trips = [
 export default function OrganizedTrips() {
   const [selectedDetails, setSelectedDetails] = useState<(typeof trips)[number] | null>(null);
   const [selectedFilter, setSelectedFilter] = useState('Tous');
+  const [favoriteIds, setFavoriteIds] = useState<string[]>(() => {
+    if (typeof window === 'undefined') return [];
+    try {
+      const stored = window.localStorage.getItem('dehbi-voyages-favorites');
+      const parsed = stored ? JSON.parse(stored) : [];
+      return Array.isArray(parsed) ? parsed.filter((id): id is string => typeof id === 'string') : [];
+    } catch {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    window.localStorage.setItem('dehbi-voyages-favorites', JSON.stringify(favoriteIds));
+  }, [favoriteIds]);
+
+  const toggleFavorite = (tripId: string) => {
+    setFavoriteIds((current) => current.includes(tripId) ? current.filter((id) => id !== tripId) : [...current, tripId]);
+  };
 
   const destinations = ['Tous', ...Array.from(new Set(trips.map((trip) => trip.destination)))];
   const filteredTrips = selectedFilter === 'Tous'
@@ -186,11 +204,23 @@ export default function OrganizedTrips() {
         <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 xl:grid-cols-3">
           {filteredTrips.map((trip) => (
             <article key={trip.id} className="overflow-hidden rounded-2xl bg-white shadow-xl shadow-black/20 transition hover:-translate-y-1 hover:shadow-2xl">
-              <button type="button" className="group relative block h-72 w-full bg-[#f6f1e8] md:h-80" onClick={() => setSelectedDetails(trip)} aria-label={`Voir les détails de ${trip.title}`}>
-                <img src={trip.image} alt={`Affiche du voyage ${trip.title}`} className="h-full w-full object-contain transition duration-500 group-hover:scale-[1.02]" />
-                <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-slate-950/75 px-3 py-1.5 text-xs font-bold text-white"><MapPin size={13} aria-hidden="true" />{trip.destination}</span>
-                <span className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1.5 text-xs font-bold text-slate-900 opacity-0 transition group-hover:opacity-100"><Eye size={14} aria-hidden="true" />Voir détail</span>
-              </button>
+              <div className="group relative h-72 w-full bg-[#f6f1e8] md:h-80">
+                <button type="button" className="absolute inset-0 block h-full w-full" onClick={() => setSelectedDetails(trip)} aria-label={`Voir les détails de ${trip.title}`}>
+                  <img src={trip.image} alt={`Affiche du voyage ${trip.title}`} className="h-full w-full object-contain transition duration-500 group-hover:scale-[1.02]" />
+                  <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-slate-950/75 px-3 py-1.5 text-xs font-bold text-white"><MapPin size={13} aria-hidden="true" />{trip.destination}</span>
+                  <span className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1.5 text-xs font-bold text-slate-900 opacity-0 transition group-hover:opacity-100"><Eye size={14} aria-hidden="true" />Voir détail</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => toggleFavorite(trip.id)}
+                  aria-pressed={favoriteIds.includes(trip.id)}
+                  aria-label={favoriteIds.includes(trip.id) ? `Retirer ${trip.title} des favoris` : `Ajouter ${trip.title} aux favoris`}
+                  title={favoriteIds.includes(trip.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+                  className={`absolute right-4 top-4 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full shadow-lg backdrop-blur transition active:scale-90 focus:outline-none focus:ring-2 focus:ring-[#FF8C42] focus:ring-offset-2 ${favoriteIds.includes(trip.id) ? 'bg-[#FF8C42] text-white' : 'bg-white/90 text-[#10213f] hover:bg-white'}`}
+                >
+                  <Heart size={20} fill={favoriteIds.includes(trip.id) ? 'currentColor' : 'none'} strokeWidth={2.2} aria-hidden="true" />
+                </button>
+              </div>
 
               <div className="p-5">
                 <h3 className="min-h-[3.5rem] font-['Playfair_Display'] text-2xl font-bold leading-tight text-slate-900">{trip.title}</h3>
