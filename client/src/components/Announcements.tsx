@@ -52,7 +52,7 @@ export default function Announcements() {
 
   return (
     <div
-      className="pointer-events-none fixed left-0 right-0 top-[88px] z-30 px-3 py-1.5 sm:px-4"
+      className="pointer-events-none fixed left-0 right-0 top-[84px] z-30 px-3 py-1.5 sm:px-4"
       aria-label="Annonces des programmes à jour"
     >
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-stretch gap-1.5 md:grid-cols-3">
