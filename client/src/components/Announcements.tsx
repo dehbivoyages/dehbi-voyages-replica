@@ -2,9 +2,9 @@ import { X } from 'lucide-react';
 import { useState } from 'react';
 
 /**
- * Direction artistique : bandeau d’annonces premium et discret, avec un fond
- * bleu profond lisible, l’Orange tropical pour l’action et le Vert lime pour
- * signaler les offres à jour sans masquer le contenu de la page.
+ * Direction artistique : annonces de voyage premium organisées en trois blocs
+ * réguliers, avec un fond bleu profond, l’Orange tropical pour l’accent et le
+ * Vert lime pour signaler les offres à jour sans masquer le contenu de la page.
  */
 
 interface Announcement {
@@ -51,26 +51,29 @@ export default function Announcements() {
   }
 
   return (
-    <div className="pointer-events-none fixed left-0 right-0 top-[76px] z-30 px-3 py-2 sm:px-4">
-      <div className="mx-auto max-w-6xl space-y-1.5">
+    <div
+      className="pointer-events-none fixed left-0 right-0 top-[76px] z-30 px-3 py-2 sm:px-4"
+      aria-label="Annonces des programmes à jour"
+    >
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-stretch gap-2 md:grid-cols-3">
         {visibleAnnouncements.map((announcement) => (
           <div
             key={announcement.id}
-            className="pointer-events-auto relative overflow-hidden rounded-xl border border-white/15 border-l-4 bg-[#10213f]/95 shadow-lg shadow-slate-950/20 backdrop-blur-md"
+            className="pointer-events-auto h-full overflow-hidden rounded-xl border border-white/15 border-l-4 bg-[#10213f]/95 shadow-lg shadow-slate-950/20 backdrop-blur-md"
             style={{ borderLeftColor: announcement.accentColor }}
           >
-            <div className="flex min-h-[48px] items-center justify-between gap-3 px-3 py-2 sm:px-4">
+            <div className="flex min-h-[68px] h-full items-center gap-2.5 px-3 py-2.5 sm:px-3.5">
               <div className="min-w-0 flex-1">
-                <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                  <h3 className="truncate text-xs font-bold text-white sm:text-sm">{announcement.title}</h3>
+                <div className="flex min-h-[2.25rem] items-start justify-between gap-2">
+                  <h3 className="line-clamp-2 text-xs font-bold leading-4 text-white sm:text-sm">{announcement.title}</h3>
                   <span
-                    className="inline-flex shrink-0 rounded-full px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-[0.08em] text-[#10213f]"
+                    className="mt-0.5 inline-flex shrink-0 rounded-full px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-[0.08em] text-[#10213f]"
                     style={{ backgroundColor: announcement.accentColor }}
                   >
                     {announcement.badge}
                   </span>
                 </div>
-                <p className="mt-0.5 truncate text-[10px] font-medium text-white/75 sm:text-xs">{announcement.description}</p>
+                <p className="mt-1 line-clamp-2 text-[10px] font-medium leading-3.5 text-white/75 sm:text-xs">{announcement.description}</p>
               </div>
               <button
                 type="button"
