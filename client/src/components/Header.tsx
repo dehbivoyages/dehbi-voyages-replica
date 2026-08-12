@@ -17,11 +17,11 @@ export default function Header({ onReserveClick }: HeaderProps) {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm">
+    <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/95 shadow-sm backdrop-blur-md">
       <div className="container mx-auto px-4 py-3">
-        <div className="grid grid-cols-[auto_minmax(0,1fr)_auto_auto] items-center gap-4">
+        <div className="grid min-h-[72px] grid-cols-[auto_minmax(0,1fr)_auto_auto] items-center gap-4 lg:gap-6">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
+          <a href="#" className="flex shrink-0 items-center gap-3 transition-opacity hover:opacity-90">
             <img
               src="/manus-storage/dehbi-voyages-logo_d65e39fd.png"
               alt="Dehbi Voyages Logo"
@@ -30,7 +30,7 @@ export default function Header({ onReserveClick }: HeaderProps) {
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden min-w-0 justify-self-center md:flex items-center gap-6 lg:gap-8">
+          <nav className="hidden min-w-0 justify-self-center md:flex items-center gap-5 whitespace-nowrap lg:gap-8">
             {navItems.map((item) => (
               <a
                 key={item.label}
@@ -43,7 +43,7 @@ export default function Header({ onReserveClick }: HeaderProps) {
           </nav>
 
           {/* Dedicated clock column: kept separate from navigation and CTA to prevent overlap */}
-          <div className="hidden min-w-[210px] justify-self-end border-l border-slate-200 pl-4 md:block">
+          <div className="hidden min-w-[210px] justify-self-end border-l border-slate-200 pl-4 md:block lg:min-w-[224px]">
             <TravelClock />
           </div>
 
