@@ -13,33 +13,33 @@ interface Announcement {
 const announcements: Announcement[] = [
   {
     id: '1',
-    title: '🌏 Jakarta - Bali - Kuala Lumpur',
-    description: 'À partir de 34.500 MAD - 11 nuits / 12 jours - Qatar Airways',
+    title: '🕋 Omra — Deux Omra en une',
+    description: 'À partir de 13.900 MAD - Départs septembre 2026 - Etihad Airways',
     badge: 'NOUVEAU',
     color: '#ff8000',
     bgColor: '#00ff80'
   },
   {
     id: '2',
-    title: '🇻🇳 Le Vietnam Authentement',
-    description: 'À partir de 33.500 MAD - 12 nuits / 14 jours - Circuit accompagné',
-    badge: 'HOT',
+    title: '🌴 Thaïlande — Bangkok, Krabi & Phuket',
+    description: 'À partir de 24.500 MAD - 11 nuits / 13 jours - Qatar Airways',
+    badge: 'NOUVEAU',
     color: '#ff8000',
     bgColor: '#00ff80'
   },
   {
     id: '3',
-    title: '🇲🇾 Kuala Lumpur - Bali',
-    description: 'À partir de 32.500 MAD - 11 nuits / 13 jours - Croisière incluse',
-    badge: 'LIMITÉ',
+    title: '🏺 Le Caire — Croisière — Hurghada',
+    description: 'À partir de 17.600 MAD - 11 nuits / 12 jours - Plusieurs départs',
+    badge: 'HOT',
     color: '#ff8000',
     bgColor: '#00ff80'
   },
   {
     id: '4',
-    title: '🕌 Omra - Voyages Spirituels',
-    description: 'À partir de 14.500 MAD - Omra avec Turquie, Omra Distinguée - Royal Air Maroc',
-    badge: 'SPÉCIAL',
+    title: '🌉 Istanbul — Entre Orient et Occident',
+    description: 'À partir de 9.900 MAD - 7 nuits / 8 jours - Départs juillet et août',
+    badge: 'À DÉCOUVRIR',
     color: '#ff8000',
     bgColor: '#00ff80'
   }

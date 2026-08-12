@@ -20,12 +20,18 @@ import {
  */
 
 const organizedTrips = [
-  'Jakarta - Bali - Kuala Lumpur',
-  'Le Vietnam Authentement',
-  'Kuala Lumpur - Bali',
+  'Omra — Deux Omra en une',
+  'Omra avec Kuala Lumpur',
+  'Omra — Médine & La Mecque',
   'Omra avec Turquie',
-  'Omra',
-  'Omra Distinguée',
+  'Jakarta — Bali — Kuala Lumpur',
+  'Le Vietnam autrement',
+  'Kuala Lumpur — Bali',
+  'Thaïlande — Bangkok, Krabi & Phuket',
+  'Charm el-Cheikh — Le Caire',
+  'Istanbul — Entre Orient et Occident',
+  'Le Caire — Croisière — Hurghada',
+  'Omra distinguée',
 ];
 
 type FormStatus = 'idle' | 'success';
