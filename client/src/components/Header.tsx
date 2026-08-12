@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import TravelClock from './TravelClock';
 
 interface HeaderProps {
   onReserveClick?: () => void;
@@ -41,10 +42,13 @@ export default function Header({ onReserveClick }: HeaderProps) {
             ))}
           </nav>
 
-          {/* Desktop CTA Button */}
-          <button className="hidden md:block btn-primary" onClick={onReserveClick}>
-            Réserver
-          </button>
+          {/* Desktop clock and CTA */}
+          <div className="hidden items-center gap-3 md:flex">
+            <TravelClock />
+            <button className="btn-primary" onClick={onReserveClick}>
+              Réserver
+            </button>
+          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -68,6 +72,7 @@ export default function Header({ onReserveClick }: HeaderProps) {
                 {item.label}
               </a>
             ))}
+            <TravelClock className="w-full justify-center" />
             <button className="btn-primary w-full" onClick={onReserveClick}>
               Réserver
             </button>
