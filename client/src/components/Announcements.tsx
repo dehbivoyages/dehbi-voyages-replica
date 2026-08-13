@@ -52,37 +52,37 @@ export default function Announcements() {
 
   return (
     <div
-      className="pointer-events-none fixed left-0 right-0 top-[84px] z-30 px-3 py-1.5 sm:px-4"
+      className="pointer-events-none fixed left-0 right-0 top-[84px] z-30 px-2.5 py-1 sm:px-3"
       aria-label="Annonces des programmes à jour"
     >
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-stretch gap-1.5 md:grid-cols-3">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-stretch gap-1 md:grid-cols-3">
         {visibleAnnouncements.map((announcement) => (
           <div
             key={announcement.id}
             className="pointer-events-auto h-full overflow-hidden rounded-xl border border-white/15 border-l-4 bg-[#10213f]/95 shadow-lg shadow-slate-950/20 backdrop-blur-md"
             style={{ borderLeftColor: announcement.accentColor }}
           >
-            <div className="flex min-h-[54px] h-full items-center gap-2 px-2.5 py-1.5 sm:px-3">
+            <div className="flex min-h-[44px] h-full items-center gap-1.5 px-2 py-1 sm:px-2.5">
               <div className="min-w-0 flex-1">
-                <div className="flex min-h-[2.25rem] items-start justify-between gap-2">
-                  <h3 className="line-clamp-1 text-[11px] font-bold leading-4 text-white sm:text-xs">{announcement.title}</h3>
+                <div className="flex min-h-[1.75rem] items-start justify-between gap-1.5">
+                  <h3 className="line-clamp-1 text-[10px] font-bold leading-3 text-white sm:text-[11px]">{announcement.title}</h3>
                   <span
-                    className="mt-0.5 inline-flex shrink-0 rounded-full px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-[0.08em] text-[#10213f]"
+                    className="mt-0.5 inline-flex shrink-0 rounded-full px-1.5 py-0.5 text-[8px] font-extrabold uppercase tracking-[0.06em] text-[#10213f]"
                     style={{ backgroundColor: announcement.accentColor }}
                   >
                     {announcement.badge}
                   </span>
                 </div>
-                <p className="mt-0.5 line-clamp-1 text-[9px] font-medium leading-3 text-white/75 sm:text-[11px]">{announcement.description}</p>
+                <p className="mt-0.5 line-clamp-1 text-[8px] font-medium leading-3 text-white/75 sm:text-[10px]">{announcement.description}</p>
               </div>
               <button
                 type="button"
                 onClick={() => setClosedAnnouncements((current) => [...current, announcement.id])}
-                className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-white/65 transition hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#6BFF42] active:scale-95"
+                className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-white/65 transition hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#6BFF42] active:scale-95"
                 title="Fermer l’annonce"
                 aria-label={`Fermer l’annonce ${announcement.title}`}
               >
-                <X size={15} aria-hidden="true" />
+                <X size={13} aria-hidden="true" />
               </button>
             </div>
           </div>
