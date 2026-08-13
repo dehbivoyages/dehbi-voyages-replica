@@ -9,13 +9,13 @@ export default function InternationalDestinations() {
       name: 'Turquie',
       highlights: ['Istanbul, Cappadoce, Côte Méditerranéenne'],
       features: ['Mosquée Bleue', 'Cappadoce', 'Bazars'],
-      videoUrl: '/manus-storage/turkey_istanbul_monument_326fae65.mp4',
+      videoUrl: '/manus-storage/turquie-istanbul-hd_2741b712.mp4',
     },
     {
       name: 'Égypte',
       highlights: ['Le Caire, Louxor, Croisière sur le Nil'],
       features: ['Pyramides', 'Croisière Nil', 'Temples'],
-      videoUrl: '/manus-storage/egypt_cairo_pyramids_92e4bfa3.mp4',
+      videoUrl: '/manus-storage/egypte-gizeh-hd_25c8f1b9.mp4',
     },
     {
       name: 'Jordanie',
@@ -41,6 +41,18 @@ export default function InternationalDestinations() {
       features: ['Tours Petronas', 'Îles paradisiaques', 'Nature'],
       videoUrl: '/manus-storage/malaysia_kuala_lumpur_589e77da.mp4',
     },
+    {
+      name: 'Europe',
+      highlights: ['Rome, Paris, Alpes et patrimoine européen'],
+      features: ['Colisée', 'Capitales historiques', 'Escapades culturelles'],
+      videoUrl: '/manus-storage/europe-rome-hd_4eac07e7.mp4',
+    },
+    {
+      name: 'Amérique du Sud',
+      highlights: ['Brésil, Pérou, Argentine — panoramas grandioses'],
+      features: ['Machu Picchu', 'Rio de Janeiro', 'Patagonie'],
+      videoUrl: '/manus-storage/amerique-sud-machu-picchu-hd_b8db3b3a.mp4',
+    },
   ];
 
   return (
@@ -53,6 +65,11 @@ export default function InternationalDestinations() {
               src={destinations[playingVideo].videoUrl}
               controls
               autoPlay
+              playsInline
+              preload="metadata"
+              onLoadedMetadata={(event) => {
+                event.currentTarget.volume = 0.45;
+              }}
               className="w-full rounded-lg"
             />
             <button
@@ -77,21 +94,28 @@ export default function InternationalDestinations() {
 
         <div className="grid md:grid-cols-3 gap-6">
           {destinations.map((dest, index) => (
-            <div key={index} className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
+            <div key={dest.name} className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
               {/* Video Preview */}
-              <div className="relative w-full h-48 bg-black group cursor-pointer" onClick={() => setPlayingVideo(index)}>
+              <button
+                type="button"
+                className="relative block h-48 w-full bg-black text-left group"
+                onClick={() => setPlayingVideo(index)}
+                aria-label={`Lire la vidéo de la destination ${dest.name}`}
+              >
                 <video
                   src={dest.videoUrl}
                   className="w-full h-full object-cover"
                   muted
                   loop
+                  playsInline
+                  preload="metadata"
                   onMouseEnter={(e) => e.currentTarget.play()}
                   onMouseLeave={(e) => e.currentTarget.pause()}
                 />
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors flex items-center justify-center">
                   <Play size={48} className="text-white" fill="white" />
                 </div>
-              </div>
+              </button>
 
               {/* Content */}
               <div className="p-6">
