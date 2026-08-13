@@ -2,40 +2,40 @@ import { X } from 'lucide-react';
 import { useState } from 'react';
 
 /**
- * Direction artistique : annonces de voyage premium organisées en trois blocs
- * réguliers, avec un fond bleu profond, l’Orange tropical pour l’accent et le
- * Vert lime pour signaler les offres à jour sans masquer le contenu de la page.
+ * Direction artistique : mini-étiquettes horizontales discrètes et premium,
+ * avec un fond bleu doux, des accents légèrement désaturés et une hiérarchie
+ * réduite au nom du voyage et à son prix pour préserver le hero.
  */
 
 interface Announcement {
   id: string;
   title: string;
-  description: string;
-  badge: string;
+  price: string;
+  fullTitle: string;
   accentColor: string;
 }
 
 const announcements: Announcement[] = [
   {
     id: 'omra',
-    title: '🕋 Omra — Deux Omra en une',
-    description: 'À partir de 13.900 MAD · Départs septembre 2026 · Etihad Airways',
-    badge: 'À JOUR',
-    accentColor: '#6BFF42',
+    title: '🕋 Omra',
+    price: '13.900 MAD',
+    fullTitle: 'Omra — Deux Omra en une',
+    accentColor: '#9ED68B',
   },
   {
     id: 'caire',
-    title: '🏺 Le Caire — Croisière — Hurghada',
-    description: 'À partir de 17.600 MAD · 11 nuits / 12 jours · Plusieurs départs',
-    badge: 'À JOUR',
-    accentColor: '#FF8C42',
+    title: '🏺 Le Caire',
+    price: '17.600 MAD',
+    fullTitle: 'Le Caire — Croisière — Hurghada',
+    accentColor: '#E6A77F',
   },
   {
     id: 'thailande',
-    title: '🌴 Thaïlande — Bangkok, Krabi & Phuket',
-    description: 'À partir de 24.500 MAD · 11 nuits / 13 jours · Qatar Airways',
-    badge: 'À JOUR',
-    accentColor: '#6BFF42',
+    title: '🌴 Thaïlande',
+    price: '24.500 MAD',
+    fullTitle: 'Thaïlande — Bangkok, Krabi & Phuket',
+    accentColor: '#9ED68B',
   },
 ];
 
@@ -59,30 +59,27 @@ export default function Announcements() {
         {visibleAnnouncements.map((announcement) => (
           <div
             key={announcement.id}
-            className="pointer-events-auto h-full overflow-hidden rounded-xl border border-white/15 border-l-4 bg-[#10213f]/95 shadow-lg shadow-slate-950/20 backdrop-blur-md"
+            className="pointer-events-auto h-full overflow-hidden rounded-lg border border-white/10 border-l-2 bg-[#203451]/80 shadow-md shadow-slate-950/10 backdrop-blur-sm"
             style={{ borderLeftColor: announcement.accentColor }}
+            aria-label={`${announcement.fullTitle} — à partir de ${announcement.price}`}
           >
-            <div className="flex min-h-[44px] h-full items-center gap-1.5 px-2 py-1 sm:px-2.5">
-              <div className="min-w-0 flex-1">
-                <div className="flex min-h-[1.75rem] items-start justify-between gap-1.5">
-                  <h3 className="line-clamp-1 text-[10px] font-bold leading-3 text-white sm:text-[11px]">{announcement.title}</h3>
-                  <span
-                    className="mt-0.5 inline-flex shrink-0 rounded-full px-1.5 py-0.5 text-[8px] font-extrabold uppercase tracking-[0.06em] text-[#10213f]"
-                    style={{ backgroundColor: announcement.accentColor }}
-                  >
-                    {announcement.badge}
-                  </span>
-                </div>
-                <p className="mt-0.5 line-clamp-1 text-[8px] font-medium leading-3 text-white/75 sm:text-[10px]">{announcement.description}</p>
+            <div className="flex min-h-[38px] h-full items-center gap-1.5 px-2 py-0.5 sm:px-2.5">
+              <div className="flex min-w-0 flex-1 items-center gap-2">
+                <h3 className="min-w-0 truncate text-[10px] font-semibold text-white/90 sm:text-[11px]">
+                  {announcement.title}
+                </h3>
+                <span className="shrink-0 text-[9px] font-medium text-white/65 sm:text-[10px]">
+                  {announcement.price}
+                </span>
               </div>
               <button
                 type="button"
                 onClick={() => setClosedAnnouncements((current) => [...current, announcement.id])}
-                className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-white/65 transition hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#6BFF42] active:scale-95"
-                title="Fermer l’annonce"
-                aria-label={`Fermer l’annonce ${announcement.title}`}
+                className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-white/45 transition hover:bg-white/10 hover:text-white/80 focus:outline-none focus:ring-2 focus:ring-[#9ED68B] active:scale-95"
+                title={`Fermer l’annonce ${announcement.fullTitle}`}
+                aria-label={`Fermer l’annonce ${announcement.fullTitle}`}
               >
-                <X size={13} aria-hidden="true" />
+                <X size={12} aria-hidden="true" />
               </button>
             </div>
           </div>
