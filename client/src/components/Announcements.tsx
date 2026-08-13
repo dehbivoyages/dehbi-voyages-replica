@@ -11,6 +11,7 @@ interface Announcement {
   id: string;
   title: string;
   price: string;
+  details: string;
   fullTitle: string;
   accentColor: string;
 }
@@ -20,6 +21,7 @@ const announcements: Announcement[] = [
     id: 'omra',
     title: '🕋 Omra',
     price: '13.900 MAD',
+    details: 'Sept. 2026 · Etihad Airways',
     fullTitle: 'Omra — Deux Omra en une',
     accentColor: '#9ED68B',
   },
@@ -27,6 +29,7 @@ const announcements: Announcement[] = [
     id: 'caire',
     title: '🏺 Le Caire',
     price: '17.600 MAD',
+    details: '11 nuits / 12 jours · Départs multiples',
     fullTitle: 'Le Caire — Croisière — Hurghada',
     accentColor: '#E6A77F',
   },
@@ -34,6 +37,7 @@ const announcements: Announcement[] = [
     id: 'thailande',
     title: '🌴 Thaïlande',
     price: '24.500 MAD',
+    details: '11 nuits / 13 jours · Qatar Airways',
     fullTitle: 'Thaïlande — Bangkok, Krabi & Phuket',
     accentColor: '#9ED68B',
   },
@@ -90,16 +94,21 @@ export default function Announcements() {
               key={announcement.id}
               className="pointer-events-auto h-full overflow-hidden rounded-lg border border-white/10 border-l-2 bg-[#203451]/80 shadow-md shadow-slate-950/10 backdrop-blur-sm transition-[transform,background-color,border-color,box-shadow] duration-200 ease-out hover:-translate-y-px hover:border-white/25 hover:bg-[#2a4565]/90 hover:shadow-[0_0_14px_rgba(158,214,139,0.16)]"
               style={{ borderLeftColor: announcement.accentColor }}
-              aria-label={`${announcement.fullTitle} — à partir de ${announcement.price}`}
+              aria-label={`${announcement.fullTitle} — à partir de ${announcement.price} — ${announcement.details}`}
             >
-              <div className="flex min-h-[38px] h-full items-center gap-1.5 px-2 py-0.5 sm:px-2.5">
-                <div className="flex min-w-0 flex-1 items-center gap-2">
-                  <h3 className="min-w-0 truncate text-[10px] font-semibold text-white/90 sm:text-[11px]">
-                    {announcement.title}
-                  </h3>
-                  <span className="shrink-0 text-[9px] font-medium text-white/65 sm:text-[10px]">
-                    {announcement.price}
-                  </span>
+              <div className="flex min-h-[46px] h-full items-center gap-1.5 px-2 py-1 sm:px-2.5">
+                <div className="min-w-0 flex-1">
+                  <div className="flex min-w-0 items-center gap-2">
+                    <h3 className="min-w-0 truncate text-[10px] font-semibold text-white/90 sm:text-[11px]">
+                      {announcement.title}
+                    </h3>
+                    <span className="shrink-0 text-[9px] font-medium text-white/65 sm:text-[10px]">
+                      {announcement.price}
+                    </span>
+                  </div>
+                  <p className="truncate pt-0.5 text-[8px] font-medium leading-3 text-white/50 sm:text-[9px]">
+                    {announcement.details}
+                  </p>
                 </div>
                 <button
                   type="button"
