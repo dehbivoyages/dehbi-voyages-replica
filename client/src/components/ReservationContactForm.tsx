@@ -149,7 +149,7 @@ export default function ReservationContactForm() {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="rounded-3xl bg-white p-6 shadow-2xl md:p-8" noValidate>
+          <form onSubmit={handleSubmit} className="reservation-form-surface rounded-3xl bg-white p-6 shadow-2xl md:p-8" noValidate>
             <div className="mb-6 flex items-start justify-between gap-4">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#FF8C42]">Votre demande</p>
@@ -370,7 +370,7 @@ export default function ReservationContactForm() {
 
             <button
               type="submit"
-              className={`mt-6 flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3.5 font-bold text-white shadow-lg transition active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#FF8C42] focus:ring-offset-2 ${status === 'success' ? 'bg-[#10213f] shadow-[#10213f]/20 hover:bg-[#1b3560]' : 'bg-[#FF8C42] shadow-[#FF8C42]/20 hover:bg-[#eb7330]'}`}
+              className={`reserve-submit mt-6 flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3.5 font-bold text-white shadow-lg transition active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#FF8C42] focus:ring-offset-2 ${status === 'success' ? 'bg-[#10213f] shadow-[#10213f]/20 hover:bg-[#1b3560]' : 'bg-[#FF8C42] shadow-[#FF8C42]/20 hover:bg-[#eb7330]'}`}
             >
               {status === 'success' ? <CheckCircle2 size={18} aria-hidden="true" /> : <Send size={18} aria-hidden="true" />}
               {status === 'success' ? 'Demande envoyée — ouvrir WhatsApp' : 'Envoyer ma demande sur WhatsApp'}
