@@ -20,18 +20,16 @@ import {
  */
 
 const organizedTrips = [
-  'Omra — Deux Omra en une',
-  'Omra avec Kuala Lumpur',
-  'Omra — Médine & La Mecque',
-  'Omra avec Turquie',
-  'Jakarta — Bali — Kuala Lumpur',
-  'Le Vietnam autrement',
-  'Kuala Lumpur — Bali',
-  'Thaïlande — Bangkok, Krabi & Phuket',
-  'Charm el-Cheikh — Le Caire',
   'Istanbul — Entre Orient et Occident',
-  'Le Caire — Croisière — Hurghada',
-  'Omra distinguée',
+  'Omra — Médine & La Mecque',
+  'Programmes Omra & Hajj sur mesure',
+  'Omra avec Kuala Lumpur',
+  'Deux Omra en un voyage',
+  'Punta Cana — Été 2026',
+  'Circuit Ouzbékistan & Istanbul',
+  'Dakhla — Lagon & dunes',
+  'Antalya–Istanbul — Été 2026',
+  'Antalya–Istanbul — Offre 18.200 DHS',
 ];
 
 type FormStatus = 'idle' | 'success';
@@ -386,4 +384,3 @@ export default function ReservationContactForm() {
     </section>
   );
 }
-
