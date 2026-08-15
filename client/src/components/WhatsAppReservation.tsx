@@ -128,20 +128,6 @@ const WhatsAppReservation = forwardRef<ReservationModalHandle>((_props, ref) => 
 
   return (
     <>
-      <button
-        type="button"
-        onClick={openModal}
-        className="fixed bottom-6 left-6 z-40 flex h-16 w-16 items-center justify-center rounded-full bg-[#6BFF42] shadow-lg shadow-[#6BFF42]/30 transition duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#FF8C42] focus:ring-offset-2 focus:ring-offset-background"
-        title="Ouvrir la réservation"
-        aria-label="Ouvrir la fenêtre de réservation"
-      >
-        <img
-          src="/manus-storage/whatsapp_logo_dehbi_3SVvvJn7TaHH7qKQLYy8VM.png"
-          alt=""
-          className="h-14 w-14 object-contain"
-        />
-      </button>
-
       {isOpen && (
         <div
           className="fixed inset-0 z-[80] flex items-center justify-center bg-slate-950/75 p-4 backdrop-blur-sm"
