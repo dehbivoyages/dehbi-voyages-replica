@@ -1,6 +1,11 @@
 import { MapPin, Play } from 'lucide-react';
 import { useState } from 'react';
 
+/**
+ * Direction artistique : cartes de destinations internationales épurées,
+ * aperçus vidéo HD immersifs et accents Orange tropical Dehbi Voyages.
+ */
+
 export default function InternationalDestinations() {
   const [playingVideo, setPlayingVideo] = useState<number | null>(null);
 
@@ -21,25 +26,25 @@ export default function InternationalDestinations() {
       name: 'Jordanie',
       highlights: ['Pétra, Mer Morte, Désert de Wadi Rum'],
       features: ['Pétra', 'Mer Morte', 'Wadi Rum'],
-      videoUrl: '/manus-storage/jordan_petra_monument_6e59a668.mp4',
+      videoUrl: '/manus-storage/jordanie-petra-hd_663e2d37.mp4',
     },
     {
       name: 'Arabie Saoudite',
-      highlights: ['Riyad, Jeddah, Expériences culturelles'],
-      features: ['Riyad moderne', 'Jeddah côtière', 'Culture locale'],
-      videoUrl: '/manus-storage/saudi_arabia_riyadh_dd8a2335.mp4',
+      highlights: ['Médine, Riyad, Jeddah et expériences culturelles'],
+      features: ['Mosquée du Prophète', 'Riyad moderne', 'Jeddah côtière'],
+      videoUrl: '/manus-storage/arabie-saoudite-medine-hd_0544db71.mp4',
     },
     {
       name: 'Dubaï',
       highlights: ['Luxe, shopping, plages et désert'],
       features: ['Burj Khalifa', 'Shopping', 'Désert'],
-      videoUrl: '/manus-storage/dubai_burj_khalifa_ddcec158.mp4',
+      videoUrl: '/manus-storage/dubai-burj-khalifa-hd_dad9a8bc.mp4',
     },
     {
       name: 'Malaisie',
       highlights: ['Kuala Lumpur, Îles Langkawi, Forêts tropicales'],
       features: ['Tours Petronas', 'Îles paradisiaques', 'Nature'],
-      videoUrl: '/manus-storage/malaysia_kuala_lumpur_589e77da.mp4',
+      videoUrl: '/manus-storage/malaisie-petronas-hd_7d17093c.mp4',
     },
     {
       name: 'Europe',
