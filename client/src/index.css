@@ -96,13 +96,13 @@
   --secondary: #E76F36;
   --secondary-foreground: #FFFFFF;
   --muted: #1C344E;
-  --muted-foreground: #B7C7D9;
+  --muted-foreground: #D2DFEC;
   --accent: #6BFF42;
   --accent-foreground: #07111F;
   --destructive: oklch(0.704 0.191 22.216);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: #31506E;
-  --input: #1A3049;
+  --border: #486B8C;
+  --input: #20415D;
   --ring: #6BFF42;
   --chart-1: #6BFF42;
   --chart-2: #FF8C42;
@@ -182,8 +182,24 @@
 .dark .text-slate-700,
 .dark .text-slate-600,
 .dark .text-gray-700,
-.dark .text-gray-600 {
-  color: var(--muted-foreground) !important;
+.dark .text-gray-600,
+.dark .text-gray-500,
+.dark .text-gray-400 {
+  color: #D2DFEC !important;
+}
+
+.dark [class*="text-[#10213f]"],
+.dark [class*="text-[#34322d]"] {
+  color: #F8F4EA !important;
+}
+
+.dark [class*="text-[#d86d2d]"],
+.dark [class*="text-[#317a20]"] {
+  color: #BFFFAE !important;
+}
+
+.dark [class*="text-[#858481]"] {
+  color: #D2DFEC !important;
 }
 
 .dark .border-slate-100,
@@ -199,6 +215,12 @@
   background-color: var(--input) !important;
   color: var(--foreground) !important;
   border-color: var(--border) !important;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #BFD0E0 !important;
+  opacity: 1;
 }
 
 .dark select option {
@@ -231,8 +253,35 @@
 }
 
 .dark .reservation-form-surface {
-  border: 1px solid #31506E;
+  border: 1px solid #486B8C;
   box-shadow: 0 22px 50px rgba(0, 0, 0, 0.3);
+}
+
+/* Renfort ciblé des éléments qui utilisaient auparavant des teintes claires fixes. */
+.dark .bg-foreground,
+.dark .bg-gray-900,
+.dark .bg-gray-800,
+.dark .bg-gray-700 {
+  background-color: #07111F !important;
+}
+
+.dark .btn-outline {
+  border-color: #BFFFAE !important;
+  background-color: #13263D;
+  color: #F8F4EA !important;
+}
+
+.dark .btn-outline:hover {
+  background-color: #6BFF42 !important;
+  border-color: #6BFF42 !important;
+  color: #07111F !important;
+}
+
+.dark .bg-gradient-to-br.from-blue-50,
+.dark .bg-gradient-to-r.from-blue-50,
+.dark .bg-blue-50 {
+  background-color: #13263D !important;
+  background-image: none !important;
 }
 
 .section-reveal {
