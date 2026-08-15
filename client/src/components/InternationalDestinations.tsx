@@ -1,5 +1,6 @@
 import { MapPin, Play } from 'lucide-react';
 import { useState } from 'react';
+import { openReservationDialog } from './WhatsAppReservation';
 
 /**
  * Direction artistique : cartes de destinations internationales épurées,
@@ -141,7 +142,7 @@ export default function InternationalDestinations() {
                     </div>
                   ))}
                 </div>
-                <button className="btn-secondary w-full">
+                <button type="button" className="btn-secondary w-full" onClick={openReservationDialog}>
                   Réserver
                 </button>
               </div>

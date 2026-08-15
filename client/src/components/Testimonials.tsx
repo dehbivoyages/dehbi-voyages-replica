@@ -1,5 +1,6 @@
 import { Star } from 'lucide-react';
 import { useState } from 'react';
+import { openReservationDialog } from './WhatsAppReservation';
 
 export default function Testimonials() {
   const [selectedTestimonial, setSelectedTestimonial] = useState<number | null>(null);
@@ -147,7 +148,7 @@ export default function Testimonials() {
           <button
             className="px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-semibold transition-colors"
             style={{ backgroundColor: '#FF8C42' }}
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={openReservationDialog}
           >
             Réserver Maintenant
           </button>

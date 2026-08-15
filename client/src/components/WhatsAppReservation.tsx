@@ -1,11 +1,44 @@
-import { useState } from 'react';
-import { MessageCircle, X, Mail } from 'lucide-react';
-import { forwardRef, useImperativeHandle } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
+import { CheckCircle2, Mail, MessageCircle, PlaneTakeoff, X } from 'lucide-react';
 
-const WhatsAppReservation = forwardRef((props, ref) => {
-  useImperativeHandle(ref, () => ({
-    openModal: () => setIsOpen(true),
-  }));
+/**
+ * Direction artistique : une fenêtre de réservation immédiatement lisible, avec en-tête
+ * Orange tropical et corps Vert lime stable dans les thèmes clair et sombre.
+ */
+
+const reservationEventName = 'dehbi-voyages:open-reservation';
+
+export const openReservationDialog = () => {
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new Event(reservationEventName));
+  }
+};
+
+export interface ReservationModalHandle {
+  openModal: () => void;
+}
+
+const services = [
+  { id: 'hotel', label: 'Hôtel' },
+  { id: 'avion', label: 'Avion' },
+  { id: 'hotel-avion', label: 'Hôtel + Avion' },
+  { id: 'bateaux', label: 'Bateaux' },
+  { id: 'omrah', label: 'Omra' },
+  { id: 'hajj', label: 'Hajj' },
+];
+
+const destinations = [
+  'Tanger', 'Casablanca', 'Rabat', 'Meknès', 'Fès', 'Marrakech', 'Agadir',
+  'Turquie', 'Égypte', 'Jordanie', 'Arabie Saoudite', 'Dubaï', 'Oman', 'Liban',
+  'Malaisie', 'Thaïlande', 'Indonésie', 'Singapour', 'Japon', 'Corée du Sud', 'Vietnam',
+  'France', 'Italie', 'Espagne', 'Grèce', 'Suisse', 'Allemagne', 'Pays-Bas',
+  'Sénégal', 'Kenya', 'Tanzanie', 'Afrique du Sud', 'Madagascar',
+  'États-Unis', 'Canada', 'Mexique', 'Brésil', 'Pérou', 'Colombie', 'Autre',
+];
+
+const hotelCategories = ['3 étoiles', '4 étoiles', '5 étoiles', 'Luxe', 'Budget'];
+
+const WhatsAppReservation = forwardRef<ReservationModalHandle>((_props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedService, setSelectedService] = useState('');
   const [selectedDestination, setSelectedDestination] = useState('');
@@ -13,129 +46,9 @@ const WhatsAppReservation = forwardRef((props, ref) => {
   const [returnDate, setReturnDate] = useState('');
   const [numberOfPax, setNumberOfPax] = useState('1');
   const [hotelCategory, setHotelCategory] = useState('');
-
-  const services = [
-    { id: 'hotel', label: 'Hôtel' },
-    { id: 'avion', label: 'Avion' },
-    { id: 'hotel-avion', label: 'Hôtel + Avion' },
-    { id: 'bateaux', label: 'Bateaux' },
-    { id: 'omrah', label: 'Omrah' },
-    { id: 'hajj', label: 'Hajj' },
-  ];
-
-  const destinations = [
-    // Maroc
-    'Tanger',
-    'Casablanca',
-    'Rabat',
-    'Meknès',
-    'Fès',
-    'Marrakech',
-    'Agadir',
-    // Moyen-Orient
-    'Turquie',
-    'Égypte',
-    'Jordanie',
-    'Arabie Saoudite',
-    'Dubaï',
-    'Oman',
-    'Liban',
-    // Asie
-    'Malaisie',
-    'Thaïlande',
-    'Indonésie',
-    'Singapour',
-    'Japon',
-    'Corée du Sud',
-    'Vietnam',
-    // Europe
-    'France',
-    'Italie',
-    'Espagne',
-    'Grèce',
-    'Suisse',
-    'Allemagne',
-    'Pays-Bas',
-    // Afrique
-    'Sénégal',
-    'Kenya',
-    'Tanzanie',
-    'Afrique du Sud',
-    'Madagascar',
-    // Amériques
-    'États-Unis',
-    'Canada',
-    'Mexique',
-    'Brésil',
-    'Pérou',
-    'Colombie',
-    'Autre',
-  ];
-
-  const hotelCategories = [
-    '3 étoiles',
-    '4 étoiles',
-    '5 étoiles',
-    'Luxe',
-    'Budget',
-  ];
+  const [formError, setFormError] = useState('');
 
   const isOmrahOrHajj = selectedService === 'omrah' || selectedService === 'hajj';
-
-  const handleWhatsAppReservation = () => {
-    if (!selectedService) {
-      alert('Veuillez sélectionner un service');
-      return;
-    }
-    if (!isOmrahOrHajj && !selectedDestination) {
-      alert('Veuillez sélectionner une destination');
-      return;
-    }
-
-    if (isOmrahOrHajj && (!departureDate || !returnDate || !numberOfPax || !hotelCategory)) {
-      alert('Veuillez remplir tous les champs requis');
-      return;
-    }
-
-    let message = `Bonjour, je souhaite faire une réservation:\n- Service: ${services.find(s => s.id === selectedService)?.label}\n- Destination: ${selectedDestination}`;
-    
-    if (isOmrahOrHajj) {
-      message += `\n- Date d'aller: ${departureDate}\n- Date de retour: ${returnDate}\n- Nombre de passagers: ${numberOfPax}\n- Catégorie d'hôtel: ${hotelCategory}`;
-    }
-
-    const whatsappUrl = `https://wa.me/212653940304?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-    resetForm();
-  };
-
-  const handleEmailReservation = () => {
-    if (!selectedService) {
-      alert('Veuillez sélectionner un service');
-      return;
-    }
-    if (!isOmrahOrHajj && !selectedDestination) {
-      alert('Veuillez sélectionner une destination');
-      return;
-    }
-
-    if (isOmrahOrHajj && (!departureDate || !returnDate || !numberOfPax || !hotelCategory)) {
-      alert('Veuillez remplir tous les champs requis');
-      return;
-    }
-
-    const subject = `Demande de Réservation - ${services.find(s => s.id === selectedService)?.label} - ${selectedDestination}`;
-    let body = `Bonjour,\n\nJe souhaite faire une réservation avec les détails suivants:\n\nService: ${services.find(s => s.id === selectedService)?.label}\nDestination: ${selectedDestination}`;
-    
-    if (isOmrahOrHajj) {
-      body += `\nDate d'aller: ${departureDate}\nDate de retour: ${returnDate}\nNombre de passagers: ${numberOfPax}\nCatégorie d'hôtel: ${hotelCategory}`;
-    }
-
-    body += '\n\nCordialement';
-    
-    const mailtoUrl = `mailto:Dehbivoyages23@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.open(mailtoUrl, '_blank');
-    resetForm();
-  };
 
   const resetForm = () => {
     setIsOpen(false);
@@ -145,188 +58,197 @@ const WhatsAppReservation = forwardRef((props, ref) => {
     setReturnDate('');
     setNumberOfPax('1');
     setHotelCategory('');
+    setFormError('');
+  };
+
+  const openModal = () => {
+    setFormError('');
+    setIsOpen(true);
+  };
+
+  useImperativeHandle(ref, () => ({ openModal }));
+
+  useEffect(() => {
+    const handleOpen = () => openModal();
+    window.addEventListener(reservationEventName, handleOpen);
+    return () => window.removeEventListener(reservationEventName, handleOpen);
+  }, []);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') resetForm();
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [isOpen]);
+
+  const validate = () => {
+    if (!selectedService) {
+      setFormError('Veuillez sélectionner un type de service.');
+      return false;
+    }
+    if (!isOmrahOrHajj && !selectedDestination) {
+      setFormError('Veuillez sélectionner une destination.');
+      return false;
+    }
+    if (isOmrahOrHajj && (!departureDate || !returnDate || !numberOfPax || !hotelCategory)) {
+      setFormError('Veuillez compléter les dates, le nombre de voyageurs et la catégorie d’hôtel.');
+      return false;
+    }
+    setFormError('');
+    return true;
+  };
+
+  const reservationSummary = () => {
+    const serviceLabel = services.find((service) => service.id === selectedService)?.label ?? selectedService;
+    const destinationLabel = selectedDestination || (isOmrahOrHajj ? 'Médine & La Mecque' : 'À préciser');
+    let summary = `Bonjour Dehbi Voyages, je souhaite faire une réservation :\n- Service : ${serviceLabel}\n- Destination : ${destinationLabel}`;
+
+    if (isOmrahOrHajj) {
+      summary += `\n- Date d’aller : ${departureDate}\n- Date de retour : ${returnDate}\n- Voyageurs : ${numberOfPax}\n- Catégorie d’hôtel : ${hotelCategory}`;
+    }
+    return { serviceLabel, destinationLabel, summary };
+  };
+
+  const handleWhatsAppReservation = () => {
+    if (!validate()) return;
+    const { summary } = reservationSummary();
+    window.open(`https://wa.me/212663381004?text=${encodeURIComponent(summary)}`, '_blank', 'noopener,noreferrer');
+    resetForm();
+  };
+
+  const handleEmailReservation = () => {
+    if (!validate()) return;
+    const { serviceLabel, destinationLabel, summary } = reservationSummary();
+    const subject = `Demande de réservation — ${serviceLabel} — ${destinationLabel}`;
+    window.open(`mailto:Dehbivoyages23@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(summary)}`, '_blank', 'noopener,noreferrer');
+    resetForm();
   };
 
   return (
     <>
-      {/* Floating WhatsApp Button */}
       <button
-        onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 left-6 z-40 rounded-full shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center"
-        title="Réserver via WhatsApp"
-        style={{
-          width: '64px',
-          height: '64px',
-          backgroundImage: 'url(/manus-storage/whatsapp_logo_dehbi_3SVvvJn7TaHH7qKQLYy8VM.png)',
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          backgroundColor: 'transparent'
-        }}
+        type="button"
+        onClick={openModal}
+        className="fixed bottom-6 left-6 z-40 flex h-16 w-16 items-center justify-center rounded-full bg-[#6BFF42] shadow-lg shadow-[#6BFF42]/30 transition duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#FF8C42] focus:ring-offset-2 focus:ring-offset-background"
+        title="Ouvrir la réservation"
+        aria-label="Ouvrir la fenêtre de réservation"
       >
+        <img
+          src="/manus-storage/whatsapp_logo_dehbi_3SVvvJn7TaHH7qKQLYy8VM.png"
+          alt=""
+          className="h-14 w-14 object-contain"
+        />
       </button>
 
-      {/* Modal */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 overflow-y-auto">
-          <div className="bg-white rounded-lg shadow-xl max-w-md w-full my-8">
-            {/* Header */}
-            <div className="bg-orange-500 text-white p-4 flex items-center justify-between rounded-t-lg">
-              <div className="flex items-center gap-2">
-                <MessageCircle size={24} />
-                <h2 className="text-lg font-bold">Réserver Maintenant</h2>
+        <div
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-slate-950/75 p-4 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="quick-reservation-title"
+          onClick={resetForm}
+        >
+          <div
+            className="w-full max-w-xl overflow-hidden rounded-2xl border border-[#FFB27D]/70 bg-[#C8FF42] shadow-[0_26px_80px_rgba(0,0,0,0.46)]"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="flex items-center justify-between bg-[#FF8C42] px-5 py-4 text-white">
+              <div className="flex items-center gap-3">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15" aria-hidden="true">
+                  <PlaneTakeoff size={19} />
+                </span>
+                <div>
+                  <h2 id="quick-reservation-title" className="font-['Playfair_Display'] text-xl font-bold">Réserver Maintenant</h2>
+                  <p className="text-xs font-medium text-white/85">Une réponse directe de Dehbi Voyages</p>
+                </div>
               </div>
               <button
+                type="button"
                 onClick={resetForm}
-                className="hover:bg-orange-600 p-1 rounded transition-colors"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full text-white transition hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-white"
+                aria-label="Fermer la fenêtre de réservation"
               >
-                <X size={20} />
+                <X size={20} aria-hidden="true" />
               </button>
             </div>
 
-            {/* Content */}
-            <div className="p-6 space-y-4 max-h-[80vh] overflow-y-auto" style={{ backgroundColor: '#C8FF42' }}>
-              {/* Service Selection */}
-              <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">
-                  Type de Service *
-                </label>
-                <div className="space-y-2">
+            <div className="max-h-[72vh] overflow-y-auto p-5 text-[#07111F] sm:p-6">
+              <fieldset>
+                <legend className="text-sm font-extrabold uppercase tracking-[0.12em] text-[#1C5A2A]">Type de service</legend>
+                <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
                   {services.map((service) => (
-                    <label key={service.id} className="flex items-center gap-3 cursor-pointer">
+                    <label
+                      key={service.id}
+                      className={`flex cursor-pointer items-center gap-2 rounded-xl border px-3 py-2.5 text-sm font-semibold transition ${selectedService === service.id ? 'border-[#07111F] bg-[#07111F] text-white shadow-md' : 'border-[#4E9B40]/50 bg-white/35 text-[#07111F] hover:bg-white/65'}`}
+                    >
                       <input
                         type="radio"
                         name="service"
                         value={service.id}
                         checked={selectedService === service.id}
-                        onChange={(e) => setSelectedService(e.target.value)}
-                        className="w-4 h-4"
+                        onChange={(event) => setSelectedService(event.target.value)}
+                        className="h-4 w-4 accent-[#FF8C42]"
                       />
-                      <span className="text-sm text-foreground">{service.label}</span>
+                      {service.label}
                     </label>
                   ))}
                 </div>
-              </div>
+              </fieldset>
 
-              {/* Destination Selection - Hidden for Omrah/Hajj */}
               {!isOmrahOrHajj && (
-                <div>
-                  <label className="block text-sm font-semibold text-foreground mb-2">
-                    Destination *
-                  </label>
+                <label className="mt-5 block text-sm font-extrabold uppercase tracking-[0.12em] text-[#1C5A2A]">
+                  Destination
                   <select
                     value={selectedDestination}
-                    onChange={(e) => setSelectedDestination(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                    onChange={(event) => setSelectedDestination(event.target.value)}
+                    className="mt-2 w-full rounded-xl border border-[#07111F]/25 bg-[#10213F] px-4 py-3 text-sm font-semibold text-white outline-none transition focus:border-white focus:ring-2 focus:ring-[#FF8C42]"
                   >
-                    <option value="">-- Sélectionner une destination --</option>
-                    {destinations.map((dest) => (
-                      <option key={dest} value={dest}>
-                        {dest}
-                      </option>
-                    ))}
+                    <option value="">— Sélectionner une destination —</option>
+                    {destinations.map((destination) => <option key={destination} value={destination}>{destination}</option>)}
                   </select>
+                </label>
+              )}
+
+              {isOmrahOrHajj && (
+                <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                  <label className="text-sm font-bold text-[#1C5A2A]">Date d’aller
+                    <input type="date" value={departureDate} onChange={(event) => setDepartureDate(event.target.value)} className="mt-1.5 w-full rounded-xl border border-[#07111F]/25 bg-white/75 px-3 py-2.5 text-[#07111F] outline-none focus:border-[#07111F] focus:ring-2 focus:ring-[#FF8C42]" />
+                  </label>
+                  <label className="text-sm font-bold text-[#1C5A2A]">Date de retour
+                    <input type="date" value={returnDate} onChange={(event) => setReturnDate(event.target.value)} className="mt-1.5 w-full rounded-xl border border-[#07111F]/25 bg-white/75 px-3 py-2.5 text-[#07111F] outline-none focus:border-[#07111F] focus:ring-2 focus:ring-[#FF8C42]" />
+                  </label>
+                  <label className="text-sm font-bold text-[#1C5A2A]">Voyageurs
+                    <input type="number" min="1" value={numberOfPax} onChange={(event) => setNumberOfPax(event.target.value)} className="mt-1.5 w-full rounded-xl border border-[#07111F]/25 bg-white/75 px-3 py-2.5 text-[#07111F] outline-none focus:border-[#07111F] focus:ring-2 focus:ring-[#FF8C42]" />
+                  </label>
+                  <label className="text-sm font-bold text-[#1C5A2A]">Catégorie d’hôtel
+                    <select value={hotelCategory} onChange={(event) => setHotelCategory(event.target.value)} className="mt-1.5 w-full rounded-xl border border-[#07111F]/25 bg-white/75 px-3 py-2.5 text-[#07111F] outline-none focus:border-[#07111F] focus:ring-2 focus:ring-[#FF8C42]">
+                      <option value="">Sélectionner une catégorie</option>
+                      {hotelCategories.map((category) => <option key={category} value={category}>{category}</option>)}
+                    </select>
+                  </label>
                 </div>
               )}
 
-              {/* Omrah/Hajj Specific Fields */}
-              {isOmrahOrHajj && (
-                <>
-                  {/* Departure Date */}
-                  <div>
-                    <label className="block text-sm font-semibold text-foreground mb-2">
-                      Date d'aller *
-                    </label>
-                    <input
-                      type="date"
-                      value={departureDate}
-                      onChange={(e) => setDepartureDate(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                    />
-                  </div>
+              {formError && <p role="alert" className="mt-4 rounded-xl border border-[#C0451D] bg-white/65 px-3 py-2 text-sm font-semibold text-[#8D2F16]">{formError}</p>}
 
-                  {/* Return Date */}
-                  <div>
-                    <label className="block text-sm font-semibold text-foreground mb-2">
-                      Date de retour *
-                    </label>
-                    <input
-                      type="date"
-                      value={returnDate}
-                      onChange={(e) => setReturnDate(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                    />
-                  </div>
+              <div className="mt-5 flex items-start gap-2 rounded-xl border border-[#4E9B40]/45 bg-white/35 px-3 py-2.5 text-xs leading-5 text-[#244B2D]">
+                <CheckCircle2 size={16} className="mt-0.5 shrink-0" aria-hidden="true" />
+                Vous serez redirigé vers WhatsApp ou votre messagerie pour finaliser la demande avec notre équipe.
+              </div>
 
-                  {/* Number of Passengers */}
-                  <div>
-                    <label className="block text-sm font-semibold text-foreground mb-2">
-                      Nombre de passagers *
-                    </label>
-                    <input
-                      type="number"
-                      min="1"
-                      value={numberOfPax}
-                      onChange={(e) => setNumberOfPax(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                    />
-                  </div>
-
-                  {/* Hotel Category */}
-                  <div>
-                    <label className="block text-sm font-semibold text-foreground mb-2">
-                      Catégorie d'hôtel *
-                    </label>
-                    <select
-                      value={hotelCategory}
-                      onChange={(e) => setHotelCategory(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                    >
-                      <option value="">-- Sélectionner une catégorie --</option>
-                      {hotelCategories.map((cat) => (
-                        <option key={cat} value={cat}>
-                          {cat}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </>
-              )}
-
-              {/* Info Text */}
-              <p className="text-xs text-muted-foreground">
-                Vous serez redirigé vers WhatsApp ou Gmail pour finaliser votre réservation avec notre équipe.
-              </p>
-
-              {/* Buttons */}
-              <div className="flex gap-2 pt-4">
-                <button
-                  onClick={resetForm}
-                  className="flex-1 px-4 py-2 border border-gray-300 text-foreground rounded-lg hover:bg-gray-50 transition-colors text-sm"
-                >
-                  Annuler
-                </button>
-                <button
-                  onClick={handleWhatsAppReservation}
-                  className="flex-1 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-semibold flex items-center justify-center gap-2 text-sm"
-                >
-                  <MessageCircle size={16} />
-                  WhatsApp
-                </button>
-                <button
-                  onClick={handleEmailReservation}
-                  className="flex-1 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-semibold flex items-center justify-center gap-2 text-sm"
-                >
-                  <Mail size={16} />
-                  Gmail
-                </button>
+              <div className="mt-5 grid gap-2 sm:grid-cols-3">
+                <button type="button" onClick={resetForm} className="rounded-xl border border-[#07111F]/25 bg-white/55 px-3 py-3 text-sm font-bold text-[#07111F] transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#07111F]">Annuler</button>
+                <button type="button" onClick={handleWhatsAppReservation} className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#17B85B] px-3 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-[#119747] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#C8FF42]"><MessageCircle size={16} aria-hidden="true" />WhatsApp</button>
+                <button type="button" onClick={handleEmailReservation} className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#246BDF] px-3 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-[#1958B8] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#C8FF42]"><Mail size={16} aria-hidden="true" />Gmail</button>
               </div>
             </div>
           </div>
         </div>
       )}
-      </>
-    );
+    </>
+  );
 });
 
 WhatsAppReservation.displayName = 'WhatsAppReservation';

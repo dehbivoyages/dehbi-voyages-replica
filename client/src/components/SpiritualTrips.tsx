@@ -1,5 +1,6 @@
 import { CheckCircle2, Play } from 'lucide-react';
 import { useState } from 'react';
+import { openReservationDialog } from './WhatsAppReservation';
 
 interface Trip {
   title: string;
@@ -78,7 +79,7 @@ export default function SpiritualTrips() {
                   </li>
                 ))}
               </ul>
-              <button className="btn-primary w-full">
+              <button type="button" className="btn-primary w-full" onClick={openReservationDialog}>
                 Réserver
               </button>
             </div>
