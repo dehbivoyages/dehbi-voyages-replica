@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import WhatsAppButton from "./components/WhatsAppButton";
 import ChatBot from "./components/ChatBot";
 import Announcements from "./components/Announcements";
+import BackToTop from "./components/BackToTop";
 import { Toaster } from "sonner";
 
 /** Direction artistique : la charte orange tropical et vert lime reste lisible en clair comme en sombre. */
@@ -35,6 +36,7 @@ function App() {
           <Router />
           <WhatsAppButton phoneNumber="212663381004" message="Bonjour Dehbi Voyages, je souhaite en savoir plus sur vos voyages organisés." />
           <ChatBot />
+          <BackToTop />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
