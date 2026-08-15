@@ -1,6 +1,13 @@
 import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, Moon, Sun, X } from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
+import { useTheme } from '@/contexts/ThemeContext';
 import TravelClock from './TravelClock';
+
+/**
+ * Direction artistique : en-tête lumineux, précis et premium, enrichi d’un contrôle
+ * de thème discret mais immédiatement identifiable, sans encombrer la navigation.
+ */
 
 interface HeaderProps {
   onReserveClick?: () => void;
@@ -8,6 +15,8 @@ interface HeaderProps {
 
 export default function Header({ onReserveClick }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  const isDarkTheme = theme === 'dark';
 
   const navItems = [
     { label: 'Spirituel', href: '#spirituel' },
@@ -17,9 +26,9 @@ export default function Header({ onReserveClick }: HeaderProps) {
   ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/95 shadow-sm backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/95 shadow-sm backdrop-blur-md">
       <div className="container mx-auto px-4 py-3">
-        <div className="grid min-h-[72px] grid-cols-[auto_minmax(0,1fr)_auto_auto] items-center gap-4 lg:gap-6">
+        <div className="grid min-h-[72px] grid-cols-[auto_minmax(0,1fr)_auto_auto] items-center gap-3 md:grid-cols-[auto_minmax(0,1fr)_auto_auto_auto] lg:gap-5">
           {/* Logo */}
           <a href="#" className="flex shrink-0 items-center gap-3 transition-opacity hover:opacity-90">
             <img
@@ -42,8 +51,20 @@ export default function Header({ onReserveClick }: HeaderProps) {
             ))}
           </nav>
 
+          {/* Theme toggle: own desktop column, with a compact equivalent on mobile. */}
+          <div className="hidden items-center gap-2 rounded-full border border-border bg-muted/70 px-2 py-1.5 text-muted-foreground shadow-sm md:flex">
+            <Sun size={15} aria-hidden="true" className={isDarkTheme ? 'opacity-45' : 'text-[#FF8C42]'} />
+            <Switch
+              checked={isDarkTheme}
+              onCheckedChange={toggleTheme}
+              aria-label={isDarkTheme ? 'Activer le mode clair' : 'Activer le mode sombre'}
+              className="h-5 w-9 data-[state=checked]:bg-[#6BFF42] data-[state=unchecked]:bg-[#FF8C42]"
+            />
+            <Moon size={15} aria-hidden="true" className={isDarkTheme ? 'text-[#6BFF42]' : 'opacity-45'} />
+          </div>
+
           {/* Dedicated clock column: kept separate from navigation and CTA to prevent overlap */}
-          <div className="hidden min-w-[210px] justify-self-end border-l border-slate-200 pl-4 md:block lg:min-w-[224px]">
+          <div className="hidden min-w-[210px] justify-self-end border-l border-border pl-4 md:block lg:min-w-[224px]">
             <TravelClock />
           </div>
 
@@ -54,8 +75,20 @@ export default function Header({ onReserveClick }: HeaderProps) {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden"
+            type="button"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-muted text-foreground transition hover:bg-accent/20 focus:outline-none focus:ring-2 focus:ring-[#6BFF42] md:hidden"
+            onClick={toggleTheme}
+            aria-label={isDarkTheme ? 'Activer le mode clair' : 'Activer le mode sombre'}
+            title={isDarkTheme ? 'Mode clair' : 'Mode sombre'}
+          >
+            {isDarkTheme ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
+          </button>
+
+          <button
+            type="button"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-muted text-foreground transition hover:bg-accent/20 focus:outline-none focus:ring-2 focus:ring-[#6BFF42] md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -74,6 +107,15 @@ export default function Header({ onReserveClick }: HeaderProps) {
                 {item.label}
               </a>
             ))}
+            <div className="flex items-center justify-between rounded-xl border border-border bg-muted/60 px-4 py-3 text-sm font-semibold text-foreground">
+              <span className="flex items-center gap-2">{isDarkTheme ? <Moon size={16} aria-hidden="true" /> : <Sun size={16} aria-hidden="true" />} Mode sombre</span>
+              <Switch
+                checked={isDarkTheme}
+                onCheckedChange={toggleTheme}
+                aria-label={isDarkTheme ? 'Activer le mode clair' : 'Activer le mode sombre'}
+                className="h-5 w-9 data-[state=checked]:bg-[#6BFF42] data-[state=unchecked]:bg-[#FF8C42]"
+              />
+            </div>
             <TravelClock className="w-full justify-center" />
             <button className="btn-primary w-full" onClick={onReserveClick}>
               Réserver

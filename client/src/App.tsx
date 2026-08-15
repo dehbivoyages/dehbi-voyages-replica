@@ -9,6 +9,7 @@ import ChatBot from "./components/ChatBot";
 import Announcements from "./components/Announcements";
 import { Toaster } from "sonner";
 
+/** Direction artistique : la charte orange tropical et vert lime reste lisible en clair comme en sombre. */
 
 function Router() {
   return (
@@ -26,6 +27,7 @@ function App() {
     <ErrorBoundary>
       <ThemeProvider
         defaultTheme="light"
+        switchable
       >
         <TooltipProvider>
           <Toaster />

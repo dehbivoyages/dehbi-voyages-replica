@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Direction artistique : une charte orange tropical / vert lime conserve son éclat sur des fonds encre et ardoise. */
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -43,6 +45,7 @@
 }
 
 :root {
+  color-scheme: light;
   --primary: #FF8C42;
   --primary-foreground: #FFFFFF;
   --sidebar-primary: #FF8C42;
@@ -79,41 +82,47 @@
 }
 
 .dark {
-  --primary: #0066FF;
+  color-scheme: dark;
+  --primary: #FF8C42;
   --primary-foreground: #FFFFFF;
-  --sidebar-primary: #0066FF;
+  --sidebar-primary: #FF8C42;
   --sidebar-primary-foreground: #FFFFFF;
-  --background: #0F0F0F;
-  --foreground: #E5E5E5;
-  --card: #1A1A1A;
-  --card-foreground: #E5E5E5;
-  --popover: #1A1A1A;
-  --popover-foreground: #E5E5E5;
-  --secondary: #FF8C5A;
+  --background: #081526;
+  --foreground: #F8F4EA;
+  --card: #13263D;
+  --card-foreground: #F8F4EA;
+  --popover: #13263D;
+  --popover-foreground: #F8F4EA;
+  --secondary: #E76F36;
   --secondary-foreground: #FFFFFF;
-  --muted: #2A2A2A;
-  --muted-foreground: #999999;
-  --accent: #0066FF;
-  --accent-foreground: #FFFFFF;
+  --muted: #1C344E;
+  --muted-foreground: #B7C7D9;
+  --accent: #6BFF42;
+  --accent-foreground: #07111F;
   --destructive: oklch(0.704 0.191 22.216);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: #333333;
-  --input: #2A2A2A;
-  --ring: #0066FF;
-  --chart-1: #0066FF;
-  --chart-2: #0052CC;
-  --chart-3: #003D99;
-  --chart-4: #002E73;
-  --chart-5: #001F4D;
-  --sidebar: #1A1A1A;
-  --sidebar-foreground: #E5E5E5;
-  --sidebar-accent: #0066FF;
-  --sidebar-accent-foreground: #FFFFFF;
-  --sidebar-border: #333333;
-  --sidebar-ring: #0066FF;
+  --border: #31506E;
+  --input: #1A3049;
+  --ring: #6BFF42;
+  --chart-1: #6BFF42;
+  --chart-2: #FF8C42;
+  --chart-3: #53BFD3;
+  --chart-4: #C9A34E;
+  --chart-5: #9E7CFF;
+  --sidebar: #13263D;
+  --sidebar-foreground: #F8F4EA;
+  --sidebar-accent: #1C344E;
+  --sidebar-accent-foreground: #F8F4EA;
+  --sidebar-border: #31506E;
+  --sidebar-ring: #6BFF42;
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    background: var(--background);
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
@@ -125,6 +134,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    transition: background-color 240ms cubic-bezier(0.23, 1, 0.32, 1), color 240ms cubic-bezier(0.23, 1, 0.32, 1);
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', serif;
@@ -140,6 +150,91 @@
   input[type="checkbox"]:not(:disabled),
   input[type="radio"]:not(:disabled) {
     @apply cursor-pointer;
+  }
+}
+
+/* Les classes historiques restent utilisables tout en recevant des surfaces lisibles dans le thème sombre. */
+.dark body {
+  background-color: #07111f;
+  background-blend-mode: soft-light;
+}
+
+.dark .bg-white,
+.dark .bg-white\/90,
+.dark .bg-white\/95,
+.dark .bg-white\/80 {
+  background-color: var(--card) !important;
+}
+
+.dark .bg-gray-50,
+.dark .bg-slate-50,
+.dark [class~="bg-[#f6f1e8]"] {
+  background-color: var(--muted) !important;
+}
+
+.dark .text-slate-900,
+.dark .text-slate-800,
+.dark .text-gray-900,
+.dark .text-gray-800 {
+  color: var(--foreground) !important;
+}
+
+.dark .text-slate-700,
+.dark .text-slate-600,
+.dark .text-gray-700,
+.dark .text-gray-600 {
+  color: var(--muted-foreground) !important;
+}
+
+.dark .border-slate-100,
+.dark .border-slate-200,
+.dark .border-gray-200,
+.dark .border-gray-300 {
+  border-color: var(--border) !important;
+}
+
+.dark input,
+.dark select,
+.dark textarea {
+  background-color: var(--input) !important;
+  color: var(--foreground) !important;
+  border-color: var(--border) !important;
+}
+
+.dark select option {
+  background-color: var(--card);
+  color: var(--foreground);
+}
+
+.dark .card-bordered {
+  background-color: var(--card);
+  border-color: #FF8C42;
+}
+
+.section-reveal {
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  header,
+  section,
+  article,
+  form,
+  footer,
+  input,
+  select,
+  textarea {
+    transition: background-color 240ms cubic-bezier(0.23, 1, 0.32, 1), color 240ms cubic-bezier(0.23, 1, 0.32, 1), border-color 240ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 240ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .section-reveal {
+    will-change: auto;
   }
 }
 
