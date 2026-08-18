@@ -1,5 +1,5 @@
-import { MapPin, Play } from 'lucide-react';
-import { useState } from 'react';
+import { ArrowRight, CheckCircle2, MapPin, Plane, Play, Ticket, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { openReservationDialog } from './WhatsAppReservation';
 
 /**
@@ -9,6 +9,20 @@ import { openReservationDialog } from './WhatsAppReservation';
 
 export default function InternationalDestinations() {
   const [playingVideo, setPlayingVideo] = useState<number | null>(null);
+  const [isTicketVideoOpen, setIsTicketVideoOpen] = useState(false);
+
+  const ticketingVideoUrl = '/manus-storage/billetterie-parcours-12s_021c6e7b.mp4';
+
+  useEffect(() => {
+    if (!isTicketVideoOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsTicketVideoOpen(false);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isTicketVideoOpen]);
 
   const destinations = [
     {
@@ -88,6 +102,54 @@ export default function InternationalDestinations() {
         </div>
       )}
 
+      {isTicketVideoOpen && (
+        <div
+          className="fixed inset-0 z-[70] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
+          onClick={() => setIsTicketVideoOpen(false)}
+          role="presentation"
+        >
+          <div
+            className="relative w-full max-w-4xl overflow-hidden rounded-2xl border border-[#6BFF42]/50 bg-[#07111F] shadow-2xl"
+            onClick={(event) => event.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="ticket-video-title"
+          >
+            <div className="flex items-center justify-between gap-4 border-b border-white/15 bg-[#10233C] px-5 py-4 text-white">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#6BFF42]">Billetterie aérienne</p>
+                <h3 id="ticket-video-title" className="mt-1 text-lg font-bold">Votre parcours aller-retour, accompagné par Dehbi Voyages</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsTicketVideoOpen(false)}
+                className="rounded-full p-2 text-white transition hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-[#6BFF42]"
+                aria-label="Fermer la vidéo de billetterie"
+              >
+                <X size={22} />
+              </button>
+            </div>
+            <video
+              src={ticketingVideoUrl}
+              controls
+              autoPlay
+              playsInline
+              preload="metadata"
+              className="aspect-video w-full bg-black object-contain"
+              onLoadedMetadata={(event) => {
+                event.currentTarget.volume = 0.35;
+              }}
+            />
+            <div className="flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-sm leading-6 text-[#D8E8FF]">Exemples de liaisons depuis le Maroc. Les horaires, itinéraires et tarifs sont confirmés par notre équipe avant réservation.</p>
+              <button type="button" className="btn-secondary shrink-0" onClick={openReservationDialog}>
+                Demander mon billet
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
@@ -149,6 +211,94 @@ export default function InternationalDestinations() {
             </div>
           ))}
         </div>
+
+        <section
+          id="billetterie"
+          className="mt-16 overflow-hidden rounded-[2rem] border border-[#FF8C42]/35 bg-[#07111F] text-white shadow-[0_24px_80px_rgba(7,17,31,0.18)]"
+          aria-labelledby="ticketing-title"
+        >
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
+            <div className="p-7 sm:p-10 lg:p-12">
+              <div className="flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#FF8C42] text-[#07111F] shadow-lg shadow-[#FF8C42]/25">
+                  <Ticket size={25} strokeWidth={2.4} />
+                </div>
+                <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-[#6BFF42]">Service agence</p>
+              </div>
+
+              <h3 id="ticketing-title" className="mt-6 max-w-xl text-3xl font-black leading-tight text-white sm:text-4xl">
+                Billetterie Aérienne, partout où vous allez.
+              </h3>
+              <p className="mt-4 max-w-xl text-base leading-7 text-[#D8E8FF]">
+                Notre équipe vous accompagne pour organiser vos billets aller-retour depuis le Maroc, avec une demande adaptée à votre destination, vos dates et vos bagages.
+              </p>
+
+              <div className="mt-7 grid gap-3 sm:grid-cols-[1fr_auto_1fr] sm:items-stretch">
+                <div className="rounded-2xl border border-white/15 bg-white/8 p-4">
+                  <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#AFC9EA]">Départs</span>
+                  <div className="mt-2 flex items-center gap-2 text-lg font-extrabold text-white"><MapPin size={18} className="text-[#6BFF42]" />Tanger & Casablanca</div>
+                  <p className="mt-1 text-sm text-[#D8E8FF]">Maroc</p>
+                </div>
+                <div className="hidden items-center justify-center text-[#FF8C42] sm:flex"><ArrowRight size={30} /></div>
+                <div className="rounded-2xl border border-white/15 bg-white/8 p-4">
+                  <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#AFC9EA]">Arrivées</span>
+                  <div className="mt-2 flex items-center gap-2 text-lg font-extrabold text-white"><Plane size={18} className="text-[#FF8C42]" />France & international</div>
+                  <p className="mt-1 text-sm text-[#D8E8FF]">Selon votre demande</p>
+                </div>
+              </div>
+
+              <div className="mt-7 flex flex-wrap gap-2" aria-label="Exemples de liaisons traitées">
+                {['Maroc → France', 'Europe', 'Moyen-Orient', 'Afrique', 'Amériques'].map((route) => (
+                  <span key={route} className="rounded-full border border-[#6BFF42]/35 bg-[#6BFF42]/10 px-3 py-1.5 text-sm font-semibold text-[#E8FFE3]">
+                    {route}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-8 grid gap-3 text-sm text-[#D8E8FF] sm:grid-cols-2">
+                <span className="flex items-start gap-2"><CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#6BFF42]" />Conseil sur l’itinéraire et les bagages</span>
+                <span className="flex items-start gap-2"><CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#6BFF42]" />Confirmation personnalisée par l’agence</span>
+              </div>
+
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <button type="button" className="btn-secondary" onClick={openReservationDialog}>
+                  Demander mon billet
+                </button>
+                <button
+                  type="button"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/30 px-5 py-3 font-bold text-white transition hover:border-[#6BFF42] hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#6BFF42]"
+                  onClick={() => setIsTicketVideoOpen(true)}
+                >
+                  <Play size={18} fill="currentColor" /> Voir le parcours en vidéo
+                </button>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              className="group relative min-h-[340px] overflow-hidden bg-black text-left lg:min-h-full"
+              onClick={() => setIsTicketVideoOpen(true)}
+              aria-label="Lire la vidéo du parcours de billetterie aérienne"
+            >
+              <video
+                src={ticketingVideoUrl}
+                className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                muted
+                loop
+                playsInline
+                autoPlay
+                preload="metadata"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#07111F]/90 via-[#07111F]/20 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-7 sm:p-9">
+                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#FF8C42] text-[#07111F] shadow-xl shadow-black/30 transition group-hover:scale-110"><Play size={24} fill="currentColor" /></div>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#6BFF42]">Départ · Vol · Retour</p>
+                <p className="mt-2 text-2xl font-extrabold text-white">Du Maroc vers le monde</p>
+                <p className="mt-2 max-w-md text-sm leading-6 text-[#D8E8FF]">Une courte démonstration du parcours de demande de billet, du départ à l’arrivée.</p>
+              </div>
+            </button>
+          </div>
+        </section>
       </div>
     </section>
   );

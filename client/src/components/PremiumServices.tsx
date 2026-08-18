@@ -97,12 +97,14 @@ export default function PremiumServices() {
                     <button
                       className="btn-outline"
                       onClick={() => {
-                        if (hasVideo) {
+                        if (service.title === 'Billetterie Aérienne') {
+                          document.getElementById('billetterie')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        } else if (hasVideo) {
                           setExpandedService(index);
                         }
                       }}
                     >
-                      {hasVideo ? 'Clic pour voir' : 'Bientôt disponible'}
+                      {service.title === 'Billetterie Aérienne' ? 'Découvrir la billetterie' : hasVideo ? 'Clic pour voir' : 'Bientôt disponible'}
                     </button>
                   </>
                 )}
