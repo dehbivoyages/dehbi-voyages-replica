@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle2, MapPin, Plane, Play, Ticket, X } from 'lucide-react';
+import { CheckCircle2, MapPin, Plane, Play, Ticket, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { openReservationDialog } from './WhatsAppReservation';
 
@@ -141,7 +141,7 @@ export default function InternationalDestinations() {
               }}
             />
             <div className="flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-sm leading-6 text-[#D8E8FF]">Exemples de liaisons depuis le Maroc. Les horaires, itinéraires et tarifs sont confirmés par notre équipe avant réservation.</p>
+              <p className="text-sm leading-6 text-[#D8E8FF]">Les horaires, itinéraires et tarifs sont confirmés par notre équipe avant réservation.</p>
               <button type="button" className="btn-secondary shrink-0" onClick={openReservationDialog}>
                 Demander mon billet
               </button>
@@ -230,25 +230,11 @@ export default function InternationalDestinations() {
                 Billetterie Aérienne, partout où vous allez.
               </h3>
               <p className="mt-4 max-w-xl text-base leading-7 text-[#D8E8FF]">
-                Notre équipe vous accompagne pour organiser vos billets aller-retour depuis le Maroc, avec une demande adaptée à votre destination, vos dates et vos bagages.
+                Notre équipe vous accompagne pour organiser vos billets aller-retour, avec une demande adaptée à votre destination, vos dates et vos bagages.
               </p>
 
-              <div className="mt-7 grid gap-3 sm:grid-cols-[1fr_auto_1fr] sm:items-stretch">
-                <div className="rounded-2xl border border-white/15 bg-white/8 p-4">
-                  <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#AFC9EA]">Départs</span>
-                  <div className="mt-2 flex items-center gap-2 text-lg font-extrabold text-white"><MapPin size={18} className="text-[#6BFF42]" />Tanger & Casablanca</div>
-                  <p className="mt-1 text-sm text-[#D8E8FF]">Maroc</p>
-                </div>
-                <div className="hidden items-center justify-center text-[#FF8C42] sm:flex"><ArrowRight size={30} /></div>
-                <div className="rounded-2xl border border-white/15 bg-white/8 p-4">
-                  <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#AFC9EA]">Arrivées</span>
-                  <div className="mt-2 flex items-center gap-2 text-lg font-extrabold text-white"><Plane size={18} className="text-[#FF8C42]" />France & international</div>
-                  <p className="mt-1 text-sm text-[#D8E8FF]">Selon votre demande</p>
-                </div>
-              </div>
-
-              <div className="mt-7 flex flex-wrap gap-2" aria-label="Exemples de liaisons traitées">
-                {['Maroc → France', 'Europe', 'Moyen-Orient', 'Afrique', 'Amériques'].map((route) => (
+              <div className="mt-7 flex flex-wrap gap-2" aria-label="Régions prises en charge sur demande">
+                {['Europe', 'Moyen-Orient', 'Afrique', 'Amériques', 'Autres destinations'].map((route) => (
                   <span key={route} className="rounded-full border border-[#6BFF42]/35 bg-[#6BFF42]/10 px-3 py-1.5 text-sm font-semibold text-[#E8FFE3]">
                     {route}
                   </span>
@@ -293,8 +279,8 @@ export default function InternationalDestinations() {
               <div className="absolute inset-x-0 bottom-0 p-7 sm:p-9">
                 <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#FF8C42] text-[#07111F] shadow-xl shadow-black/30 transition group-hover:scale-110"><Play size={24} fill="currentColor" /></div>
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#6BFF42]">Départ · Vol · Retour</p>
-                <p className="mt-2 text-2xl font-extrabold text-white">Du Maroc vers le monde</p>
-                <p className="mt-2 max-w-md text-sm leading-6 text-[#D8E8FF]">Une courte démonstration du parcours de demande de billet, du départ à l’arrivée.</p>
+                <p className="mt-2 text-2xl font-extrabold text-white">Votre voyage, en toute simplicité</p>
+                <p className="mt-2 max-w-md text-sm leading-6 text-[#D8E8FF]">Une courte démonstration de l’accompagnement de votre demande de billet.</p>
               </div>
             </button>
           </div>
