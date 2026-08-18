@@ -319,6 +319,40 @@
   border: 1px solid #6BFF42 !important;
 }
 
+/* Aperçu visuel du basculement : court, non bloquant et compatible avec les préférences de mouvement réduit. */
+.theme-transition-preview {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  pointer-events: none;
+  animation: theme-reveal 720ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.theme-transition-preview-dark {
+  background: radial-gradient(circle at 78% 45px, rgba(107, 255, 66, 0.25), rgba(7, 17, 31, 0.98) 52%, rgba(7, 17, 31, 0));
+}
+
+.theme-transition-preview-light {
+  background: radial-gradient(circle at 78% 45px, rgba(255, 140, 66, 0.28), rgba(255, 250, 242, 0.98) 52%, rgba(255, 250, 242, 0));
+}
+
+.theme-preview-toast {
+  animation: theme-preview-toast 900ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+@keyframes theme-reveal {
+  0% { clip-path: circle(0% at 78% 45px); opacity: 0.96; }
+  65% { clip-path: circle(105% at 78% 45px); opacity: 0.42; }
+  100% { clip-path: circle(125% at 78% 45px); opacity: 0; }
+}
+
+@keyframes theme-preview-toast {
+  0% { transform: translateY(-10px) scale(0.96); opacity: 0; }
+  30% { transform: translateY(0) scale(1); opacity: 1; }
+  82% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-6px) scale(0.98); opacity: 0; }
+}
+
 .section-reveal {
   will-change: transform, opacity;
 }
@@ -343,6 +377,11 @@
 
   .section-reveal {
     will-change: auto;
+  }
+
+  .theme-transition-preview,
+  .theme-preview-toast {
+    animation: none;
   }
 }
 

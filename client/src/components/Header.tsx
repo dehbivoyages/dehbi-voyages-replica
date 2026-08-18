@@ -15,8 +15,16 @@ interface HeaderProps {
 
 export default function Header({ onReserveClick }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [themePreview, setThemePreview] = useState<'light' | 'dark' | null>(null);
   const { theme, toggleTheme } = useTheme();
   const isDarkTheme = theme === 'dark';
+
+  const handleThemeToggle = () => {
+    const nextTheme = isDarkTheme ? 'light' : 'dark';
+    setThemePreview(nextTheme);
+    toggleTheme?.();
+    window.setTimeout(() => setThemePreview(null), 900);
+  };
 
   const navItems = [
     { label: 'Spirituel', href: '#spirituel' },
@@ -51,16 +59,19 @@ export default function Header({ onReserveClick }: HeaderProps) {
             ))}
           </nav>
 
-          {/* Theme toggle: own desktop column, with a compact equivalent on mobile. */}
+          {/* Theme toggle: own desktop column, with a persistent state label. */}
           <div className="hidden items-center gap-2 rounded-full border border-border bg-muted/70 px-2 py-1.5 text-muted-foreground shadow-sm md:flex">
             <Sun size={15} aria-hidden="true" className={isDarkTheme ? 'opacity-45' : 'text-[#FF8C42]'} />
             <Switch
               checked={isDarkTheme}
-              onCheckedChange={toggleTheme}
+              onCheckedChange={handleThemeToggle}
               aria-label={isDarkTheme ? 'Activer le mode clair' : 'Activer le mode sombre'}
               className="h-5 w-9 data-[state=checked]:bg-[#6BFF42] data-[state=unchecked]:bg-[#FF8C42]"
             />
             <Moon size={15} aria-hidden="true" className={isDarkTheme ? 'text-[#6BFF42]' : 'opacity-45'} />
+            <span className={`hidden rounded-full px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-[0.08em] lg:inline ${isDarkTheme ? 'bg-[#6BFF42]/15 text-[#BFFFAE]' : 'bg-[#FF8C42]/15 text-[#d86d2d]'}`}>
+              {isDarkTheme ? 'Nuit' : 'Clair'}
+            </span>
           </div>
 
           {/* Dedicated clock column: kept separate from navigation and CTA to prevent overlap */}
@@ -77,7 +88,7 @@ export default function Header({ onReserveClick }: HeaderProps) {
           <button
             type="button"
             className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-muted text-foreground transition hover:bg-accent/20 focus:outline-none focus:ring-2 focus:ring-[#6BFF42] md:hidden"
-            onClick={toggleTheme}
+            onClick={handleThemeToggle}
             aria-label={isDarkTheme ? 'Activer le mode clair' : 'Activer le mode sombre'}
             title={isDarkTheme ? 'Mode clair' : 'Mode sombre'}
           >
@@ -108,10 +119,10 @@ export default function Header({ onReserveClick }: HeaderProps) {
               </a>
             ))}
             <div className="flex items-center justify-between rounded-xl border border-border bg-muted/60 px-4 py-3 text-sm font-semibold text-foreground">
-              <span className="flex items-center gap-2">{isDarkTheme ? <Moon size={16} aria-hidden="true" /> : <Sun size={16} aria-hidden="true" />} Mode sombre</span>
+              <span className="flex items-center gap-2">{isDarkTheme ? <Moon size={16} aria-hidden="true" /> : <Sun size={16} aria-hidden="true" />} {isDarkTheme ? 'Mode nuit actif' : 'Mode clair actif'}</span>
               <Switch
                 checked={isDarkTheme}
-                onCheckedChange={toggleTheme}
+                onCheckedChange={handleThemeToggle}
                 aria-label={isDarkTheme ? 'Activer le mode clair' : 'Activer le mode sombre'}
                 className="h-5 w-9 data-[state=checked]:bg-[#6BFF42] data-[state=unchecked]:bg-[#FF8C42]"
               />
@@ -123,6 +134,16 @@ export default function Header({ onReserveClick }: HeaderProps) {
           </nav>
         )}
       </div>
+
+      {themePreview && (
+        <>
+          <div aria-hidden="true" className={`theme-transition-preview theme-transition-preview-${themePreview}`} />
+          <div role="status" className="theme-preview-toast fixed right-5 top-[88px] z-[60] flex items-center gap-3 rounded-2xl border border-[#6BFF42]/50 bg-[#10213F]/95 px-4 py-3 text-sm font-semibold text-[#F8F4EA] shadow-xl shadow-black/30 backdrop-blur-md">
+            {themePreview === 'dark' ? <Moon size={18} className="text-[#BFFFAE]" aria-hidden="true" /> : <Sun size={18} className="text-[#FFB27D]" aria-hidden="true" />}
+            <span><span className="block text-[10px] font-extrabold uppercase tracking-[0.14em] text-[#BFFFAE]">Aperçu du thème</span>{themePreview === 'dark' ? 'Mode nuit activé' : 'Mode clair activé'}</span>
+          </div>
+        </>
+      )}
     </header>
   );
 }
