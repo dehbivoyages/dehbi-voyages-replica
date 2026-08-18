@@ -4,6 +4,7 @@ import { CheckCircle2, Mail, MessageCircle, PlaneTakeoff, X } from 'lucide-react
 /**
  * Direction artistique : une fenêtre de réservation immédiatement lisible, avec en-tête
  * Orange tropical et corps Vert lime stable dans les thèmes clair et sombre.
+ * Les parcours « Au Maroc » et « International » restent distincts jusqu’au choix de destination.
  */
 
 const reservationEventName = 'dehbi-voyages:open-reservation';
@@ -27,8 +28,11 @@ const services = [
   { id: 'hajj', label: 'Hajj' },
 ];
 
-const destinations = [
+const moroccanDestinations = [
   'Tanger', 'Casablanca', 'Rabat', 'Meknès', 'Fès', 'Marrakech', 'Agadir',
+];
+
+const internationalDestinations = [
   'Turquie', 'Égypte', 'Jordanie', 'Arabie Saoudite', 'Dubaï', 'Oman', 'Liban',
   'Malaisie', 'Thaïlande', 'Indonésie', 'Singapour', 'Japon', 'Corée du Sud', 'Vietnam',
   'France', 'Italie', 'Espagne', 'Grèce', 'Suisse', 'Allemagne', 'Pays-Bas',
@@ -41,6 +45,7 @@ const hotelCategories = ['3 étoiles', '4 étoiles', '5 étoiles', 'Luxe', 'Budg
 const WhatsAppReservation = forwardRef<ReservationModalHandle>((_props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedService, setSelectedService] = useState('');
+  const [selectedTravelZone, setSelectedTravelZone] = useState('');
   const [selectedDestination, setSelectedDestination] = useState('');
   const [departureDate, setDepartureDate] = useState('');
   const [returnDate, setReturnDate] = useState('');
@@ -49,10 +54,16 @@ const WhatsAppReservation = forwardRef<ReservationModalHandle>((_props, ref) => 
   const [formError, setFormError] = useState('');
 
   const isOmrahOrHajj = selectedService === 'omrah' || selectedService === 'hajj';
+  const destinationsForSelectedZone = selectedTravelZone === 'morocco'
+    ? moroccanDestinations
+    : selectedTravelZone === 'international'
+      ? internationalDestinations
+      : [];
 
   const resetForm = () => {
     setIsOpen(false);
     setSelectedService('');
+    setSelectedTravelZone('');
     setSelectedDestination('');
     setDepartureDate('');
     setReturnDate('');
@@ -88,6 +99,10 @@ const WhatsAppReservation = forwardRef<ReservationModalHandle>((_props, ref) => 
       setFormError('Veuillez sélectionner un type de service.');
       return false;
     }
+    if (!isOmrahOrHajj && !selectedTravelZone) {
+      setFormError('Veuillez choisir « Au Maroc » ou « International ».');
+      return false;
+    }
     if (!isOmrahOrHajj && !selectedDestination) {
       setFormError('Veuillez sélectionner une destination.');
       return false;
@@ -103,7 +118,8 @@ const WhatsAppReservation = forwardRef<ReservationModalHandle>((_props, ref) => 
   const reservationSummary = () => {
     const serviceLabel = services.find((service) => service.id === selectedService)?.label ?? selectedService;
     const destinationLabel = selectedDestination || (isOmrahOrHajj ? 'Médine & La Mecque' : 'À préciser');
-    let summary = `Bonjour Dehbi Voyages, je souhaite faire une réservation :\n- Service : ${serviceLabel}\n- Destination : ${destinationLabel}`;
+    const travelZoneLabel = selectedTravelZone === 'morocco' ? 'Au Maroc' : selectedTravelZone === 'international' ? 'International' : '';
+    let summary = `Bonjour Dehbi Voyages, je souhaite faire une réservation :\n- Service : ${serviceLabel}${travelZoneLabel ? `\n- Zone : ${travelZoneLabel}` : ''}\n- Destination : ${destinationLabel}`;
 
     if (isOmrahOrHajj) {
       summary += `\n- Date d’aller : ${departureDate}\n- Date de retour : ${returnDate}\n- Voyageurs : ${numberOfPax}\n- Catégorie d’hôtel : ${hotelCategory}`;
@@ -174,7 +190,12 @@ const WhatsAppReservation = forwardRef<ReservationModalHandle>((_props, ref) => 
                         name="service"
                         value={service.id}
                         checked={selectedService === service.id}
-                        onChange={(event) => setSelectedService(event.target.value)}
+                        onChange={(event) => {
+                          setSelectedService(event.target.value);
+                          setSelectedTravelZone('');
+                          setSelectedDestination('');
+                          setFormError('');
+                        }}
                         className="h-4 w-4 accent-[#FF8C42]"
                       />
                       {service.label}
@@ -184,17 +205,56 @@ const WhatsAppReservation = forwardRef<ReservationModalHandle>((_props, ref) => 
               </fieldset>
 
               {!isOmrahOrHajj && (
-                <label className="mt-5 block text-sm font-extrabold uppercase tracking-[0.12em] text-[#1C5A2A]">
-                  Destination
-                  <select
-                    value={selectedDestination}
-                    onChange={(event) => setSelectedDestination(event.target.value)}
-                    className="mt-2 w-full rounded-xl border border-[#07111F]/25 bg-[#10213F] px-4 py-3 text-sm font-semibold text-white outline-none transition focus:border-white focus:ring-2 focus:ring-[#FF8C42]"
-                  >
-                    <option value="">— Sélectionner une destination —</option>
-                    {destinations.map((destination) => <option key={destination} value={destination}>{destination}</option>)}
-                  </select>
-                </label>
+                <div className="mt-5">
+                  <fieldset>
+                    <legend className="text-sm font-extrabold uppercase tracking-[0.12em] text-[#1C5A2A]">Zone de voyage</legend>
+                    <div className="mt-2 grid grid-cols-2 gap-2">
+                      <label className={`flex cursor-pointer items-center gap-2 rounded-xl border px-3 py-3 text-sm font-bold transition ${selectedTravelZone === 'morocco' ? 'border-[#FF8C42] bg-[#FF8C42] text-[#07111F] shadow-md' : 'border-[#4E9B40]/50 bg-white/35 text-[#07111F] hover:bg-white/65'}`}>
+                        <input
+                          type="radio"
+                          name="travel-zone"
+                          value="morocco"
+                          checked={selectedTravelZone === 'morocco'}
+                          onChange={() => {
+                            setSelectedTravelZone('morocco');
+                            setSelectedDestination('');
+                            setFormError('');
+                          }}
+                          className="h-4 w-4 accent-[#FF8C42]"
+                        />
+                        Au Maroc
+                      </label>
+                      <label className={`flex cursor-pointer items-center gap-2 rounded-xl border px-3 py-3 text-sm font-bold transition ${selectedTravelZone === 'international' ? 'border-[#07111F] bg-[#07111F] text-white shadow-md' : 'border-[#4E9B40]/50 bg-white/35 text-[#07111F] hover:bg-white/65'}`}>
+                        <input
+                          type="radio"
+                          name="travel-zone"
+                          value="international"
+                          checked={selectedTravelZone === 'international'}
+                          onChange={() => {
+                            setSelectedTravelZone('international');
+                            setSelectedDestination('');
+                            setFormError('');
+                          }}
+                          className="h-4 w-4 accent-[#6BFF42]"
+                        />
+                        International
+                      </label>
+                    </div>
+                  </fieldset>
+
+                  <label className="mt-4 block text-sm font-extrabold uppercase tracking-[0.12em] text-[#1C5A2A]">
+                    Destination
+                    <select
+                      value={selectedDestination}
+                      disabled={!selectedTravelZone}
+                      onChange={(event) => setSelectedDestination(event.target.value)}
+                      className="mt-2 w-full rounded-xl border border-[#07111F]/25 bg-[#10213F] px-4 py-3 text-sm font-semibold text-white outline-none transition focus:border-white focus:ring-2 focus:ring-[#FF8C42] disabled:cursor-not-allowed disabled:opacity-55"
+                    >
+                      <option value="">{selectedTravelZone ? '— Sélectionner une destination —' : '— Choisir d’abord une zone de voyage —'}</option>
+                      {destinationsForSelectedZone.map((destination) => <option key={destination} value={destination}>{destination}</option>)}
+                    </select>
+                  </label>
+                </div>
               )}
 
               {isOmrahOrHajj && (
