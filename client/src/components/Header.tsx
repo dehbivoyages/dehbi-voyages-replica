@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Menu, Moon, Sun, X } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -25,6 +25,21 @@ export default function Header({ onReserveClick }: HeaderProps) {
     toggleTheme?.();
     window.setTimeout(() => setThemePreview(null), 900);
   };
+
+  useEffect(() => {
+    const handleThemeShortcut = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      const isEditable = target?.matches('input, textarea, select, [contenteditable="true"]');
+
+      if (!isEditable && event.shiftKey && !event.altKey && !event.ctrlKey && !event.metaKey && event.key.toLowerCase() === 't') {
+        event.preventDefault();
+        handleThemeToggle();
+      }
+    };
+
+    window.addEventListener('keydown', handleThemeShortcut);
+    return () => window.removeEventListener('keydown', handleThemeShortcut);
+  }, [isDarkTheme, toggleTheme]);
 
   const navItems = [
     { label: 'Spirituel', href: '#spirituel' },
@@ -60,13 +75,14 @@ export default function Header({ onReserveClick }: HeaderProps) {
           </nav>
 
           {/* Theme toggle: own desktop column, with a persistent state label. */}
-          <div className="hidden items-center gap-2 rounded-full border border-border bg-muted/70 px-2 py-1.5 text-muted-foreground shadow-sm md:flex">
+          <div className="theme-toggle-control hidden items-center gap-2 rounded-full border border-border bg-muted/70 px-2 py-1.5 text-muted-foreground shadow-sm md:flex">
             <Sun size={15} aria-hidden="true" className={isDarkTheme ? 'opacity-45' : 'text-[#FF8C42]'} />
             <Switch
               checked={isDarkTheme}
               onCheckedChange={handleThemeToggle}
               aria-label={isDarkTheme ? 'Activer le mode clair' : 'Activer le mode sombre'}
-              className="h-5 w-9 data-[state=checked]:bg-[#6BFF42] data-[state=unchecked]:bg-[#FF8C42]"
+              title="Basculez aussi avec Maj + T"
+              className="theme-toggle-switch h-5 w-9 data-[state=checked]:bg-[#6BFF42] data-[state=unchecked]:bg-[#FF8C42]"
             />
             <Moon size={15} aria-hidden="true" className={isDarkTheme ? 'text-[#6BFF42]' : 'opacity-45'} />
             <span className={`hidden rounded-full px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-[0.08em] lg:inline ${isDarkTheme ? 'bg-[#6BFF42]/15 text-[#BFFFAE]' : 'bg-[#FF8C42]/15 text-[#d86d2d]'}`}>
@@ -87,10 +103,10 @@ export default function Header({ onReserveClick }: HeaderProps) {
           {/* Mobile Menu Button */}
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-muted text-foreground transition hover:bg-accent/20 focus:outline-none focus:ring-2 focus:ring-[#6BFF42] md:hidden"
+            className="theme-toggle-mobile inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-muted text-foreground transition hover:bg-accent/20 focus:outline-none focus:ring-2 focus:ring-[#6BFF42] md:hidden"
             onClick={handleThemeToggle}
             aria-label={isDarkTheme ? 'Activer le mode clair' : 'Activer le mode sombre'}
-            title={isDarkTheme ? 'Mode clair' : 'Mode sombre'}
+            title={`${isDarkTheme ? 'Mode clair' : 'Mode sombre'} — raccourci Maj + T`}
           >
             {isDarkTheme ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
           </button>

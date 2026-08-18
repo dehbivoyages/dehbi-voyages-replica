@@ -340,6 +340,26 @@
   animation: theme-preview-toast 900ms cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 
+/* Le contrôle de thème répond visuellement sans masquer son état persistant. */
+.theme-toggle-control,
+.theme-toggle-mobile {
+  transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.theme-toggle-control:hover,
+.theme-toggle-control:focus-within,
+.theme-toggle-mobile:hover,
+.theme-toggle-mobile:focus-visible {
+  transform: translateY(-2px) scale(1.025);
+  border-color: #6BFF42 !important;
+  box-shadow: 0 10px 24px rgba(107, 255, 66, 0.22);
+}
+
+.theme-toggle-control:hover .theme-toggle-switch,
+.theme-toggle-control:focus-within .theme-toggle-switch {
+  box-shadow: 0 0 0 4px rgba(107, 255, 66, 0.13);
+}
+
 @keyframes theme-reveal {
   0% { clip-path: circle(0% at 78% 45px); opacity: 0.96; }
   65% { clip-path: circle(105% at 78% 45px); opacity: 0.42; }
@@ -380,8 +400,11 @@
   }
 
   .theme-transition-preview,
-  .theme-preview-toast {
+  .theme-preview-toast,
+  .theme-toggle-control,
+  .theme-toggle-mobile {
     animation: none;
+    transition: none;
   }
 }
 
