@@ -5,6 +5,7 @@ import { openReservationDialog } from './WhatsAppReservation';
 /**
  * Direction artistique : cartes de destinations internationales épurées,
  * aperçus vidéo HD immersifs et accents Orange tropical Dehbi Voyages.
+ * Billetterie : module bleu encre, deux parcours indépendants et actions très lisibles.
  */
 
 export default function InternationalDestinations() {
@@ -230,26 +231,52 @@ export default function InternationalDestinations() {
                 Billetterie Aérienne, partout où vous allez.
               </h3>
               <p className="mt-4 max-w-xl text-base leading-7 text-[#D8E8FF]">
-                Notre équipe vous accompagne pour organiser vos billets aller-retour, avec une demande adaptée à votre destination, vos dates et vos bagages.
+                Choisissez votre parcours de réservation. Les demandes nationales et internationales sont traitées séparément par notre agence.
               </p>
 
-              <div className="mt-7 flex flex-wrap gap-2" aria-label="Régions prises en charge sur demande">
-                {['Europe', 'Moyen-Orient', 'Afrique', 'Amériques', 'Autres destinations'].map((route) => (
-                  <span key={route} className="rounded-full border border-[#6BFF42]/35 bg-[#6BFF42]/10 px-3 py-1.5 text-sm font-semibold text-[#E8FFE3]">
-                    {route}
-                  </span>
-                ))}
+              <div className="mt-8 grid gap-4 sm:grid-cols-2" aria-label="Choisir un service de billetterie">
+                <article className="flex min-h-[252px] flex-col rounded-2xl border border-[#FF8C42]/65 bg-white/[0.05] p-5 shadow-[0_18px_35px_rgba(0,0,0,0.18)]">
+                  <div className="flex items-start gap-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FF8C42] text-[#07111F]">
+                      <MapPin size={20} strokeWidth={2.5} />
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#FFB986]">Au Maroc</p>
+                      <h4 className="mt-1 text-xl font-extrabold text-white">Voyages nationaux</h4>
+                    </div>
+                  </div>
+                  <p className="mt-4 text-sm leading-6 text-[#D8E8FF]">Billets entre les villes marocaines, avec accompagnement sur les horaires et les bagages.</p>
+                  <div className="mt-4 space-y-2 text-sm text-[#E8FFE3]">
+                    <span className="flex items-start gap-2"><CheckCircle2 size={17} className="mt-0.5 shrink-0 text-[#FF8C42]" />Demande dédiée au territoire national</span>
+                    <span className="flex items-start gap-2"><CheckCircle2 size={17} className="mt-0.5 shrink-0 text-[#FF8C42]" />Confirmation par l’agence</span>
+                  </div>
+                  <button type="button" onClick={openReservationDialog} className="mt-auto rounded-xl bg-[#FF8C42] px-4 py-3 text-sm font-extrabold text-[#07111F] transition hover:bg-[#FFA562] focus:outline-none focus:ring-2 focus:ring-[#FF8C42] focus:ring-offset-2 focus:ring-offset-[#07111F]">
+                    Demander un billet national
+                  </button>
+                </article>
+
+                <article className="flex min-h-[252px] flex-col rounded-2xl border border-[#6BFF42]/65 bg-white/[0.05] p-5 shadow-[0_18px_35px_rgba(0,0,0,0.18)]">
+                  <div className="flex items-start gap-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#6BFF42] text-[#07111F]">
+                      <Plane size={20} strokeWidth={2.5} />
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#6BFF42]">Vers le monde</p>
+                      <h4 className="mt-1 text-xl font-extrabold text-white">Voyages internationaux</h4>
+                    </div>
+                  </div>
+                  <p className="mt-4 text-sm leading-6 text-[#D8E8FF]">Billets pour l’Europe, l’Afrique, le Moyen-Orient, les Amériques et les autres destinations.</p>
+                  <div className="mt-4 space-y-2 text-sm text-[#E8FFE3]">
+                    <span className="flex items-start gap-2"><CheckCircle2 size={17} className="mt-0.5 shrink-0 text-[#6BFF42]" />Conseil sur l’itinéraire et les correspondances</span>
+                    <span className="flex items-start gap-2"><CheckCircle2 size={17} className="mt-0.5 shrink-0 text-[#6BFF42]" />Tarif et disponibilité confirmés par l’agence</span>
+                  </div>
+                  <button type="button" onClick={openReservationDialog} className="mt-auto rounded-xl bg-[#6BFF42] px-4 py-3 text-sm font-extrabold text-[#07111F] transition hover:bg-[#92FF73] focus:outline-none focus:ring-2 focus:ring-[#6BFF42] focus:ring-offset-2 focus:ring-offset-[#07111F]">
+                    Demander un billet international
+                  </button>
+                </article>
               </div>
 
-              <div className="mt-8 grid gap-3 text-sm text-[#D8E8FF] sm:grid-cols-2">
-                <span className="flex items-start gap-2"><CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#6BFF42]" />Conseil sur l’itinéraire et les bagages</span>
-                <span className="flex items-start gap-2"><CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#6BFF42]" />Confirmation personnalisée par l’agence</span>
-              </div>
-
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <button type="button" className="btn-secondary" onClick={openReservationDialog}>
-                  Demander mon billet
-                </button>
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <button
                   type="button"
                   className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/30 px-5 py-3 font-bold text-white transition hover:border-[#6BFF42] hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#6BFF42]"
