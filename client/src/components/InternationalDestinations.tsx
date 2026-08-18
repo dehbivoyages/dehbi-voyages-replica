@@ -4,7 +4,7 @@ import { openReservationDialog } from './WhatsAppReservation';
 
 /**
  * Direction artistique : cartes de destinations internationales épurées,
- * aperçus vidéo HD immersifs et accents Orange tropical Dehbi Voyages.
+ * aperçus vidéo HD immersifs et livrée aérienne Dehbi Voyages en Orange tropical, Vert lime et Bleu profond.
  */
 
 export default function InternationalDestinations() {
@@ -12,6 +12,7 @@ export default function InternationalDestinations() {
   const [isTicketVideoOpen, setIsTicketVideoOpen] = useState(false);
 
   const ticketingVideoUrl = '/manus-storage/billetterie-parcours-12s_021c6e7b.mp4';
+  const ticketingAircraftUrl = '/manus-storage/billetterie-avion-dehbi-voyages_bd8d22a9.png';
 
   useEffect(() => {
     if (!isTicketVideoOpen) return;
@@ -264,23 +265,20 @@ export default function InternationalDestinations() {
               type="button"
               className="group relative min-h-[340px] overflow-hidden bg-black text-left lg:min-h-full"
               onClick={() => setIsTicketVideoOpen(true)}
-              aria-label="Lire la vidéo du parcours de billetterie aérienne"
+              aria-label="Voir l’avion Dehbi Voyages et lire la vidéo du parcours de billetterie aérienne"
             >
-              <video
-                src={ticketingVideoUrl}
-                className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                muted
-                loop
-                playsInline
-                autoPlay
-                preload="metadata"
+              <img
+                src={ticketingAircraftUrl}
+                alt="Avion à la livrée Dehbi Voyages avec logo et inscription sur le fuselage"
+                className="h-full w-full bg-[#F4F8FA] object-contain transition duration-500 group-hover:scale-105"
+                loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#07111F]/90 via-[#07111F]/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#07111F]/95 via-[#07111F]/25 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-7 sm:p-9">
                 <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#FF8C42] text-[#07111F] shadow-xl shadow-black/30 transition group-hover:scale-110"><Play size={24} fill="currentColor" /></div>
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#6BFF42]">Départ · Vol · Retour</p>
-                <p className="mt-2 text-2xl font-extrabold text-white">Votre voyage, en toute simplicité</p>
-                <p className="mt-2 max-w-md text-sm leading-6 text-[#D8E8FF]">Une courte démonstration de l’accompagnement de votre demande de billet.</p>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#6BFF42]">Livrée Dehbi Voyages</p>
+                <p className="mt-2 text-2xl font-extrabold text-white">Votre voyage, notre signature</p>
+                <p className="mt-2 max-w-md text-sm leading-6 text-[#D8E8FF]">Découvrez notre identité aérienne, puis ouvrez la vidéo de votre parcours de billetterie.</p>
               </div>
             </button>
           </div>
