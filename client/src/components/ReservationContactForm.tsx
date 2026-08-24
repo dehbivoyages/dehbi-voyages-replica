@@ -20,16 +20,13 @@ import {
  */
 
 const organizedTrips = [
-  'Istanbul — Entre Orient et Occident',
-  'Omra — Médine & La Mecque',
+  'Antalya–Istanbul — Dernier départ d’été',
   'Programmes Omra & Hajj sur mesure',
   'Omra avec Kuala Lumpur',
   'Deux Omra en un voyage',
-  'Punta Cana — Été 2026',
+  'Punta Cana — Septembre 2026',
   'Circuit Ouzbékistan & Istanbul',
   'Dakhla — Lagon & dunes',
-  'Antalya–Istanbul — Été 2026',
-  'Antalya–Istanbul — Offre 18.200 DHS',
 ];
 
 type FormStatus = 'idle' | 'success';
