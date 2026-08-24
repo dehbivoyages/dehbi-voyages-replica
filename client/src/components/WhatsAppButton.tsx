@@ -1,6 +1,11 @@
 import { MessageCircle } from "lucide-react";
 import { useState } from "react";
 
+/**
+ * Direction artistique : accès WhatsApp Business orange tropical, lisible et
+ * distinct du bouton Assistant, avec un monogramme « B » immédiatement repérable.
+ */
+
 interface WhatsAppButtonProps {
   phoneNumber?: string;
   message?: string;
@@ -22,9 +27,9 @@ export default function WhatsAppButton({
     <div className="fixed bottom-6 left-6 z-40">
       {/* Tooltip */}
       {isHovered && (
-        <div className="absolute bottom-20 left-0 bg-gray-900 text-white px-4 py-2 rounded-lg whitespace-nowrap text-sm shadow-lg animate-in fade-in duration-200">
-          Contactez-nous sur WhatsApp
-          <div className="absolute bottom-0 left-4 w-2 h-2 bg-gray-900 transform rotate-45 translate-y-1"></div>
+        <div className="absolute bottom-20 left-0 whitespace-nowrap rounded-xl bg-[#07111F] px-4 py-2 text-sm font-semibold text-white shadow-lg animate-in fade-in duration-200">
+          Contacter Dehbi Voyages sur WhatsApp Business
+          <div className="absolute bottom-0 left-5 h-2 w-2 translate-y-1 rotate-45 bg-[#07111F]"></div>
         </div>
       )}
 
@@ -33,15 +38,15 @@ export default function WhatsAppButton({
         onClick={handleWhatsAppClick}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="flex items-center justify-center w-14 h-14 bg-[#17B85B] hover:bg-[#119747] text-white rounded-full border-2 border-white/80 shadow-lg shadow-[#17B85B]/30 transition-all duration-300 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#6BFF42] focus:ring-offset-2 focus:ring-offset-background"
-        aria-label="Contacter via WhatsApp"
-        title="Contactez-nous sur WhatsApp"
+        className="flex h-14 w-14 items-center justify-center rounded-[1.15rem] border-2 border-[#FFE2C8] bg-[#FF8C42] text-[#07111F] shadow-lg shadow-[#FF8C42]/35 transition-all duration-300 hover:scale-110 hover:bg-[#F6762C] active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#FF8C42] focus:ring-offset-2 focus:ring-offset-background"
+        aria-label="Contacter Dehbi Voyages via WhatsApp Business"
+        title="WhatsApp Business Dehbi Voyages"
       >
-        <MessageCircle size={24} className="fill-current" />
+        <span className="relative flex h-8 w-8 items-center justify-center" aria-hidden="true">
+          <MessageCircle size={31} strokeWidth={2.6} />
+          <span className="absolute left-1/2 top-[48%] -translate-x-1/2 -translate-y-1/2 text-[11px] font-black leading-none">B</span>
+        </span>
       </button>
-
-      {/* Badge de notification */}
-      <div className="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
     </div>
   );
 }
