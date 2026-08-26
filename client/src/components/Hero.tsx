@@ -1,71 +1,148 @@
 import { forwardRef, useEffect, useState } from 'react';
 
 /**
- * Direction artistique : panorama premium de Tanger, avec une lumière claire de jour,
- * une version de pluie douce et une nuit bleu encre. Les contrôles de démo restent
- * sobres afin de laisser l’Orange tropical porter les appels à l’action.
+ * Direction artistique : panorama premium de Tanger animé par la météo réelle :
+ * jour lumineux, pluie douce et nuit bleu encre. Le changement d’image se fait
+ * par fondu long, tandis que les accents Orange tropical restent lisibles.
  */
 
 type HeroMode = 'auto' | 'day' | 'rain' | 'night';
 type HeroScene = Exclude<HeroMode, 'auto'>;
 
-const heroScenes: Record<HeroScene, { image: string; label: string; description: string; overlay: string }> = {
+type WeatherCurrent = {
+  temperature_2m: number;
+  precipitation: number;
+  weather_code: number;
+  is_day: number;
+};
+
+type WeatherStatus = {
+  label: string;
+  temperature: number | null;
+};
+
+const WEATHER_ENDPOINT = 'https://api.open-meteo.com/v1/forecast?latitude=35.7595&longitude=-5.834&current=temperature_2m,precipitation,weather_code,is_day&timezone=Africa%2FCasablanca';
+
+const heroScenes: Record<HeroScene, { image: string; label: string; description: string; overlay: string; filter: string }> = {
   day: {
-    image: '/manus-storage/hero-tanger-day_41a380d2.png',
+    image: '/manus-storage/mosquee-mohammed-v-tanger-hd_faa02adc.jpg',
     label: 'Jour clair',
     description: 'Panorama de Tanger en lumière naturelle',
     overlay: 'linear-gradient(90deg, rgba(5, 24, 53, 0.82) 0%, rgba(5, 24, 53, 0.56) 48%, rgba(5, 24, 53, 0.18) 100%)',
+    filter: 'brightness(1.05) saturate(1.04)',
   },
   rain: {
-    image: '/manus-storage/hero-tanger-rain_4037d604.png',
+    image: '/manus-storage/mosquee-mohammed-v-tanger-hd_faa02adc.jpg',
     label: 'Pluie douce',
     description: 'Aperçu météo de Tanger sous la pluie',
     overlay: 'linear-gradient(90deg, rgba(7, 22, 44, 0.86) 0%, rgba(7, 22, 44, 0.62) 50%, rgba(7, 22, 44, 0.28) 100%)',
+    filter: 'brightness(0.78) saturate(0.72) grayscale(0.1)',
   },
   night: {
-    image: '/manus-storage/hero-tanger-night_5d0aa3c8.png',
+    image: '/manus-storage/mosquee-mohammed-v-tanger-hd_faa02adc.jpg',
     label: 'Nuit bleue',
     description: 'Tanger illuminée après le coucher du soleil',
     overlay: 'linear-gradient(90deg, rgba(1, 10, 26, 0.92) 0%, rgba(1, 10, 26, 0.69) 52%, rgba(1, 10, 26, 0.32) 100%)',
+    filter: 'brightness(0.44) saturate(0.76) hue-rotate(7deg) contrast(1.08)',
   },
 };
 
+const rainCodes = new Set([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99]);
+
 const automaticScene = (): HeroScene => {
-  const hour = new Date().getHours();
+  const hour = Number(new Intl.DateTimeFormat('fr-FR', { timeZone: 'Africa/Casablanca', hour: '2-digit', hourCycle: 'h23' }).format(new Date()));
   return hour >= 8 && hour < 20 ? 'day' : 'night';
+};
+
+const weatherScene = (weather: WeatherCurrent): HeroScene => {
+  if (!weather.is_day) return 'night';
+  if (weather.precipitation > 0 || rainCodes.has(weather.weather_code)) return 'rain';
+  return 'day';
+};
+
+const weatherLabel = (weather: WeatherCurrent): string => {
+  if (weather.precipitation > 0 || rainCodes.has(weather.weather_code)) return 'Pluie réelle à Tanger';
+  if (!weather.is_day) return 'Nuit réelle à Tanger';
+  if ([1, 2, 3, 45, 48].includes(weather.weather_code)) return 'Ciel couvert à Tanger';
+  return 'Ciel clair à Tanger';
 };
 
 const Hero = forwardRef((props, ref: any) => {
   const [mode, setMode] = useState<HeroMode>('auto');
   const [scheduledScene, setScheduledScene] = useState<HeroScene>(automaticScene);
-
-  useEffect(() => {
-    const refreshScene = () => setScheduledScene(automaticScene());
-    refreshScene();
-    const timer = window.setInterval(refreshScene, 60_000);
-    return () => window.clearInterval(timer);
-  }, []);
+  const [weatherStatus, setWeatherStatus] = useState<WeatherStatus>({ label: 'Météo de Tanger en cours', temperature: null });
+  const [activeScene, setActiveScene] = useState<HeroScene>(automaticScene);
+  const [leavingScene, setLeavingScene] = useState<HeroScene | null>(null);
 
   const scene = heroScenes[mode === 'auto' ? scheduledScene : mode];
+
+  useEffect(() => {
+    let isCurrent = true;
+
+    const loadWeather = async () => {
+      try {
+        const response = await fetch(WEATHER_ENDPOINT);
+        if (!response.ok) throw new Error('weather_unavailable');
+        const payload = await response.json() as { current?: WeatherCurrent };
+        if (!payload.current || !isCurrent) throw new Error('weather_payload_invalid');
+
+        setScheduledScene(weatherScene(payload.current));
+        setWeatherStatus({
+          label: weatherLabel(payload.current),
+          temperature: Math.round(payload.current.temperature_2m),
+        });
+      } catch {
+        if (!isCurrent) return;
+        setScheduledScene(automaticScene());
+        setWeatherStatus({ label: 'Mode horaire de Tanger', temperature: null });
+      }
+    };
+
+    void loadWeather();
+    const timer = window.setInterval(() => void loadWeather(), 30 * 60_000);
+    return () => {
+      isCurrent = false;
+      window.clearInterval(timer);
+    };
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.dataset.tangerAtmosphere = mode === 'auto' ? scheduledScene : mode;
+  }, [mode, scheduledScene]);
+
+  useEffect(() => {
+    const nextScene = mode === 'auto' ? scheduledScene : mode;
+    if (nextScene === activeScene) return;
+    setLeavingScene(activeScene);
+    setActiveScene(nextScene);
+    const timer = window.setTimeout(() => setLeavingScene(null), 2_900);
+    return () => window.clearTimeout(timer);
+  }, [activeScene, mode, scheduledScene]);
+
   const handleReserveClick = () => {
     ref?.current?.openModal();
   };
 
+  const modeText = mode === 'auto'
+    ? `${weatherStatus.label}${weatherStatus.temperature !== null ? ` · ${weatherStatus.temperature}°C` : ''}`
+    : `Démo · ${scene.label}`;
+
+  const visibleScene = heroScenes[activeScene];
+
   return (
     <section className="relative h-[30rem] overflow-hidden md:h-[560px]" aria-label="En-tête Dehbi Voyages">
-      <div
-        className="absolute inset-0 bg-cover bg-center transition-[background-image] duration-1000 ease-out"
-        style={{ backgroundImage: `url(${scene.image})` }}
-        aria-hidden="true"
-      />
-      <div className="absolute inset-0 transition-colors duration-1000" style={{ background: scene.overlay }} aria-hidden="true" />
+      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${visibleScene.image})`, filter: visibleScene.filter }} aria-hidden="true" />
+      {leavingScene && (
+        <div className="tanger-hero-image-fade-out absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroScenes[leavingScene].image})`, filter: heroScenes[leavingScene].filter }} aria-hidden="true" />
+      )}
+      <div className="absolute inset-0 transition-[background] duration-[2800ms] ease-in-out" style={{ background: scene.overlay }} aria-hidden="true" />
       <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#07111F]/55 to-transparent" aria-hidden="true" />
 
       <div className="container relative z-10 mx-auto flex h-full flex-col justify-center px-4 pt-12">
         <div className="max-w-2xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-[#07111F]/45 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-white/85 backdrop-blur-sm">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-[#07111F]/45 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-white/85 backdrop-blur-sm" aria-live="polite">
             <span className={`h-2 w-2 rounded-full ${mode === 'auto' ? 'bg-[#6BFF42]' : 'bg-[#FF8C42]'}`} aria-hidden="true" />
-            {mode === 'auto' ? `Mode automatique · ${scene.label}` : `Démo · ${scene.label}`}
+            {modeText}
           </div>
           <h1 className="mb-4 text-4xl font-bold text-[#FF8C42] md:text-5xl">اختر وجهتك .. وعلينا ايصالك</h1>
           <p className="mb-8 max-w-xl text-lg leading-8 text-white/95">
@@ -79,7 +156,7 @@ const Hero = forwardRef((props, ref: any) => {
 
         <div className="mt-9 flex flex-wrap items-center gap-2" role="group" aria-label="Démonstration des paysages de Tanger">
           {([
-            ['auto', 'Auto 12 h'],
+            ['auto', 'Météo réelle'],
             ['day', 'Jour'],
             ['rain', 'Pluie'],
             ['night', 'Nuit'],

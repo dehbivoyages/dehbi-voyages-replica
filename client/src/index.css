@@ -377,6 +377,34 @@
   will-change: transform, opacity;
 }
 
+/* Paysage Tanger : un fondu long recouvre brièvement l’ancien panorama avant de révéler le nouveau. */
+.tanger-hero-image-fade-out {
+  animation: tanger-landscape-fade 2.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: opacity, transform;
+}
+
+/* Les annonces gagnent en contraste selon la lumière réelle de Tanger, sans modifier leur organisation. */
+.tanger-announcements article {
+  transition: background-color 900ms ease, border-color 900ms ease, box-shadow 900ms ease;
+}
+
+html[data-tanger-atmosphere='night'] .tanger-announcements article {
+  background-color: rgba(4, 19, 42, 0.94) !important;
+  border-color: rgba(107, 255, 66, 0.36) !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
+}
+
+html[data-tanger-atmosphere='rain'] .tanger-announcements article {
+  background-color: rgba(31, 57, 82, 0.92) !important;
+  border-color: rgba(191, 224, 247, 0.34) !important;
+  box-shadow: 0 10px 24px rgba(7, 17, 31, 0.22);
+}
+
+@keyframes tanger-landscape-fade {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.018); }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   header,
   section,
@@ -405,6 +433,10 @@
   .theme-toggle-mobile {
     animation: none;
     transition: none;
+  }
+
+  .tanger-hero-image-fade-out {
+    animation: none;
   }
 }
 

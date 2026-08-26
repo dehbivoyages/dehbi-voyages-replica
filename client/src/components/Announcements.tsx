@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 /**
  * Direction artistique : mini-étiquettes premium bleu doux / bleu encre, avec un accès
- * immédiat à des détails de voyage riches mais contenus dans une modale sobre et lumineuse.
+ * immédiat à des détails de voyage riches. Leur luminosité suit aussi l’ambiance météo de Tanger.
  */
 
 interface Announcement {
@@ -120,7 +120,7 @@ export default function Announcements() {
               </button>
             </div>
 
-            <div className="grid grid-cols-1 items-stretch gap-1 md:grid-cols-3">
+            <div className="tanger-announcements grid grid-cols-1 items-stretch gap-1 md:grid-cols-3">
               {visibleAnnouncements.map((announcement) => (
                 <article
                   key={announcement.id}
