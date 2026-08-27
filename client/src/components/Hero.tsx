@@ -1,13 +1,14 @@
 import { forwardRef, useEffect, useState } from 'react';
 
 /**
- * Direction artistique : panorama premium de Tanger animé par la météo réelle :
- * jour lumineux, pluie douce et nuit bleu encre. Le changement d’image se fait
- * par fondu long, tandis que les accents Orange tropical restent lisibles.
+ * Direction artistique : quatre vues documentaires de Tanger, chacune centrée
+ * sur une mosquée emblématique. Les fonds alternent avec un fondu long, et le
+ * voile bleu encre préserve la lisibilité des accents Orange tropical.
  */
 
-type HeroMode = 'auto' | 'day' | 'rain' | 'night';
+type HeroMode = 'auto' | 'night' | 'morning' | 'afternoon' | 'sunset';
 type HeroScene = Exclude<HeroMode, 'auto'>;
+type WeatherTone = 'clear' | 'rain' | 'night';
 
 type WeatherCurrent = {
   temperature_2m: number;
@@ -23,41 +24,57 @@ type WeatherStatus = {
 
 const WEATHER_ENDPOINT = 'https://api.open-meteo.com/v1/forecast?latitude=35.7595&longitude=-5.834&current=temperature_2m,precipitation,weather_code,is_day&timezone=Africa%2FCasablanca';
 
-const heroScenes: Record<HeroScene, { image: string; label: string; description: string; overlay: string; filter: string }> = {
-  day: {
-    image: '/manus-storage/mosquee-mohammed-v-tanger-hd_faa02adc.jpg',
-    label: 'Jour clair',
-    description: 'Panorama de Tanger en lumière naturelle',
-    overlay: 'linear-gradient(90deg, rgba(5, 24, 53, 0.82) 0%, rgba(5, 24, 53, 0.56) 48%, rgba(5, 24, 53, 0.18) 100%)',
-    filter: 'brightness(1.05) saturate(1.04)',
-  },
-  rain: {
-    image: '/manus-storage/mosquee-mohammed-v-tanger-hd_faa02adc.jpg',
-    label: 'Pluie douce',
-    description: 'Aperçu météo de Tanger sous la pluie',
-    overlay: 'linear-gradient(90deg, rgba(7, 22, 44, 0.86) 0%, rgba(7, 22, 44, 0.62) 50%, rgba(7, 22, 44, 0.28) 100%)',
-    filter: 'brightness(0.78) saturate(0.72) grayscale(0.1)',
-  },
+const heroScenes: Record<HeroScene, { image: string; label: string; description: string; overlay: string; filter: string; credit: string; creditUrl: string }> = {
   night: {
-    image: '/manus-storage/mosquee-mohammed-v-tanger-hd_faa02adc.jpg',
-    label: 'Nuit bleue',
-    description: 'Tanger illuminée après le coucher du soleil',
+    image: '/manus-storage/tanger-sidi-bou-abib-soiree_eb118b77.jpg',
+    label: 'Nuit · Sidi Bou Abib',
+    description: 'Grand Socco et mosquée Sidi Bou Abib sous un ciel bleu encre',
     overlay: 'linear-gradient(90deg, rgba(1, 10, 26, 0.92) 0%, rgba(1, 10, 26, 0.69) 52%, rgba(1, 10, 26, 0.32) 100%)',
     filter: 'brightness(0.44) saturate(0.76) hue-rotate(7deg) contrast(1.08)',
+    credit: 'Youssef.ma.o · CC BY-SA 4.0',
+    creditUrl: 'https://commons.wikimedia.org/wiki/File:Sidi_Bouabid_mosque.jpg',
+  },
+  morning: {
+    image: '/manus-storage/tanger-mosquee-mohammed-v-matin_7627f6db.webp',
+    label: 'Matin · Mosquée Mohammed V',
+    description: 'Mosquée Mohammed V en lumière atlantique du matin',
+    overlay: 'linear-gradient(90deg, rgba(5, 24, 53, 0.80) 0%, rgba(5, 24, 53, 0.52) 48%, rgba(5, 24, 53, 0.16) 100%)',
+    filter: 'brightness(1.04) saturate(1.03)',
+    credit: 'Tangier City Tour',
+    creditUrl: 'https://tanger.city-tour.com/',
+  },
+  afternoon: {
+    image: '/manus-storage/tanger-grand-socco-matin_acfd2ae2.jpg',
+    label: 'Après-midi · Grand Socco',
+    description: 'Place du Grand Socco et mosquée Sidi Bou Abib en plein jour',
+    overlay: 'linear-gradient(90deg, rgba(5, 24, 53, 0.78) 0%, rgba(5, 24, 53, 0.49) 48%, rgba(5, 24, 53, 0.14) 100%)',
+    filter: 'brightness(1.02) saturate(1.06)',
+    credit: 'Diego Delso · CC BY-SA 4.0',
+    creditUrl: 'https://commons.wikimedia.org/wiki/File:Plaza_del_9_de_abril_de_1947,_T%C3%A1nger,_Marruecos,_2015-12-11,_DD_28.JPG',
+  },
+  sunset: {
+    image: '/manus-storage/tanger-grand-socco-apres-midi_b9a03ce3.jpg',
+    label: 'Soir · Grand Socco',
+    description: 'Grand Socco et mosquée Sidi Bou Abib dans une lumière plus douce',
+    overlay: 'linear-gradient(90deg, rgba(30, 18, 33, 0.84) 0%, rgba(30, 18, 33, 0.54) 48%, rgba(30, 18, 33, 0.18) 100%)',
+    filter: 'brightness(0.78) saturate(0.92) sepia(0.12)',
+    credit: 'Chris Yunker · CC BY-SA 2.0',
+    creditUrl: 'https://commons.wikimedia.org/wiki/File:Grand_Socco_Tangier.jpg',
   },
 };
 
 const rainCodes = new Set([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99]);
 
-const automaticScene = (): HeroScene => {
-  const hour = Number(new Intl.DateTimeFormat('fr-FR', { timeZone: 'Africa/Casablanca', hour: '2-digit', hourCycle: 'h23' }).format(new Date()));
-  return hour >= 8 && hour < 20 ? 'day' : 'night';
-};
-
-const weatherScene = (weather: WeatherCurrent): HeroScene => {
-  if (!weather.is_day) return 'night';
-  if (weather.precipitation > 0 || rainCodes.has(weather.weather_code)) return 'rain';
-  return 'day';
+const timeScene = (): HeroScene => {
+  const hour = Number(
+    new Intl.DateTimeFormat('fr-FR', { timeZone: 'Africa/Casablanca', hour: '2-digit', hourCycle: 'h23' })
+      .formatToParts(new Date())
+      .find((part) => part.type === 'hour')?.value ?? '0',
+  );
+  if (hour < 6) return 'night';
+  if (hour < 12) return 'morning';
+  if (hour < 18) return 'afternoon';
+  return 'sunset';
 };
 
 const weatherLabel = (weather: WeatherCurrent): string => {
@@ -69,9 +86,10 @@ const weatherLabel = (weather: WeatherCurrent): string => {
 
 const Hero = forwardRef((props, ref: any) => {
   const [mode, setMode] = useState<HeroMode>('auto');
-  const [scheduledScene, setScheduledScene] = useState<HeroScene>(automaticScene);
+  const [scheduledScene, setScheduledScene] = useState<HeroScene>(timeScene);
   const [weatherStatus, setWeatherStatus] = useState<WeatherStatus>({ label: 'Météo de Tanger en cours', temperature: null });
-  const [activeScene, setActiveScene] = useState<HeroScene>(automaticScene);
+  const [weatherTone, setWeatherTone] = useState<WeatherTone>('clear');
+  const [activeScene, setActiveScene] = useState<HeroScene>(timeScene);
   const [leavingScene, setLeavingScene] = useState<HeroScene | null>(null);
 
   const scene = heroScenes[mode === 'auto' ? scheduledScene : mode];
@@ -86,14 +104,17 @@ const Hero = forwardRef((props, ref: any) => {
         const payload = await response.json() as { current?: WeatherCurrent };
         if (!payload.current || !isCurrent) throw new Error('weather_payload_invalid');
 
-        setScheduledScene(weatherScene(payload.current));
+        const isRainy = payload.current.precipitation > 0 || rainCodes.has(payload.current.weather_code);
+        setScheduledScene(timeScene());
+        setWeatherTone(!payload.current.is_day ? 'night' : isRainy ? 'rain' : 'clear');
         setWeatherStatus({
           label: weatherLabel(payload.current),
           temperature: Math.round(payload.current.temperature_2m),
         });
       } catch {
         if (!isCurrent) return;
-        setScheduledScene(automaticScene());
+        setScheduledScene(timeScene());
+        setWeatherTone('clear');
         setWeatherStatus({ label: 'Mode horaire de Tanger', temperature: null });
       }
     };
@@ -107,8 +128,16 @@ const Hero = forwardRef((props, ref: any) => {
   }, []);
 
   useEffect(() => {
-    document.documentElement.dataset.tangerAtmosphere = mode === 'auto' ? scheduledScene : mode;
-  }, [mode, scheduledScene]);
+    const timer = window.setInterval(() => setScheduledScene(timeScene()), 60_000);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const atmosphere = mode === 'auto'
+      ? weatherTone === 'rain' ? 'rain' : scheduledScene === 'night' ? 'night' : 'clear'
+      : mode === 'night' ? 'night' : 'clear';
+    document.documentElement.dataset.tangerAtmosphere = atmosphere;
+  }, [mode, scheduledScene, weatherTone]);
 
   useEffect(() => {
     const nextScene = mode === 'auto' ? scheduledScene : mode;
@@ -156,10 +185,11 @@ const Hero = forwardRef((props, ref: any) => {
 
         <div className="mt-9 flex flex-wrap items-center gap-2" role="group" aria-label="Démonstration des paysages de Tanger">
           {([
-            ['auto', 'Météo réelle'],
-            ['day', 'Jour'],
-            ['rain', 'Pluie'],
+            ['auto', 'Auto 6 h'],
             ['night', 'Nuit'],
+            ['morning', 'Matin'],
+            ['afternoon', 'Après-midi'],
+            ['sunset', 'Soir'],
           ] as const).map(([value, label]) => (
             <button
               key={value}
@@ -173,6 +203,9 @@ const Hero = forwardRef((props, ref: any) => {
           ))}
           <span className="ml-1 hidden text-xs text-white/70 sm:inline">{scene.description}</span>
         </div>
+        <a href={scene.creditUrl} target="_blank" rel="noreferrer" className="mt-3 block w-fit text-[10px] text-white/55 underline-offset-2 hover:text-white hover:underline">
+          Photo : {scene.credit}
+        </a>
       </div>
     </section>
   );
