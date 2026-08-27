@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* Direction artistique : une charte orange tropical / vert lime conserve son éclat sur des fonds encre et ardoise. */
+/* Direction artistique : une charte orange tropical / vert lime conserve son éclat sur des fonds encre et ardoise ; les panoramas Tanger apparaissent par fondu doux. */
 
 @custom-variant dark (&:is(.dark *));
 
@@ -377,7 +377,19 @@
   will-change: transform, opacity;
 }
 
-/* Paysage Tanger : un fondu long recouvre brièvement l’ancien panorama avant de révéler le nouveau. */
+/* Paysage Tanger : préchargement discret puis fondu doux avant de révéler chaque panorama. */
+.tanger-hero-image-base {
+  opacity: 0;
+}
+
+.tanger-hero-image-base.is-ready {
+  opacity: 1;
+}
+
+.tanger-hero-loading {
+  background: linear-gradient(90deg, rgba(7, 17, 31, 0.48), rgba(7, 17, 31, 0.08), rgba(7, 17, 31, 0));
+}
+
 .tanger-hero-image-fade-out {
   animation: tanger-landscape-fade 2.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   will-change: opacity, transform;
@@ -406,6 +418,10 @@ html[data-tanger-atmosphere='rain'] .tanger-announcements article {
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  .tanger-hero-image-base {
+    transition: opacity 1400ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
   header,
   section,
   article,
@@ -437,6 +453,10 @@ html[data-tanger-atmosphere='rain'] .tanger-announcements article {
 
   .tanger-hero-image-fade-out {
     animation: none;
+  }
+
+  .tanger-hero-image-base {
+    transition: none;
   }
 }
 

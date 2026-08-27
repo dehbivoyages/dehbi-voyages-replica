@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef, useEffect, useMemo, useState } from 'react';
 
 /**
  * Direction artistique : quatre vues documentaires de Tanger, chacune centrée
@@ -91,8 +91,38 @@ const Hero = forwardRef((props, ref: any) => {
   const [weatherTone, setWeatherTone] = useState<WeatherTone>('clear');
   const [activeScene, setActiveScene] = useState<HeroScene>(timeScene);
   const [leavingScene, setLeavingScene] = useState<HeroScene | null>(null);
+  const [loadedScenes, setLoadedScenes] = useState<Record<HeroScene, boolean>>({
+    night: false,
+    morning: false,
+    afternoon: false,
+    sunset: false,
+  });
 
   const scene = heroScenes[mode === 'auto' ? scheduledScene : mode];
+  const allSceneImages = useMemo(() => Object.entries(heroScenes) as [HeroScene, typeof heroScenes[HeroScene]][], []);
+  const activeSceneIsReady = loadedScenes[activeScene];
+
+  useEffect(() => {
+    let isCurrent = true;
+
+    allSceneImages.forEach(([sceneName, sceneDetails]) => {
+      const image = new Image();
+      const markLoaded = () => {
+        if (!isCurrent) return;
+        setLoadedScenes((current) => current[sceneName] ? current : { ...current, [sceneName]: true });
+      };
+
+      image.onload = markLoaded;
+      image.onerror = markLoaded;
+      image.src = sceneDetails.image;
+
+      if (image.complete) markLoaded();
+    });
+
+    return () => {
+      isCurrent = false;
+    };
+  }, [allSceneImages]);
 
   useEffect(() => {
     let isCurrent = true;
@@ -160,12 +190,23 @@ const Hero = forwardRef((props, ref: any) => {
 
   return (
     <section className="relative h-[30rem] overflow-hidden md:h-[560px]" aria-label="En-tête Dehbi Voyages">
-      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${visibleScene.image})`, filter: visibleScene.filter }} aria-hidden="true" />
+      <div
+        className={`tanger-hero-image-base absolute inset-0 bg-cover bg-center ${activeSceneIsReady ? 'is-ready' : ''}`}
+        style={{ backgroundImage: `url(${visibleScene.image})`, filter: visibleScene.filter }}
+        aria-hidden="true"
+      />
       {leavingScene && (
         <div className="tanger-hero-image-fade-out absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroScenes[leavingScene].image})`, filter: heroScenes[leavingScene].filter }} aria-hidden="true" />
       )}
       <div className="absolute inset-0 transition-[background] duration-[2800ms] ease-in-out" style={{ background: scene.overlay }} aria-hidden="true" />
       <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#07111F]/55 to-transparent" aria-hidden="true" />
+      {!activeSceneIsReady && (
+        <div className="tanger-hero-loading absolute inset-0 z-[1] flex items-end px-4 pb-5 sm:px-8" aria-hidden="true">
+          <span className="h-1 w-28 rounded-full bg-white/15">
+            <span className="block h-full w-2/3 rounded-full bg-[#FF8C42]/85" />
+          </span>
+        </div>
+      )}
 
       <div className="container relative z-10 mx-auto flex h-full flex-col justify-center px-4 pt-12">
         <div className="max-w-2xl">
