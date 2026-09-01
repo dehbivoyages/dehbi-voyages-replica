@@ -11,8 +11,8 @@ import BackToTop from "./components/BackToTop";
 import { Toaster } from "sonner";
 
 /** Direction artistique : la charte orange tropical et vert lime reste lisible en clair comme en sombre. */
+
 function Router() {
-  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path={"/"} component={Home} />
