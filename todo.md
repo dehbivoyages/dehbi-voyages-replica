@@ -10,8 +10,8 @@
 - [x] Intégrer les scènes Mohammed V, port de Tanger, Rmilat et mosquée saoudienne
 - [x] Vérifier les quatre scènes manuellement dans l’interface et contrôler les transitions
 - [x] Exécuter les tests Vitest du projet
-- [ ] Enregistrer le point de contrôle final de cette version
-- [ ] Présenter l’URL de prévisualisation et rappeler l’action Publier dans l’interface
+- [x] Enregistrer le point de contrôle final de cette version
+- [x] Présenter l’URL de prévisualisation et rappeler l’action Publier dans l’interface
 
 ## Notes de mise en œuvre
 
@@ -42,7 +42,13 @@
 - [x] Respecter les thèmes clair et sombre, la responsivité et l’accessibilité clavier
 - [x] Ajouter les tests Vitest du comportement déterministe de la notification
 - [x] Vérifier visuellement la notification puis enregistrer un checkpoint
-- [ ] Enregistrer un checkpoint après la validation finale de la notification personnalisée
-- [ ] Présenter l’URL de prévisualisation mise à jour et rappeler l’action Publier dans l’interface
+- [x] Enregistrer un checkpoint après la validation finale de la notification personnalisée
+- [x] Présenter l’URL de prévisualisation mise à jour et rappeler l’action Publier dans l’interface
 - [x] Encoder et examiner une vidéo mobile focalisée sur le hero à partir des captures intermédiaires
 - [x] Confirmer dans cette preuve les changements Mohammed V, Port de Tanger, Rmilat et Mosquée saoudienne sans flash
+
+- [x] Vérifier que l’heure, la date grégorienne et la date hégirienne proviennent du même instant à Tanger
+- [x] Confirmer que les deux dates sont placées dans le tableau de l’heure et que « −1 h » est absent
+- [x] Tester l’affichage synchronisé sur desktop et mobile puis enregistrer la correction
+- [ ] Enregistrer un nouveau checkpoint après la correction finale de l’horloge synchronisée et des dates
+- [ ] Présenter l’URL et la pièce jointe du checkpoint correspondant à la correction d’horloge
