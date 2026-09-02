@@ -6,7 +6,7 @@ import { forwardRef, useEffect, useMemo, useState } from 'react';
  * voile bleu encre préserve la lisibilité des accents Orange tropical.
  */
 
-type HeroMode = 'auto' | 'night' | 'morning' | 'afternoon' | 'sunset';
+type HeroMode = 'auto' | 'mohammedV' | 'port' | 'rmilat' | 'saoudienne';
 type HeroScene = Exclude<HeroMode, 'auto'>;
 type WeatherTone = 'clear' | 'rain' | 'night';
 
@@ -25,45 +25,51 @@ type WeatherStatus = {
 const WEATHER_ENDPOINT = 'https://api.open-meteo.com/v1/forecast?latitude=35.7595&longitude=-5.834&current=temperature_2m,precipitation,weather_code,is_day&timezone=Africa%2FCasablanca';
 
 const heroScenes: Record<HeroScene, { image: string; label: string; description: string; overlay: string; filter: string; credit: string; creditUrl: string }> = {
-  night: {
-    image: '/manus-storage/tanger-sidi-bou-abib-soiree_eb118b77.jpg',
-    label: 'Nuit · Sidi Bou Abib',
-    description: 'Grand Socco et mosquée Sidi Bou Abib sous un ciel bleu encre',
-    overlay: 'linear-gradient(90deg, rgba(1, 10, 26, 0.92) 0%, rgba(1, 10, 26, 0.69) 52%, rgba(1, 10, 26, 0.32) 100%)',
-    filter: 'brightness(0.44) saturate(0.76) hue-rotate(7deg) contrast(1.08)',
-    credit: 'Youssef.ma.o · CC BY-SA 4.0',
-    creditUrl: 'https://commons.wikimedia.org/wiki/File:Sidi_Bouabid_mosque.jpg',
-  },
-  morning: {
-    image: '/manus-storage/tanger-mosquee-mohammed-v-matin_7627f6db.webp',
-    label: 'Matin · Mosquée Mohammed V',
-    description: 'Mosquée Mohammed V en lumière atlantique du matin',
+  mohammedV: {
+    image: '/manus-storage/tanger-mosquee-mohammed-v-matin_62295c9a.webp',
+    label: 'Mosquée Mohammed V · Tanger',
+    description: 'Façade et minaret de la mosquée Mohammed V en lumière claire',
     overlay: 'linear-gradient(90deg, rgba(5, 24, 53, 0.80) 0%, rgba(5, 24, 53, 0.52) 48%, rgba(5, 24, 53, 0.16) 100%)',
     filter: 'brightness(1.04) saturate(1.03)',
     credit: 'Tangier City Tour',
     creditUrl: 'https://tanger.city-tour.com/',
   },
-  afternoon: {
-    image: '/manus-storage/tanger-grand-socco-matin_acfd2ae2.jpg',
-    label: 'Après-midi · Grand Socco',
-    description: 'Place du Grand Socco et mosquée Sidi Bou Abib en plein jour',
-    overlay: 'linear-gradient(90deg, rgba(5, 24, 53, 0.78) 0%, rgba(5, 24, 53, 0.49) 48%, rgba(5, 24, 53, 0.14) 100%)',
-    filter: 'brightness(1.02) saturate(1.06)',
-    credit: 'Diego Delso · CC BY-SA 4.0',
-    creditUrl: 'https://commons.wikimedia.org/wiki/File:Plaza_del_9_de_abril_de_1947,_T%C3%A1nger,_Marruecos,_2015-12-11,_DD_28.JPG',
+  port: {
+    image: '/manus-storage/tanger-mosquee-port-matin_2013dcda.jpg',
+    label: 'Mosquée du port · Tanger',
+    description: 'Mosquée du port de Tanger et sa perspective maritime',
+    overlay: 'linear-gradient(90deg, rgba(5, 24, 53, 0.80) 0%, rgba(5, 24, 53, 0.51) 48%, rgba(5, 24, 53, 0.16) 100%)',
+    filter: 'brightness(1.02) saturate(1.04)',
+    credit: 'Référence photo Dehbi Voyages',
+    creditUrl: 'https://www.facebook.com/dehbi.voyages/',
   },
-  sunset: {
-    image: '/manus-storage/tanger-grand-socco-apres-midi_b9a03ce3.jpg',
-    label: 'Soir · Grand Socco',
-    description: 'Grand Socco et mosquée Sidi Bou Abib dans une lumière plus douce',
-    overlay: 'linear-gradient(90deg, rgba(30, 18, 33, 0.84) 0%, rgba(30, 18, 33, 0.54) 48%, rgba(30, 18, 33, 0.18) 100%)',
-    filter: 'brightness(0.78) saturate(0.92) sepia(0.12)',
-    credit: 'Chris Yunker · CC BY-SA 2.0',
-    creditUrl: 'https://commons.wikimedia.org/wiki/File:Grand_Socco_Tangier.jpg',
+  rmilat: {
+    image: '/manus-storage/tanger-mosquee-mesnana-soiree_e294a19c.jpg',
+    label: 'Mosquée de Rmilat · Tanger',
+    description: 'Mosquée de quartier et ciel atlantique dans le secteur de Rmilat',
+    overlay: 'linear-gradient(90deg, rgba(12, 22, 35, 0.84) 0%, rgba(12, 22, 35, 0.55) 48%, rgba(12, 22, 35, 0.18) 100%)',
+    filter: 'brightness(0.92) saturate(0.90)',
+    credit: 'Référence photo Dehbi Voyages',
+    creditUrl: 'https://www.facebook.com/dehbi.voyages/',
+  },
+  saoudienne: {
+    image: '/manus-storage/U1R4xR9HrdJp_7b899715.jpg',
+    label: 'Mosquée saoudienne · Tanger',
+    description: 'Mosquée saoudienne de Tanger dans un panorama urbain',
+    overlay: 'linear-gradient(90deg, rgba(7, 18, 37, 0.87) 0%, rgba(7, 18, 37, 0.57) 48%, rgba(7, 18, 37, 0.18) 100%)',
+    filter: 'brightness(0.82) saturate(0.92)',
+    credit: 'Référence publique à vérifier',
+    creditUrl: 'https://www.facebook.com/dehbi.voyages/',
   },
 };
 
 const rainCodes = new Set([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99]);
+
+export const sceneForTangierHour = (hour: number): HeroScene => {
+  const safeHour = Math.max(0, Math.min(23, Math.floor(hour)));
+  const slot = Math.floor(safeHour / 3) % 4;
+  return (['mohammedV', 'port', 'rmilat', 'saoudienne'] as const)[slot];
+};
 
 const timeScene = (): HeroScene => {
   const hour = Number(
@@ -71,10 +77,7 @@ const timeScene = (): HeroScene => {
       .formatToParts(new Date())
       .find((part) => part.type === 'hour')?.value ?? '0',
   );
-  if (hour < 6) return 'night';
-  if (hour < 12) return 'morning';
-  if (hour < 18) return 'afternoon';
-  return 'sunset';
+  return sceneForTangierHour(hour);
 };
 
 const weatherLabel = (weather: WeatherCurrent): string => {
@@ -92,10 +95,10 @@ const Hero = forwardRef((props, ref: any) => {
   const [activeScene, setActiveScene] = useState<HeroScene>(timeScene);
   const [leavingScene, setLeavingScene] = useState<HeroScene | null>(null);
   const [loadedScenes, setLoadedScenes] = useState<Record<HeroScene, boolean>>({
-    night: false,
-    morning: false,
-    afternoon: false,
-    sunset: false,
+    mohammedV: false,
+    port: false,
+    rmilat: false,
+    saoudienne: false,
   });
 
   const scene = heroScenes[mode === 'auto' ? scheduledScene : mode];
@@ -164,8 +167,8 @@ const Hero = forwardRef((props, ref: any) => {
 
   useEffect(() => {
     const atmosphere = mode === 'auto'
-      ? weatherTone === 'rain' ? 'rain' : scheduledScene === 'night' ? 'night' : 'clear'
-      : mode === 'night' ? 'night' : 'clear';
+      ? weatherTone === 'rain' ? 'rain' : weatherTone === 'night' ? 'night' : 'clear'
+      : mode === 'saoudienne' ? 'night' : 'clear';
     document.documentElement.dataset.tangerAtmosphere = atmosphere;
   }, [mode, scheduledScene, weatherTone]);
 
@@ -174,9 +177,13 @@ const Hero = forwardRef((props, ref: any) => {
     if (nextScene === activeScene) return;
     setLeavingScene(activeScene);
     setActiveScene(nextScene);
+  }, [activeScene, mode, scheduledScene]);
+
+  useEffect(() => {
+    if (!leavingScene) return;
     const timer = window.setTimeout(() => setLeavingScene(null), 2_900);
     return () => window.clearTimeout(timer);
-  }, [activeScene, mode, scheduledScene]);
+  }, [leavingScene]);
 
   const handleReserveClick = () => {
     ref?.current?.openModal();
@@ -226,11 +233,11 @@ const Hero = forwardRef((props, ref: any) => {
 
         <div className="mt-9 flex flex-wrap items-center gap-2" role="group" aria-label="Démonstration des paysages de Tanger">
           {([
-            ['auto', 'Auto 6 h'],
-            ['night', 'Nuit'],
-            ['morning', 'Matin'],
-            ['afternoon', 'Après-midi'],
-            ['sunset', 'Soir'],
+            ['auto', 'Auto 3 h'],
+            ['mohammedV', 'Mohammed V'],
+            ['port', 'Port de Tanger'],
+            ['rmilat', 'Rmilat'],
+            ['saoudienne', 'Mosquée saoudienne'],
           ] as const).map(([value, label]) => (
             <button
               key={value}
