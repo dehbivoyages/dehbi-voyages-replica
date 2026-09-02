@@ -50,5 +50,13 @@
 - [x] Vérifier que l’heure, la date grégorienne et la date hégirienne proviennent du même instant à Tanger
 - [x] Confirmer que les deux dates sont placées dans le tableau de l’heure et que « −1 h » est absent
 - [x] Tester l’affichage synchronisé sur desktop et mobile puis enregistrer la correction
-- [ ] Enregistrer un nouveau checkpoint après la correction finale de l’horloge synchronisée et des dates
-- [ ] Présenter l’URL et la pièce jointe du checkpoint correspondant à la correction d’horloge
+- [x] Enregistrer un nouveau checkpoint après la correction finale de l’horloge synchronisée et des dates
+- [x] Présenter l’URL et la pièce jointe du checkpoint correspondant à la correction d’horloge
+
+- [x] Auditer les programmes actuellement affichés dans « Sélection Dehbi Voyages »
+- [x] Vérifier et conserver les offres à jour : l’archive jointe ne contenait aucun nouveau programme ni remplacement
+- [x] Conserver les détails, boutons « Voir détail » et brochures PDF valides
+- [x] Vérifier la section sur desktop et mobile puis enregistrer un checkpoint
+- [x] Corriger l’identifiant dupliqué de la section Voyages Organisés afin que ses filtres et son ancre ciblent la bonne section
+- [ ] Enregistrer un checkpoint après la correction de la section Voyages Organisés et ses validations desktop/mobile
+- [ ] Présenter à l’utilisateur l’URL et la pièce jointe du checkpoint de la section Voyages Organisés

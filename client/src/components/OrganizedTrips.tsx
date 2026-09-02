@@ -116,7 +116,7 @@ export default function OrganizedTrips() {
 
   return (
     <section
-      id="international"
+      id="organized-trips"
       className="relative py-16 md:py-20"
       style={{
         backgroundImage: 'url(https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/world_destinations-J3U2HM7NeytZKeXb2Q8b4R.webp)',
