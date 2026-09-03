@@ -58,5 +58,13 @@
 - [x] Conserver les détails, boutons « Voir détail » et brochures PDF valides
 - [x] Vérifier la section sur desktop et mobile puis enregistrer un checkpoint
 - [x] Corriger l’identifiant dupliqué de la section Voyages Organisés afin que ses filtres et son ancre ciblent la bonne section
-- [ ] Enregistrer un checkpoint après la correction de la section Voyages Organisés et ses validations desktop/mobile
-- [ ] Présenter à l’utilisateur l’URL et la pièce jointe du checkpoint de la section Voyages Organisés
+- [x] Enregistrer un checkpoint après la correction de la section Voyages Organisés et ses validations desktop/mobile
+- [x] Présenter à l’utilisateur l’URL et la pièce jointe du checkpoint de la section Voyages Organisés
+
+- [x] Ajouter une date de fin structurée aux programmes à durée déterminée
+- [x] Masquer par défaut les programmes dont la date de fin est dépassée
+- [x] Prévoir un contrôle permettant d’afficher temporairement les programmes expirés si nécessaire
+- [x] Auditer les données disponibles pour les programmes de la prochaine saison : aucune nouvelle offre confirmée dans l’archive
+- [x] Ne pas ajouter de programme non confirmé ; attendre les dates, prix, visuels et brochures de la prochaine saison
+- [x] Tester le filtrage, les filtres de destination et l’affichage responsive
+- [ ] Enregistrer un checkpoint de la mise à jour

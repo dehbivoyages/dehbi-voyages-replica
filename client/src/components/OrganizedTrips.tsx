@@ -7,12 +7,41 @@ import { useEffect, useState } from 'react';
  * pour les actions et le Vert lime pour les accents de confirmation.
  */
 
-const trips = [
+export type OrganizedTrip = {
+  id: string;
+  title: string;
+  description: string;
+  dates: string;
+  endDate?: string;
+  image: string;
+  pdfUrl: string;
+  destination: string;
+  price: string;
+  highlights: string[];
+};
+
+export function getMoroccoDateKey(date: Date) {
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Africa/Casablanca',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(date);
+  const values = Object.fromEntries(parts.map(({ type, value }) => [type, value]));
+  return `${values.year}-${values.month}-${values.day}`;
+}
+
+export function isTripExpired(trip: Pick<OrganizedTrip, 'endDate'>, now = new Date()) {
+  return Boolean(trip.endDate && trip.endDate < getMoroccoDateKey(now));
+}
+
+const trips: OrganizedTrip[] = [
   {
     id: 'antalya-istanbul-aout-sept-2026',
     title: 'Antalya–Istanbul — Dernier départ d’été',
     description: 'Un circuit Turquie entre Istanbul et Antalya, avec visites en option, hôtels sélectionnés et séjour balnéaire.',
     dates: '26/08 au 04/09/2026 — 9 nuits / 10 jours',
+    endDate: '2026-09-04',
     image: '/manus-storage/antalya-istanbul-aout-sept-2026_6995cbcc.jpg',
     pdfUrl: '/manus-storage/antalya-istanbul-aout-sept-2026_19be1582.pdf',
     destination: 'International',
@@ -35,6 +64,7 @@ const trips = [
     title: 'Omra avec Kuala Lumpur',
     description: 'Une Omra associée à une escale de découverte à Kuala Lumpur, avec hôtels et visites incluses au programme.',
     dates: '06/09 au 19/09/2026 — 13 nuits / 14 jours',
+    endDate: '2026-09-19',
     image: '/manus-storage/omra-kuala-lumpur-sept-2026_402cbf9a.jpg',
     pdfUrl: '/manus-storage/omra-kuala-lumpur-sept-2026_9f466bf1.pdf',
     destination: 'Moyen-Orient',
@@ -46,6 +76,7 @@ const trips = [
     title: 'Deux Omra en un voyage',
     description: 'Un itinéraire spirituel via Abu Dhabi, avec deux séjours à La Mecque et une étape à Médine.',
     dates: '16/09 au 04/10/2026 — 18 nuits / 19 jours',
+    endDate: '2026-10-04',
     image: '/manus-storage/deux-omra-etihad-sept-oct-2026_675d28bb.jpg',
     pdfUrl: '/manus-storage/deux-omra-etihad-sept-oct-2026_8837939a.pdf',
     destination: 'Moyen-Orient',
@@ -57,6 +88,7 @@ const trips = [
     title: 'Punta Cana — Septembre 2026',
     description: 'Un séjour caraïbe entre plages de sable blanc, hôtel 5 étoiles et formule tout compris.',
     dates: '8 nuits / 10 jours — départs tous les vendredis de septembre',
+    endDate: '2026-09-30',
     image: '/manus-storage/punta-cana-septembre-2026_89ff6676.jpg',
     pdfUrl: '/manus-storage/punta-cana-septembre-2026_961df264.pdf',
     destination: 'International',
@@ -68,6 +100,7 @@ const trips = [
     title: 'Circuit Ouzbékistan & Istanbul',
     description: 'Un circuit culturel de Samarcande à Istanbul entre patrimoine de la Route de la Soie et grandes escales.',
     dates: '16/05 au 30/05/2027 — 13 nuits / 14 jours',
+    endDate: '2027-05-30',
     image: '/manus-storage/ouzbekistan-istanbul-mai-2027_58527759.jpg',
     pdfUrl: '/manus-storage/ouzbekistan-istanbul-mai-2027_e60b0ed9.pdf',
     destination: 'International',
@@ -90,6 +123,7 @@ const trips = [
 export default function OrganizedTrips() {
   const [selectedDetails, setSelectedDetails] = useState<(typeof trips)[number] | null>(null);
   const [selectedFilter, setSelectedFilter] = useState('Tous');
+  const [showExpired, setShowExpired] = useState(false);
   const [favoriteIds, setFavoriteIds] = useState<string[]>(() => {
     if (typeof window === 'undefined') return [];
     try {
@@ -109,10 +143,12 @@ export default function OrganizedTrips() {
     setFavoriteIds((current) => current.includes(tripId) ? current.filter((id) => id !== tripId) : [...current, tripId]);
   };
 
-  const destinations = ['Tous', ...Array.from(new Set(trips.map((trip) => trip.destination)))];
+  const expiredTrips = trips.filter((trip) => isTripExpired(trip));
+  const visibleTrips = showExpired ? trips : trips.filter((trip) => !isTripExpired(trip));
+  const destinations = ['Tous', ...Array.from(new Set(visibleTrips.map((trip) => trip.destination)))];
   const filteredTrips = selectedFilter === 'Tous'
-    ? trips
-    : trips.filter((trip) => trip.destination === selectedFilter);
+    ? visibleTrips
+    : visibleTrips.filter((trip) => trip.destination === selectedFilter);
 
   return (
     <section
@@ -144,6 +180,16 @@ export default function OrganizedTrips() {
               {destination}
             </button>
           ))}
+          {expiredTrips.length > 0 && (
+            <button
+              type="button"
+              aria-pressed={showExpired}
+              onClick={() => setShowExpired((current) => !current)}
+              className={`rounded-full px-5 py-2.5 text-sm font-bold transition active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#6BFF42] focus:ring-offset-2 focus:ring-offset-slate-950 ${showExpired ? 'bg-[#10213f] text-white' : 'bg-white/90 text-slate-800 hover:bg-white'}`}
+            >
+              {showExpired ? 'Masquer les expirés' : `Afficher les expirés (${expiredTrips.length})`}
+            </button>
+          )}
         </div>
 
         <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 xl:grid-cols-3">
