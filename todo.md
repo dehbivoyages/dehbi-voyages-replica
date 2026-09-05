@@ -67,4 +67,25 @@
 - [x] Auditer les données disponibles pour les programmes de la prochaine saison : aucune nouvelle offre confirmée dans l’archive
 - [x] Ne pas ajouter de programme non confirmé ; attendre les dates, prix, visuels et brochures de la prochaine saison
 - [x] Tester le filtrage, les filtres de destination et l’affichage responsive
-- [ ] Enregistrer un checkpoint de la mise à jour
+- [x] Enregistrer un checkpoint de la mise à jour
+
+- [x] Extraire et auditer les programmes, dates, affiches et brochures de PRODV26-2.rar
+- [x] Remplacer les anciens programmes de la section Voyages Organisés par les offres confirmées de l’archive
+- [x] Conserver les détails, filtres, favoris, boutons « Voir détail » et gérer honnêtement les brochures PDF absentes de l’archive
+- [x] Vérifier l’affichage desktop/mobile et les dates d’expiration
+- [x] Enregistrer un checkpoint de la nouvelle sélection
+- [x] Corriger les références de stockage des affiches PRODV26-2 dont le chargement n’est pas confirmé par le navigateur
+- [x] Revalider le chargement réel des neuf affiches après correction
+- [x] Vérifier si PRODV26-2.rar contient des brochures PDF séparées pour les neuf programmes
+- [x] Réactiver uniquement les boutons Télécharger avec des brochures PDF correspondant réellement aux programmes
+- [x] Documenter et valider explicitement les brochures PDF correspondant aux neuf programmes
+- [x] Revalider dans le navigateur les cartes, images et liens PDF avant le nouveau checkpoint
+
+- [x] Auditer l’archive publique dehbi-voyages-replica-main.zip et comparer l’horloge à la version active
+- [x] Appliquer un décalage d’une heure en moins à l’affichage de l’heure
+- [x] Conserver les dates grégorienne et hégirienne cohérentes avec l’instant affiché
+- [x] Vérifier desktop/mobile et enregistrer un checkpoint de la correction
+- [ ] Enregistrer un nouveau checkpoint après la correction « une heure de moins » de l’horloge
+- [ ] Présenter la version correspondante et son aperçu à l’utilisateur
+- [ ] Enregistrer un nouveau checkpoint après l’intégration complète des 9 programmes PRODV26-2 et de leurs 9 brochures PDF
+- [ ] Partager la version correspondante avec l’aperçu à jour

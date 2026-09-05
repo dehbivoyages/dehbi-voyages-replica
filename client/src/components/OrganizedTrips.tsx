@@ -14,7 +14,7 @@ export type OrganizedTrip = {
   dates: string;
   endDate?: string;
   image: string;
-  pdfUrl: string;
+  pdfUrl?: string;
   destination: string;
   price: string;
   highlights: string[];
@@ -35,93 +35,117 @@ export function isTripExpired(trip: Pick<OrganizedTrip, 'endDate'>, now = new Da
   return Boolean(trip.endDate && trip.endDate < getMoroccoDateKey(now));
 }
 
-const trips: OrganizedTrip[] = [
+export const trips: OrganizedTrip[] = [
   {
-    id: 'antalya-istanbul-aout-sept-2026',
-    title: 'Antalya–Istanbul — Dernier départ d’été',
-    description: 'Un circuit Turquie entre Istanbul et Antalya, avec visites en option, hôtels sélectionnés et séjour balnéaire.',
-    dates: '26/08 au 04/09/2026 — 9 nuits / 10 jours',
-    endDate: '2026-09-04',
-    image: '/manus-storage/antalya-istanbul-aout-sept-2026_6995cbcc.jpg',
-    pdfUrl: '/manus-storage/antalya-istanbul-aout-sept-2026_19be1582.pdf',
+    id: 'istanbul-septembre-2026-prodv26',
+    title: 'Istanbul — Départs septembre 2026',
+    description: 'Un séjour de 8 jours et 7 nuits à Istanbul avec Royal Air Maroc, hébergement avec petit-déjeuner et transferts aéroport-hôtel.',
+    dates: 'Départs les 5, 12, 18 et 26 septembre 2026 — 7 nuits / 8 jours',
+    endDate: '2026-09-30',
+    image: '/manus-storage/istanbul-septembre-2026-prodv26_b3e05e9c.jpg',
+    pdfUrl: '/manus-storage/istanbul-septembre-2026-prodv26_3af7850b.pdf',
     destination: 'International',
-    price: 'À partir de 17.900 DHS',
-    highlights: ['Turkish Airlines via Istanbul', '4 nuits à Istanbul', '5 nuits à Antalya', 'Transferts inclus'],
+    price: 'À partir de 7.800 DHS',
+    highlights: ['Royal Air Maroc', '7 nuits à Istanbul', 'Petit-déjeuner inclus', 'Transferts inclus'],
   },
   {
-    id: 'omra-hajj-sur-mesure-2026',
-    title: 'Programmes Omra & Hajj sur mesure',
-    description: 'Des programmes spirituels organisés toute l’année, construits selon votre rythme et vos envies.',
-    dates: 'Toute l’année — dates selon vos envies',
-    image: '/manus-storage/omra-hajj-sur-mesure-2026_e38fd289.jpg',
-    pdfUrl: '/manus-storage/omra-hajj-sur-mesure-2026_6f7df2ec.pdf',
+    id: 'istanbul-octobre-2026-prodv26',
+    title: 'Istanbul — Octobre 2026',
+    description: 'Une escapade culturelle de 8 jours et 7 nuits entre visites guidées, journées libres et découverte du Bosphore.',
+    dates: 'Départs en octobre 2026 — 7 nuits / 8 jours',
+    endDate: '2026-10-31',
+    image: '/manus-storage/istanbul-octobre-2026-prodv26_edfefa52.jpg',
+    pdfUrl: '/manus-storage/istanbul-octobre-2026-prodv26_8c6da6b3.pdf',
+    destination: 'International',
+    price: 'À partir de 7.900 DHS',
+    highlights: ['Royal Air Maroc', 'Visite guidée', 'Îles des Princesses en option', 'Transfert aéroport inclus'],
+  },
+  {
+    id: 'omra-hajj-sur-mesure-prodv26',
+    title: 'Omra & Hajj — Programmes sur mesure',
+    description: 'Des programmes spirituels organisés selon vos besoins, avec accompagnement de l’agence et solutions de transport adaptées.',
+    dates: 'Dates selon vos envies — programme sur demande',
+    image: '/manus-storage/IMG-20260704-WA0004_1623e2a7.jpg',
+    pdfUrl: '/manus-storage/omra-hajj-sur-mesure-prodv26_1884b0fc.pdf',
     destination: 'Moyen-Orient',
     price: 'Tarif sur demande',
-    highlights: ['Billets et hôtels adaptés', 'Transferts climatisés', 'Accompagnement administratif', 'Assistance 24 h / 24'],
+    highlights: ['Hôtels et visas adaptés', 'Transferts confortables', 'Accompagnement religieux', 'Service client 24 h / 24'],
   },
   {
-    id: 'omra-kuala-lumpur-sept-2026',
+    id: 'omra-kuala-lumpur-septembre-2026-prodv26',
     title: 'Omra avec Kuala Lumpur',
-    description: 'Une Omra associée à une escale de découverte à Kuala Lumpur, avec hôtels et visites incluses au programme.',
-    dates: '06/09 au 19/09/2026 — 13 nuits / 14 jours',
+    description: 'Une Omra avec escale de découverte à Kuala Lumpur, hébergement et sorties offertes dans la capitale malaisienne.',
+    dates: 'Du 06/09 au 19/09/2026 — 13 nuits / 14 jours',
     endDate: '2026-09-19',
-    image: '/manus-storage/omra-kuala-lumpur-sept-2026_402cbf9a.jpg',
-    pdfUrl: '/manus-storage/omra-kuala-lumpur-sept-2026_9f466bf1.pdf',
+    image: '/manus-storage/IMG-20260722-WA0001_5d1abb41.jpg',
+    pdfUrl: '/manus-storage/omra-kuala-lumpur-septembre-2026-prodv26_6a73674a.pdf',
     destination: 'Moyen-Orient',
     price: 'À partir de 25.800 DHS',
-    highlights: ['Saudia', '5 nuits à Kuala Lumpur', '7 nuits à La Mecque', 'Excursions offertes à Kuala Lumpur'],
+    highlights: ['Saudia', '5 nuits à Kuala Lumpur', '7 nuits à La Mecque', 'Sorties offertes à Kuala Lumpur'],
   },
   {
-    id: 'deux-omra-etihad-sept-oct-2026',
+    id: 'deux-omra-etihad-2026-prodv26',
     title: 'Deux Omra en un voyage',
-    description: 'Un itinéraire spirituel via Abu Dhabi, avec deux séjours à La Mecque et une étape à Médine.',
-    dates: '16/09 au 04/10/2026 — 18 nuits / 19 jours',
+    description: 'Un parcours spirituel avec Etihad via Abu Dhabi, deux étapes à La Mecque et un séjour à Médine.',
+    dates: 'Du 16/09 au 04/10/2026 — 18 nuits / 19 jours',
     endDate: '2026-10-04',
-    image: '/manus-storage/deux-omra-etihad-sept-oct-2026_675d28bb.jpg',
-    pdfUrl: '/manus-storage/deux-omra-etihad-sept-oct-2026_8837939a.pdf',
+    image: '/manus-storage/IMG-20260722-WA0005_1605bb68.jpg',
+    pdfUrl: '/manus-storage/deux-omra-etihad-2026-prodv26_1812acc2.pdf',
     destination: 'Moyen-Orient',
     price: 'À partir de 13.900 DHS',
-    highlights: ['Etihad via Abu Dhabi', '7 + 4 + 7 nuits', 'Hôtels au choix', 'Transferts inclus'],
+    highlights: ['Etihad via Abu Dhabi', '7 + 4 + 7 nuits', 'Hôtels selon formule', 'Transferts en Arabie Saoudite'],
   },
   {
-    id: 'punta-cana-septembre-2026',
-    title: 'Punta Cana — Septembre 2026',
-    description: 'Un séjour caraïbe entre plages de sable blanc, hôtel 5 étoiles et formule tout compris.',
-    dates: '8 nuits / 10 jours — départs tous les vendredis de septembre',
+    id: 'omra-deux-departs-septembre-2026-prodv26',
+    title: 'Omra — Deux départs septembre 2026',
+    description: 'Deux dates de départ pour organiser votre Omra avec hébergement à La Mecque et à Médine et accompagnement de l’agence.',
+    dates: 'Départ 1 : 21/09–10/10 · Départ 2 : 28/09–17/10/2026',
+    endDate: '2026-10-17',
+    image: '/manus-storage/omra-deux-departs-septembre-2026-prodv26_a3bd7721.jpg',
+    pdfUrl: '/manus-storage/omra-deux-departs-septembre-2026-prodv26_70c7a6c9.pdf',
+    destination: 'Moyen-Orient',
+    price: 'À partir de 16.400 DHS',
+    highlights: ['Deux dates de départ', 'Vol aller-retour', 'Hôtels à La Mecque et Médine', 'Visa et accompagnement inclus'],
+  },
+  {
+    id: 'punta-cana-ete-2026-prodv26',
+    title: 'Punta Cana — Été 2026',
+    description: 'Un séjour caribéen tout compris entre plages, détente et activités, avec départs garantis pendant la saison estivale.',
+    dates: 'Départs garantis juillet, août et septembre 2026 — dates selon disponibilité',
     endDate: '2026-09-30',
-    image: '/manus-storage/punta-cana-septembre-2026_89ff6676.jpg',
-    pdfUrl: '/manus-storage/punta-cana-septembre-2026_961df264.pdf',
+    image: '/manus-storage/IMG-20260804-WA0005_4ec5960c.jpg',
+    pdfUrl: '/manus-storage/punta-cana-ete-2026-prodv26_1d7f4f1f.pdf',
     destination: 'International',
     price: 'À partir de 15.000 DHS',
-    highlights: ['Départs Tanger et Casablanca', 'Hôtel 5 étoiles', 'All inclusive', 'Transferts inclus'],
+    highlights: ['Départs depuis Casablanca', 'Formule tout compris', 'Hôtel et transferts', 'Confirmation immédiate'],
   },
   {
-    id: 'ouzbekistan-istanbul-mai-2027',
-    title: 'Circuit Ouzbékistan & Istanbul',
-    description: 'Un circuit culturel de Samarcande à Istanbul entre patrimoine de la Route de la Soie et grandes escales.',
-    dates: '16/05 au 30/05/2027 — 13 nuits / 14 jours',
+    id: 'ouzbekistan-istanbul-mai-2027-prodv26',
+    title: 'Ouzbékistan & Istanbul — Route de la soie',
+    description: 'Un circuit culturel entre Tachkent, Samarcande, Boukhara et Istanbul, avec guide arabophone et visites au programme.',
+    dates: 'Du 16/05 au 30/05/2027 — 13 nuits / 14 jours',
     endDate: '2027-05-30',
-    image: '/manus-storage/ouzbekistan-istanbul-mai-2027_58527759.jpg',
-    pdfUrl: '/manus-storage/ouzbekistan-istanbul-mai-2027_e60b0ed9.pdf',
+    image: '/manus-storage/IMG-20260815-WA0005_37bef4bc.jpg',
+    pdfUrl: '/manus-storage/ouzbekistan-istanbul-mai-2027-prodv26_0ce2ac9f.pdf',
     destination: 'International',
     price: 'À partir de 23.900 DHS',
-    highlights: ['Hôtels 4 et 5 étoiles', 'Petit déjeuner inclus', 'Guide arabophone', 'Visites au programme'],
+    highlights: ['Hôtels 4 et 5 étoiles', 'Petit-déjeuner inclus', 'Guide arabophone', 'Visites de Tachkent et Samarcande'],
   },
   {
-    id: 'dakhla-lagon-dunes-sur-demande',
+    id: 'dakhla-lagon-dunes-prodv26',
     title: 'Dakhla — Lagon & dunes',
-    description: 'Une escapade marocaine entre désert et océan, avec hébergement, pension complète et accompagnement agence.',
-    dates: '4 nuits / 5 jours — dates sur demande',
-    image: '/manus-storage/dakhla-lagon-dunes-sur-demande_92f5b0e7.jpg',
-    pdfUrl: '/manus-storage/dakhla-lagon-dunes-sur-demande_94dffec4.pdf',
+    description: 'Une escapade marocaine de 5 jours entre lagon turquoise, dunes et océan, avec pension complète et accompagnement agence.',
+    dates: '5 jours / 4 nuits — dates sur demande',
+    image: '/manus-storage/IMG-20260815-WA0006_9b299284.jpg',
+    pdfUrl: '/manus-storage/dakhla-lagon-dunes-prodv26_2d9123ca.pdf',
     destination: 'Maroc',
     price: 'À partir de 5.900 DHS',
-    highlights: ['Royal Air Maroc', 'Pension complète', 'Transferts inclus', 'Accompagnement agence'],
+    highlights: ['Vol Royal Air Maroc', 'Pension complète', 'Transferts à Dakhla', 'Pack visites en option'],
   },
 ];
 
 export default function OrganizedTrips() {
-  const [selectedDetails, setSelectedDetails] = useState<(typeof trips)[number] | null>(null);
+  const [selectedDetails, setSelectedDetails] = useState<OrganizedTrip | null>(null);
   const [selectedFilter, setSelectedFilter] = useState('Tous');
   const [showExpired, setShowExpired] = useState(false);
   const [favoriteIds, setFavoriteIds] = useState<string[]>(() => {
@@ -225,7 +249,11 @@ export default function OrganizedTrips() {
 
                 <div className="mt-5 grid grid-cols-2 gap-3">
                   <button type="button" onClick={() => setSelectedDetails(trip)} className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#FF8C42] px-3 py-3 text-sm font-bold text-white transition hover:bg-[#eb7330] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#FF8C42] focus:ring-offset-2"><Eye size={16} aria-hidden="true" />Voir détail</button>
-                  <a href={trip.pdfUrl} download={`${trip.id}.pdf`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#5ecb3b] px-3 py-3 text-sm font-bold text-slate-950 transition hover:bg-[#79df58] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#6BFF42] focus:ring-offset-2"><Download size={16} aria-hidden="true" />Télécharger</a>
+                  {trip.pdfUrl ? (
+                    <a href={trip.pdfUrl} download={`${trip.id}.pdf`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#5ecb3b] px-3 py-3 text-sm font-bold text-slate-950 transition hover:bg-[#79df58] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#6BFF42] focus:ring-offset-2"><Download size={16} aria-hidden="true" />Télécharger</a>
+                  ) : (
+                    <span className="inline-flex items-center justify-center rounded-xl bg-slate-100 px-3 py-3 text-center text-xs font-bold text-slate-500">Brochure à venir</span>
+                  )}
                 </div>
               </div>
             </article>
@@ -240,7 +268,11 @@ export default function OrganizedTrips() {
             <img src={selectedDetails.image} alt={`Détails du voyage ${selectedDetails.title}`} className="mx-auto max-h-[78vh] w-auto max-w-full rounded-xl object-contain" />
             <div className="flex flex-wrap items-center justify-between gap-3 px-2 pb-1 pt-4 md:px-4">
               <div><h3 className="font-['Playfair_Display'] text-2xl font-bold text-slate-900">{selectedDetails.title}</h3><p className="mt-1 text-sm text-slate-600">{selectedDetails.dates}</p></div>
-              <a href={selectedDetails.pdfUrl} download={`${selectedDetails.id}.pdf`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#FF8C42] px-4 py-2.5 text-sm font-bold text-white hover:bg-[#eb7330]"><Download size={16} aria-hidden="true" />Télécharger le PDF</a>
+              {selectedDetails.pdfUrl ? (
+                <a href={selectedDetails.pdfUrl} download={`${selectedDetails.id}.pdf`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#FF8C42] px-4 py-2.5 text-sm font-bold text-white hover:bg-[#eb7330]"><Download size={16} aria-hidden="true" />Télécharger le PDF</a>
+              ) : (
+                <span className="inline-flex items-center rounded-xl bg-slate-100 px-4 py-2.5 text-sm font-bold text-slate-500">Brochure PDF à venir</span>
+              )}
             </div>
           </div>
         </div>

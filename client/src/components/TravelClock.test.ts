@@ -1,16 +1,19 @@
 import { describe, expect, it } from 'vitest';
 import { sceneForTangierHour } from './Hero';
-import { formatClock, formatDate, formatHijriDate } from './TravelClock';
+import { formatClock, formatDate, formatHijriDate, getDisplayInstant } from './TravelClock';
 
 describe('TravelClock', () => {
   const instant = new Date('2026-09-01T09:23:25.000Z');
 
-  it('formats the same instant in Tangier time without a manual offset', () => {
-    expect(formatClock(instant)).toMatch(/10:23:25/);
-    expect(formatDate(instant)).toMatch(/2026/);
-    expect(formatDate(instant).toLowerCase()).toMatch(/sept/);
-    expect(formatHijriDate(instant)).toMatch(/1448/);
-    expect(formatClock(instant)).not.toContain('−1 h');
+  it('displays one hour less while keeping Gregorian and Hijri dates on the same display instant', () => {
+    const displayInstant = getDisplayInstant(instant);
+
+    expect(displayInstant.getTime()).toBe(instant.getTime() - 60 * 60 * 1000);
+    expect(formatClock(displayInstant)).toMatch(/09:23:25/);
+    expect(formatDate(displayInstant)).toMatch(/2026/);
+    expect(formatDate(displayInstant).toLowerCase()).toMatch(/sept/);
+    expect(formatHijriDate(displayInstant)).toMatch(/1448/);
+    expect(formatClock(displayInstant)).not.toContain('−1 h');
   });
 });
 
