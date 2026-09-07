@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getMoroccoDateKey, isTripExpired } from './OrganizedTrips';
+import { getMoroccoDateKey, getTripShareUrl, isTripExpired, matchesTripSearch, trips } from './OrganizedTrips';
 
 describe('OrganizedTrips expiration filtering', () => {
   it('formats the same calendar date in the Morocco timezone', () => {
@@ -43,5 +43,22 @@ describe('PRODV26-2 programme selection', () => {
     const { trips } = await import('./OrganizedTrips');
     expect(trips.find((trip) => trip.id === 'omra-hajj-sur-mesure-prodv26')?.endDate).toBeUndefined();
     expect(trips.find((trip) => trip.id === 'dakhla-lagon-dunes-prodv26')?.endDate).toBeUndefined();
+  });
+});
+
+
+describe('OrganizedTrips search and sharing', () => {
+  it('finds offers by destination, title, dates or highlights', () => {
+    const istanbul = trips.find((trip) => trip.id === 'istanbul-septembre-2026-prodv26')!;
+    expect(matchesTripSearch(istanbul, 'istanbul')).toBe(true);
+    expect(matchesTripSearch(istanbul, 'Royal Air Maroc')).toBe(true);
+    expect(matchesTripSearch(istanbul, 'Dakhla')).toBe(false);
+    expect(matchesTripSearch(istanbul, '  ')).toBe(true);
+  });
+
+  it('creates a stable share URL containing the selected offer', () => {
+    const url = getTripShareUrl('istanbul-septembre-2026-prodv26');
+    expect(url).toContain('voyage=istanbul-septembre-2026-prodv26');
+    expect(url).toContain('#organized-trips');
   });
 });

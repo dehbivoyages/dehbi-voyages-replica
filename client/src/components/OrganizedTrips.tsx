@@ -1,4 +1,4 @@
-import { CalendarDays, Download, Eye, Heart, MapPin, X } from 'lucide-react';
+import { CalendarDays, Check, Download, Eye, Facebook, Heart, MapPin, Search, Send, Share2, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 /**
@@ -33,6 +33,23 @@ export function getMoroccoDateKey(date: Date) {
 
 export function isTripExpired(trip: Pick<OrganizedTrip, 'endDate'>, now = new Date()) {
   return Boolean(trip.endDate && trip.endDate < getMoroccoDateKey(now));
+}
+
+export function matchesTripSearch(trip: OrganizedTrip, query: string) {
+  const normalizedQuery = query.trim().toLocaleLowerCase('fr-FR');
+  if (!normalizedQuery) return true;
+  return [trip.title, trip.description, trip.destination, trip.dates, trip.price, ...trip.highlights]
+    .join(' ')
+    .toLocaleLowerCase('fr-FR')
+    .includes(normalizedQuery);
+}
+
+export function getTripShareUrl(tripId: string) {
+  if (typeof window === 'undefined') return `?voyage=${encodeURIComponent(tripId)}#organized-trips`;
+  const url = new URL(window.location.href);
+  url.searchParams.set('voyage', tripId);
+  url.hash = 'organized-trips';
+  return url.toString();
 }
 
 export const trips: OrganizedTrip[] = [
@@ -147,7 +164,9 @@ export const trips: OrganizedTrip[] = [
 export default function OrganizedTrips() {
   const [selectedDetails, setSelectedDetails] = useState<OrganizedTrip | null>(null);
   const [selectedFilter, setSelectedFilter] = useState('Tous');
+  const [searchQuery, setSearchQuery] = useState('');
   const [showExpired, setShowExpired] = useState(false);
+  const [copiedTripId, setCopiedTripId] = useState<string | null>(null);
   const [favoriteIds, setFavoriteIds] = useState<string[]>(() => {
     if (typeof window === 'undefined') return [];
     try {
@@ -170,9 +189,30 @@ export default function OrganizedTrips() {
   const expiredTrips = trips.filter((trip) => isTripExpired(trip));
   const visibleTrips = showExpired ? trips : trips.filter((trip) => !isTripExpired(trip));
   const destinations = ['Tous', ...Array.from(new Set(visibleTrips.map((trip) => trip.destination)))];
-  const filteredTrips = selectedFilter === 'Tous'
+  const filteredByDestination = selectedFilter === 'Tous'
     ? visibleTrips
     : visibleTrips.filter((trip) => trip.destination === selectedFilter);
+  const filteredTrips = filteredByDestination.filter((trip) => matchesTripSearch(trip, searchQuery));
+
+  const shareTrip = async (trip: OrganizedTrip) => {
+    const shareUrl = getTripShareUrl(trip.id);
+    const shareData = { title: trip.title, text: `${trip.title} · ${trip.price}`, url: shareUrl };
+    if (typeof navigator !== 'undefined' && navigator.share) {
+      try {
+        await navigator.share(shareData);
+        return;
+      } catch (error) {
+        if (error instanceof DOMException && error.name === 'AbortError') return;
+      }
+    }
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopiedTripId(trip.id);
+      window.setTimeout(() => setCopiedTripId((current) => current === trip.id ? null : current), 1800);
+    } catch {
+      window.open(shareUrl, '_blank', 'noopener,noreferrer');
+    }
+  };
 
   return (
     <section
@@ -191,6 +231,20 @@ export default function OrganizedTrips() {
           <p className="mb-3 text-sm font-bold uppercase tracking-[0.24em] text-[#6BFF42]">Sélection Dehbi Voyages</p>
           <h2 className="mb-4 font-['Playfair_Display'] text-4xl font-bold md:text-5xl">Voyages Organisés</h2>
           <p className="text-base leading-7 text-white/80 md:text-lg">Découvrez les nouvelles offres internationales, spirituelles et culturelles dans un format clair et confortable.</p>
+        </div>
+
+        <div className="mx-auto mb-5 flex max-w-2xl items-center gap-3 rounded-2xl border border-white/20 bg-white/95 px-4 py-3 shadow-xl shadow-black/15">
+          <Search size={19} className="shrink-0 text-[#d86d2d]" aria-hidden="true" />
+          <label htmlFor="organized-trip-search" className="sr-only">Rechercher une offre</label>
+          <input
+            id="organized-trip-search"
+            type="search"
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+            placeholder="Rechercher une destination, une date ou une offre…"
+            className="min-w-0 flex-1 bg-transparent text-sm font-semibold text-slate-900 outline-none placeholder:text-slate-500"
+          />
+          {searchQuery && <button type="button" onClick={() => setSearchQuery('')} className="rounded-full p-1 text-slate-500 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-[#FF8C42]" aria-label="Effacer la recherche"><X size={16} aria-hidden="true" /></button>}
         </div>
 
         <div className="mb-10 flex flex-wrap justify-center gap-3" aria-label="Filtrer les voyages par destination">
@@ -216,7 +270,15 @@ export default function OrganizedTrips() {
           )}
         </div>
 
-        <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {filteredTrips.length === 0 ? (
+          <div className="mx-auto max-w-2xl rounded-2xl border border-white/20 bg-slate-950/70 px-6 py-10 text-center text-white shadow-xl shadow-black/20" role="status">
+            <Search size={28} className="mx-auto mb-4 text-[#FF8C42]" aria-hidden="true" />
+            <h3 className="font-['Playfair_Display'] text-2xl font-bold">Aucune offre trouvée</h3>
+            <p className="mt-2 text-sm leading-6 text-white/75">Essayez une autre destination, une autre date ou un mot-clé.</p>
+            <button type="button" onClick={() => { setSearchQuery(''); setSelectedFilter('Tous'); }} className="mt-5 rounded-xl bg-[#FF8C42] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#eb7330] focus:outline-none focus:ring-2 focus:ring-[#6BFF42] focus:ring-offset-2 focus:ring-offset-slate-950">Réinitialiser la recherche</button>
+          </div>
+        ) : (
+          <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 xl:grid-cols-3">
           {filteredTrips.map((trip) => (
             <article key={trip.id} className="overflow-hidden rounded-2xl bg-white shadow-xl shadow-black/20 transition hover:-translate-y-1 hover:shadow-2xl">
               <div className="group relative h-72 w-full bg-[#f6f1e8] md:h-80">
@@ -255,10 +317,19 @@ export default function OrganizedTrips() {
                     <span className="inline-flex items-center justify-center rounded-xl bg-slate-100 px-3 py-3 text-center text-xs font-bold text-slate-500">Brochure à venir</span>
                   )}
                 </div>
+                <div className="mt-3 flex items-center justify-between gap-3 border-t border-slate-200 pt-3">
+                  <span className="text-xs font-semibold text-slate-500">Partager cette offre</span>
+                  <div className="flex items-center gap-1.5">
+                    <a href={`https://wa.me/?text=${encodeURIComponent(`${trip.title} · ${getTripShareUrl(trip.id)}`)}`} target="_blank" rel="noopener noreferrer" aria-label={`Partager ${trip.title} sur WhatsApp`} className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#25D366] text-white transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2"><Send size={15} aria-hidden="true" /></a>
+                    <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(getTripShareUrl(trip.id))}`} target="_blank" rel="noopener noreferrer" aria-label={`Partager ${trip.title} sur Facebook`} className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#1877F2] text-white transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#1877F2] focus:ring-offset-2"><Facebook size={15} aria-hidden="true" /></a>
+                    <button type="button" onClick={() => shareTrip(trip)} aria-label={copiedTripId === trip.id ? 'Lien copié' : `Partager ou copier le lien de ${trip.title}`} className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#10213f] text-white transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#10213f] focus:ring-offset-2">{copiedTripId === trip.id ? <Check size={15} aria-hidden="true" /> : <Share2 size={15} aria-hidden="true" />}</button>
+                  </div>
+                </div>
               </div>
             </article>
           ))}
-        </div>
+          </div>
+        )}
       </div>
 
       {selectedDetails && (

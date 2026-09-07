@@ -85,7 +85,19 @@
 - [x] Appliquer un décalage d’une heure en moins à l’affichage de l’heure
 - [x] Conserver les dates grégorienne et hégirienne cohérentes avec l’instant affiché
 - [x] Vérifier desktop/mobile et enregistrer un checkpoint de la correction
-- [ ] Enregistrer un nouveau checkpoint après la correction « une heure de moins » de l’horloge
-- [ ] Présenter la version correspondante et son aperçu à l’utilisateur
-- [ ] Enregistrer un nouveau checkpoint après l’intégration complète des 9 programmes PRODV26-2 et de leurs 9 brochures PDF
-- [ ] Partager la version correspondante avec l’aperçu à jour
+- [x] Enregistrer un nouveau checkpoint après la correction « une heure de moins » de l’horloge
+- [x] Présenter la version correspondante et son aperçu à l’utilisateur
+- [x] Enregistrer un nouveau checkpoint après l’intégration complète des 9 programmes PRODV26-2 et de leurs 9 brochures PDF
+- [x] Partager la version correspondante avec l’aperçu à jour
+- [x] Présenter à l’utilisateur le checkpoint `d484fb5d` avec l’URL d’aperçu à jour
+- [x] Confirmer que la version combinant l’horloge « une heure de moins », les 9 programmes PRODV26-2 et leurs 9 PDF est prête à publier
+
+- [x] Auditer le composant des 9 offres et ses filtres avant ajout de la recherche
+- [x] Ajouter une barre de recherche combinée aux filtres existants
+- [x] Ajouter des boutons de partage social pour chaque offre
+- [x] Ajouter les tests de recherche, de partage et de responsivité
+- [x] Vérifier desktop/mobile et enregistrer un checkpoint de la nouvelle version
+- [x] Ajouter un état vide élégant lorsque la recherche et les filtres ne renvoient aucune offre
+- [x] Valider explicitement la recherche et les boutons de partage sur mobile
+- [x] Tests et validation réalisés ; checkpoint à enregistrer après la revue TODO
+- [ ] Présenter l’aperçu mis à jour et le checkpoint à l’utilisateur
