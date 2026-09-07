@@ -100,4 +100,11 @@
 - [x] Ajouter un état vide élégant lorsque la recherche et les filtres ne renvoient aucune offre
 - [x] Valider explicitement la recherche et les boutons de partage sur mobile
 - [x] Tests et validation réalisés ; checkpoint à enregistrer après la revue TODO
-- [ ] Présenter l’aperçu mis à jour et le checkpoint à l’utilisateur
+- [x] Présenter l’aperçu mis à jour et le checkpoint à l’utilisateur
+
+- [x] Auditer les annonces actuelles de l’en-tête et leurs liens
+- [x] Remplacer les anciennes annonces par Omra, Istanbul et Punta Cana
+- [x] Vérifier les liens vers les offres, la lisibilité et l’affichage mobile
+- [ ] Enregistrer un checkpoint de la nouvelle version
+- [x] Vérifier que chaque annonce ouvre le bon détail du programme sur desktop et mobile ; contrôle desktop et mobile confirmé
+- [x] Confirmer que l’ancienne offre Antalya reste uniquement dans le formulaire de réservation et non dans l’en-tête
