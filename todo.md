@@ -105,6 +105,6 @@
 - [x] Auditer les annonces actuelles de l’en-tête et leurs liens
 - [x] Remplacer les anciennes annonces par Omra, Istanbul et Punta Cana
 - [x] Vérifier les liens vers les offres, la lisibilité et l’affichage mobile
-- [ ] Enregistrer un checkpoint de la nouvelle version
+- [x] Enregistrer un checkpoint de la nouvelle version
 - [x] Vérifier que chaque annonce ouvre le bon détail du programme sur desktop et mobile ; contrôle desktop et mobile confirmé
 - [x] Confirmer que l’ancienne offre Antalya reste uniquement dans le formulaire de réservation et non dans l’en-tête
