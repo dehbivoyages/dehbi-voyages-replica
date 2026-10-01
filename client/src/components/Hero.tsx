@@ -308,6 +308,9 @@ const Hero = forwardRef((props, ref: any) => {
                 alt="Présentation animée de Dehbi Voyages"
                 className="mx-auto max-h-[72vh] w-full rounded-lg object-contain"
               />
+              <p className="mx-auto max-w-3xl px-2 pt-3 text-center text-sm leading-6 text-white/75 sm:pt-4 sm:text-base">
+                Découvrez Dehbi Voyages : une agence dédiée aux voyages spirituels, aux circuits marocains et aux destinations internationales, avec un accompagnement personnalisé du départ au retour.
+              </p>
             </div>
           </div>
         </div>
