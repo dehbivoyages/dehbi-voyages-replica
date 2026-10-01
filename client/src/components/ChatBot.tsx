@@ -92,12 +92,12 @@ export default function ChatBot() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-24 left-6 z-40 rounded-full border border-[#6BFF42]/40 bg-[#10213f] p-3 text-[#BFFFAE] shadow-lg shadow-[#10213f]/30 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#6BFF42] focus:ring-offset-2 focus:ring-offset-background flex items-center justify-center gap-2 font-semibold text-sm"
+          className="fixed bottom-24 left-6 z-40 flex items-center justify-center gap-2 rounded-full border border-[#6BFF42]/60 bg-[#2E7D32] p-3 text-[#F2FFE9] shadow-lg shadow-[#2E7D32]/35 transition-all duration-300 hover:scale-105 hover:bg-[#256628] focus:outline-none focus:ring-2 focus:ring-[#6BFF42] focus:ring-offset-2 focus:ring-offset-background font-semibold text-sm"
           title="Chat Assistant"
         >
           <MessageCircle size={20} />
           <span className="hidden sm:inline">Assistant</span>
-          <span className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-xs text-white font-bold">
+          <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-[#B8E986] text-xs font-bold text-[#173C20]">
             ?
           </span>
         </button>
@@ -105,26 +105,26 @@ export default function ChatBot() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 left-6 z-50 w-96 max-w-[calc(100vw-2rem)] bg-white rounded-lg shadow-2xl flex flex-col overflow-hidden">
+        <div className="fixed bottom-6 left-6 z-50 flex w-96 max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-[#6BFF42]/40 bg-[#F2FAEC] shadow-2xl shadow-[#173C20]/25">
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 flex items-center justify-between">
+          <div className="flex items-center justify-between bg-gradient-to-r from-[#2E7D32] to-[#4E9F3D] p-4 text-white">
             <div className="flex items-center gap-2">
               <MessageCircle size={20} />
               <div>
                 <h3 className="font-semibold">Dehbi Assistant</h3>
-                <p className="text-xs text-blue-100">En ligne 24/7</p>
+                <p className="text-xs text-[#E6FFD8]">En ligne 24/7</p>
               </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="hover:bg-blue-800 p-1 rounded transition-colors"
+              className="rounded p-1 transition-colors hover:bg-[#256628]"
             >
               <X size={20} />
             </button>
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50" style={{ maxHeight: '400px' }}>
+          <div className="flex-1 space-y-4 overflow-y-auto bg-[#EAF5E2] p-4" style={{ maxHeight: '400px' }}>
             {messages.map((message) => (
               <div
                 key={message.id}
@@ -133,12 +133,12 @@ export default function ChatBot() {
                 <div
                   className={`max-w-xs px-4 py-2 rounded-lg ${
                     message.sender === 'user'
-                      ? 'bg-blue-600 text-white rounded-br-none'
-                      : 'bg-white text-foreground border border-gray-200 rounded-bl-none'
+                      ? 'bg-[#4E9F3D] text-white rounded-br-none'
+                      : 'bg-white text-[#173C20] border border-[#B8D7A3] rounded-bl-none'
                   }`}
                 >
                   <p className="text-sm">{message.text}</p>
-                  <p className={`text-xs mt-1 ${message.sender === 'user' ? 'text-blue-100' : 'text-muted-foreground'}`}>
+                  <p className={`text-xs mt-1 ${message.sender === 'user' ? 'text-[#E6FFD8]' : 'text-[#63805D]'}`}>
                     {message.timestamp.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
                   </p>
                 </div>
@@ -147,7 +147,7 @@ export default function ChatBot() {
 
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-white text-foreground border border-gray-200 rounded-lg rounded-bl-none px-4 py-2">
+                <div className="rounded-lg rounded-bl-none border border-[#B8D7A3] bg-white px-4 py-2 text-[#173C20]">
                   <div className="flex gap-2">
                     <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                     <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
@@ -161,24 +161,24 @@ export default function ChatBot() {
           </div>
 
           {/* Input */}
-          <form onSubmit={handleSendMessage} className="border-t border-gray-200 p-4 bg-white">
+          <form onSubmit={handleSendMessage} className="border-t border-[#B8D7A3] bg-[#F7FCF2] p-4">
             <div className="flex gap-2">
               <input
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Posez votre question..."
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm"
+                className="flex-1 rounded-lg border border-[#B8D7A3] bg-white px-3 py-2 text-sm text-[#173C20] focus:outline-none focus:ring-2 focus:ring-[#4E9F3D]"
               />
               <button
                 type="submit"
                 disabled={isLoading || !inputValue.trim()}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="rounded-lg bg-[#2E7D32] px-4 py-2 text-white transition-colors hover:bg-[#256628] disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <Send size={18} />
               </button>
             </div>
-            <p className="text-xs text-muted-foreground mt-2">
+            <p className="mt-2 text-xs text-[#63805D]">
               💡 Posez des questions sur nos voyages, tarifs, réservations, etc.
             </p>
           </form>

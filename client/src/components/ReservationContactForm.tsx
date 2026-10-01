@@ -1,4 +1,5 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
+import { RESERVATION_TRIP_EVENT, RESERVATION_TRIP_KEY } from '@/lib/reservation';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
   CalendarDays,
@@ -20,7 +21,9 @@ import {
  */
 
 const organizedTrips = [
-  'Antalya–Istanbul — Dernier départ d’été',
+  'Istanbul — Octobre 2026 · Programme actualisé',
+  'Omra avec Istanbul — Décembre 2026',
+  'Omra Rajab — Décembre 2026',
   'Programmes Omra & Hajj sur mesure',
   'Omra avec Kuala Lumpur',
   'Deux Omra en un voyage',
@@ -45,6 +48,23 @@ export default function ReservationContactForm() {
     travelers: '1',
     message: '',
   });
+
+  useEffect(() => {
+    const applyTrip = (tripName: string) => {
+      if (!tripName) return;
+      setFormData((current) => ({ ...current, trip: tripName }));
+    };
+
+    const storedTrip = window.localStorage.getItem(RESERVATION_TRIP_KEY);
+    if (storedTrip) applyTrip(storedTrip);
+
+    const handleTripSelection = (event: Event) => {
+      const tripName = (event as CustomEvent<string>).detail;
+      if (typeof tripName === 'string') applyTrip(tripName);
+    };
+    window.addEventListener(RESERVATION_TRIP_EVENT, handleTripSelection);
+    return () => window.removeEventListener(RESERVATION_TRIP_EVENT, handleTripSelection);
+  }, []);
 
   const updateField = (field: keyof typeof formData, value: string) => {
     setFormData((current) => ({ ...current, [field]: value }));

@@ -1,5 +1,6 @@
 import { CalendarDays, Check, Download, Eye, Facebook, Heart, MapPin, Search, Send, Share2, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { selectReservationTrip } from '@/lib/reservation';
 
 /**
  * Direction artistique : catalogue de voyages premium mais lisible, avec des cartes
@@ -67,15 +68,37 @@ export const trips: OrganizedTrip[] = [
   },
   {
     id: 'istanbul-octobre-2026-prodv26',
-    title: 'Istanbul — Octobre 2026',
-    description: 'Une escapade culturelle de 8 jours et 7 nuits entre visites guidées, journées libres et découverte du Bosphore.',
-    dates: 'Départs en octobre 2026 — 7 nuits / 8 jours',
-    endDate: '2026-10-31',
-    image: '/manus-storage/istanbul-octobre-2026-prodv26_edfefa52.jpg',
+    title: 'Istanbul — Octobre 2026 · Programme actualisé',
+    description: 'Une escapade culturelle de 8 jours et 7 nuits entre visites guidées, journées libres, Bosphore et options Bursa ou les Îles des Princesses.',
+    dates: 'Départs les 03, 10, 17, 24 et 30 octobre 2026 — 7 nuits / 8 jours',
+    endDate: '2026-11-06',
+    image: '/manus-storage/turkie 2026_21f2fa81.jpeg',
     pdfUrl: '/manus-storage/istanbul-octobre-2026-prodv26_8c6da6b3.pdf',
     destination: 'International',
-    price: 'À partir de 7.900 DHS',
-    highlights: ['Royal Air Maroc', 'Visite guidée', 'Îles des Princesses en option', 'Transfert aéroport inclus'],
+    price: 'À partir de 7.550 DHS',
+    highlights: ['Royal Air Maroc', '7 nuits avec petit-déjeuner', 'Bosphore et visites guidées', 'Transferts aéroport inclus'],
+  },
+  {
+    id: 'omra-istanbul-decembre-2026-mns',
+    title: 'Omra avec Istanbul — Décembre 2026',
+    description: 'Un programme spirituel de 15 nuits avec 4 nuits à Istanbul, 6 nuits à La Mecque et 4 nuits à Médine, selon le visuel fourni par l’agence.',
+    dates: 'Du 05/12 au 19/12/2026 — 14 nuits / 15 jours',
+    endDate: '2026-12-19',
+    image: '/manus-storage/dv3_69f6ec19.jpeg',
+    destination: 'Moyen-Orient',
+    price: 'À partir de 16.500 DHS',
+    highlights: ['Turkish Airlines', '4 nuits à Istanbul', '6 nuits à La Mecque', '4 nuits à Médine'],
+  },
+  {
+    id: 'omra-rajab-decembre-2026-mns',
+    title: 'Omra Rajab — Décembre 2026',
+    description: 'Un séjour spirituel de 13 nuits entre Médine et La Mecque, avec vol direct Royal Air Maroc depuis Casablanca et formules économiques, moyennes ou touristiques.',
+    dates: 'Du 11/12 au 24/12/2026 — 13 nuits / 14 jours',
+    endDate: '2026-12-24',
+    image: '/manus-storage/dv5_b4dddf4c.jpeg',
+    destination: 'Moyen-Orient',
+    price: 'À partir de 17.900 DHS',
+    highlights: ['Royal Air Maroc', '4 nuits à Médine', '9 nuits à La Mecque', 'Formules selon budget'],
   },
   {
     id: 'omra-hajj-sur-mesure-prodv26',
@@ -309,8 +332,9 @@ export default function OrganizedTrips() {
                   {trip.highlights.map((highlight) => <li key={highlight} className="flex items-start gap-1.5"><span className="mt-0.5 text-[#5bba39]">✓</span><span>{highlight}</span></li>)}
                 </ul>
 
-                <div className="mt-5 grid grid-cols-2 gap-3">
+                <div className="mt-5 grid gap-3 sm:grid-cols-3">
                   <button type="button" onClick={() => setSelectedDetails(trip)} className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#FF8C42] px-3 py-3 text-sm font-bold text-white transition hover:bg-[#eb7330] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#FF8C42] focus:ring-offset-2"><Eye size={16} aria-hidden="true" />Voir détail</button>
+                  <button type="button" onClick={() => selectReservationTrip(trip.title)} className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#2E7D32] px-3 py-3 text-sm font-bold text-white transition hover:bg-[#256628] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#6BFF42] focus:ring-offset-2"><Send size={16} aria-hidden="true" />Demander un devis</button>
                   {trip.pdfUrl ? (
                     <a href={trip.pdfUrl} download={`${trip.id}.pdf`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#5ecb3b] px-3 py-3 text-sm font-bold text-slate-950 transition hover:bg-[#79df58] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#6BFF42] focus:ring-offset-2"><Download size={16} aria-hidden="true" />Télécharger</a>
                   ) : (
@@ -339,6 +363,7 @@ export default function OrganizedTrips() {
             <img src={selectedDetails.image} alt={`Détails du voyage ${selectedDetails.title}`} className="mx-auto max-h-[78vh] w-auto max-w-full rounded-xl object-contain" />
             <div className="flex flex-wrap items-center justify-between gap-3 px-2 pb-1 pt-4 md:px-4">
               <div><h3 className="font-['Playfair_Display'] text-2xl font-bold text-slate-900">{selectedDetails.title}</h3><p className="mt-1 text-sm text-slate-600">{selectedDetails.dates}</p></div>
+              <button type="button" onClick={() => { setSelectedDetails(null); selectReservationTrip(selectedDetails.title); }} className="inline-flex items-center gap-2 rounded-xl bg-[#2E7D32] px-4 py-2.5 text-sm font-bold text-white transition hover:bg-[#256628] focus:outline-none focus:ring-2 focus:ring-[#6BFF42]"><Send size={16} aria-hidden="true" />Demander un devis</button>
               {selectedDetails.pdfUrl ? (
                 <a href={selectedDetails.pdfUrl} download={`${selectedDetails.id}.pdf`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#FF8C42] px-4 py-2.5 text-sm font-bold text-white hover:bg-[#eb7330]"><Download size={16} aria-hidden="true" />Télécharger le PDF</a>
               ) : (

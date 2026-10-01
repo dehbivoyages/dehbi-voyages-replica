@@ -24,10 +24,12 @@ describe('OrganizedTrips expiration filtering', () => {
 describe('PRODV26-2 programme selection', () => {
   it('contains only the nine archive programmes with usable images', async () => {
     const { trips } = await import('./OrganizedTrips');
-    expect(trips).toHaveLength(9);
+    expect(trips).toHaveLength(11);
     expect(trips.map((trip) => trip.id)).toEqual([
       'istanbul-septembre-2026-prodv26',
       'istanbul-octobre-2026-prodv26',
+      'omra-istanbul-decembre-2026-mns',
+      'omra-rajab-decembre-2026-mns',
       'omra-hajj-sur-mesure-prodv26',
       'omra-kuala-lumpur-septembre-2026-prodv26',
       'deux-omra-etihad-2026-prodv26',
