@@ -72,7 +72,7 @@ export const trips: OrganizedTrip[] = [
     description: 'Une escapade culturelle de 8 jours et 7 nuits entre visites guidées, journées libres, Bosphore et options Bursa ou les Îles des Princesses.',
     dates: 'Départs les 03, 10, 17, 24 et 30 octobre 2026 — 7 nuits / 8 jours',
     endDate: '2026-11-06',
-    image: '/manus-storage/turkie 2026_21f2fa81.jpeg',
+    image: '/manus-storage/istanbul-octobre-2026-mns_84698913.jpeg',
     pdfUrl: '/manus-storage/istanbul-octobre-2026-prodv26_8c6da6b3.pdf',
     destination: 'International',
     price: 'À partir de 7.550 DHS',

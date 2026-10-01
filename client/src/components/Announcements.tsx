@@ -44,7 +44,7 @@ const announcements: Announcement[] = [
     destination: 'International',
     description: 'Une escapade culturelle entre visites guidées, journées libres, Bosphore et options Bursa ou les Îles des Princesses.',
     highlights: ['Royal Air Maroc', 'Visite guidée', 'Transfert aéroport inclus'],
-    image: '/manus-storage/turkie 2026_21f2fa81.jpeg',
+    image: '/manus-storage/istanbul-octobre-2026-mns_84698913.jpeg',
     pdfUrl: '/manus-storage/istanbul-octobre-2026-prodv26_8c6da6b3.pdf',
     accentColor: '#53BFD3',
   },
