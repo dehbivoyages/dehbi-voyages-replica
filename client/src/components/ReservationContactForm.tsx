@@ -1,5 +1,6 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { RESERVATION_TRIP_EVENT, RESERVATION_TRIP_KEY } from '@/lib/reservation';
+import { trips } from './OrganizedTrips';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
   CalendarDays,
@@ -20,17 +21,7 @@ import {
  * qui reste lisible sur mobile comme sur desktop.
  */
 
-const organizedTrips = [
-  'Istanbul — Octobre 2026 · Programme actualisé',
-  'Omra avec Istanbul — Décembre 2026',
-  'Omra Rajab — Décembre 2026',
-  'Programmes Omra & Hajj sur mesure',
-  'Omra avec Kuala Lumpur',
-  'Deux Omra en un voyage',
-  'Punta Cana — Septembre 2026',
-  'Circuit Ouzbékistan & Istanbul',
-  'Dakhla — Lagon & dunes',
-];
+const organizedTrips = trips.map((trip) => trip.title);
 
 type FormStatus = 'idle' | 'success';
 type ShareStatus = 'idle' | 'shared' | 'copied' | 'error';

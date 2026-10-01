@@ -1,5 +1,6 @@
 import { CalendarDays, Download, MapPin, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { selectReservationTrip } from '@/lib/reservation';
 
 /**
  * Direction artistique : mini-étiquettes premium bleu doux / bleu encre, avec un accès
@@ -229,7 +230,10 @@ export default function Announcements() {
                 </a>
                 <a
                   href="#reservation-form"
-                  onClick={() => setSelectedAnnouncement(null)}
+                  onClick={() => {
+                    setSelectedAnnouncement(null);
+                    selectReservationTrip(selectedAnnouncement.fullTitle);
+                  }}
                   className="inline-flex items-center justify-center rounded-xl border border-[#6BFF42]/70 px-4 py-3 text-sm font-bold text-[#317a20] transition hover:bg-[#6BFF42]/15 focus:outline-none focus:ring-2 focus:ring-[#6BFF42] dark:text-[#BFFFAE]"
                 >
                   Réserver ce voyage

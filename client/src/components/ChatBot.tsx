@@ -20,6 +20,7 @@ export default function ChatBot() {
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const responseTimeoutRef = useRef<number | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -29,6 +30,10 @@ export default function ChatBot() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => () => {
+    if (responseTimeoutRef.current) window.clearTimeout(responseTimeoutRef.current);
+  }, []);
 
   const faqResponses: { [key: string]: string } = {
     'prix': 'Nos prix varient selon la destination et la saison. Les voyages commencent à partir de 7.690 MAD. Pour des tarifs précis, consultez la section "Voyages Organisés" ou contactez-nous directement.',
@@ -74,7 +79,7 @@ export default function ChatBot() {
     setIsLoading(true);
 
     // Simuler un délai de réponse
-    setTimeout(() => {
+    responseTimeoutRef.current = window.setTimeout(() => {
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
         text: getBotResponse(inputValue),
@@ -83,6 +88,7 @@ export default function ChatBot() {
       };
       setMessages((prev) => [...prev, botResponse]);
       setIsLoading(false);
+      responseTimeoutRef.current = null;
     }, 800);
   };
 
@@ -91,6 +97,7 @@ export default function ChatBot() {
       {/* Chat Button */}
       {!isOpen && (
         <button
+          type="button"
           onClick={() => setIsOpen(true)}
           className="fixed bottom-24 left-6 z-40 flex items-center justify-center gap-2 rounded-full border border-[#6BFF42]/60 bg-[#2E7D32] p-3 text-[#F2FFE9] shadow-lg shadow-[#2E7D32]/35 transition-all duration-300 hover:scale-105 hover:bg-[#256628] focus:outline-none focus:ring-2 focus:ring-[#6BFF42] focus:ring-offset-2 focus:ring-offset-background font-semibold text-sm"
           title="Chat Assistant"
@@ -116,6 +123,8 @@ export default function ChatBot() {
               </div>
             </div>
             <button
+              type="button"
+              aria-label="Fermer Dehbi Assistant"
               onClick={() => setIsOpen(false)}
               className="rounded p-1 transition-colors hover:bg-[#256628]"
             >
