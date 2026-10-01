@@ -1,4 +1,5 @@
 import { forwardRef, useEffect, useMemo, useState } from 'react';
+import { X } from 'lucide-react';
 
 /**
  * Direction artistique : quatre vues documentaires de Tanger, chacune centrée
@@ -23,6 +24,7 @@ type WeatherStatus = {
 };
 
 const WEATHER_ENDPOINT = 'https://api.open-meteo.com/v1/forecast?latitude=35.7595&longitude=-5.834&current=temperature_2m,precipitation,weather_code,is_day&timezone=Africa%2FCasablanca';
+const MORE_INFO_GIF = '/manus-storage/CVDV_98afd0f6.gif';
 
 const heroScenes: Record<HeroScene, { image: string; label: string; description: string; overlay: string; filter: string; credit: string; creditUrl: string }> = {
   mohammedV: {
@@ -94,6 +96,7 @@ const Hero = forwardRef((props, ref: any) => {
   const [weatherTone, setWeatherTone] = useState<WeatherTone>('clear');
   const [activeScene, setActiveScene] = useState<HeroScene>(timeScene);
   const [leavingScene, setLeavingScene] = useState<HeroScene | null>(null);
+  const [isMoreInfoOpen, setIsMoreInfoOpen] = useState(false);
   const [loadedScenes, setLoadedScenes] = useState<Record<HeroScene, boolean>>({
     mohammedV: false,
     port: false,
@@ -173,6 +176,15 @@ const Hero = forwardRef((props, ref: any) => {
   }, [mode, scheduledScene, weatherTone]);
 
   useEffect(() => {
+    if (!isMoreInfoOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsMoreInfoOpen(false);
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [isMoreInfoOpen]);
+
+  useEffect(() => {
     const nextScene = mode === 'auto' ? scheduledScene : mode;
     if (nextScene === activeScene) return;
     setLeavingScene(activeScene);
@@ -227,7 +239,15 @@ const Hero = forwardRef((props, ref: any) => {
           </p>
           <div className="flex flex-col gap-4 sm:flex-row">
             <button onClick={handleReserveClick} className="btn-primary bg-[#FF8C42] text-white hover:bg-[#F6762C]">Réserver Maintenant</button>
-            <button className="btn-outline border-white text-white hover:bg-white hover:text-primary">En Savoir Plus</button>
+            <button
+              type="button"
+              onClick={() => setIsMoreInfoOpen(true)}
+              className="btn-outline border-white text-white hover:bg-white hover:text-primary"
+              aria-haspopup="dialog"
+              aria-expanded={isMoreInfoOpen}
+            >
+              En Savoir Plus
+            </button>
           </div>
         </div>
 
@@ -255,6 +275,43 @@ const Hero = forwardRef((props, ref: any) => {
           Photo : {scene.credit}
         </a>
       </div>
+
+      {isMoreInfoOpen && (
+        <div
+          className="fixed inset-0 z-[90] flex items-center justify-center bg-slate-950/85 p-4 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="more-info-title"
+          onClick={() => setIsMoreInfoOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-5xl overflow-hidden rounded-2xl border border-white/20 bg-[#07111F] shadow-2xl shadow-black/50 motion-safe:animate-[modal-in_220ms_cubic-bezier(0.23,1,0.32,1)]"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3 text-white sm:px-5">
+              <div>
+                <h2 id="more-info-title" className="font-['Playfair_Display'] text-lg font-bold sm:text-xl">Dehbi Voyages</h2>
+                <p className="text-xs text-white/65">Découvrez notre présentation en vidéo</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsMoreInfoOpen(false)}
+                className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white/75 transition hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#6BFF42] active:scale-95"
+                aria-label="Fermer la présentation Dehbi Voyages"
+              >
+                <X size={20} aria-hidden="true" />
+              </button>
+            </div>
+            <div className="bg-black p-2 sm:p-4">
+              <img
+                src={MORE_INFO_GIF}
+                alt="Présentation animée de Dehbi Voyages"
+                className="mx-auto max-h-[72vh] w-full rounded-lg object-contain"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 });
