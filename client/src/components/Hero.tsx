@@ -242,11 +242,12 @@ const Hero = forwardRef((props, ref: any) => {
             <button
               type="button"
               onClick={() => setIsMoreInfoOpen(true)}
-              className="btn-outline border-white text-white hover:bg-white hover:text-primary"
+              className="group relative btn-outline border-white text-white shadow-[0_0_0_rgba(255,140,66,0)] transition-[transform,background-color,color,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:scale-[1.03] hover:border-[#FFB27D] hover:bg-[#FF8C42] hover:text-white hover:shadow-[0_8px_24px_rgba(255,140,66,0.32)] focus-visible:ring-2 focus-visible:ring-[#6BFF42] active:scale-[0.98]"
               aria-haspopup="dialog"
               aria-expanded={isMoreInfoOpen}
             >
-              En Savoir Plus
+              <span>En Savoir Plus</span>
+              <span aria-hidden="true" className="ml-1 inline-block transition-transform duration-200 ease-out group-hover:translate-x-0.5">→</span>
             </button>
           </div>
         </div>
@@ -296,8 +297,9 @@ const Hero = forwardRef((props, ref: any) => {
               <button
                 type="button"
                 onClick={() => setIsMoreInfoOpen(false)}
-                className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white/75 transition hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#6BFF42] active:scale-95"
+                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white transition-[transform,background-color,border-color] duration-200 ease-out hover:rotate-90 hover:scale-105 hover:border-[#FFB27D] hover:bg-[#FF8C42] focus:outline-none focus:ring-2 focus:ring-[#6BFF42] active:scale-95"
                 aria-label="Fermer la présentation Dehbi Voyages"
+                title="Fermer la présentation"
               >
                 <X size={20} aria-hidden="true" />
               </button>
