@@ -148,10 +148,10 @@ export default function Footer() {
               <div className="mb-4 flex flex-wrap items-center gap-3">
                 <h4 className="font-bold">Horaires</h4>
                 <span
-                  className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-bold ${currentlyOpen ? 'border-[#6BFF42]/35 bg-[#6BFF42]/10 text-[#B7FF9F]' : 'border-white/15 bg-white/10 text-white/70'}`}
+                  className={`motion-safe:animate-pulse inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-bold ${currentlyOpen ? 'border-[#6BFF42]/35 bg-[#6BFF42]/10 text-[#B7FF9F]' : 'border-[#FF5A5F]/40 bg-[#FF5A5F]/10 text-[#FFB3B5]'}`}
                   aria-live="polite"
                 >
-                  <span className={`h-2 w-2 rounded-full ${currentlyOpen ? 'bg-[#6BFF42]' : 'bg-white/45'}`} aria-hidden="true" />
+                  <span className={`h-2 w-2 rounded-full ${currentlyOpen ? 'bg-[#6BFF42]' : 'bg-[#FF5A5F]'}`} aria-hidden="true" />
                   {currentlyOpen ? 'Ouvert actuellement' : 'Fermé actuellement'}
                 </span>
               </div>
