@@ -233,14 +233,6 @@ const Hero = forwardRef((props, ref: any) => {
             <span className={`h-2 w-2 rounded-full ${mode === 'auto' ? 'bg-[#6BFF42]' : 'bg-[#FF8C42]'}`} aria-hidden="true" />
             {modeText}
           </div>
-          <div
-            className="mb-5 w-fit max-w-full rounded-xl border-l-4 border-[#FF8C42] bg-[#07111F]/70 px-4 py-2.5 text-white shadow-lg shadow-[#07111F]/20 backdrop-blur-md transition-[background-color,transform] duration-500"
-            aria-live="polite"
-            aria-label={`Image actuelle : ${visibleScene.label}`}
-          >
-            <p className="font-['Playfair_Display'] text-lg font-bold leading-tight sm:text-xl">{visibleScene.label}</p>
-            <p className="mt-1 text-[11px] font-medium text-white/70">Photographe : {visibleScene.credit.split(' · ')[0]}</p>
-          </div>
           <h1 className="mb-4 text-4xl font-bold text-[#FF8C42] md:text-5xl">اختر وجهتك .. وعلينا ايصالك</h1>
           <p className="mb-8 max-w-xl text-lg leading-8 text-white/95">
             Voyages religieux, circuits marocains et destinations internationales. Depuis 2015, nous réalisons vos rêves de voyage.
