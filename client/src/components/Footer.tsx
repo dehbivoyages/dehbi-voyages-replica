@@ -1,6 +1,32 @@
+import { useEffect, useState } from 'react';
 import { Facebook, Instagram, MessageCircle } from 'lucide-react';
 
+const MOROCCO_TIME_ZONE = 'Africa/Casablanca';
+
+function isAgencyOpen(date: Date) {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: MOROCCO_TIME_ZONE,
+    weekday: 'short',
+    hour: '2-digit',
+    hourCycle: 'h23',
+  }).formatToParts(date);
+  const weekday = parts.find((part) => part.type === 'weekday')?.value;
+  const hour = Number(parts.find((part) => part.type === 'hour')?.value ?? 0);
+
+  if (weekday === 'Sun') return false;
+  if (weekday === 'Sat') return hour >= 10 && hour < 15;
+  return hour >= 10 && hour < 18;
+}
+
 export default function Footer() {
+  const [currentTime, setCurrentTime] = useState(() => new Date());
+  const currentlyOpen = isAgencyOpen(currentTime);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setCurrentTime(new Date()), 60_000);
+    return () => window.clearInterval(timer);
+  }, []);
+
   return (
     <footer id="contact" className="bg-foreground text-white">
       <div className="container mx-auto px-4 py-12">
@@ -119,11 +145,21 @@ export default function Footer() {
           {/* Social Links & Hours */}
           <div className="grid md:grid-cols-2 gap-8 pt-8 border-t border-gray-700">
             <div>
-              <h4 className="font-bold mb-4">Horaires</h4>
+              <div className="mb-4 flex flex-wrap items-center gap-3">
+                <h4 className="font-bold">Horaires</h4>
+                <span
+                  className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-bold ${currentlyOpen ? 'border-[#6BFF42]/35 bg-[#6BFF42]/10 text-[#B7FF9F]' : 'border-white/15 bg-white/10 text-white/70'}`}
+                  aria-live="polite"
+                >
+                  <span className={`h-2 w-2 rounded-full ${currentlyOpen ? 'bg-[#6BFF42]' : 'bg-white/45'}`} aria-hidden="true" />
+                  {currentlyOpen ? 'Ouvert actuellement' : 'Fermé actuellement'}
+                </span>
+              </div>
               <div className="space-y-2 text-sm text-gray-400">
                 <p>Lundi - Vendredi: 10:00 - 18:00</p>
                 <p>Samedi: 10:00 - 15:00</p>
                 <p>Dimanche: Fermé</p>
+                <p className="pt-1 text-xs leading-5 text-gray-500">Des fermetures exceptionnelles peuvent s’appliquer pendant les jours fériés nationaux. Contactez-nous pour confirmation.</p>
               </div>
             </div>
             <div>
