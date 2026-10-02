@@ -2,9 +2,9 @@ import { forwardRef, useEffect, useMemo, useState } from 'react';
 import { X } from 'lucide-react';
 
 /**
- * Direction artistique : quatre vues documentaires de Tanger, chacune centrée
- * sur une mosquée emblématique. Les fonds alternent avec un fondu long, et le
- * voile bleu encre préserve la lisibilité des accents Orange tropical.
+ * Direction artistique : quatre vues documentaires de mosquées marocaines
+ * emblématiques. Les fonds alternent avec un fondu long, et le voile bleu encre
+ * préserve la lisibilité des accents Orange tropical.
  */
 
 type HeroMode = 'auto' | 'mohammedV' | 'port' | 'rmilat' | 'saoudienne';
@@ -28,40 +28,40 @@ const MORE_INFO_GIF = '/manus-storage/CVDV_98afd0f6.gif';
 
 const heroScenes: Record<HeroScene, { image: string; label: string; description: string; overlay: string; filter: string; credit: string; creditUrl: string }> = {
   mohammedV: {
-    image: '/manus-storage/tanger-mosquee-mohammed-v-matin_62295c9a.webp',
-    label: 'Mosquée Mohammed V · Tanger',
-    description: 'Façade et minaret de la mosquée Mohammed V en lumière claire',
+    image: '/manus-storage/casablanca-hassan-ii_7f5d8f80.jpg',
+    label: 'Mosquée Hassan II · Casablanca',
+    description: 'Esplanade et minaret de la mosquée Hassan II face à l’océan',
     overlay: 'linear-gradient(90deg, rgba(5, 24, 53, 0.80) 0%, rgba(5, 24, 53, 0.52) 48%, rgba(5, 24, 53, 0.16) 100%)',
     filter: 'brightness(1.04) saturate(1.03)',
-    credit: 'Tangier City Tour',
-    creditUrl: 'https://tanger.city-tour.com/',
+    credit: 'Ayman.mesa25 · Wikimedia Commons · CC BY-SA 4.0',
+    creditUrl: 'https://commons.wikimedia.org/wiki/File:The_Open_Area_of_Hassan_II_Mosque_-_Casablanca_Morocco.jpg',
   },
   port: {
-    image: '/manus-storage/tanger-mosquee-port-matin_2013dcda.jpg',
-    label: 'Mosquée du port · Tanger',
-    description: 'Mosquée du port de Tanger et sa perspective maritime',
+    image: '/manus-storage/marrakech-koutoubia_d21c16c8.jpg',
+    label: 'Mosquée Koutoubia · Marrakech',
+    description: 'Le minaret emblématique de Marrakech dans ses jardins historiques',
     overlay: 'linear-gradient(90deg, rgba(5, 24, 53, 0.80) 0%, rgba(5, 24, 53, 0.51) 48%, rgba(5, 24, 53, 0.16) 100%)',
     filter: 'brightness(1.02) saturate(1.04)',
-    credit: 'Référence photo Dehbi Voyages',
-    creditUrl: 'https://www.facebook.com/dehbi.voyages/',
+    credit: 'Marcel.c · Wikimedia Commons · Domaine public',
+    creditUrl: 'https://commons.wikimedia.org/wiki/File:Koutoubia_Mosque_1.jpg',
   },
   rmilat: {
-    image: '/manus-storage/tanger-mosquee-mesnana-soiree_e294a19c.jpg',
-    label: 'Mosquée de Rmilat · Tanger',
-    description: 'Mosquée de quartier et ciel atlantique dans le secteur de Rmilat',
+    image: '/manus-storage/fes-qarawiyyin_64c4922f.jpg',
+    label: 'Mosquée Al Quaraouiyine · Fès',
+    description: 'Cour intérieure et zellige de l’un des grands patrimoines de Fès',
     overlay: 'linear-gradient(90deg, rgba(12, 22, 35, 0.84) 0%, rgba(12, 22, 35, 0.55) 48%, rgba(12, 22, 35, 0.18) 100%)',
     filter: 'brightness(0.92) saturate(0.90)',
-    credit: 'Référence photo Dehbi Voyages',
-    creditUrl: 'https://www.facebook.com/dehbi.voyages/',
+    credit: 'R Prazeres · Wikimedia Commons · CC BY-SA 4.0',
+    creditUrl: 'https://commons.wikimedia.org/wiki/File:Qarawiyyin_Mosque_DSCF4250.jpg',
   },
   saoudienne: {
-    image: '/manus-storage/U1R4xR9HrdJp_7b899715.jpg',
-    label: 'Mosquée saoudienne · Tanger',
-    description: 'Mosquée saoudienne de Tanger dans un panorama urbain',
+    image: '/manus-storage/rabat-hassan-tower_ceb13826.jpg',
+    label: 'Tour Hassan · Rabat',
+    description: 'La Tour Hassan et le complexe historique Mohammed V à Rabat',
     overlay: 'linear-gradient(90deg, rgba(7, 18, 37, 0.87) 0%, rgba(7, 18, 37, 0.57) 48%, rgba(7, 18, 37, 0.18) 100%)',
     filter: 'brightness(0.82) saturate(0.92)',
-    credit: 'Référence publique à vérifier',
-    creditUrl: 'https://www.facebook.com/dehbi.voyages/',
+    credit: 'Jorge Láscar · Wikimedia Commons · CC BY 2.0',
+    creditUrl: 'https://commons.wikimedia.org/wiki/File:Mausoleum_of_Mohammed_V_(5509102646).jpg',
   },
 };
 
@@ -252,13 +252,13 @@ const Hero = forwardRef((props, ref: any) => {
           </div>
         </div>
 
-        <div className="mt-9 flex flex-wrap items-center gap-2" role="group" aria-label="Démonstration des paysages de Tanger">
+        <div className="mt-9 flex flex-wrap items-center gap-2" role="group" aria-label="Démonstration des mosquées marocaines">
           {([
             ['auto', 'Auto 3 h'],
-            ['mohammedV', 'Mohammed V'],
-            ['port', 'Port de Tanger'],
-            ['rmilat', 'Rmilat'],
-            ['saoudienne', 'Mosquée saoudienne'],
+            ['mohammedV', 'Hassan II · Casablanca'],
+            ['port', 'Koutoubia · Marrakech'],
+            ['rmilat', 'Al Quaraouiyine · Fès'],
+            ['saoudienne', 'Tour Hassan · Rabat'],
           ] as const).map(([value, label]) => (
             <button
               key={value}
