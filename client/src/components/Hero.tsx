@@ -238,8 +238,8 @@ const Hero = forwardRef((props, ref: any) => {
             aria-live="polite"
             aria-label={`Image actuelle : ${visibleScene.label}`}
           >
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#FFB27D]">Patrimoine marocain</p>
-            <p className="mt-0.5 font-['Playfair_Display'] text-lg font-bold leading-tight sm:text-xl">{visibleScene.label}</p>
+            <p className="font-['Playfair_Display'] text-lg font-bold leading-tight sm:text-xl">{visibleScene.label}</p>
+            <p className="mt-1 text-[11px] font-medium text-white/70">Photographe : {visibleScene.credit.split(' · ')[0]}</p>
           </div>
           <h1 className="mb-4 text-4xl font-bold text-[#FF8C42] md:text-5xl">اختر وجهتك .. وعلينا ايصالك</h1>
           <p className="mb-8 max-w-xl text-lg leading-8 text-white/95">
