@@ -8,10 +8,9 @@ import { useEffect, useState } from 'react';
  */
 
 const MOROCCO_TIME_ZONE = 'Africa/Casablanca';
-const DISPLAY_OFFSET_MINUTES = -60;
 
 export function getDisplayInstant(date: Date) {
-  return new Date(date.getTime() + DISPLAY_OFFSET_MINUTES * 60_000);
+  return new Date(date.getTime());
 }
 
 export function formatClock(date: Date) {

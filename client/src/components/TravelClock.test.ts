@@ -5,11 +5,11 @@ import { formatClock, formatDate, formatHijriDate, getDisplayInstant } from './T
 describe('TravelClock', () => {
   const instant = new Date('2026-09-01T09:23:25.000Z');
 
-  it('displays one hour less while keeping Gregorian and Hijri dates on the same display instant', () => {
+  it('uses the same Morocco instant for the clock and both calendars', () => {
     const displayInstant = getDisplayInstant(instant);
 
-    expect(displayInstant.getTime()).toBe(instant.getTime() - 60 * 60 * 1000);
-    expect(formatClock(displayInstant)).toMatch(/09:23:25/);
+    expect(displayInstant.getTime()).toBe(instant.getTime());
+    expect(formatClock(displayInstant)).toMatch(/10:23:25/);
     expect(formatDate(displayInstant)).toMatch(/2026/);
     expect(formatDate(displayInstant).toLowerCase()).toMatch(/sept/);
     expect(formatHijriDate(displayInstant)).toMatch(/1448/);
