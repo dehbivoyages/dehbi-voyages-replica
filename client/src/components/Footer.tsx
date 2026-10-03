@@ -18,12 +18,23 @@ function isAgencyOpen(date: Date) {
   return hour >= 10 && hour < 18;
 }
 
+function formatMoroccoTime(date: Date) {
+  return new Intl.DateTimeFormat('fr-FR', {
+    timeZone: MOROCCO_TIME_ZONE,
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hourCycle: 'h23',
+  }).format(date);
+}
+
 export default function Footer() {
   const [currentTime, setCurrentTime] = useState(() => new Date());
   const currentlyOpen = isAgencyOpen(currentTime);
+  const moroccoTime = formatMoroccoTime(currentTime);
 
   useEffect(() => {
-    const timer = window.setInterval(() => setCurrentTime(new Date()), 60_000);
+    const timer = window.setInterval(() => setCurrentTime(new Date()), 1_000);
     return () => window.clearInterval(timer);
   }, []);
 
@@ -153,6 +164,9 @@ export default function Footer() {
                 >
                   <span className={`h-2 w-2 rounded-full ${currentlyOpen ? 'bg-[#6BFF42]' : 'bg-[#FF5A5F]'}`} aria-hidden="true" />
                   {currentlyOpen ? 'Ouvert actuellement' : 'Fermé actuellement'}
+                </span>
+                <span className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-2.5 py-1 font-mono text-xs font-semibold tracking-wide text-white/85 tabular-nums" aria-label={`Heure locale du Maroc : ${moroccoTime}`}>
+                  Maroc&nbsp;{moroccoTime}
                 </span>
               </div>
               <div className="space-y-2 text-sm text-gray-400">
