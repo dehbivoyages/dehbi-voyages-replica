@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Facebook, Instagram, MessageCircle } from 'lucide-react';
+import { getDisplayInstant } from './TravelClock';
 
 const MOROCCO_TIME_ZONE = 'Africa/Casablanca';
 
@@ -30,8 +31,9 @@ function formatMoroccoTime(date: Date) {
 
 export default function Footer() {
   const [currentTime, setCurrentTime] = useState(() => new Date());
-  const currentlyOpen = isAgencyOpen(currentTime);
-  const moroccoTime = formatMoroccoTime(currentTime);
+  const displayTime = getDisplayInstant(currentTime);
+  const currentlyOpen = isAgencyOpen(displayTime);
+  const moroccoTime = formatMoroccoTime(displayTime);
 
   useEffect(() => {
     const timer = window.setInterval(() => setCurrentTime(new Date()), 1_000);
