@@ -28,7 +28,7 @@ export default function PremiumServices() {
       title: 'Service Visa',
       description: 'Accompagnement personnalisé pour vos demandes de visa vers les grandes régions du monde',
       regions: ['Asie', 'Golfe', 'Afrique', 'Europe'],
-      videoUrl: '/manus-storage/service-visa_1954dc1f.mp4',
+      videoUrl: '/manus-storage/service-visa-final_3c635fc3.mp4',
     },
   ];
 
