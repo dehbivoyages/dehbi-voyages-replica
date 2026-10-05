@@ -21,7 +21,7 @@ describe('OrganizedTrips expiration filtering', () => {
 });
 
 
-describe('PRODV26-2 programme selection', () => {
+describe('Programme selection', () => {
   it('contains only the nine archive programmes with usable images', async () => {
     const { trips } = await import('./OrganizedTrips');
     expect(trips).toHaveLength(11);
@@ -33,7 +33,7 @@ describe('PRODV26-2 programme selection', () => {
       'omra-hajj-sur-mesure-prodv26',
       'omra-kuala-lumpur-septembre-2026-prodv26',
       'deux-omra-etihad-2026-prodv26',
-      'omra-deux-departs-septembre-2026-prodv26',
+      'omra-direct-tanger-novembre-2026',
       'punta-cana-ete-2026-prodv26',
       'ouzbekistan-istanbul-mai-2027-prodv26',
       'dakhla-lagon-dunes-prodv26',
