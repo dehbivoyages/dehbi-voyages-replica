@@ -147,6 +147,17 @@ export const trips: OrganizedTrip[] = [
     highlights: ['Vol direct Saudia depuis Tanger', 'Médine et La Mecque', 'Hôtels 5 étoiles disponibles', 'Visa, transport et accompagnement inclus'],
   },
   {
+    id: 'cairo-omra-octobre-2026',
+    title: 'Le Caire & Omra — Octobre 2026',
+    description: 'Un programme spirituel et culturel de 16 jours combinant la découverte du Caire et une Omra à Médine et La Mecque, au départ de Casablanca.',
+    dates: 'Du 16/10 au 31/10/2026 — 16 jours',
+    endDate: '2026-10-31',
+    image: '/manus-storage/cairo-omra-octobre-2026_29c785dc.jpeg',
+    destination: 'Moyen-Orient',
+    price: 'À partir de 19.500 DHS',
+    highlights: ['Départ et retour depuis Casablanca', '4 jours au Caire', 'Médine et La Mecque', 'Formules économique, moyenne ou touristique'],
+  },
+  {
     id: 'punta-cana-ete-2026-prodv26',
     title: 'Punta Cana — Été 2026',
     description: 'Un séjour caribéen tout compris entre plages, détente et activités, avec départs garantis pendant la saison estivale.',

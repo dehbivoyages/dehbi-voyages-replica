@@ -24,7 +24,7 @@ describe('OrganizedTrips expiration filtering', () => {
 describe('Programme selection', () => {
   it('contains only the nine archive programmes with usable images', async () => {
     const { trips } = await import('./OrganizedTrips');
-    expect(trips).toHaveLength(11);
+    expect(trips).toHaveLength(12);
     expect(trips.map((trip) => trip.id)).toEqual([
       'istanbul-septembre-2026-prodv26',
       'istanbul-octobre-2026-prodv26',
@@ -34,6 +34,7 @@ describe('Programme selection', () => {
       'omra-kuala-lumpur-septembre-2026-prodv26',
       'deux-omra-etihad-2026-prodv26',
       'omra-direct-tanger-novembre-2026',
+      'cairo-omra-octobre-2026',
       'punta-cana-ete-2026-prodv26',
       'ouzbekistan-istanbul-mai-2027-prodv26',
       'dakhla-lagon-dunes-prodv26',
