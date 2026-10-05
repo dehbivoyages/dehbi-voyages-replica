@@ -1,4 +1,4 @@
-import { Heart, Map, Plane } from 'lucide-react';
+import { FileCheck, Heart, Map, Plane } from 'lucide-react';
 import { useState } from 'react';
 
 export default function PremiumServices() {
@@ -23,6 +23,13 @@ export default function PremiumServices() {
       description: 'Vols nationaux et internationaux aux meilleurs tarifs',
       videoUrl: '/manus-storage/TICKETAVION_WITH_MUSIC_aa5b60b6.mp4',
     },
+    {
+      icon: FileCheck,
+      title: 'Service Visa',
+      description: 'Accompagnement personnalisé pour vos demandes de visa vers les grandes régions du monde',
+      regions: ['Asie', 'Golfe', 'Afrique', 'Europe'],
+      videoUrl: '/manus-storage/service-visa_1954dc1f.mp4',
+    },
   ];
 
   return (
@@ -34,7 +41,7 @@ export default function PremiumServices() {
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
           {services.map((service, index) => {
             const Icon = service.icon;
             const isExpanded = expandedService === index;
@@ -94,6 +101,15 @@ export default function PremiumServices() {
                     <p className="text-muted-foreground mb-6">
                       {service.description}
                     </p>
+                    {'regions' in service && service.regions && (
+                      <div className="mb-6 flex flex-wrap justify-center gap-2" aria-label="Zones couvertes par le service Visa">
+                        {service.regions.map((region) => (
+                          <span key={region} className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                            {region}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                     <button
                       className="btn-outline"
                       onClick={() => {
