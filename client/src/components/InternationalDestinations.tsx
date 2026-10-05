@@ -69,6 +69,12 @@ export default function InternationalDestinations() {
       videoUrl: '/manus-storage/europe-rome-hd_4eac07e7.mp4',
     },
     {
+      name: 'Afrique',
+      highlights: ['Kenya, Afrique du Sud, Sénégal et grands horizons africains'],
+      features: ['Safaris et nature', 'Cultures authentiques', 'Villes et littoraux'],
+      videoUrl: '/manus-storage/afrique-destination_f6683848.mp4',
+    },
+    {
       name: 'Amérique du Sud',
       highlights: ['Brésil, Pérou, Argentine — panoramas grandioses'],
       features: ['Machu Picchu', 'Rio de Janeiro', 'Patagonie'],
