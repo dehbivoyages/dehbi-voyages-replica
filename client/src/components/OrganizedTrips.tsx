@@ -56,25 +56,25 @@ export function getTripShareUrl(tripId: string) {
 
 export const trips: OrganizedTrip[] = [
   {
-    id: 'omra-ramadan-1448-economique',
-    title: 'Omra Ramadan 1448 — Formule Économique',
-    description: 'Le programme prioritaire Dehbi Voyages pour la Omra de Ramadan : trajet direct Tanger–Jeddah, Médine puis La Mecque, avec hébergement économique soigneusement sélectionné.',
-    dates: 'Du 25 Chaabane au 08 Chawwal 1448 H · selon le calendrier du programme',
-    image: '/manus-storage/omra-ramadan-1448_df20087a.jpeg',
+    id: 'omra-ramadan-fevrier-2027',
+    title: 'Omra Ramadan 1448 — Février 2027',
+    description: 'Programme prioritaire Dehbi Voyages avec trajet direct Tanger–Jeddah–Tanger, 4 nuits à Médine puis séjour à La Mecque, vols Saudia et accompagnement de l’agence.',
+    dates: 'Du 25 Chaabane au 08 Chawwal 1448 H · Février 2027',
+    image: '/manus-storage/omra-ramadan-1448-fevrier-2027_7035553c.jpeg',
     destination: 'Moyen-Orient',
     price: 'À partir de 25.500 DHS',
-    highlights: ['Trajet direct depuis Tanger', '4 nuits à Médine', 'Hébergement économique', 'Accompagnement Dehbi Voyages'],
+    highlights: ['Vol Saudia direct depuis Tanger', '4 nuits à Médine', 'La Mecque pour le reste du séjour', 'Transport et accompagnement inclus'],
     featured: true,
   },
   {
-    id: 'omra-ramadan-1448-premium',
-    title: 'Omra Ramadan 1448 — Formule Premium',
-    description: 'Notre offre prioritaire avec hébergement premium autour des lieux saints, vol Saudia et accompagnement complet pendant tout le parcours Tanger–Jeddah–Médine–Tanger.',
-    dates: 'Du 25 Chaabane au 08 Chawwal 1448 H · selon le calendrier du programme',
-    image: '/manus-storage/omra-ramadan-1448_df20087a.jpeg',
+    id: 'omra-chaabane-ramadan-fevrier-2027',
+    title: 'Omra Chaabane + Ramadan 1448 — Février 2027',
+    description: 'Un séjour spirituel prolongé entre Chaabane et Ramadan, avec trajet direct Tanger–Jeddah–Tanger, Médine, La Mecque et plusieurs niveaux d’hébergement.',
+    dates: 'Du 22 Chaabane au 10 Chawwal 1448 H · Février 2027',
+    image: '/manus-storage/omra-chaabane-ramadan-1448-fevrier-2027_a4478c05.jpeg',
     destination: 'Moyen-Orient',
-    price: 'À partir de 39.000 DHS',
-    highlights: ['Vol Saudia direct', 'Médine et La Mecque', 'Hôtels premium sélectionnés', 'Transport et accompagnement inclus'],
+    price: 'À partir de 25.500 DHS',
+    highlights: ['Vol Saudia direct depuis Tanger', 'Médine et La Mecque', '3 programmes au choix', 'Transport et accompagnement inclus'],
     featured: true,
   },
   {
@@ -290,8 +290,8 @@ export default function OrganizedTrips() {
         </div>
 
         <div className="mx-auto mb-8 max-w-4xl rounded-2xl border border-[#FFB347]/70 bg-gradient-to-r from-[#10213f]/95 via-[#173d45]/95 to-[#10213f]/95 px-5 py-4 text-center text-white shadow-[0_0_32px_rgba(255,179,71,0.28)]">
-          <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-[#FFD27A]">Programmes prioritaires · Réservations ouvertes</p>
-          <p className="mt-1 text-sm leading-6 text-white/85">Les deux offres Omra Ramadan 1448 sont mises en avant pour vos prochaines réservations.</p>
+          <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-[#FFD27A]">Nouveaux programmes prioritaires · Réservations ouvertes</p>
+          <p className="mt-1 text-sm leading-6 text-white/85">Les deux offres Omra 1448 H de février 2027 sont mises en avant pour vos prochaines réservations.</p>
         </div>
 
         <div className="mx-auto mb-5 flex max-w-2xl items-center gap-3 rounded-2xl border border-white/20 bg-white/95 px-4 py-3 shadow-xl shadow-black/15">
@@ -342,7 +342,7 @@ export default function OrganizedTrips() {
           <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 xl:grid-cols-3">
           {filteredTrips.map((trip) => (
             <article key={trip.id} className={`relative overflow-hidden rounded-2xl bg-white shadow-xl shadow-black/20 transition hover:-translate-y-1 hover:shadow-2xl ${trip.featured ? 'ring-2 ring-[#FFB347] shadow-[0_0_34px_rgba(255,179,71,0.42)] motion-safe:animate-[featuredGlow_3s_ease-in-out_infinite]' : ''}`}>
-              {trip.featured && <div className="absolute inset-x-0 top-0 z-20 bg-gradient-to-r from-[#FF8C42] via-[#FFD166] to-[#FF8C42] px-4 py-2 text-center text-xs font-black uppercase tracking-[0.18em] text-[#10213f]">Programme prioritaire · Ramadan 1448</div>}
+              {trip.featured && <div className="absolute inset-x-0 top-0 z-20 bg-gradient-to-r from-[#FF8C42] via-[#FFD166] to-[#FF8C42] px-4 py-2 text-center text-xs font-black uppercase tracking-[0.18em] text-[#10213f]">Programme prioritaire · 1448 H</div>}
               <div className={`group relative h-72 w-full bg-[#f6f1e8] md:h-80 ${trip.featured ? 'pt-7' : ''}`}>
                 <button type="button" className="absolute inset-0 block h-full w-full" onClick={() => setSelectedDetails(trip)} aria-label={`Voir les détails de ${trip.title}`}>
                   <img src={trip.image} alt={`Affiche du voyage ${trip.title}`} className="h-full w-full object-contain transition duration-500 group-hover:scale-[1.02]" />

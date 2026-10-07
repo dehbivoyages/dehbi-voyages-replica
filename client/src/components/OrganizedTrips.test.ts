@@ -26,8 +26,8 @@ describe('Programme selection', () => {
     const { trips } = await import('./OrganizedTrips');
     expect(trips).toHaveLength(14);
     expect(trips.map((trip) => trip.id)).toEqual([
-      'omra-ramadan-1448-economique',
-      'omra-ramadan-1448-premium',
+      'omra-ramadan-fevrier-2027',
+      'omra-chaabane-ramadan-fevrier-2027',
       'istanbul-septembre-2026-prodv26',
       'istanbul-octobre-2026-prodv26',
       'omra-istanbul-decembre-2026-mns',
@@ -43,9 +43,10 @@ describe('Programme selection', () => {
     ]);
     expect(trips.every((trip) => trip.image.startsWith('/manus-storage/'))).toBe(true);
     expect(trips.filter((trip) => trip.featured).map((trip) => trip.id)).toEqual([
-      'omra-ramadan-1448-economique',
-      'omra-ramadan-1448-premium',
+      'omra-ramadan-fevrier-2027',
+      'omra-chaabane-ramadan-fevrier-2027',
     ]);
+    expect(trips.some((trip) => trip.id === 'omra-ramadan-1448-economique' || trip.id === 'omra-ramadan-1448-premium')).toBe(false);
   });
 
   it('keeps the on-demand spiritual and Dakhla programmes non-expiring', async () => {
