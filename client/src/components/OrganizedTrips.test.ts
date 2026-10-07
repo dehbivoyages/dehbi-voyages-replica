@@ -24,8 +24,10 @@ describe('OrganizedTrips expiration filtering', () => {
 describe('Programme selection', () => {
   it('contains only the nine archive programmes with usable images', async () => {
     const { trips } = await import('./OrganizedTrips');
-    expect(trips).toHaveLength(12);
+    expect(trips).toHaveLength(14);
     expect(trips.map((trip) => trip.id)).toEqual([
+      'omra-ramadan-1448-economique',
+      'omra-ramadan-1448-premium',
       'istanbul-septembre-2026-prodv26',
       'istanbul-octobre-2026-prodv26',
       'omra-istanbul-decembre-2026-mns',
@@ -40,6 +42,10 @@ describe('Programme selection', () => {
       'dakhla-lagon-dunes-prodv26',
     ]);
     expect(trips.every((trip) => trip.image.startsWith('/manus-storage/'))).toBe(true);
+    expect(trips.filter((trip) => trip.featured).map((trip) => trip.id)).toEqual([
+      'omra-ramadan-1448-economique',
+      'omra-ramadan-1448-premium',
+    ]);
   });
 
   it('keeps the on-demand spiritual and Dakhla programmes non-expiring', async () => {

@@ -153,6 +153,17 @@
   }
 }
 
+@keyframes featuredGlow {
+  0%, 100% { box-shadow: 0 0 24px rgba(255, 179, 71, 0.28); }
+  50% { box-shadow: 0 0 38px rgba(255, 210, 122, 0.58); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-safe\:animate-\[featuredGlow_3s_ease-in-out_infinite\] {
+    animation: none !important;
+  }
+}
+
 /* Les classes historiques restent utilisables tout en recevant des surfaces lisibles dans le thème sombre. */
 .dark body {
   background-color: #07111f;
