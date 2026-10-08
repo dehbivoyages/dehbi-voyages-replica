@@ -46,6 +46,7 @@ describe('Programme selection', () => {
       'omra-ramadan-fevrier-2027',
       'omra-chaabane-ramadan-fevrier-2027',
     ]);
+    expect(trips.filter((trip) => trip.featured).every((trip) => trip.pdfUrl?.endsWith('.pdf'))).toBe(true);
     expect(trips.some((trip) => trip.id === 'omra-ramadan-1448-economique' || trip.id === 'omra-ramadan-1448-premium')).toBe(false);
   });
 
