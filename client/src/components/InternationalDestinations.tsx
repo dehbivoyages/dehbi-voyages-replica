@@ -12,7 +12,15 @@ export default function InternationalDestinations() {
   const [playingVideo, setPlayingVideo] = useState<number | null>(null);
   const [isTicketVideoOpen, setIsTicketVideoOpen] = useState(false);
 
-  const ticketingVideoUrl = '/manus-storage/billetterie-parcours-12s_021c6e7b.mp4';
+const ticketingVideoUrl = '/manus-storage/billetterie-parcours-12s_021c6e7b.mp4';
+const hotelWhatsAppNumber = '212663381004';
+
+const hotelWhatsAppUrl = (zone: 'morocco' | 'international') => {
+  const message = zone === 'morocco'
+    ? 'Bonjour Dehbi Voyages, je souhaite demander une réservation d’hôtel au Maroc. Merci de me proposer des disponibilités et tarifs.'
+    : 'Bonjour Dehbi Voyages, je souhaite demander une réservation d’hôtel international. Merci de me proposer des disponibilités et tarifs.';
+  return `https://wa.me/${hotelWhatsAppNumber}?text=${encodeURIComponent(message)}`;
+};
 
   useEffect(() => {
     if (!isTicketVideoOpen) return;
@@ -355,9 +363,9 @@ export default function InternationalDestinations() {
                   <span className="flex items-start gap-2"><CheckCircle2 size={17} className="mt-0.5 shrink-0 text-[#FF8C42]" />Sélection selon votre budget et votre séjour</span>
                   <span className="flex items-start gap-2"><CheckCircle2 size={17} className="mt-0.5 shrink-0 text-[#FF8C42]" />Disponibilités confirmées par l’agence</span>
                 </div>
-                <button type="button" onClick={openReservationDialog} className="mt-auto rounded-xl bg-[#FF8C42] px-4 py-3 text-sm font-extrabold text-[#07111F] transition hover:bg-[#FFA562] focus:outline-none focus:ring-2 focus:ring-[#FF8C42] focus:ring-offset-2 focus:ring-offset-[#10233C]">
+                <a href={hotelWhatsAppUrl('morocco')} target="_blank" rel="noopener noreferrer" className="mt-auto rounded-xl bg-[#FF8C42] px-4 py-3 text-center text-sm font-extrabold text-[#07111F] transition hover:bg-[#FFA562] focus:outline-none focus:ring-2 focus:ring-[#FF8C42] focus:ring-offset-2 focus:ring-offset-[#10233C]">
                   Demander un hôtel au Maroc
-                </button>
+                </a>
               </article>
 
               <article className="flex min-h-[252px] flex-col rounded-2xl border border-[#6BFF42]/65 bg-white/[0.05] p-5 shadow-[0_18px_35px_rgba(0,0,0,0.18)]">
@@ -375,9 +383,9 @@ export default function InternationalDestinations() {
                   <span className="flex items-start gap-2"><CheckCircle2 size={17} className="mt-0.5 shrink-0 text-[#6BFF42]" />Conseil sur l’emplacement et les prestations</span>
                   <span className="flex items-start gap-2"><CheckCircle2 size={17} className="mt-0.5 shrink-0 text-[#6BFF42]" />Tarif et disponibilité confirmés par l’agence</span>
                 </div>
-                <button type="button" onClick={openReservationDialog} className="mt-auto rounded-xl bg-[#6BFF42] px-4 py-3 text-sm font-extrabold text-[#07111F] transition hover:bg-[#92FF73] focus:outline-none focus:ring-2 focus:ring-[#6BFF42] focus:ring-offset-2 focus:ring-offset-[#10233C]">
+                <a href={hotelWhatsAppUrl('international')} target="_blank" rel="noopener noreferrer" className="mt-auto rounded-xl bg-[#6BFF42] px-4 py-3 text-center text-sm font-extrabold text-[#07111F] transition hover:bg-[#92FF73] focus:outline-none focus:ring-2 focus:ring-[#6BFF42] focus:ring-offset-2 focus:ring-offset-[#10233C]">
                   Demander un hôtel international
-                </button>
+                </a>
               </article>
             </div>
           </div>
