@@ -28,7 +28,7 @@ export default function PremiumServices() {
       title: 'Service Visa',
       description: 'Accompagnement personnalisé pour vos demandes de visa, avec réservation avion et hôtel disponibles sur demande dans le pack',
       regions: ['Asie', 'Golfe', 'Afrique', 'Europe'],
-      includedServices: ['Réservation avion', 'Réservation hôtel'],
+      includedServices: ['Réservation avion', 'Réservation hôtel', 'Formulaire du visa à la demande'],
       videoUrl: '/manus-storage/service-visa-final_3c635fc3.mp4',
     },
   ];

@@ -1,4 +1,4 @@
-import { CheckCircle2, MapPin, Plane, Play, Ticket, X } from 'lucide-react';
+import { CheckCircle2, Hotel, MapPin, Plane, Play, Ticket, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { openReservationDialog } from './WhatsAppReservation';
 
@@ -316,6 +316,70 @@ export default function InternationalDestinations() {
                 <p className="mt-2 max-w-md text-sm leading-6 text-[#D8E8FF]">Une courte démonstration de l’accompagnement de votre demande de billet.</p>
               </div>
             </button>
+          </div>
+        </section>
+
+        <section
+          id="reservation-hotel"
+          className="mt-10 overflow-hidden rounded-[2rem] border border-[#6BFF42]/30 bg-[#10233C] text-white shadow-[0_24px_80px_rgba(7,17,31,0.16)]"
+          aria-labelledby="hotel-booking-title"
+        >
+          <div className="p-7 sm:p-10 lg:p-12">
+            <div className="flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#6BFF42] text-[#07111F] shadow-lg shadow-[#6BFF42]/20">
+                <Hotel size={25} strokeWidth={2.4} />
+              </div>
+              <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-[#FFB986]">Service agence</p>
+            </div>
+
+            <h3 id="hotel-booking-title" className="mt-6 max-w-3xl text-3xl font-black leading-tight text-white sm:text-4xl">
+              Réservation Hôtel, partout où vous allez.
+            </h3>
+            <p className="mt-4 max-w-3xl text-base leading-7 text-[#D8E8FF]">
+              Confiez-nous la recherche d’un hébergement confortable et adapté à votre itinéraire, au Maroc comme dans le monde entier.
+            </p>
+
+            <div className="mt-8 grid gap-4 sm:grid-cols-2" aria-label="Choisir un service de réservation hôtel">
+              <article className="flex min-h-[252px] flex-col rounded-2xl border border-[#FF8C42]/65 bg-white/[0.05] p-5 shadow-[0_18px_35px_rgba(0,0,0,0.18)]">
+                <div className="flex items-start gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FF8C42] text-[#07111F]">
+                    <MapPin size={20} strokeWidth={2.5} />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#FFB986]">Au Maroc</p>
+                    <h4 className="mt-1 text-xl font-extrabold text-white">Hôtels au Maroc</h4>
+                  </div>
+                </div>
+                <p className="mt-4 text-sm leading-6 text-[#D8E8FF]">Riads, hôtels et resorts dans les principales villes et stations marocaines.</p>
+                <div className="mt-4 space-y-2 text-sm text-[#E8FFE3]">
+                  <span className="flex items-start gap-2"><CheckCircle2 size={17} className="mt-0.5 shrink-0 text-[#FF8C42]" />Sélection selon votre budget et votre séjour</span>
+                  <span className="flex items-start gap-2"><CheckCircle2 size={17} className="mt-0.5 shrink-0 text-[#FF8C42]" />Disponibilités confirmées par l’agence</span>
+                </div>
+                <button type="button" onClick={openReservationDialog} className="mt-auto rounded-xl bg-[#FF8C42] px-4 py-3 text-sm font-extrabold text-[#07111F] transition hover:bg-[#FFA562] focus:outline-none focus:ring-2 focus:ring-[#FF8C42] focus:ring-offset-2 focus:ring-offset-[#10233C]">
+                  Demander un hôtel au Maroc
+                </button>
+              </article>
+
+              <article className="flex min-h-[252px] flex-col rounded-2xl border border-[#6BFF42]/65 bg-white/[0.05] p-5 shadow-[0_18px_35px_rgba(0,0,0,0.18)]">
+                <div className="flex items-start gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#6BFF42] text-[#07111F]">
+                    <Hotel size={20} strokeWidth={2.5} />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#6BFF42]">Vers le monde</p>
+                    <h4 className="mt-1 text-xl font-extrabold text-white">Hôtels internationaux</h4>
+                  </div>
+                </div>
+                <p className="mt-4 text-sm leading-6 text-[#D8E8FF]">Hébergements pour vos voyages en Europe, Afrique, Moyen-Orient, Amériques et autres destinations.</p>
+                <div className="mt-4 space-y-2 text-sm text-[#E8FFE3]">
+                  <span className="flex items-start gap-2"><CheckCircle2 size={17} className="mt-0.5 shrink-0 text-[#6BFF42]" />Conseil sur l’emplacement et les prestations</span>
+                  <span className="flex items-start gap-2"><CheckCircle2 size={17} className="mt-0.5 shrink-0 text-[#6BFF42]" />Tarif et disponibilité confirmés par l’agence</span>
+                </div>
+                <button type="button" onClick={openReservationDialog} className="mt-auto rounded-xl bg-[#6BFF42] px-4 py-3 text-sm font-extrabold text-[#07111F] transition hover:bg-[#92FF73] focus:outline-none focus:ring-2 focus:ring-[#6BFF42] focus:ring-offset-2 focus:ring-offset-[#10233C]">
+                  Demander un hôtel international
+                </button>
+              </article>
+            </div>
           </div>
         </section>
       </div>
