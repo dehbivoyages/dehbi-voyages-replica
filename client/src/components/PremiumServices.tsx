@@ -26,8 +26,9 @@ export default function PremiumServices() {
     {
       icon: FileCheck,
       title: 'Service Visa',
-      description: 'Accompagnement personnalisé pour vos demandes de visa vers les grandes régions du monde',
+      description: 'Accompagnement personnalisé pour vos demandes de visa, avec réservation avion et hôtel disponibles sur demande dans le pack',
       regions: ['Asie', 'Golfe', 'Afrique', 'Europe'],
+      includedServices: ['Réservation avion', 'Réservation hôtel'],
       videoUrl: '/manus-storage/service-visa-final_3c635fc3.mp4',
     },
   ];
@@ -108,6 +109,19 @@ export default function PremiumServices() {
                             {region}
                           </span>
                         ))}
+                      </div>
+                    )}
+                    {'includedServices' in service && service.includedServices && (
+                      <div className="mb-6 rounded-lg border border-primary/15 bg-primary/5 px-4 py-3 text-left" aria-label="Services inclus dans le pack Visa">
+                        <p className="mb-2 text-xs font-bold uppercase tracking-wide text-primary">Disponible avec le pack Visa</p>
+                        <ul className="space-y-1 text-sm font-medium text-foreground">
+                          {service.includedServices.map((includedService) => (
+                            <li key={includedService} className="flex items-center gap-2">
+                              <span className="text-primary" aria-hidden="true">✓</span>
+                              {includedService}
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     )}
                     <button
