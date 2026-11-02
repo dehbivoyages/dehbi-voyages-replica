@@ -68,7 +68,7 @@ export default function TravelClock({ className = '' }: TravelClockProps) {
       </span>
       <span className="min-w-0">
         <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#6BFF42]">
-          <Clock3 size={12} aria-hidden="true" /> Maroc
+          <Clock3 size={12} aria-hidden="true" /> Maroc · Africa/Casablanca
         </span>
         <span className="mt-0.5 block font-mono text-[17px] font-bold leading-none tracking-wider text-white tabular-nums">{formatClock(displayNow)}</span>
         <span className="mt-1 grid gap-0.5 text-[10px] font-semibold leading-tight text-[#FFB17D]">

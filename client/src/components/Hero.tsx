@@ -2,12 +2,12 @@ import { forwardRef, useEffect, useMemo, useState } from 'react';
 import { X } from 'lucide-react';
 
 /**
- * Direction artistique : quatre vues documentaires de mosquées marocaines
+ * Direction artistique : cinq vues documentaires de mosquées marocaines
  * emblématiques. Les fonds alternent avec un fondu long, et le voile bleu encre
  * préserve la lisibilité des accents Orange tropical.
  */
 
-type HeroMode = 'auto' | 'mohammedV' | 'port' | 'rmilat' | 'saoudienne';
+type HeroMode = 'auto' | 'mohammedV' | 'port' | 'rmilat' | 'saoudienne' | 'tangierMohammedV';
 type HeroScene = Exclude<HeroMode, 'auto'>;
 type WeatherTone = 'clear' | 'rain' | 'night';
 
@@ -63,14 +63,23 @@ const heroScenes: Record<HeroScene, { image: string; label: string; description:
     credit: 'Jorge Láscar · Wikimedia Commons · CC BY 2.0',
     creditUrl: 'https://commons.wikimedia.org/wiki/File:Mausoleum_of_Mohammed_V_(5509102646).jpg',
   },
+  tangierMohammedV: {
+    image: '/manus-storage/gcRSffW4b820_b9fb7896.jpg',
+    label: 'Mosquée Mohammed V · Tanger',
+    description: 'Vue panoramique de la mosquée, de la médina et du bord de mer de Tanger',
+    overlay: 'linear-gradient(90deg, rgba(5, 24, 53, 0.82) 0%, rgba(5, 24, 53, 0.50) 48%, rgba(5, 24, 53, 0.14) 100%)',
+    filter: 'brightness(1.03) saturate(1.05)',
+    credit: 'IRCICA · Grand Mosque of Tangier',
+    creditUrl: 'https://www.ircica.org/photogallery/grand-mosque-of-tangier',
+  },
 };
 
 const rainCodes = new Set([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99]);
 
 export const sceneForTangierHour = (hour: number): HeroScene => {
   const safeHour = Math.max(0, Math.min(23, Math.floor(hour)));
-  const slot = Math.floor(safeHour / 3) % 4;
-  return (['mohammedV', 'port', 'rmilat', 'saoudienne'] as const)[slot];
+  const slot = Math.floor(safeHour / 3) % 5;
+  return (['mohammedV', 'port', 'rmilat', 'saoudienne', 'tangierMohammedV'] as const)[slot];
 };
 
 const timeScene = (): HeroScene => {
@@ -102,6 +111,7 @@ const Hero = forwardRef((props, ref: any) => {
     port: false,
     rmilat: false,
     saoudienne: false,
+    tangierMohammedV: false,
   });
 
   const scene = heroScenes[mode === 'auto' ? scheduledScene : mode];
@@ -259,6 +269,7 @@ const Hero = forwardRef((props, ref: any) => {
             ['port', 'Koutoubia · Marrakech'],
             ['rmilat', 'Al Quaraouiyine · Fès'],
             ['saoudienne', 'Tour Hassan · Rabat'],
+            ['tangierMohammedV', 'Mohammed V · Tanger'],
           ] as const).map(([value, label]) => (
             <button
               key={value}

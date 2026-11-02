@@ -6,7 +6,6 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import WhatsAppButton from "./components/WhatsAppButton";
 import ChatBot from "./components/ChatBot";
-import Announcements from "./components/Announcements";
 import BackToTop from "./components/BackToTop";
 import AgencyNotification from "./components/AgencyNotification";
 import { Toaster } from "sonner";
@@ -34,7 +33,6 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <AgencyNotification />
-          <Announcements />
           <Router />
           <WhatsAppButton phoneNumber="212663381004" message="Bonjour Dehbi Voyages, je souhaite en savoir plus sur vos voyages organisés." />
           <ChatBot />

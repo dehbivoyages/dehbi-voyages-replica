@@ -27,8 +27,8 @@ describe('Tangier hero rotation', () => {
     [8, 'rmilat'],
     [9, 'saoudienne'],
     [11, 'saoudienne'],
-    [12, 'mohammedV'],
-    [23, 'saoudienne'],
+    [12, 'tangierMohammedV'],
+    [23, 'rmilat'],
   ] as const)('selects %s for Tangier hour %s', (hour, expectedScene) => {
     expect(sceneForTangierHour(hour)).toBe(expectedScene);
   });
