@@ -21,6 +21,11 @@ export default function PremiumServices() {
       icon: Plane,
       title: 'Billetterie Aérienne',
       description: 'Vols nationaux et internationaux aux meilleurs tarifs',
+      lowCostLogos: [
+        { name: 'Ryanair', image: '/manus-storage/8455a25d64d22d64d5416372e304007b_72dd8dd1.jpg' },
+        { name: 'Transavia', image: '/manus-storage/Transavia-Logo_6e0a6ba6.png' },
+        { name: 'Air Arabia', image: '/manus-storage/logo AIR ARABIA_d74d2b0d.png' },
+      ],
       videoUrl: '/manus-storage/TICKETAVION_WITH_MUSIC_aa5b60b6.mp4',
     },
     {
@@ -102,6 +107,19 @@ export default function PremiumServices() {
                     <p className="text-muted-foreground mb-6">
                       {service.description}
                     </p>
+                    {'lowCostLogos' in service && service.lowCostLogos && (
+                      <div className="mb-6 rounded-lg border border-[#FF8C42]/25 bg-[#FFF7F0] px-3 py-3" aria-label="Disponibilité des compagnies Low Cost">
+                        <p className="mb-3 text-xs font-bold uppercase tracking-wide text-[#D86D2D]">Disponibilité Low Cost</p>
+                        <div className="grid grid-cols-3 items-center gap-2">
+                          {service.lowCostLogos.map((logo) => (
+                            <div key={logo.name} className="flex min-h-14 flex-col items-center justify-center gap-1 rounded-md bg-white px-1.5 py-1 shadow-sm" title={logo.name}>
+                              <img src={logo.image} alt={`Logo ${logo.name}`} className="h-8 w-full object-contain" />
+                              <span className="text-[10px] font-semibold text-slate-600">{logo.name}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                     {'regions' in service && service.regions && (
                       <div className="mb-6 flex flex-wrap justify-center gap-2" aria-label="Zones couvertes par le service Visa">
                         {service.regions.map((region) => (
