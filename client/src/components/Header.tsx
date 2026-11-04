@@ -13,11 +13,24 @@ interface HeaderProps {
   onReserveClick?: () => void;
 }
 
+const ACCENT_CYCLE_START = Date.UTC(2026, 10, 4);
+
+function applyDailyAccent() {
+  const elapsedDays = Math.floor((Date.now() - ACCENT_CYCLE_START) / (24 * 60 * 60 * 1000));
+  document.documentElement.dataset.siteAccent = elapsedDays % 2 === 1 ? 'orange' : 'palm';
+}
+
 export default function Header({ onReserveClick }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [themePreview, setThemePreview] = useState<'light' | 'dark' | null>(null);
   const { theme, toggleTheme } = useTheme();
   const isDarkTheme = theme === 'dark';
+
+  useEffect(() => {
+    applyDailyAccent();
+    const timer = window.setInterval(applyDailyAccent, 60_000);
+    return () => window.clearInterval(timer);
+  }, []);
 
   const handleThemeToggle = () => {
     const nextTheme = isDarkTheme ? 'light' : 'dark';
@@ -67,7 +80,7 @@ export default function Header({ onReserveClick }: HeaderProps) {
               <a
                 key={item.label}
                 href={item.href}
-                className="text-foreground hover:text-primary transition-colors font-bold"
+                className="text-primary hover:text-primary/80 transition-colors font-bold"
               >
                 {item.label}
               </a>
@@ -128,7 +141,7 @@ export default function Header({ onReserveClick }: HeaderProps) {
               <a
                 key={item.label}
                 href={item.href}
-                className="text-foreground hover:text-primary transition-colors font-bold"
+                className="text-primary hover:text-primary/80 transition-colors font-bold"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.label}

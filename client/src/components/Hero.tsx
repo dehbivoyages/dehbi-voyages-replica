@@ -248,7 +248,7 @@ const Hero = forwardRef((props, ref: any) => {
             Voyages religieux, circuits marocains et destinations internationales. Depuis 2015, nous réalisons vos rêves de voyage.
           </p>
           <div className="flex flex-col gap-4 sm:flex-row">
-            <button onClick={handleReserveClick} className="btn-primary bg-[#FF8C42] text-white hover:bg-[#F6762C]">Réserver Maintenant</button>
+            <button onClick={handleReserveClick} className="btn-primary text-white">Réserver Maintenant</button>
             <button
               type="button"
               onClick={() => setIsMoreInfoOpen(true)}

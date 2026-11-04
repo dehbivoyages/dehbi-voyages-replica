@@ -46,9 +46,9 @@
 
 :root {
   color-scheme: light;
-  --primary: #FF8C42;
+  --primary: #2F6B4F;
   --primary-foreground: #FFFFFF;
-  --sidebar-primary: #FF8C42;
+  --sidebar-primary: #2F6B4F;
   --sidebar-primary-foreground: #FFFFFF;
   --chart-1: #0066FF;
   --chart-2: #0052CC;
@@ -81,11 +81,16 @@
   --sidebar-ring: #0080c0;
 }
 
+html[data-site-accent='orange'] {
+  --primary: #FF8C42;
+  --sidebar-primary: #FF8C42;
+}
+
 .dark {
   color-scheme: dark;
-  --primary: #FF8C42;
+  --primary: #2F6B4F;
   --primary-foreground: #FFFFFF;
-  --sidebar-primary: #FF8C42;
+  --sidebar-primary: #2F6B4F;
   --sidebar-primary-foreground: #FFFFFF;
   --background: #081526;
   --foreground: #F8F4EA;
@@ -115,6 +120,11 @@
   --sidebar-accent-foreground: #F8F4EA;
   --sidebar-border: #31506E;
   --sidebar-ring: #6BFF42;
+}
+
+html.dark[data-site-accent='orange'] {
+  --primary: #FF8C42;
+  --sidebar-primary: #FF8C42;
 }
 
 @layer base {
@@ -245,22 +255,22 @@
 }
 
 /* Les actions de réservation doivent rester immédiatement lisibles sur les surfaces encre. */
-.dark .btn-primary,
-.dark .btn-secondary,
-.dark .reserve-submit {
-  background-color: #6BFF42 !important;
-  color: #07111F !important;
-  border: 1px solid #BFFFAE;
-  box-shadow: 0 10px 22px rgba(107, 255, 66, 0.22);
+  .dark .btn-primary,
+  .dark .btn-secondary,
+  .dark .reserve-submit {
+    background-color: #2F6B4F !important;
+    color: #FFFFFF !important;
+    border: 1px solid #79A88F;
+    box-shadow: 0 10px 22px rgba(47, 107, 79, 0.28);
   text-shadow: none;
 }
 
-.dark .btn-primary:hover,
-.dark .btn-secondary:hover,
-.dark .reserve-submit:hover {
-  background-color: #BFFFAE !important;
-  color: #07111F !important;
-  border-color: #6BFF42;
+  .dark .btn-primary:hover,
+  .dark .btn-secondary:hover,
+  .dark .reserve-submit:hover {
+    background-color: #1F4A36 !important;
+    color: #FFFFFF !important;
+    border-color: #79A88F;
 }
 
 .dark .reservation-form-surface {
@@ -286,6 +296,23 @@
   background-color: #6BFF42 !important;
   border-color: #6BFF42 !important;
   color: #07111F !important;
+}
+
+html.dark[data-site-accent='orange'] .btn-primary,
+html.dark[data-site-accent='orange'] .btn-secondary,
+html.dark[data-site-accent='orange'] .reserve-submit {
+  background-color: #FF8C42 !important;
+  color: #07111F !important;
+  border-color: #FFB27D;
+  box-shadow: 0 10px 22px rgba(255, 140, 66, 0.24);
+}
+
+html.dark[data-site-accent='orange'] .btn-primary:hover,
+html.dark[data-site-accent='orange'] .btn-secondary:hover,
+html.dark[data-site-accent='orange'] .reserve-submit:hover {
+  background-color: #F6762C !important;
+  color: #07111F !important;
+  border-color: #FF8C42;
 }
 
 .dark .bg-gradient-to-br.from-blue-50,
@@ -531,4 +558,33 @@ html[data-tanger-atmosphere='rain'] .tanger-announcements article {
   .hero-overlay {
     @apply absolute inset-0 bg-gradient-to-r from-blue-900/60 to-blue-600/40;
   }
+}
+
+/* Accent quotidien : le Vert Palm et l’orange pilotent aussi les classes compilées par Tailwind. */
+html[data-site-accent='orange'] header nav a {
+  color: #FF8C42 !important;
+}
+
+html[data-site-accent='orange'] .btn-primary,
+html[data-site-accent='orange'] .btn-secondary,
+html[data-site-accent='orange'] .reserve-submit {
+  background-color: #FF8C42 !important;
+  border-color: #FFB27D;
+  color: #FFFFFF !important;
+}
+
+html[data-site-accent='orange'] .btn-primary:hover,
+html[data-site-accent='orange'] .btn-secondary:hover,
+html[data-site-accent='orange'] .reserve-submit:hover {
+  background-color: #F6762C !important;
+}
+
+html[data-site-accent='orange'] .btn-outline {
+  border-color: #FF8C42 !important;
+  color: #FF8C42 !important;
+}
+
+html[data-site-accent='orange'] .btn-outline:hover {
+  background-color: #FF8C42 !important;
+  color: #FFFFFF !important;
 }
