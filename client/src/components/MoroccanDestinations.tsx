@@ -32,6 +32,12 @@ const destinations = [
     description: 'Une ville impériale au patrimoine remarquable, entre portes monumentales, souks et histoire saadienne.',
     image: '/manus-storage/meknes-bab-mansour_9735f3a7.jpg',
   },
+  {
+    name: 'Tétouan',
+    landmark: 'Médina blanche et montagnes du Rif',
+    description: 'La colombe blanche du Nord dévoile une médina classée, des ruelles andalouses et les paysages lumineux du Rif.',
+    image: '/manus-storage/tetouan-destination_bc0e52b1.jpg',
+  },
 ];
 
 export default function MoroccanDestinations() {
@@ -41,12 +47,17 @@ export default function MoroccanDestinations() {
     <section id="maroc" className="morocco-section section-padding bg-gradient-to-b from-white via-[#fffaf2] to-[#edf8ff]">
       <div className="container mx-auto px-4">
         <div className="mx-auto mb-10 max-w-3xl text-center">
-          <p className="morocco-eyebrow mb-3 text-sm font-bold uppercase tracking-[0.24em] text-[#d86d2d]">Escapades au Maroc</p>
+          <div className="mb-3 flex items-center justify-center gap-3">
+            <span className="inline-flex h-5 w-8 items-center justify-center rounded-sm bg-[#c1272d] shadow-sm" aria-label="Drapeau du Maroc" role="img">
+              <span className="text-[13px] leading-none text-[#006233]" aria-hidden="true">★</span>
+            </span>
+            <p className="morocco-eyebrow text-sm font-bold uppercase tracking-[0.24em] text-[#d86d2d]">Escapades au Maroc</p>
+          </div>
           <h2 className="morocco-title font-['Playfair_Display'] text-4xl font-bold text-slate-900 md:text-5xl">Destinations Marocaines</h2>
-          <p className="morocco-intro mt-4 text-base leading-7 text-slate-600 md:text-lg">Tanger, Casablanca, Rabat et Meknès : quatre ambiances, un patrimoine exceptionnel.</p>
+          <p className="morocco-intro mt-4 text-base leading-7 text-slate-600 md:text-lg">Tanger, Casablanca, Rabat, Meknès et Tétouan : cinq ambiances, un patrimoine exceptionnel.</p>
         </div>
 
-        <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 xl:grid-cols-5">
           {destinations.map((destination) => (
             <article key={destination.name} className="morocco-card group overflow-hidden rounded-2xl bg-white shadow-lg shadow-slate-900/10 transition hover:-translate-y-1 hover:shadow-xl">
               <button type="button" onClick={() => setSelectedDestination(destination)} className="relative block h-56 w-full overflow-hidden bg-slate-100 text-left" aria-label={`Voir ${destination.name} en grand`}>
