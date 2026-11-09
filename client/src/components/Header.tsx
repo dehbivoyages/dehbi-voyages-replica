@@ -55,9 +55,9 @@ export default function Header({ onReserveClick }: HeaderProps) {
   }, [isDarkTheme, toggleTheme]);
 
   const navItems = [
-    { label: 'Spirituel', href: '#spirituel' },
-    { label: 'Maroc', href: '#maroc' },
     { label: 'International', href: '#international' },
+    { label: 'Maroc', href: '#maroc' },
+    { label: 'Spirituel', href: '#spirituel' },
     { label: 'Contact', href: '#reservation-form' },
   ];
 
@@ -66,12 +66,15 @@ export default function Header({ onReserveClick }: HeaderProps) {
       <div className="container mx-auto px-4 py-3">
         <div className="grid min-h-[72px] grid-cols-[auto_minmax(0,1fr)_auto_auto] items-center gap-3 md:grid-cols-[auto_minmax(0,1fr)_auto_auto_auto] lg:gap-5">
           {/* Logo */}
-          <a href="#" className="flex shrink-0 items-center gap-3 transition-opacity hover:opacity-90">
+          <a href="#" className="flex shrink-0 items-center gap-2 transition-opacity hover:opacity-90" aria-label="Dehbi Voyages — Maroc">
             <img
               src="/manus-storage/dehbi-voyages-logo_d65e39fd.png"
               alt="Dehbi Voyages Logo"
               className="h-16 w-auto"
             />
+            <span className="inline-flex h-5 w-8 items-center justify-center rounded-sm bg-[#c1272d] shadow-sm ring-1 ring-black/5" aria-label="Drapeau du Maroc" role="img">
+              <span className="text-[13px] leading-none text-[#006233]" aria-hidden="true">★</span>
+            </span>
           </a>
 
           {/* Desktop Navigation */}
