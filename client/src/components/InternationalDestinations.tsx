@@ -36,54 +36,81 @@ const hotelWhatsAppUrl = (zone: 'morocco' | 'international') => {
   const destinations = [
     {
       name: 'Turquie',
+      flag: '🇹🇷',
+      region: 'Eurasie',
+      accent: '#E76F51',
       highlights: ['Istanbul, Cappadoce, Côte Méditerranéenne'],
       features: ['Mosquée Bleue', 'Cappadoce', 'Bazars'],
       videoUrl: '/manus-storage/turquie-istanbul-hd_2741b712.mp4',
     },
     {
       name: 'Égypte',
+      flag: '🇪🇬',
+      region: 'Afrique du Nord',
+      accent: '#D4A72C',
       highlights: ['Le Caire, Louxor, Croisière sur le Nil'],
       features: ['Pyramides', 'Croisière Nil', 'Temples'],
       videoUrl: '/manus-storage/egypte-gizeh-hd_25c8f1b9.mp4',
     },
     {
       name: 'Jordanie',
+      flag: '🇯🇴',
+      region: 'Moyen-Orient',
+      accent: '#C084FC',
       highlights: ['Pétra, Mer Morte, Désert de Wadi Rum'],
       features: ['Pétra', 'Mer Morte', 'Wadi Rum'],
       videoUrl: '/manus-storage/jordanie-petra-hd_663e2d37.mp4',
     },
     {
       name: 'Arabie Saoudite',
+      flag: '🇸🇦',
+      region: 'Golfe',
+      accent: '#65C18C',
       highlights: ['Médine, Riyad, Jeddah et expériences culturelles'],
       features: ['Mosquée du Prophète', 'Riyad moderne', 'Jeddah côtière'],
       videoUrl: '/manus-storage/arabie-saoudite-medine-hd_0544db71.mp4',
     },
     {
       name: 'Dubaï',
+      flag: '🇦🇪',
+      region: 'Golfe',
+      accent: '#40C9FF',
       highlights: ['Luxe, shopping, plages et désert'],
       features: ['Burj Khalifa', 'Shopping', 'Désert'],
       videoUrl: '/manus-storage/dubai-burj-khalifa-hd_dad9a8bc.mp4',
     },
     {
       name: 'Malaisie',
+      flag: '🇲🇾',
+      region: 'Asie',
+      accent: '#F59E0B',
       highlights: ['Kuala Lumpur, Îles Langkawi, Forêts tropicales'],
       features: ['Tours Petronas', 'Îles paradisiaques', 'Nature'],
       videoUrl: '/manus-storage/malaisie-petronas-hd_7d17093c.mp4',
     },
     {
       name: 'Europe',
+      flag: '🇪🇺',
+      region: 'Europe',
+      accent: '#7C9DFF',
       highlights: ['Rome, Paris, Alpes et patrimoine européen'],
       features: ['Colisée', 'Capitales historiques', 'Escapades culturelles'],
       videoUrl: '/manus-storage/europe-rome-hd_4eac07e7.mp4',
     },
     {
       name: 'Afrique',
+      flag: '🌍',
+      region: 'Continent africain',
+      accent: '#F4B942',
       highlights: ['Kenya, Afrique du Sud, Sénégal et grands horizons africains'],
       features: ['Safaris et nature', 'Cultures authentiques', 'Villes et littoraux'],
       videoUrl: '/manus-storage/afrique-destination_f6683848.mp4',
     },
     {
       name: 'Amérique du Sud',
+      flag: '🌎',
+      region: 'Amériques',
+      accent: '#F472B6',
       highlights: ['Brésil, Pérou, Argentine — panoramas grandioses'],
       features: ['Machu Picchu', 'Rio de Janeiro', 'Patagonie'],
       videoUrl: '/manus-storage/amerique-sud-machu-picchu-hd_b8db3b3a.mp4',
@@ -91,7 +118,18 @@ const hotelWhatsAppUrl = (zone: 'morocco' | 'international') => {
   ];
 
   return (
-    <section id="international" className="section-padding bg-white">
+    <section
+      id="international"
+      className="relative overflow-hidden bg-[#101735] py-20 text-white md:py-24"
+      style={{
+        backgroundImage: 'linear-gradient(135deg, rgba(16,23,53,0.98) 0%, rgba(25,34,76,0.9) 48%, rgba(55,31,77,0.92) 100%), url(https://d2xsxph8kpxj0f.cloudfront.net/310519663591781073/ViXFFkRctWTJLPBgidN9PC/world_destinations-J3U2HM7NeytZKeXb2Q8b4R.webp)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+      }}
+    >
+      <div className="pointer-events-none absolute -left-32 top-20 h-80 w-80 rounded-full bg-[#40C9FF]/15 blur-3xl" aria-hidden="true" />
+      <div className="pointer-events-none absolute -right-32 bottom-20 h-96 w-96 rounded-full bg-[#F472B6]/15 blur-3xl" aria-hidden="true" />
       {/* Video Modal */}
       {playingVideo !== null && (
         <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" onClick={() => setPlayingVideo(null)}>
@@ -165,23 +203,27 @@ const hotelWhatsAppUrl = (zone: 'morocco' | 'international') => {
         </div>
       )}
 
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+      <div className="container relative z-10 mx-auto px-4">
+        <div className="mx-auto mb-12 max-w-3xl text-center">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#40C9FF]/40 bg-[#101735]/75 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-[#A8E8FF] shadow-lg backdrop-blur">
+            <span aria-hidden="true">✈</span> Départs depuis le Maroc · horizons du monde
+          </div>
+          <h2 className="mb-4 font-['Cormorant_Garamond'] text-5xl font-semibold tracking-tight text-white md:text-6xl">
             Destinations Internationales
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-lg leading-8 text-[#E5E7FF] md:text-xl">
             Explorez le monde avec nos circuits premium
           </p>
+          <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-gradient-to-r from-[#40C9FF] via-[#C084FC] to-[#F472B6]" />
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
           {destinations.map((dest, index) => (
-            <div key={dest.name} className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
+            <div key={dest.name} className="group overflow-hidden rounded-2xl border border-white/15 bg-[#182348]/90 shadow-[0_18px_50px_rgba(4,8,30,0.32)] backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-white/35 hover:shadow-[0_24px_60px_rgba(4,8,30,0.5)]">
               {/* Video Preview */}
               <button
                 type="button"
-                className="relative block h-48 w-full bg-black text-left group"
+                className="relative block h-48 w-full bg-black text-left"
                 onClick={() => setPlayingVideo(index)}
                 aria-label={`Lire la vidéo de la destination ${dest.name}`}
               >
@@ -195,31 +237,38 @@ const hotelWhatsAppUrl = (zone: 'morocco' | 'international') => {
                   onMouseEnter={(e) => e.currentTarget.play()}
                   onMouseLeave={(e) => e.currentTarget.pause()}
                 />
-                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors flex items-center justify-center">
+                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-[#101735]/75 via-black/20 to-transparent transition-colors group-hover:from-[#101735]/90">
                   <Play size={48} className="text-white" fill="white" />
                 </div>
+                <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-white/25 bg-[#101735]/75 px-3 py-1.5 text-xs font-bold text-white backdrop-blur">
+                  <span className="text-lg leading-none" aria-hidden="true">{dest.flag}</span>{dest.region}
+                </span>
               </button>
 
               {/* Content */}
               <div className="p-6">
-                <div className="flex items-center gap-2 mb-3">
-                  <MapPin size={20} className="text-secondary" />
-                  <h3 className="text-xl font-bold text-foreground">
-                    {dest.name}
-                  </h3>
+                <div className="mb-3 flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <span className="text-3xl leading-none" aria-hidden="true">{dest.flag}</span>
+                    <div>
+                      <p className="text-[10px] font-extrabold uppercase tracking-[0.18em]" style={{ color: dest.accent }}>{dest.region}</p>
+                      <h3 className="font-['Cormorant_Garamond'] text-3xl font-semibold leading-none text-white">{dest.name}</h3>
+                    </div>
+                  </div>
+                  <MapPin size={19} style={{ color: dest.accent }} aria-hidden="true" />
                 </div>
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="mb-4 text-sm leading-6 text-[#D7DDF5]">
                   {dest.highlights[0]}
                 </p>
                 <div className="space-y-2 mb-6">
                   {dest.features.map((feature, i) => (
                     <div key={i} className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-secondary rounded-full" />
-                      <span className="text-sm text-foreground">{feature}</span>
+                      <div className="h-2 w-2 rounded-full" style={{ backgroundColor: dest.accent }} />
+                      <span className="text-sm text-[#F1F3FF]">{feature}</span>
                     </div>
                   ))}
                 </div>
-                <button type="button" className="btn-secondary w-full" onClick={openReservationDialog}>
+                <button type="button" className="w-full rounded-xl px-4 py-3 text-sm font-extrabold text-[#101735] transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-[#182348]" style={{ backgroundColor: dest.accent }} onClick={openReservationDialog}>
                   Réserver
                 </button>
               </div>
