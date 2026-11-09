@@ -17,8 +17,11 @@ export default function Newsletter() {
       return;
     }
 
-    // Simulation d'abonnement
-    console.log('Email abonné:', email);
+    void fetch('/api/newsletter', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    }).catch(() => undefined);
     setIsSubscribed(true);
     setEmail('');
 

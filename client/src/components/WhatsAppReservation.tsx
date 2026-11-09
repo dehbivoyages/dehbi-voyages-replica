@@ -129,7 +129,18 @@ const WhatsAppReservation = forwardRef<ReservationModalHandle>((_props, ref) => 
 
   const handleWhatsAppReservation = () => {
     if (!validate()) return;
-    const { summary } = reservationSummary();
+    const { serviceLabel, destinationLabel, summary } = reservationSummary();
+    void fetch('/api/booking-requests', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        requestType: selectedService === 'hotel' ? 'hotel' : selectedService === 'avion' ? 'flight' : 'reservation',
+        name: 'Demande via formulaire rapide',
+        destination: destinationLabel,
+        travelDate: departureDate,
+        details: `${serviceLabel}\n${summary}`,
+      }),
+    }).catch(() => undefined);
     window.open(`https://wa.me/212663381004?text=${encodeURIComponent(summary)}`, '_blank', 'noopener,noreferrer');
     resetForm();
   };
@@ -137,6 +148,17 @@ const WhatsAppReservation = forwardRef<ReservationModalHandle>((_props, ref) => 
   const handleEmailReservation = () => {
     if (!validate()) return;
     const { serviceLabel, destinationLabel, summary } = reservationSummary();
+    void fetch('/api/booking-requests', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        requestType: selectedService === 'hotel' ? 'hotel' : selectedService === 'avion' ? 'flight' : 'reservation',
+        name: 'Demande via formulaire rapide',
+        destination: destinationLabel,
+        travelDate: departureDate,
+        details: `${serviceLabel}\n${summary}`,
+      }),
+    }).catch(() => undefined);
     const subject = `Demande de réservation — ${serviceLabel} — ${destinationLabel}`;
     window.open(`mailto:Dehbivoyages23@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(summary)}`, '_blank', 'noopener,noreferrer');
     resetForm();

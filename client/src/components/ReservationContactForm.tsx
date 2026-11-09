@@ -118,6 +118,19 @@ export default function ReservationContactForm() {
       .join('\n');
 
     const whatsappUrl = `https://wa.me/212653940304?text=${encodeURIComponent(message)}`;
+    void fetch('/api/booking-requests', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        requestType: 'reservation',
+        tripId: trips.find((trip) => trip.title === formData.trip)?.id,
+        name: formData.fullName,
+        phone: formData.phone,
+        email: formData.email,
+        travelDate: formData.departureDate,
+        details: `Nombre de voyageurs : ${formData.travelers}\n${formData.message}`,
+      }),
+    }).catch(() => undefined);
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     setStatus('success');
   };

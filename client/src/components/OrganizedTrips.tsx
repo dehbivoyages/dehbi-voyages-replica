@@ -220,6 +220,7 @@ export const trips: OrganizedTrip[] = [
 ];
 
 export default function OrganizedTrips() {
+  const [catalogTrips, setCatalogTrips] = useState<OrganizedTrip[]>(trips);
   const [selectedDetails, setSelectedDetails] = useState<OrganizedTrip | null>(null);
   const [selectedFilter, setSelectedFilter] = useState('Tous');
   const [searchQuery, setSearchQuery] = useState('');
@@ -235,6 +236,21 @@ export default function OrganizedTrips() {
       return [];
     }
   });
+
+  useEffect(() => {
+    let isCurrent = true;
+    fetch('/api/trips')
+      .then((response) => response.ok ? response.json() as Promise<OrganizedTrip[]> : Promise.reject(new Error('catalog_unavailable')))
+      .then((remoteTrips) => {
+        if (isCurrent && Array.isArray(remoteTrips) && remoteTrips.length > 0) setCatalogTrips(remoteTrips);
+      })
+      .catch(() => {
+        // Le catalogue intégré reste disponible si l’API est momentanément indisponible.
+      });
+    return () => {
+      isCurrent = false;
+    };
+  }, []);
 
   useEffect(() => {
     window.localStorage.setItem('dehbi-voyages-favorites', JSON.stringify(favoriteIds));
@@ -258,8 +274,8 @@ export default function OrganizedTrips() {
     setFavoriteIds((current) => current.includes(tripId) ? current.filter((id) => id !== tripId) : [...current, tripId]);
   };
 
-  const expiredTrips = trips.filter((trip) => isTripExpired(trip));
-  const visibleTrips = showExpired ? trips : trips.filter((trip) => !isTripExpired(trip));
+  const expiredTrips = catalogTrips.filter((trip) => isTripExpired(trip));
+  const visibleTrips = showExpired ? catalogTrips : catalogTrips.filter((trip) => !isTripExpired(trip));
   const destinations = ['Tous', ...Array.from(new Set(visibleTrips.map((trip) => trip.destination)))];
   const filteredByDestination = selectedFilter === 'Tous'
     ? visibleTrips
