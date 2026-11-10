@@ -224,6 +224,9 @@ export default defineConfig({
     port: 3000,
     strictPort: false, // Will find next available port if 3000 is busy
     host: true,
+    // The hosted WebDev preview does not proxy Vite's HMR WebSocket reliably.
+    // Disable the client reconnect loop so users do not see a false Vite error.
+    hmr: false,
     allowedHosts: [
       ".manuspre.computer",
       ".manus.computer",
