@@ -11,6 +11,7 @@ import {
   newsletterSubscribers,
   organizedTrips,
 } from "../drizzle/schema";
+import { removeViteClientScript, viteServerOptions } from "./viteOptions";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -122,18 +123,25 @@ async function startServer() {
     : path.resolve(__dirname, "..", "dist", "public");
 
   if (!isProduction) {
-    const vite = await createViteServer({ server: { middlewareMode: true }, appType: "spa" });
-    app.use(vite.middlewares);
+    // The hosted WebDev preview does not expose Vite's HMR WebSocket.
+    // Disable HMR here as well as in vite.config.ts to avoid client reconnect errors.
+    const vite = await createViteServer({ server: viteServerOptions, appType: "spa" });
     app.use(async (req, res, next) => {
-      if (req.method !== "GET" || req.originalUrl.startsWith("/api/")) return next();
+      const acceptsHtml = req.headers.accept?.includes("text/html");
+      if (req.method !== "GET" || req.originalUrl.startsWith("/api/") || !acceptsHtml) return next();
       try {
         const template = await vite.transformIndexHtml(req.originalUrl, "<!doctype html><html><head></head><body><div id=\"root\"></div><script type=\"module\" src=\"/src/main.tsx\"></script></body></html>");
-        res.status(200).set({ "Content-Type": "text/html" }).end(template);
+        // This hosted preview has no public HMR socket. Vite may still inject
+        // its client script during HTML transformation, so remove it explicitly
+        // to prevent the browser from retrying a WebSocket that cannot open.
+        const previewTemplate = removeViteClientScript(template);
+        res.status(200).set({ "Content-Type": "text/html" }).end(previewTemplate);
       } catch (error) {
         vite.ssrFixStacktrace(error as Error);
         next(error);
       }
     });
+    app.use(vite.middlewares);
   } else {
     app.use(express.static(staticPath));
     app.get("*", (_req, res) => res.sendFile(path.join(staticPath, "index.html")));
