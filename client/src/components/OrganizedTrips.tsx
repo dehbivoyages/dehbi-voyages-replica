@@ -429,7 +429,7 @@ export default function OrganizedTrips() {
 
       {selectedDetails && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/85 p-4" role="dialog" aria-modal="true" aria-labelledby="organized-trip-dialog-title" onClick={() => setSelectedDetails(null)}>
-          <div className="relative max-h-[92vh] w-full max-w-3xl overflow-auto rounded-2xl bg-white p-3 shadow-2xl md:p-5" onClick={(event) => event.stopPropagation()}>
+          <div className="relative max-h-[92vh] w-full max-w-5xl overflow-auto rounded-2xl bg-white p-3 shadow-2xl md:p-5" onClick={(event) => event.stopPropagation()}>
             <button type="button" onClick={() => setSelectedDetails(null)} className="absolute right-5 top-5 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-950/80 text-white transition hover:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-[#FF8C42]" aria-label="Fermer les détails"><X size={20} aria-hidden="true" /></button>
             <img src={selectedDetails.image} alt={`Détails du voyage ${selectedDetails.title}`} className="mx-auto max-h-[78vh] w-auto max-w-full rounded-xl object-contain" />
             <div className="flex flex-wrap items-center justify-between gap-3 px-2 pb-1 pt-4 md:px-4">
@@ -441,6 +441,23 @@ export default function OrganizedTrips() {
                 <span className="inline-flex items-center rounded-xl bg-slate-100 px-4 py-2.5 text-sm font-bold text-slate-500">Brochure PDF à venir</span>
               )}
             </div>
+            {selectedDetails.pdfUrl && (
+              <section className="mt-5 overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 shadow-inner" aria-labelledby="organized-trip-pdf-preview-title">
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 bg-slate-100 px-4 py-3">
+                  <div>
+                    <h4 id="organized-trip-pdf-preview-title" className="text-sm font-extrabold text-slate-900">Aperçu de la brochure PDF</h4>
+                    <p className="mt-0.5 text-xs text-slate-600">Consultez le programme ici avant de le télécharger.</p>
+                  </div>
+                  <a href={selectedDetails.pdfUrl} target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-[#2E7D32] underline-offset-2 hover:underline">Ouvrir en grand</a>
+                </div>
+                <iframe
+                  src={`${selectedDetails.pdfUrl}#toolbar=1&navpanes=0&view=FitH`}
+                  title={`Aperçu PDF de ${selectedDetails.title}`}
+                  className="h-[52vh] min-h-[360px] w-full bg-slate-200"
+                  loading="lazy"
+                />
+              </section>
+            )}
           </div>
         </div>
       )}
