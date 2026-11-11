@@ -56,28 +56,95 @@ export function getTripShareUrl(tripId: string) {
 
 export const trips: OrganizedTrip[] = [
   {
+    id: 'omra-ramadan-direct-fevrier-2027',
+    title: 'Omra Ramadan direct — Février 2027',
+    description: 'Programme Omra direct au départ de Tanger vers Jeddah, avec Médine, La Mecque, vol Saudia et accompagnement de Dehbi Voyages.',
+    dates: 'Du 25 Chaabane au 08 Chawwal 1448 H · Février 2027',
+    endDate: '2027-03-08',
+    image: '/manus-storage/omra-ramadan-direct-fevrier-2027_5e854d17.jpg',
+    pdfUrl: '/manus-storage/omra-ramadan-direct-fevrier-2027_defc460e.pdf',
+    destination: 'Moyen-Orient',
+    price: 'À partir de 25.500 DHS',
+    highlights: ['Vol Saudia direct Tanger–Jeddah', '04 nuits à Médine', 'La Mecque pour le reste du séjour', 'Visa, transport et accompagnement'],
+    featured: true,
+  },
+  {
+    id: 'omra-chaabane-ramadan-direct-fevrier-2027',
+    title: 'Omra Chaabane + Ramadan direct — Février 2027',
+    description: 'Séjour spirituel prolongé avec trajet direct Tanger–Jeddah–Tanger, Médine, La Mecque et plusieurs formules d’hébergement.',
+    dates: 'Du 22 Chaabane au 10 Chawwal 1448 H · Février 2027',
+    endDate: '2027-03-10',
+    image: '/manus-storage/omra-chaabane-ramadan-direct-fevrier-2027_d8c978fc.jpg',
+    pdfUrl: '/manus-storage/omra-chaabane-ramadan-direct-fevrier-2027_4dead05f.pdf',
+    destination: 'Moyen-Orient',
+    price: 'À partir de 25.500 DHS',
+    highlights: ['Vol Saudia direct Tanger–Jeddah', '04 nuits à Médine', 'Médine et La Mecque', 'Transport et accompagnement inclus'],
+    featured: true,
+  },
+  {
+    id: 'omra-ramadan-50-jours-2027',
+    title: 'Omra Ramadan — 50 jours',
+    description: 'Programme Ramadan de 50 jours avec EgyptAir, départ vers Jeddah, hébergement à Médine et à La Mecque.',
+    dates: 'Du 27 janvier au 20 mars 2027 · 50 jours',
+    endDate: '2027-03-20',
+    image: '/manus-storage/omra-ramadan-50-jours-2027_a631e06f.jpg',
+    pdfUrl: '/manus-storage/omra-ramadan-50-jours-2027_cc84d65c.pdf',
+    destination: 'Moyen-Orient',
+    price: 'À partir de 25.300 DHS',
+    highlights: ['EgyptAir vers Jeddah', '04 nuits à Médine', 'Hébergement à La Mecque', 'Transport et accompagnement inclus'],
+    featured: true,
+  },
+  {
+    id: 'vietnam-merveilles-decembre-2026',
+    title: 'Merveilles du Vietnam — Décembre 2026',
+    description: 'Circuit de 12 nuits et 13 jours entre Hô Chi Minh, Da Nang, Hoi An, Hanoi, Sapa et la baie d’Ha Long.',
+    dates: 'Du 05 au 18 décembre 2026 · 12 nuits / 13 jours',
+    endDate: '2026-12-18',
+    image: '/manus-storage/vietnam-merveilles-decembre-2026_ca778f27.jpg',
+    pdfUrl: '/manus-storage/vietnam-merveilles-decembre-2026_4200e2f0.pdf',
+    destination: 'International',
+    price: 'À partir de 27.900 DHS',
+    highlights: ['Turkish Airlines', 'Hô Chi Minh, Da Nang et Hanoi', 'Baie d’Ha Long et Sapa', 'Hôtels et visites inclus'],
+    featured: true,
+  },
+  {
+    id: 'istanbul-novembre-decembre-2026',
+    title: 'Istanbul — Novembre / Décembre 2026',
+    description: 'Séjour de 7 nuits et 8 jours à Istanbul avec Royal Air Maroc, journées libres, options Bosphore, Bursa et Îles des Princesses.',
+    dates: 'Départs du 06 novembre 2026 au 01 janvier 2027 · 7 nuits / 8 jours',
+    endDate: '2027-01-01',
+    image: '/manus-storage/istanbul-novembre-decembre-2026_79700b5b.jpg',
+    pdfUrl: '/manus-storage/istanbul-novembre-decembre-2026_bc86a0dc.pdf',
+    destination: 'International',
+    price: 'À partir de 8.090 DHS',
+    highlights: ['Royal Air Maroc', '07 nuits à Istanbul', 'Petit-déjeuner inclus', 'Bosphore, Bursa et transferts selon programme'],
+    featured: true,
+  },
+  {
     id: 'omra-ramadan-fevrier-2027',
     title: 'Omra Ramadan 1448 — Février 2027',
     description: 'Programme prioritaire Dehbi Voyages avec trajet direct Tanger–Jeddah–Tanger, 4 nuits à Médine puis séjour à La Mecque, vols Saudia et accompagnement de l’agence.',
     dates: 'Du 25 Chaabane au 08 Chawwal 1448 H · Février 2027',
-    image: '/manus-storage/omra-ramadan-1448-fevrier-2027_7035553c.jpeg',
+    endDate: '2026-11-09',
+    image: '/manus-storage/omra-ramadan-fevrier-2027_0dd87373.jpg',
     pdfUrl: '/manus-storage/omra-ramadan-fevrier-2027_f7f34824.pdf',
     destination: 'Moyen-Orient',
     price: 'À partir de 25.500 DHS',
     highlights: ['Vol Saudia direct depuis Tanger', '4 nuits à Médine', 'La Mecque pour le reste du séjour', 'Transport et accompagnement inclus'],
-    featured: true,
+    featured: false,
   },
   {
     id: 'omra-chaabane-ramadan-fevrier-2027',
     title: 'Omra Chaabane + Ramadan 1448 — Février 2027',
     description: 'Un séjour spirituel prolongé entre Chaabane et Ramadan, avec trajet direct Tanger–Jeddah–Tanger, Médine, La Mecque et plusieurs niveaux d’hébergement.',
     dates: 'Du 22 Chaabane au 10 Chawwal 1448 H · Février 2027',
-    image: '/manus-storage/omra-chaabane-ramadan-1448-fevrier-2027_a4478c05.jpeg',
+    endDate: '2026-11-09',
+    image: '/manus-storage/omra-chaabane-ramadan-fevrier-2027_cdd84011.jpg',
     pdfUrl: '/manus-storage/omra-chaabane-ramadan-fevrier-2027_6cd311b1.pdf',
     destination: 'Moyen-Orient',
     price: 'À partir de 25.500 DHS',
     highlights: ['Vol Saudia direct depuis Tanger', 'Médine et La Mecque', '3 programmes au choix', 'Transport et accompagnement inclus'],
-    featured: true,
+    featured: false,
   },
   {
     id: 'istanbul-septembre-2026-prodv26',
@@ -85,7 +152,7 @@ export const trips: OrganizedTrip[] = [
     description: 'Un séjour de 8 jours et 7 nuits à Istanbul avec Royal Air Maroc, hébergement avec petit-déjeuner et transferts aéroport-hôtel.',
     dates: 'Départs les 5, 12, 18 et 26 septembre 2026 — 7 nuits / 8 jours',
     endDate: '2026-09-30',
-    image: '/manus-storage/istanbul-septembre-2026-prodv26_b3e05e9c.jpg',
+    image: '/manus-storage/istanbul-septembre-2026-prodv26_c2c25ab3.jpg',
     pdfUrl: '/manus-storage/istanbul-septembre-2026-prodv26_3af7850b.pdf',
     destination: 'International',
     price: 'À partir de 7.800 DHS',
@@ -97,7 +164,7 @@ export const trips: OrganizedTrip[] = [
     description: 'Une escapade culturelle de 8 jours et 7 nuits entre visites guidées, journées libres, Bosphore et options Bursa ou les Îles des Princesses.',
     dates: 'Départs les 03, 10, 17, 24 et 30 octobre 2026 — 7 nuits / 8 jours',
     endDate: '2026-11-06',
-    image: '/manus-storage/istanbul-octobre-2026-mns_84698913.jpeg',
+    image: '/manus-storage/istanbul-octobre-2026-prodv26_e8cddea2.jpg',
     pdfUrl: '/manus-storage/istanbul-octobre-2026-prodv26_8c6da6b3.pdf',
     destination: 'International',
     price: 'À partir de 7.550 DHS',
@@ -109,7 +176,7 @@ export const trips: OrganizedTrip[] = [
     description: 'Un programme spirituel de 15 nuits avec 4 nuits à Istanbul, 6 nuits à La Mecque et 4 nuits à Médine, selon le visuel fourni par l’agence.',
     dates: 'Du 05/12 au 19/12/2026 — 14 nuits / 15 jours',
     endDate: '2026-12-19',
-    image: '/manus-storage/dv3_69f6ec19.jpeg',
+    image: '/manus-storage/omra-istanbul-decembre-2026-mns_128c496f.jpg',
     destination: 'Moyen-Orient',
     price: 'À partir de 16.500 DHS',
     highlights: ['Turkish Airlines', '4 nuits à Istanbul', '6 nuits à La Mecque', '4 nuits à Médine'],
@@ -120,7 +187,7 @@ export const trips: OrganizedTrip[] = [
     description: 'Un séjour spirituel de 13 nuits entre Médine et La Mecque, avec vol direct Royal Air Maroc depuis Casablanca et formules économiques, moyennes ou touristiques.',
     dates: 'Du 11/12 au 24/12/2026 — 13 nuits / 14 jours',
     endDate: '2026-12-24',
-    image: '/manus-storage/dv5_b4dddf4c.jpeg',
+    image: '/manus-storage/omra-rajab-decembre-2026-mns_ea8716bf.jpg',
     destination: 'Moyen-Orient',
     price: 'À partir de 17.900 DHS',
     highlights: ['Royal Air Maroc', '4 nuits à Médine', '9 nuits à La Mecque', 'Formules selon budget'],
@@ -130,7 +197,7 @@ export const trips: OrganizedTrip[] = [
     title: 'Omra & Hajj — Programmes sur mesure',
     description: 'Des programmes spirituels organisés selon vos besoins, avec accompagnement de l’agence et solutions de transport adaptées.',
     dates: 'Dates selon vos envies — programme sur demande',
-    image: '/manus-storage/IMG-20260704-WA0004_1623e2a7.jpg',
+    image: '/manus-storage/omra-hajj-sur-mesure-prodv26_5997948f.jpg',
     pdfUrl: '/manus-storage/omra-hajj-sur-mesure-prodv26_1884b0fc.pdf',
     destination: 'Moyen-Orient',
     price: 'Tarif sur demande',
@@ -142,7 +209,7 @@ export const trips: OrganizedTrip[] = [
     description: 'Une Omra avec escale de découverte à Kuala Lumpur, hébergement et sorties offertes dans la capitale malaisienne.',
     dates: 'Du 06/09 au 19/09/2026 — 13 nuits / 14 jours',
     endDate: '2026-09-19',
-    image: '/manus-storage/IMG-20260722-WA0001_5d1abb41.jpg',
+    image: '/manus-storage/omra-kuala-lumpur-septembre-2026-prodv26_552397a5.jpg',
     pdfUrl: '/manus-storage/omra-kuala-lumpur-septembre-2026-prodv26_6a73674a.pdf',
     destination: 'Moyen-Orient',
     price: 'À partir de 25.800 DHS',
@@ -154,7 +221,7 @@ export const trips: OrganizedTrip[] = [
     description: 'Un parcours spirituel avec Etihad via Abu Dhabi, deux étapes à La Mecque et un séjour à Médine.',
     dates: 'Du 16/09 au 04/10/2026 — 18 nuits / 19 jours',
     endDate: '2026-10-04',
-    image: '/manus-storage/IMG-20260722-WA0005_1605bb68.jpg',
+    image: '/manus-storage/deux-omra-etihad-2026-prodv26_c949e249.jpg',
     pdfUrl: '/manus-storage/deux-omra-etihad-2026-prodv26_1812acc2.pdf',
     destination: 'Moyen-Orient',
     price: 'À partir de 13.900 DHS',
@@ -166,7 +233,7 @@ export const trips: OrganizedTrip[] = [
     description: 'Voyage Omra direct au départ de Tanger vers Jeddah, avec étapes à Médine et La Mecque, vols Saudia et accompagnement de l’agence.',
     dates: 'Départ 1 : 29/10–11/11 · Départ 2 : 12/11–25/11/2026',
     endDate: '2026-11-25',
-    image: '/manus-storage/omra-direct-tanger-novembre-2026_08d13c1b.jpeg',
+    image: '/manus-storage/omra-direct-tanger-novembre-2026_09dae7dc.jpg',
     destination: 'Moyen-Orient',
     price: 'À partir de 15.800 DHS',
     highlights: ['Vol direct Saudia depuis Tanger', 'Médine et La Mecque', 'Hôtels 5 étoiles disponibles', 'Visa, transport et accompagnement inclus'],
@@ -177,7 +244,7 @@ export const trips: OrganizedTrip[] = [
     description: 'Un programme spirituel et culturel de 16 jours combinant la découverte du Caire et une Omra à Médine et La Mecque, au départ de Casablanca.',
     dates: 'Du 16/10 au 31/10/2026 — 16 jours',
     endDate: '2026-10-31',
-    image: '/manus-storage/cairo-omra-octobre-2026_29c785dc.jpeg',
+    image: '/manus-storage/cairo-omra-octobre-2026_95cae2a7.jpg',
     destination: 'Moyen-Orient',
     price: 'À partir de 19.500 DHS',
     highlights: ['Départ et retour depuis Casablanca', '4 jours au Caire', 'Médine et La Mecque', 'Formules économique, moyenne ou touristique'],
@@ -188,7 +255,7 @@ export const trips: OrganizedTrip[] = [
     description: 'Un séjour caribéen tout compris entre plages, détente et activités, avec départs garantis pendant la saison estivale.',
     dates: 'Départs garantis juillet, août et septembre 2026 — dates selon disponibilité',
     endDate: '2026-09-30',
-    image: '/manus-storage/IMG-20260804-WA0005_4ec5960c.jpg',
+    image: '/manus-storage/punta-cana-ete-2026-prodv26_fe7b5e04.jpg',
     pdfUrl: '/manus-storage/punta-cana-ete-2026-prodv26_1d7f4f1f.pdf',
     destination: 'International',
     price: 'À partir de 15.000 DHS',
@@ -200,7 +267,7 @@ export const trips: OrganizedTrip[] = [
     description: 'Un circuit culturel entre Tachkent, Samarcande, Boukhara et Istanbul, avec guide arabophone et visites au programme.',
     dates: 'Du 16/05 au 30/05/2027 — 13 nuits / 14 jours',
     endDate: '2027-05-30',
-    image: '/manus-storage/IMG-20260815-WA0005_37bef4bc.jpg',
+    image: '/manus-storage/ouzbekistan-istanbul-mai-2027-prodv26_a99938e0.jpg',
     pdfUrl: '/manus-storage/ouzbekistan-istanbul-mai-2027-prodv26_0ce2ac9f.pdf',
     destination: 'International',
     price: 'À partir de 23.900 DHS',
@@ -211,7 +278,7 @@ export const trips: OrganizedTrip[] = [
     title: 'Dakhla — Lagon & dunes',
     description: 'Une escapade marocaine de 5 jours entre lagon turquoise, dunes et océan, avec pension complète et accompagnement agence.',
     dates: '5 jours / 4 nuits — dates sur demande',
-    image: '/manus-storage/IMG-20260815-WA0006_9b299284.jpg',
+    image: '/manus-storage/dakhla-lagon-dunes-prodv26_0c665fb4.jpg',
     pdfUrl: '/manus-storage/dakhla-lagon-dunes-prodv26_2d9123ca.pdf',
     destination: 'Maroc',
     price: 'À partir de 5.900 DHS',
@@ -323,7 +390,7 @@ export default function OrganizedTrips() {
 
         <div className="mx-auto mb-8 max-w-4xl rounded-2xl border border-[#FFB347]/70 bg-gradient-to-r from-[#10213f]/95 via-[#173d45]/95 to-[#10213f]/95 px-5 py-4 text-center text-white shadow-[0_0_32px_rgba(255,179,71,0.28)]">
           <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-[#FFD27A]">Nouveaux programmes prioritaires · Réservations ouvertes</p>
-          <p className="mt-1 text-sm leading-6 text-white/85">Les deux offres Omra 1448 H de février 2027 sont mises en avant pour vos prochaines réservations.</p>
+          <p className="mt-1 text-sm leading-6 text-white/85">Les 5 programmes reçus dans votre dernier dossier sont mis en avant. Les anciennes offres restent disponibles dans l’archive des programmes expirés.</p>
         </div>
 
         <div className="mx-auto mb-5 flex max-w-2xl items-center gap-3 rounded-2xl border border-white/20 bg-white/95 px-4 py-3 shadow-xl shadow-black/15">
@@ -363,6 +430,13 @@ export default function OrganizedTrips() {
           )}
         </div>
 
+        {showExpired && expiredTrips.length > 0 && (
+          <div className="mx-auto mb-8 max-w-4xl rounded-2xl border border-[#FFD27A]/60 bg-[#10213f]/90 px-5 py-4 text-center text-white shadow-xl">
+            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#FFD27A]">Archives des programmes expirés</p>
+            <p className="mt-1 text-sm text-white/80">Ces offres sont conservées pour consultation. Elles ne sont plus proposées comme départs actuels.</p>
+          </div>
+        )}
+
         {filteredTrips.length === 0 ? (
           <div className="mx-auto max-w-2xl rounded-2xl border border-white/20 bg-slate-950/70 px-6 py-10 text-center text-white shadow-xl shadow-black/20" role="status">
             <Search size={28} className="mx-auto mb-4 text-[#FF8C42]" aria-hidden="true" />
@@ -375,6 +449,7 @@ export default function OrganizedTrips() {
           {filteredTrips.map((trip) => (
             <article key={trip.id} className={`relative overflow-hidden rounded-2xl bg-white shadow-xl shadow-black/20 transition hover:-translate-y-1 hover:shadow-2xl ${trip.featured ? 'ring-2 ring-[#FFB347] shadow-[0_0_34px_rgba(255,179,71,0.42)] motion-safe:animate-[featuredGlow_3s_ease-in-out_infinite]' : ''}`}>
               {trip.featured && <div className="absolute inset-x-0 top-0 z-20 bg-gradient-to-r from-[#FF8C42] via-[#FFD166] to-[#FF8C42] px-4 py-2 text-center text-xs font-black uppercase tracking-[0.18em] text-[#10213f]">Programme prioritaire · 1448 H</div>}
+              {showExpired && isTripExpired(trip) && <div className="absolute right-3 top-3 z-30 rounded-full bg-slate-950/85 px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.12em] text-[#FFD27A] shadow-lg">Programme archivé</div>}
               <div className={`group relative h-72 w-full bg-[#f6f1e8] md:h-80 ${trip.featured ? 'pt-7' : ''}`}>
                 <button type="button" className="absolute inset-0 block h-full w-full" onClick={() => setSelectedDetails(trip)} aria-label={`Voir les détails de ${trip.title}`}>
                   <img src={trip.image} alt={`Affiche du voyage ${trip.title}`} className="h-full w-full object-contain transition duration-500 group-hover:scale-[1.02]" />
@@ -442,20 +517,17 @@ export default function OrganizedTrips() {
               )}
             </div>
             {selectedDetails.pdfUrl && (
-              <section className="mt-5 overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 shadow-inner" aria-labelledby="organized-trip-pdf-preview-title">
+              <section className="mt-5 overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 shadow-inner" aria-labelledby="organized-trip-brochure-preview-title">
                 <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 bg-slate-100 px-4 py-3">
                   <div>
-                    <h4 id="organized-trip-pdf-preview-title" className="text-sm font-extrabold text-slate-900">Aperçu de la brochure PDF</h4>
-                    <p className="mt-0.5 text-xs text-slate-600">Consultez le programme ici avant de le télécharger.</p>
+                    <h4 id="organized-trip-brochure-preview-title" className="text-sm font-extrabold text-slate-900">Aperçu de la brochure</h4>
+                    <p className="mt-0.5 text-xs text-slate-600">La brochure est affichée en JPEG pour un chargement fiable. Le PDF reste disponible au téléchargement.</p>
                   </div>
                   <a href={selectedDetails.pdfUrl} target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-[#2E7D32] underline-offset-2 hover:underline">Ouvrir en grand</a>
                 </div>
-                <iframe
-                  src={`${selectedDetails.pdfUrl}#toolbar=1&navpanes=0&view=FitH`}
-                  title={`Aperçu PDF de ${selectedDetails.title}`}
-                  className="h-[52vh] min-h-[360px] w-full bg-slate-200"
-                  loading="lazy"
-                />
+                <div className="flex max-h-[62vh] justify-center overflow-auto bg-[#f6f1e8] p-3 md:p-5">
+                  <img src={selectedDetails.image} alt={`Aperçu JPEG de la brochure ${selectedDetails.title}`} className="h-auto max-h-[58vh] w-auto max-w-full rounded-lg object-contain shadow-md" loading="lazy" />
+                </div>
               </section>
             )}
           </div>

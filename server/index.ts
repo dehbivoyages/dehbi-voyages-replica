@@ -48,7 +48,11 @@ async function startServer() {
     if (!db) return sendError(res, 503, "Database unavailable");
     try {
       const rows = await db.select().from(organizedTrips).where(eq(organizedTrips.active, true));
-      res.json(rows.map((trip) => ({ ...trip, highlights: JSON.parse(trip.highlights) })));
+      res.json(rows.map((trip) => ({
+        ...trip,
+        image: trip.imageUrl,
+        highlights: JSON.parse(trip.highlights),
+      })));
     } catch (error) {
       console.error("[Database] trips query failed", error);
       sendError(res, 500, "Unable to load trips");

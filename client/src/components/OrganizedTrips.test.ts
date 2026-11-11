@@ -22,10 +22,15 @@ describe('OrganizedTrips expiration filtering', () => {
 
 
 describe('Programme selection', () => {
-  it('contains only the nine archive programmes with usable images', async () => {
+  it('contains the five newly supplied programmes before the legacy catalogue', async () => {
     const { trips } = await import('./OrganizedTrips');
-    expect(trips).toHaveLength(14);
+    expect(trips).toHaveLength(19);
     expect(trips.map((trip) => trip.id)).toEqual([
+      'omra-ramadan-direct-fevrier-2027',
+      'omra-chaabane-ramadan-direct-fevrier-2027',
+      'omra-ramadan-50-jours-2027',
+      'vietnam-merveilles-decembre-2026',
+      'istanbul-novembre-decembre-2026',
       'omra-ramadan-fevrier-2027',
       'omra-chaabane-ramadan-fevrier-2027',
       'istanbul-septembre-2026-prodv26',
@@ -42,9 +47,13 @@ describe('Programme selection', () => {
       'dakhla-lagon-dunes-prodv26',
     ]);
     expect(trips.every((trip) => trip.image.startsWith('/manus-storage/'))).toBe(true);
+    expect(trips.every((trip) => trip.image.toLowerCase().endsWith('.jpg'))).toBe(true);
     expect(trips.filter((trip) => trip.featured).map((trip) => trip.id)).toEqual([
-      'omra-ramadan-fevrier-2027',
-      'omra-chaabane-ramadan-fevrier-2027',
+      'omra-ramadan-direct-fevrier-2027',
+      'omra-chaabane-ramadan-direct-fevrier-2027',
+      'omra-ramadan-50-jours-2027',
+      'vietnam-merveilles-decembre-2026',
+      'istanbul-novembre-decembre-2026',
     ]);
     expect(trips.filter((trip) => trip.featured).every((trip) => trip.pdfUrl?.endsWith('.pdf'))).toBe(true);
     expect(trips.some((trip) => trip.id === 'omra-ramadan-1448-economique' || trip.id === 'omra-ramadan-1448-premium')).toBe(false);
@@ -54,6 +63,14 @@ describe('Programme selection', () => {
     const { trips } = await import('./OrganizedTrips');
     expect(trips.find((trip) => trip.id === 'omra-hajj-sur-mesure-prodv26')?.endDate).toBeUndefined();
     expect(trips.find((trip) => trip.id === 'dakhla-lagon-dunes-prodv26')?.endDate).toBeUndefined();
+  });
+
+  it('keeps legacy offers archived but available through the expired filter', async () => {
+    const { trips } = await import('./OrganizedTrips');
+    expect(trips.find((trip) => trip.id === 'omra-ramadan-fevrier-2027')?.endDate).toBe('2026-11-09');
+    expect(trips.find((trip) => trip.id === 'istanbul-novembre-decembre-2026')?.endDate).toBe('2027-01-01');
+    expect(isTripExpired(trips.find((trip) => trip.id === 'omra-ramadan-fevrier-2027')!, new Date('2026-11-10T12:00:00.000Z'))).toBe(true);
+    expect(isTripExpired(trips.find((trip) => trip.id === 'vietnam-merveilles-decembre-2026')!, new Date('2026-11-10T12:00:00.000Z'))).toBe(false);
   });
 });
 

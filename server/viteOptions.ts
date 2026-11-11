@@ -1,6 +1,7 @@
 export const viteServerOptions = {
   middlewareMode: true,
   hmr: false,
+  ws: false,
 } as const;
 
 export function removeViteClientScript(html: string) {
