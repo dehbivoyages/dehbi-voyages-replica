@@ -92,7 +92,7 @@ export const trips: OrganizedTrip[] = [
     destination: 'Moyen-Orient',
     price: 'À partir de 25.300 DHS',
     highlights: ['EgyptAir vers Jeddah', '04 nuits à Médine', 'Hébergement à La Mecque', 'Transport et accompagnement inclus'],
-    featured: true,
+    featured: false,
   },
   {
     id: 'vietnam-merveilles-decembre-2026',
@@ -105,7 +105,7 @@ export const trips: OrganizedTrip[] = [
     destination: 'International',
     price: 'À partir de 27.900 DHS',
     highlights: ['Turkish Airlines', 'Hô Chi Minh, Da Nang et Hanoi', 'Baie d’Ha Long et Sapa', 'Hôtels et visites inclus'],
-    featured: true,
+    featured: false,
   },
   {
     id: 'istanbul-novembre-decembre-2026',
@@ -118,7 +118,7 @@ export const trips: OrganizedTrip[] = [
     destination: 'International',
     price: 'À partir de 8.090 DHS',
     highlights: ['Royal Air Maroc', '07 nuits à Istanbul', 'Petit-déjeuner inclus', 'Bosphore, Bursa et transferts selon programme'],
-    featured: true,
+    featured: false,
   },
   {
     id: 'omra-ramadan-fevrier-2027',
@@ -389,8 +389,8 @@ export default function OrganizedTrips() {
         </div>
 
         <div className="mx-auto mb-8 max-w-4xl rounded-2xl border border-[#FFB347]/70 bg-gradient-to-r from-[#10213f]/95 via-[#173d45]/95 to-[#10213f]/95 px-5 py-4 text-center text-white shadow-[0_0_32px_rgba(255,179,71,0.28)]">
-          <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-[#FFD27A]">Nouveaux programmes prioritaires · Réservations ouvertes</p>
-          <p className="mt-1 text-sm leading-6 text-white/85">Les 5 programmes reçus dans votre dernier dossier sont mis en avant. Les anciennes offres restent disponibles dans l’archive des programmes expirés.</p>
+          <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-[#FFD27A]">Deux programmes prioritaires · Réservations ouvertes</p>
+          <p className="mt-1 text-sm leading-6 text-white/85">Omra Chaabane + Ramadan direct et Omra Ramadan direct — Février 2027 sont mis en avant. Les autres programmes conservent un style normal.</p>
         </div>
 
         <div className="mx-auto mb-5 flex max-w-2xl items-center gap-3 rounded-2xl border border-white/20 bg-white/95 px-4 py-3 shadow-xl shadow-black/15">

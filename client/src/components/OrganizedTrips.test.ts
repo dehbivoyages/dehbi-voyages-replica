@@ -51,9 +51,6 @@ describe('Programme selection', () => {
     expect(trips.filter((trip) => trip.featured).map((trip) => trip.id)).toEqual([
       'omra-ramadan-direct-fevrier-2027',
       'omra-chaabane-ramadan-direct-fevrier-2027',
-      'omra-ramadan-50-jours-2027',
-      'vietnam-merveilles-decembre-2026',
-      'istanbul-novembre-decembre-2026',
     ]);
     expect(trips.filter((trip) => trip.featured).every((trip) => trip.pdfUrl?.endsWith('.pdf'))).toBe(true);
     expect(trips.some((trip) => trip.id === 'omra-ramadan-1448-economique' || trip.id === 'omra-ramadan-1448-premium')).toBe(false);
