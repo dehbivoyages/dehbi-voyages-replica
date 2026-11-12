@@ -448,7 +448,7 @@ export default function OrganizedTrips() {
           <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 xl:grid-cols-3">
           {filteredTrips.map((trip) => (
             <article key={trip.id} className={`relative overflow-hidden rounded-2xl bg-white shadow-xl shadow-black/20 transition hover:-translate-y-1 hover:shadow-2xl ${trip.featured ? 'ring-2 ring-[#FFB347] shadow-[0_0_34px_rgba(255,179,71,0.42)] motion-safe:animate-[featuredGlow_3s_ease-in-out_infinite]' : ''}`}>
-              {trip.featured && <div className="absolute inset-x-0 top-0 z-20 bg-gradient-to-r from-[#FF8C42] via-[#FFD166] to-[#FF8C42] px-4 py-2 text-center text-xs font-black uppercase tracking-[0.18em] text-[#10213f]">Programme prioritaire · 1448 H</div>}
+              {trip.featured && <div className="absolute inset-x-0 top-0 z-20 bg-gradient-to-r from-[#FF8C42] via-[#FFD166] to-[#FF8C42] px-4 py-2 text-center text-xs font-black uppercase tracking-[0.18em] text-[#10213f]">Programme prioritaire</div>}
               {showExpired && isTripExpired(trip) && <div className="absolute right-3 top-3 z-30 rounded-full bg-slate-950/85 px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.12em] text-[#FFD27A] shadow-lg">Programme archivé</div>}
               <div className={`group relative h-72 w-full bg-[#f6f1e8] md:h-80 ${trip.featured ? 'pt-7' : ''}`}>
                 <button type="button" className="absolute inset-0 block h-full w-full" onClick={() => setSelectedDetails(trip)} aria-label={`Voir les détails de ${trip.title}`}>

@@ -64,7 +64,7 @@ export default function Header({ onReserveClick }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 shadow-sm backdrop-blur-md">
       <div className="container mx-auto px-4 py-3">
-        <div className="grid min-h-[72px] grid-cols-[auto_minmax(0,1fr)_auto_auto] items-center gap-3 md:grid-cols-[auto_minmax(0,1fr)_auto_auto_auto] lg:gap-5">
+        <div className="grid min-h-[72px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 md:grid-cols-[auto_minmax(0,1fr)_auto] xl:grid-cols-[auto_minmax(0,1fr)_auto_auto_auto] lg:gap-5">
           {/* Logo */}
           <a href="#" className="flex shrink-0 items-center gap-2 transition-opacity hover:opacity-90" aria-label="Dehbi Voyages — Maroc">
             <img
@@ -78,7 +78,7 @@ export default function Header({ onReserveClick }: HeaderProps) {
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden min-w-0 justify-self-center md:flex items-center gap-5 whitespace-nowrap lg:gap-8">
+          <nav className="hidden min-w-0 justify-self-center xl:flex items-center gap-5 whitespace-nowrap lg:gap-8">
             {navItems.map((item) => (
               <a
                 key={item.label}
@@ -91,7 +91,7 @@ export default function Header({ onReserveClick }: HeaderProps) {
           </nav>
 
           {/* Theme toggle: own desktop column, with a persistent state label. */}
-          <div className="theme-toggle-control hidden items-center gap-2 rounded-full border border-border bg-muted/70 px-2 py-1.5 text-muted-foreground shadow-sm md:flex">
+          <div className="theme-toggle-control hidden items-center gap-2 rounded-full border border-border bg-muted/70 px-2 py-1.5 text-muted-foreground shadow-sm xl:flex">
             <Sun size={15} aria-hidden="true" className={isDarkTheme ? 'opacity-45' : 'text-[#FF8C42]'} />
             <Switch
               checked={isDarkTheme}
