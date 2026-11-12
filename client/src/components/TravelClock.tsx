@@ -72,7 +72,7 @@ export default function TravelClock({ className = '' }: TravelClockProps) {
 
   return (
     <div
-      className={`grid min-h-[72px] gap-3 rounded-2xl border border-[#2F6B4F]/35 bg-[#9BDCF8] px-3.5 py-3 text-[#073B5C] shadow-lg shadow-[#2F6B4F]/20 ring-1 ring-[#FF8C42]/20 dark:border-[#6BFF42]/45 dark:bg-[#185A7A] dark:text-white dark:ring-[#6BFF42]/10 md:grid-cols-[minmax(190px,1fr)_minmax(245px,1.25fr)] ${className}`}
+      className={`grid min-h-[72px] gap-3 rounded-2xl border border-[#2F6B4F]/35 bg-[#9BDCF8] px-3.5 py-3 text-[#073B5C] shadow-lg shadow-[#2F6B4F]/20 ring-1 ring-[#FF8C42]/20 dark:border-[#6BFF42]/45 dark:bg-[#185A7A] dark:text-white dark:ring-[#6BFF42]/10 md:scale-[0.7] md:origin-center md:-my-3 md:grid-cols-[minmax(190px,1fr)_minmax(245px,1.25fr)] ${className}`}
       aria-label="Heure du Maroc et quatre horloges mondiales synchronisées"
       data-time-zone={MOROCCO_TIME_ZONE}
     >

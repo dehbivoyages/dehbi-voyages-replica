@@ -62,9 +62,9 @@ export default function Header({ onReserveClick }: HeaderProps) {
   ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/95 shadow-sm backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-[#FFB347]/45 bg-gradient-to-r from-[#FFF1DF] via-[#E7F8FF] to-[#FFF1DF] shadow-sm backdrop-blur-md dark:from-[#173B5A] dark:via-[#185A7A] dark:to-[#173B5A]">
       <div className="container mx-auto px-4 py-3">
-        <div className="grid min-h-[72px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 md:grid-cols-[auto_minmax(0,1fr)_auto] xl:grid-cols-[auto_minmax(0,1fr)_auto_auto_auto] lg:gap-5">
+        <div className="grid min-h-[72px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 md:grid-cols-[auto_minmax(0,1fr)_auto_auto] md:grid-rows-[auto_auto] lg:gap-5">
           {/* Logo */}
           <a href="#" className="flex shrink-0 items-center gap-2 transition-opacity hover:opacity-90" aria-label="Dehbi Voyages — Maroc">
             <img
@@ -78,7 +78,7 @@ export default function Header({ onReserveClick }: HeaderProps) {
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden min-w-0 justify-self-center xl:flex items-center gap-5 whitespace-nowrap lg:gap-8">
+          <nav className="hidden min-w-0 justify-self-center md:flex items-center gap-4 whitespace-nowrap lg:gap-8">
             {navItems.map((item) => (
               <a
                 key={item.label}
@@ -91,7 +91,7 @@ export default function Header({ onReserveClick }: HeaderProps) {
           </nav>
 
           {/* Theme toggle: own desktop column, with a persistent state label. */}
-          <div className="theme-toggle-control hidden items-center gap-2 rounded-full border border-border bg-muted/70 px-2 py-1.5 text-muted-foreground shadow-sm xl:flex">
+          <div className="theme-toggle-control hidden items-center gap-2 rounded-full border border-[#FFB347]/40 bg-white/60 px-2 py-1.5 text-muted-foreground shadow-sm md:flex dark:bg-[#0E4059]/70">
             <Sun size={15} aria-hidden="true" className={isDarkTheme ? 'opacity-45' : 'text-[#FF8C42]'} />
             <Switch
               checked={isDarkTheme}
@@ -107,12 +107,12 @@ export default function Header({ onReserveClick }: HeaderProps) {
           </div>
 
           {/* Dedicated clock column: kept separate from navigation and CTA to prevent overlap */}
-          <div className="hidden min-w-[210px] justify-self-end border-l border-border pl-4 md:block lg:min-w-[224px]">
+          <div className="hidden min-w-[210px] justify-self-center border-t border-[#FFB347]/30 pt-2 md:col-span-4 md:row-start-2 md:flex md:w-full md:justify-center lg:min-w-[224px] dark:border-[#9BDCF8]/30">
             <TravelClock />
           </div>
 
           {/* Dedicated desktop CTA column */}
-          <button className="btn-primary hidden shrink-0 md:block" onClick={onReserveClick}>
+          <button className="btn-primary hidden shrink-0 md:col-start-4 md:row-start-1 md:block" onClick={onReserveClick}>
             Réserver
           </button>
 
